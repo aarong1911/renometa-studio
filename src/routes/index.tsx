@@ -713,6 +713,12 @@ function ConnectProduct() {
 
             <div className="relative">
               <ConnectMockup />
+              <MicroPreview
+                src={connectPreview.url}
+                label="Automation flow"
+                tone="dark"
+                className="hidden sm:block absolute -bottom-6 -left-6 w-48 lg:w-56 aspect-[16/10] -rotate-[3deg] hover:rotate-0 transition-transform duration-500 animate-float-y"
+              />
             </div>
           </div>
         </div>
