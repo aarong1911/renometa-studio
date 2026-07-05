@@ -35,8 +35,9 @@ function HomePage() {
       <main>
         <Hero />
         <Credibility />
-        <Solutions />
+        <PlatformArchitecture />
         <ConnectProduct />
+        <Solutions />
         <HowItWorks />
         <Benefits />
         <FeaturedGrid />
