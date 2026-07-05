@@ -85,11 +85,19 @@ function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const platformItems = [
+    { href: "#connect", label: "RenoMeta Connect", desc: "CRM, inbox, pipeline, booking, reviews, and reporting." },
+  ];
+  const solutionItems = [
+    { href: "#solutions", label: "AI Website Systems", desc: "Lead-focused websites connected to your CRM." },
+    { href: "#solutions", label: "AI Customer Engagement", desc: "AI chat, voice, and instant response." },
+    { href: "#solutions", label: "Marketing & Follow-Up Automation", desc: "Campaigns, nurture, reminders, reviews." },
+    { href: "#solutions", label: "Growth Operations", desc: "Tracking, reporting, and optimization." },
+    { href: "#solutions", label: "Custom AI Solutions", desc: "Workflows, integrations, dashboards." },
+  ];
   const links = [
-    { href: "#solutions", label: "Solutions" },
-    { href: "#connect", label: "RenoMeta Connect" },
-    { href: "#how", label: "How It Works" },
     { href: "#proof", label: "Case Studies" },
+    { href: "#pricing", label: "Pricing" },
     { href: "#contact", label: "Contact" },
   ];
 
@@ -108,7 +116,9 @@ function Nav() {
             RenoMeta
           </span>
         </a>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
+          <NavDropdown label="Platform" items={platformItems} />
+          <NavDropdown label="Solutions" items={solutionItems} />
           {links.map((l) => (
             <a
               key={l.href}
