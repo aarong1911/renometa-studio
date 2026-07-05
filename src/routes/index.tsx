@@ -194,15 +194,24 @@ function Hero() {
     <section className="relative pt-32 pb-24 overflow-hidden bg-hero-radial">
       <div className="absolute inset-0 bg-grid-fade opacity-70 pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="max-w-4xl text-left animate-reveal pt-8">
-          <h1 className="font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold text-foreground max-w-3xl">
+        <div className="max-w-4xl text-left pt-8">
+          <h1
+            className="font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold text-foreground max-w-3xl animate-reveal"
+            style={{ animationDelay: "60ms" }}
+          >
             AI Growth Systems for Service Businesses
           </h1>
-          <p className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl leading-relaxed">
+          <p
+            className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
+            style={{ animationDelay: "200ms" }}
+          >
             Websites, automation, and AI agents that help you capture leads,
             respond faster, and book more appointments.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div
+            className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
+            style={{ animationDelay: "340ms" }}
+          >
             <a href="#contact" className="btn-primary">
               Book a Free Strategy Call
               <ArrowRight className="h-4 w-4" />
