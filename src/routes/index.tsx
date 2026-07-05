@@ -848,20 +848,21 @@ function FeaturedGrid() {
           desc="Composable modules that plug into your existing tools or run inside RenoMeta Connect."
         />
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {items.map((i) => (
-            <div
+          {items.map((i, idx) => (
+            <Reveal
               key={i.title}
-              className="group rounded-xl border border-border bg-surface-elevated p-5 hover:border-border-strong hover:-translate-y-0.5 transition-all duration-300"
+              delay={(idx % 5) * 60}
+              className="group rounded-xl border border-border bg-surface-elevated p-5 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-16px_oklch(0_0_0/0.15)] transition-all duration-300"
             >
               <i.icon
-                className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-colors"
+                className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-all duration-300 group-hover:scale-110"
                 strokeWidth={1.5}
               />
               <div className="mt-4 text-[14px] font-medium tracking-tight">{i.title}</div>
               <div className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">
                 {i.desc}
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
