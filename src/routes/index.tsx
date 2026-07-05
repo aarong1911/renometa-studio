@@ -1161,19 +1161,23 @@ function Footer() {
           </a>
         </div>
         <FooterCol
-          title="Services"
+          title="Platform"
+          links={["RenoMeta Connect"]}
+        />
+        <FooterCol
+          title="Solutions"
           links={[
             "AI Website Systems",
-            "AI Customer Service",
-            "Marketing Automation",
-            "Growth & SEO",
+            "AI Customer Engagement",
+            "Marketing & Follow-Up Automation",
+            "Growth Operations",
+            "Custom AI Solutions",
           ]}
         />
         <FooterCol
           title="Company"
-          links={["About", "RenoMeta Connect", "Case Studies", "Contact"]}
+          links={["Case Studies", "Pricing", "Contact"]}
         />
-        <FooterCol title="Contact" links={["hello@renometa.com", "Book a Call", "LinkedIn"]} />
       </div>
       <div className="border-t border-border">
         <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
