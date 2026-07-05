@@ -46,6 +46,32 @@ function HomePage() {
   );
 }
 
+/* -------------------- REVEAL WRAPPER -------------------- */
+function Reveal({
+  as: Tag = "div",
+  delay = 0,
+  className = "",
+  children,
+  ...rest
+}: {
+  as?: "div" | "section" | "li" | "article";
+  delay?: number;
+  className?: string;
+  children: ReactNode;
+} & HTMLAttributes<HTMLElement>) {
+  const ref = useReveal<HTMLElement>();
+  return (
+    <Tag
+      ref={ref as never}
+      className={`reveal ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
 /* -------------------- NAV -------------------- */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
