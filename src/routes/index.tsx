@@ -758,8 +758,8 @@ function HowItWorks() {
           title="From growth audit to launched AI system."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {steps.map((s) => (
-            <div key={s.n} className="card-elegant card-elegant-hover p-8">
+          {steps.map((s, idx) => (
+            <Reveal key={s.n} delay={idx * 100} className="card-elegant card-elegant-hover p-8">
               <div className="flex items-center justify-between">
                 <div className="font-mono text-[12px] text-gold tracking-wider">
                   STEP {s.n}
@@ -774,7 +774,7 @@ function HowItWorks() {
               <p className="mt-2.5 text-[14.5px] text-muted-foreground leading-relaxed">
                 {s.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
