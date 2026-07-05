@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode, type HTMLAttributes } from "react";
+import { useReveal } from "@/hooks/use-reveal";
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -44,6 +46,32 @@ function HomePage() {
   );
 }
 
+/* -------------------- REVEAL WRAPPER -------------------- */
+function Reveal({
+  as: Tag = "div",
+  delay = 0,
+  className = "",
+  children,
+  ...rest
+}: {
+  as?: "div" | "section" | "li" | "article";
+  delay?: number;
+  className?: string;
+  children: ReactNode;
+} & HTMLAttributes<HTMLElement>) {
+  const ref = useReveal<HTMLElement>();
+  return (
+    <Tag
+      ref={ref as never}
+      className={`reveal ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
 /* -------------------- NAV -------------------- */
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -64,9 +92,9 @@ function Nav() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/70 backdrop-blur-xl border-b border-border"
+          ? "bg-background/75 backdrop-blur-xl border-b border-border shadow-[0_1px_0_oklch(0_0_0/0.03),0_8px_24px_-16px_oklch(0_0_0/0.12)]"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -173,7 +201,9 @@ function DashboardMockup() {
             "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 35%, transparent), transparent 70%)",
         }}
       />
-      <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden">
+      <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden transition-transform duration-700 hover:-translate-y-1 hover:shadow-[0_20px_60px_-24px_oklch(0_0_0/0.18)]">
+        {/* animated top accent */}
+        <div className="absolute inset-x-0 top-0 h-px animate-shimmer pointer-events-none" aria-hidden />
         {/* window bar */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface">
           <div className="flex items-center gap-1.5">
@@ -237,7 +267,10 @@ function DashboardMockup() {
                   </div>
                   <div className="text-[13px] font-medium">AI Chat — Sarah, kitchen remodel</div>
                 </div>
-                <span className="text-[11px] text-muted-foreground">Live</span>
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
+                  Live
+                </span>
               </div>
               <div className="mt-4 space-y-2.5">
                 <ChatBubble side="in">
@@ -251,6 +284,13 @@ function DashboardMockup() {
                 <ChatBubble side="out" gold>
                   Booked. You'll receive a confirmation SMS shortly.
                 </ChatBubble>
+                <div className="flex justify-start">
+                  <div className="inline-flex items-center gap-1 rounded-2xl border border-border bg-surface px-3 py-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "0ms" }} />
+                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "150ms" }} />
+                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "300ms" }} />
+                  </div>
+                </div>
               </div>
               <div className="mt-4 flex items-center gap-2 rounded-full border border-border px-3 py-2">
                 <input
@@ -361,9 +401,10 @@ function Kpi({
         {[3, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9].map((h, i) => (
           <span
             key={i}
-            className="w-1 rounded-sm bg-border"
+            className="w-1 rounded-sm bg-border animate-bar-grow"
             style={{
               height: `${h * 3}px`,
+              animationDelay: `${i * 60}ms`,
               background:
                 i > 8
                   ? "color-mix(in oklab, var(--gold) 70%, transparent)"
@@ -489,9 +530,10 @@ function Solutions() {
           desc="Every system is built to reduce manual work and increase booked revenue."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {cards.map((c) => (
-            <div
+          {cards.map((c, idx) => (
+            <Reveal
               key={c.title}
+              delay={idx * 80}
               className="card-elegant card-elegant-hover group p-8 relative overflow-hidden"
             >
               <div
@@ -510,7 +552,7 @@ function Solutions() {
               <p className="mt-2.5 text-[15px] text-muted-foreground leading-relaxed max-w-md">
                 {c.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -669,12 +711,17 @@ function ConnectMockup() {
             <div className="max-w-[80%] rounded-2xl px-3 py-2 text-[12px] bg-white/[0.06] text-white/90 border border-white/10">
               Thursday afternoon works.
             </div>
+            <div className="ml-auto inline-flex items-center gap-1 rounded-2xl px-3 py-2 bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_45%,white)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "0ms" }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "150ms" }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "300ms" }} />
+            </div>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/15 px-3 py-2">
-            <Sparkles className="h-3.5 w-3.5 text-gold" />
+          <div className="flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 transition-colors hover:border-white/30">
+            <Sparkles className="h-3.5 w-3.5 text-gold animate-pulse-dot" />
             <input
               disabled
-              placeholder="AI-suggested reply..."
+              placeholder="AI-suggested reply — Booking Thursday 2:00pm…"
               className="flex-1 bg-transparent text-[12px] outline-none text-white/70 placeholder:text-white/40"
             />
           </div>
@@ -711,8 +758,8 @@ function HowItWorks() {
           title="From growth audit to launched AI system."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {steps.map((s) => (
-            <div key={s.n} className="card-elegant card-elegant-hover p-8">
+          {steps.map((s, idx) => (
+            <Reveal key={s.n} delay={idx * 100} className="card-elegant card-elegant-hover p-8">
               <div className="flex items-center justify-between">
                 <div className="font-mono text-[12px] text-gold tracking-wider">
                   STEP {s.n}
@@ -727,7 +774,7 @@ function HowItWorks() {
               <p className="mt-2.5 text-[14.5px] text-muted-foreground leading-relaxed">
                 {s.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -759,9 +806,9 @@ function Benefits() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader eyebrow="Why RenoMeta" title="Built for measurable outcomes." />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {items.map((i) => (
-            <div key={i.title} className="card-elegant card-elegant-hover p-8">
-              <div className="h-11 w-11 rounded-xl bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] grid place-items-center">
+          {items.map((i, idx) => (
+            <Reveal key={i.title} delay={idx * 100} className="card-elegant card-elegant-hover p-8">
+              <div className="h-11 w-11 rounded-xl bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] grid place-items-center transition-transform duration-300 group-hover:scale-105">
                 <i.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
               </div>
               <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">
@@ -770,7 +817,7 @@ function Benefits() {
               <p className="mt-2 text-[14.5px] text-muted-foreground leading-relaxed">
                 {i.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -801,20 +848,21 @@ function FeaturedGrid() {
           desc="Composable modules that plug into your existing tools or run inside RenoMeta Connect."
         />
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {items.map((i) => (
-            <div
+          {items.map((i, idx) => (
+            <Reveal
               key={i.title}
-              className="group rounded-xl border border-border bg-surface-elevated p-5 hover:border-border-strong hover:-translate-y-0.5 transition-all duration-300"
+              delay={(idx % 5) * 60}
+              className="group rounded-xl border border-border bg-surface-elevated p-5 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-16px_oklch(0_0_0/0.15)] transition-all duration-300"
             >
               <i.icon
-                className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-colors"
+                className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-all duration-300 group-hover:scale-110"
                 strokeWidth={1.5}
               />
               <div className="mt-4 text-[14px] font-medium tracking-tight">{i.title}</div>
               <div className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">
                 {i.desc}
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
