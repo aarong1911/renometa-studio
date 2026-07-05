@@ -284,6 +284,13 @@ function DashboardMockup() {
                 <ChatBubble side="out" gold>
                   Booked. You'll receive a confirmation SMS shortly.
                 </ChatBubble>
+                <div className="flex justify-start">
+                  <div className="inline-flex items-center gap-1 rounded-2xl border border-border bg-surface px-3 py-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "0ms" }} />
+                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "150ms" }} />
+                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "300ms" }} />
+                  </div>
+                </div>
               </div>
               <div className="mt-4 flex items-center gap-2 rounded-full border border-border px-3 py-2">
                 <input
