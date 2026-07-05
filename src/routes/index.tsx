@@ -267,7 +267,10 @@ function DashboardMockup() {
                   </div>
                   <div className="text-[13px] font-medium">AI Chat — Sarah, kitchen remodel</div>
                 </div>
-                <span className="text-[11px] text-muted-foreground">Live</span>
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
+                  Live
+                </span>
               </div>
               <div className="mt-4 space-y-2.5">
                 <ChatBubble side="in">
