@@ -155,6 +155,39 @@ function Logo() {
   );
 }
 
+function NavDropdown({
+  label,
+  items,
+}: {
+  label: string;
+  items: { href: string; label: string; desc: string }[];
+}) {
+  return (
+    <div className="relative group">
+      <button className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors">
+        {label}
+        <ChevronDown className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+      </button>
+      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+        <div className="w-[360px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2">
+          {items.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
+            >
+              <div className="text-[13.5px] font-medium text-foreground">{item.label}</div>
+              <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
+                {item.desc}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* -------------------- HERO -------------------- */
 function Hero() {
   return (
