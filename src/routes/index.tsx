@@ -552,7 +552,7 @@ function Solutions() {
               <p className="mt-2.5 text-[15px] text-muted-foreground leading-relaxed max-w-md">
                 {c.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
