@@ -183,8 +183,13 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mt-20 animate-reveal" style={{ animationDelay: "120ms" }}>
+        <div className="mt-20 animate-reveal relative" style={{ animationDelay: "120ms" }}>
           <DashboardMockup />
+          <MicroPreview
+            src={heroPreview.url}
+            label="AI concierge"
+            className="hidden md:block absolute -top-8 -right-4 lg:-right-10 w-56 lg:w-64 aspect-[16/10] rotate-[2deg] hover:rotate-0 transition-transform duration-500 animate-float-y"
+          />
         </div>
       </div>
     </section>
