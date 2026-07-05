@@ -246,3 +246,85 @@
 @utility animate-pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
 }
+
+/* Scroll-triggered reveal — apply .reveal, add .is-visible via IntersectionObserver */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ambient gold shimmer — used on subtle accent lines */
+@keyframes gold-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@utility animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--gold) 60%, transparent) 45%,
+    color-mix(in oklab, var(--gold) 90%, transparent) 50%,
+    color-mix(in oklab, var(--gold) 60%, transparent) 55%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: gold-shimmer 3.6s linear infinite;
+}
+
+/* Typing indicator dots */
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+@utility animate-typing {
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+
+/* Vertical hover-float for mockups */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@utility animate-float-y {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+/* KPI mini-bar sweep */
+@keyframes bar-grow {
+  from { transform: scaleY(0.2); }
+  to { transform: scaleY(1); }
+}
+@utility animate-bar-grow {
+  transform-origin: bottom;
+  animation: bar-grow 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Marching ticker used inside product mockups */
+@keyframes ticker-up {
+  0% { transform: translateY(6px); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-6px); opacity: 0; }
+}
+@utility animate-ticker {
+  animation: ticker-up 3.2s ease-in-out infinite;
+}
+
+/* Reduced-motion: kill all decorative animation */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
