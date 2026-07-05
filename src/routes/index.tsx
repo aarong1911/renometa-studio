@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode, type HTMLAttributes } from "react";
+import { useReveal } from "@/hooks/use-reveal";
+
 import {
   ArrowRight,
   ArrowUpRight,
