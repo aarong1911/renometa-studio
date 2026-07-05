@@ -980,7 +980,7 @@ function FeaturedGrid() {
     { icon: Mic, title: "AI Voice Assistant", desc: "Answer calls, book jobs, route requests." },
     { icon: PhoneMissed, title: "Missed Call Text-Back", desc: "Instant SMS the moment a call is missed." },
     { icon: Globe, title: "Website Design", desc: "High-converting conversion-first websites." },
-    { icon: Search, title: "SEO Optimization", desc: "Local visibility and technical SEO." },
+    { icon: LineChart, title: "Reporting & Insights", desc: "Track pipeline, response, and revenue." },
     { icon: Star, title: "Review Automation", desc: "Request, monitor, and reply automatically." },
     { icon: Calendar, title: "Appointment Booking", desc: "Real-time scheduling and reminders." },
     { icon: Send, title: "Lead Nurturing", desc: "Personalized long-cycle follow-up." },
