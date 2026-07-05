@@ -201,7 +201,9 @@ function DashboardMockup() {
             "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 35%, transparent), transparent 70%)",
         }}
       />
-      <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden">
+      <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden transition-transform duration-700 hover:-translate-y-1 hover:shadow-[0_20px_60px_-24px_oklch(0_0_0/0.18)]">
+        {/* animated top accent */}
+        <div className="absolute inset-x-0 top-0 h-px animate-shimmer pointer-events-none" aria-hidden />
         {/* window bar */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface">
           <div className="flex items-center gap-1.5">
