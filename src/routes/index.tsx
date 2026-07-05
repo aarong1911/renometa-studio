@@ -710,12 +710,17 @@ function ConnectMockup() {
             <div className="max-w-[80%] rounded-2xl px-3 py-2 text-[12px] bg-white/[0.06] text-white/90 border border-white/10">
               Thursday afternoon works.
             </div>
+            <div className="ml-auto inline-flex items-center gap-1 rounded-2xl px-3 py-2 bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_45%,white)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "0ms" }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "150ms" }} />
+              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "300ms" }} />
+            </div>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/15 px-3 py-2">
-            <Sparkles className="h-3.5 w-3.5 text-gold" />
+          <div className="flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 transition-colors hover:border-white/30">
+            <Sparkles className="h-3.5 w-3.5 text-gold animate-pulse-dot" />
             <input
               disabled
-              placeholder="AI-suggested reply..."
+              placeholder="AI-suggested reply — Booking Thursday 2:00pm…"
               className="flex-1 bg-transparent text-[12px] outline-none text-white/70 placeholder:text-white/40"
             />
           </div>
