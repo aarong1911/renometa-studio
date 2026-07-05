@@ -194,12 +194,8 @@ function Hero() {
     <section className="relative pt-32 pb-24 overflow-hidden bg-hero-radial">
       <div className="absolute inset-0 bg-grid-fade opacity-70 pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="max-w-4xl text-left animate-reveal">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated/70 backdrop-blur px-3 py-1.5 text-[12.5px] text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
-            AI systems for modern service businesses
-          </div>
-          <h1 className="mt-6 font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold text-foreground max-w-3xl">
+        <div className="max-w-4xl text-left animate-reveal pt-8">
+          <h1 className="font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold text-foreground max-w-3xl">
             AI Growth Systems for Service Businesses
           </h1>
           <p className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl leading-relaxed">
