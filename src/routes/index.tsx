@@ -191,6 +191,67 @@ function Hero() {
   );
 }
 
+/* -------------------- MICRO VIDEO PREVIEW -------------------- */
+function MicroPreview({
+  src,
+  label,
+  tone = "light",
+  className = "",
+}: {
+  src: string;
+  label: string;
+  tone?: "light" | "dark";
+  className?: string;
+}) {
+  const isDark = tone === "dark";
+  return (
+    <div
+      className={`group relative rounded-xl overflow-hidden border shadow-elegant backdrop-blur ${
+        isDark
+          ? "border-white/10 bg-[oklch(0.14_0.008_260)/0.8]"
+          : "border-border bg-surface-elevated/85"
+      } ${className}`}
+    >
+      <video
+        src={src}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden
+        className="block w-full h-full object-cover"
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: isDark
+            ? "linear-gradient(180deg, transparent 40%, oklch(0.14 0.008 260 / 0.85) 100%)"
+            : "linear-gradient(180deg, transparent 45%, oklch(1 0 0 / 0.85) 100%)",
+        }}
+      />
+      <div className="absolute inset-x-3 bottom-2.5 flex items-center justify-between">
+        <span
+          className={`inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.14em] ${
+            isDark ? "text-white/70" : "text-foreground/70"
+          }`}
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
+          {label}
+        </span>
+        <span
+          className={`text-[10px] font-mono ${
+            isDark ? "text-white/40" : "text-muted-foreground"
+          }`}
+        >
+          live
+        </span>
+      </div>
+    </div>
+  );
+}
+
+
 /* -------------------- DASHBOARD MOCKUP -------------------- */
 function DashboardMockup() {
   return (
