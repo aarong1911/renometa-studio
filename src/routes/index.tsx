@@ -194,28 +194,19 @@ function Hero() {
     <section className="relative pt-32 pb-24 overflow-hidden bg-hero-radial">
       <div className="absolute inset-0 bg-grid-fade opacity-70 pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-4xl text-center animate-reveal">
+        <div className="max-w-4xl text-left animate-reveal">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-elevated/70 backdrop-blur px-3 py-1.5 text-[12.5px] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
             AI systems for modern service businesses
           </div>
-          <h1 className="mt-6 font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold max-w-3xl mx-auto">
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(180deg, oklch(0.28 0.02 80), var(--gold))",
-              }}
-            >
-              AI Growth Systems
-            </span>{" "}
-            for Service Businesses
+          <h1 className="mt-6 font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold text-foreground max-w-3xl">
+            AI Growth Systems for Service Businesses
           </h1>
-          <p className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl mx-auto leading-relaxed">
+          <p className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl leading-relaxed">
             Websites, automation, and AI agents that help you capture leads,
             respond faster, and book more appointments.
           </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <a href="#contact" className="btn-primary">
               Book a Free Strategy Call
               <ArrowRight className="h-4 w-4" />
