@@ -401,9 +401,10 @@ function Kpi({
         {[3, 4, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9].map((h, i) => (
           <span
             key={i}
-            className="w-1 rounded-sm bg-border"
+            className="w-1 rounded-sm bg-border animate-bar-grow"
             style={{
               height: `${h * 3}px`,
+              animationDelay: `${i * 60}ms`,
               background:
                 i > 8
                   ? "color-mix(in oklab, var(--gold) 70%, transparent)"
