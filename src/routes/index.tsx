@@ -806,9 +806,9 @@ function Benefits() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader eyebrow="Why RenoMeta" title="Built for measurable outcomes." />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {items.map((i) => (
-            <div key={i.title} className="card-elegant card-elegant-hover p-8">
-              <div className="h-11 w-11 rounded-xl bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] grid place-items-center">
+          {items.map((i, idx) => (
+            <Reveal key={i.title} delay={idx * 100} className="card-elegant card-elegant-hover p-8">
+              <div className="h-11 w-11 rounded-xl bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] grid place-items-center transition-transform duration-300 group-hover:scale-105">
                 <i.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
               </div>
               <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">
@@ -817,7 +817,7 @@ function Benefits() {
               <p className="mt-2 text-[14.5px] text-muted-foreground leading-relaxed">
                 {i.desc}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
