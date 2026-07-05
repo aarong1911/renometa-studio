@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode, type HTMLAttributes } from "react";
 import { useReveal } from "@/hooks/use-reveal";
+import heroPreview from "@/assets/hero-preview.mp4.asset.json";
+import connectPreview from "@/assets/connect-preview.mp4.asset.json";
+
 
 import {
   ArrowRight,
