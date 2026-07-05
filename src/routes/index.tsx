@@ -491,9 +491,9 @@ function PipelineRow({
 function Credibility() {
   const items = [
     "Built for service businesses",
-    "AI-powered customer engagement",
-    "Automation-first systems",
-    "Designed to increase booked appointments",
+    "Powered by RenoMeta Connect",
+    "AI-first customer engagement",
+    "Designed to book more appointments",
   ];
   return (
     <section className="border-y border-border bg-surface/60">
@@ -509,60 +509,193 @@ function Credibility() {
   );
 }
 
+/* -------------------- PLATFORM ARCHITECTURE -------------------- */
+function PlatformArchitecture() {
+  const layers = [
+    {
+      n: "01",
+      icon: Globe,
+      title: "Website Layer",
+      desc: "High-converting websites built to capture leads and send them into RenoMeta Connect.",
+    },
+    {
+      n: "02",
+      icon: Layers,
+      title: "Platform Layer",
+      desc: "RenoMeta Connect manages your CRM, inbox, pipeline, booking, reviews, reporting, and customer communication.",
+      highlight: true,
+    },
+    {
+      n: "03",
+      icon: Bot,
+      title: "AI & Automation Layer",
+      desc: "AI chat, voice automation, missed call text-back, SMS/email follow-up, lead nurturing, reminders, and review requests — all inside the platform.",
+    },
+    {
+      n: "04",
+      icon: LineChart,
+      title: "Growth Operations Layer",
+      desc: "Tracking, reporting, workflow optimization, lead flow improvement, automation performance, and conversion insights that compound over time.",
+    },
+  ];
+  return (
+    <section id="platform" className="py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Platform Architecture"
+          title="One Platform. Multiple Growth Systems."
+          desc="Most RenoMeta solutions run inside RenoMeta Connect — our CRM and automation platform built to manage leads, conversations, appointments, follow-up, reviews, and customer growth from one place."
+        />
+
+        <Reveal className="mt-12 rounded-2xl border border-border bg-surface-elevated p-8 sm:p-10">
+          <div className="text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-px w-6 bg-gold" />
+              The idea
+            </span>
+          </div>
+          <p className="mt-5 font-display text-[22px] sm:text-[26px] leading-[1.35] tracking-[-0.01em] text-foreground max-w-3xl">
+            Your website captures attention.{" "}
+            <span className="text-muted-foreground">RenoMeta Connect manages the customer journey.</span>{" "}
+            AI automation helps turn more opportunities into booked appointments.{" "}
+            <span className="text-muted-foreground">Growth Operations improves the system over time.</span>
+          </p>
+          <p className="mt-6 text-[15px] text-muted-foreground leading-relaxed max-w-3xl">
+            Most of our solutions are powered inside RenoMeta Connect — including AI chat, voice
+            automation, missed call text-back, appointment booking, customer messaging, lead
+            follow-up, reviews, and pipeline management. For businesses that need more, we also
+            build custom AI workflows and integrations tailored to their operations.
+          </p>
+        </Reveal>
+
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {layers.map((l, idx) => (
+            <Reveal
+              key={l.n}
+              delay={idx * 90}
+              className={`relative rounded-2xl border p-7 overflow-hidden transition-all duration-500 ${
+                l.highlight
+                  ? "border-[color:color-mix(in_oklab,var(--gold)_45%,var(--border))] bg-gradient-to-b from-[color:var(--gold-soft)]/60 to-surface-elevated shadow-[0_10px_40px_-20px_oklch(0.75_0.13_75/0.35)]"
+                  : "border-border bg-surface-elevated hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-16px_oklch(0_0_0/0.15)]"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="font-mono text-[11px] tracking-wider text-gold">LAYER {l.n}</div>
+                <l.icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+              </div>
+              <h3 className="mt-5 font-display text-[19px] font-semibold tracking-tight">
+                {l.title}
+              </h3>
+              <p className="mt-2 text-[13.5px] text-muted-foreground leading-relaxed">{l.desc}</p>
+              {l.highlight && (
+                <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-[color:color-mix(in_oklab,var(--gold)_45%,var(--border))] bg-surface-elevated px-2.5 py-1 text-[10.5px] uppercase tracking-wider text-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
+                  Core platform
+                </div>
+              )}
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200} className="mt-4 rounded-2xl border border-dashed border-border-strong bg-surface p-7 flex flex-col sm:flex-row sm:items-center gap-5 justify-between">
+          <div className="flex items-start gap-4 max-w-2xl">
+            <div className="h-10 w-10 rounded-xl border border-border bg-surface-elevated grid place-items-center shrink-0">
+              <Settings2 className="h-5 w-5 text-foreground" strokeWidth={1.5} />
+            </div>
+            <div>
+              <div className="font-display text-[17px] font-semibold tracking-tight">
+                Custom AI Solutions
+              </div>
+              <p className="mt-1.5 text-[13.5px] text-muted-foreground leading-relaxed">
+                Advanced workflows, integrations, dashboards, and automations built around unique
+                business needs — outside the standard platform.
+              </p>
+            </div>
+          </div>
+          <a href="#contact" className="btn-ghost self-start sm:self-auto shrink-0">
+            Discuss a build
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 /* -------------------- SOLUTIONS -------------------- */
 function Solutions() {
   const cards = [
     {
       icon: Globe,
       title: "AI Website Systems",
-      desc: "High-converting websites built to capture leads, answer questions, and guide visitors toward booking.",
+      desc: "Lead-focused websites connected to your CRM, automations, and booking flow.",
+      badge: null as string | null,
+    },
+    {
+      icon: Layers,
+      title: "RenoMeta Connect Platform",
+      desc: "CRM, inbox, pipeline, booking, reviews, reporting, and customer communication in one connected platform.",
+      badge: "Platform",
     },
     {
       icon: Bot,
-      title: "AI Customer Service Agents",
-      desc: "Smart chat and voice agents that respond instantly, qualify leads, and help schedule appointments.",
+      title: "AI Customer Engagement",
+      desc: "AI chat, AI voice, missed call text-back, and instant response automation powered through RenoMeta Connect.",
+      badge: "Powered by Connect",
     },
     {
       icon: Workflow,
-      title: "Marketing Automation",
-      desc: "Automated follow-ups, missed call text-back, SMS/email campaigns, and lead nurturing workflows.",
+      title: "Marketing & Follow-Up Automation",
+      desc: "SMS/email campaigns, lead nurturing, review requests, reactivation, reminders, and follow-up workflows powered through RenoMeta Connect.",
+      badge: "Powered by Connect",
     },
     {
-      icon: Search,
-      title: "Growth & SEO Systems",
-      desc: "Search visibility, content structure, local SEO, tracking, and performance optimization.",
+      icon: LineChart,
+      title: "Growth Operations",
+      desc: "Tracking, reporting, workflow optimization, lead flow improvement, automation performance, and conversion insights that help service businesses scale efficiently.",
+      badge: null,
+    },
+    {
+      icon: Settings2,
+      title: "Custom AI Solutions",
+      desc: "Advanced workflows, integrations, dashboards, and business-specific automations built around unique business needs.",
+      badge: "Custom build",
     },
   ];
 
   return (
-    <section id="solutions" className="py-28">
+    <section id="solutions" className="py-28 bg-surface/50 border-y border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Solutions"
-          title="A complete AI growth stack for service businesses."
-          desc="Every system is built to reduce manual work and increase booked revenue."
+          title="A complete AI growth stack, built on one platform."
+          desc="Most solutions run inside RenoMeta Connect. A few extend beyond it when your business needs something custom."
         />
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cards.map((c, idx) => (
             <Reveal
               key={c.title}
-              delay={idx * 80}
-              className="card-elegant card-elegant-hover group p-8 relative overflow-hidden"
+              delay={(idx % 3) * 80}
+              className="card-elegant card-elegant-hover group p-7 relative overflow-hidden"
             >
               <div
-                className="absolute top-0 left-8 right-8 h-px gold-line opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-0 left-7 right-7 h-px gold-line opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-hidden
               />
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between gap-3">
                 <div className="h-11 w-11 rounded-xl border border-border bg-surface grid place-items-center">
                   <c.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
                 </div>
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                {c.badge && (
+                  <span className="text-[10.5px] uppercase tracking-wider px-2 py-1 rounded-full border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] bg-gold-soft/60 text-foreground">
+                    {c.badge}
+                  </span>
+                )}
               </div>
-              <h3 className="mt-6 font-display text-[22px] font-semibold tracking-tight">
+              <h3 className="mt-6 font-display text-[20px] font-semibold tracking-tight">
                 {c.title}
               </h3>
-              <p className="mt-2.5 text-[15px] text-muted-foreground leading-relaxed max-w-md">
+              <p className="mt-2.5 text-[14px] text-muted-foreground leading-relaxed">
                 {c.desc}
               </p>
             </Reveal>
@@ -572,6 +705,8 @@ function Solutions() {
     </section>
   );
 }
+
+
 
 function SectionHeader({
   eyebrow,
