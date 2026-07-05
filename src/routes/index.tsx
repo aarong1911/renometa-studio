@@ -530,9 +530,10 @@ function Solutions() {
           desc="Every system is built to reduce manual work and increase booked revenue."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {cards.map((c) => (
-            <div
+          {cards.map((c, idx) => (
+            <Reveal
               key={c.title}
+              delay={idx * 80}
               className="card-elegant card-elegant-hover group p-8 relative overflow-hidden"
             >
               <div
