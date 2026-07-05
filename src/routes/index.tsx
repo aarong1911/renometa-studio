@@ -125,25 +125,21 @@ function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
             AI systems for modern service businesses
           </div>
-          <h1 className="mt-6 font-display text-balance text-[44px] sm:text-6xl lg:text-[76px] leading-[1.02] tracking-[-0.03em] font-semibold">
-            AI systems that help service businesses{" "}
-            <span className="relative inline-block">
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(180deg, oklch(0.35 0.02 80), var(--gold))",
-                }}
-              >
-                capture, convert, and manage
-              </span>
+          <h1 className="mt-6 font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold max-w-3xl mx-auto">
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, oklch(0.28 0.02 80), var(--gold))",
+              }}
+            >
+              AI Growth Systems
             </span>{" "}
-            more customers.
+            for Service Businesses
           </h1>
-          <p className="mt-7 text-pretty text-[17px] sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            RenoMeta builds intelligent websites, automation systems, AI agents, and growth
-            tools that help businesses respond faster, book more appointments, and scale
-            without adding more manual work.
+          <p className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Websites, automation, and AI agents that help you capture leads,
+            respond faster, and book more appointments.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <a href="#contact" className="btn-primary">
