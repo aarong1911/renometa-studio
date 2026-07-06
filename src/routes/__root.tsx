@@ -77,18 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RenoMeta — AI Systems for Service Businesses" },
+      { title: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
       {
         name: "description",
         content:
-          "RenoMeta builds intelligent websites, AI agents, and automation systems that help service businesses capture, convert, and manage more customers.",
+          "RenoMeta Connect brings leads, conversations, estimates, scheduling, marketing, and follow-up into one connected platform built for renovation contractors and home service businesses.",
       },
       { name: "author", content: "RenoMeta" },
-      { property: "og:title", content: "RenoMeta — AI Systems for Service Businesses" },
+      { property: "og:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
       {
         property: "og:description",
         content:
-          "Intelligent websites, AI agents, and automation systems that help service businesses book more appointments and scale without adding manual work.",
+          "Manage leads, conversations, estimates, scheduling, marketing, and follow-up in one connected platform built for renovation contractors.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
