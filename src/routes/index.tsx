@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode, type HTMLAttributes } from "react";
 import { useReveal } from "@/hooks/use-reveal";
+import logoAsset from "@/assets/renometa-logo.png.asset.json";
 
 import {
   ArrowRight,
@@ -110,11 +111,8 @@ function Nav() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
-          <Logo />
-          <span className="font-display text-[15px] font-semibold tracking-tight">
-            RenoMeta
-          </span>
+        <a href="#" className="flex items-center group">
+          <Logo className="h-8 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-7">
           <NavDropdown label="Platform" items={platformItems} />
@@ -140,18 +138,15 @@ function Nav() {
   );
 }
 
-function Logo() {
+function Logo({ className = "h-8 w-auto" }: { className?: string }) {
   return (
-    <div className="relative h-7 w-7 rounded-md bg-foreground grid place-items-center overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-90"
-        style={{
-          background:
-            "linear-gradient(135deg, var(--gold) 0%, oklch(0.35 0.02 80) 60%, oklch(0.18 0.01 80) 100%)",
-        }}
-      />
-      <span className="relative font-display text-[13px] font-bold text-white">R</span>
-    </div>
+    <img
+      src={logoAsset.url}
+      alt="RenoMeta"
+      className={className}
+      loading="eager"
+      decoding="async"
+    />
   );
 }
 
@@ -1139,11 +1134,8 @@ function Footer() {
     <footer className="border-t border-border bg-surface/60">
       <div className="mx-auto max-w-7xl px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
         <div className="col-span-2 md:col-span-2">
-          <div className="flex items-center gap-2">
-            <Logo />
-            <span className="font-display text-[15px] font-semibold tracking-tight">
-              RenoMeta
-            </span>
+          <div className="flex items-center">
+            <Logo className="h-9 w-auto" />
           </div>
           <p className="mt-4 text-[14px] text-muted-foreground max-w-xs leading-relaxed">
             AI systems and marketing automation for modern service businesses.
