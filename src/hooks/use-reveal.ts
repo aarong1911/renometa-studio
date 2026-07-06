@@ -11,13 +11,15 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    // If element is already at/above the viewport on mount, reveal immediately.
-    const rect = el.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = el.getBoundingClientRect();
+    // Already in or above viewport — reveal without animation gating.
     if (rect.top < vh - 40) {
       el.classList.add("is-visible");
       return;
     }
+    // Below the fold — hide and wait for scroll.
+    el.classList.add("reveal-init");
     if (typeof IntersectionObserver === "undefined") {
       el.classList.add("is-visible");
       return;
