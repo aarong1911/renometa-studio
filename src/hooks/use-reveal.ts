@@ -11,6 +11,15 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const rect = el.getBoundingClientRect();
+    // Already in or above viewport — reveal without animation gating.
+    if (rect.top < vh - 40) {
+      el.classList.add("is-visible");
+      return;
+    }
+    // Below the fold — hide and wait for scroll.
+    el.classList.add("reveal-init");
     if (typeof IntersectionObserver === "undefined") {
       el.classList.add("is-visible");
       return;
@@ -25,8 +34,8 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
         }
       },
       {
-        threshold: options?.threshold ?? 0.12,
-        rootMargin: options?.rootMargin ?? "0px 0px -60px 0px",
+        threshold: options?.threshold ?? 0.01,
+        rootMargin: options?.rootMargin ?? "0px 0px 0px 0px",
       },
     );
     io.observe(el);
