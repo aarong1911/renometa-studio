@@ -5,16 +5,18 @@ import logoAsset from "@/assets/renometa-logo.png.asset.json";
 
 import {
   ArrowRight,
-  ArrowUpRight,
   Bot,
   Calendar,
   Check,
   ChevronDown,
+  Clock,
+  FileText,
+  Gauge,
   Globe,
+  Inbox,
   Layers,
   LineChart,
   MessageSquare,
-  Mic,
   PhoneMissed,
   Send,
   Settings2,
@@ -35,14 +37,13 @@ function HomePage() {
       <Nav />
       <main>
         <Hero />
-        <Credibility />
-        <PlatformArchitecture />
-        <ConnectProduct />
-        <Solutions />
+        <ProblemStrip />
+        <PlatformOverview />
+        <FeaturePillars />
+        <WhyDifferent />
+        <WebsiteLayer />
         <HowItWorks />
-        <Benefits />
-        <FeaturedGrid />
-        <Proof />
+        <Outcomes />
         <FinalCTA />
       </main>
       <Footer />
@@ -87,14 +88,18 @@ function Nav() {
   }, []);
 
   const platformItems = [
-    { href: "#connect", label: "RenoMeta Connect", desc: "CRM, inbox, pipeline, booking, reviews, and reporting." },
+    {
+      href: "#platform",
+      label: "RenoMeta Connect",
+      desc: "The business command center for renovation contractors.",
+    },
   ];
   const solutionItems = [
-    { href: "#solutions", label: "AI Website Systems", desc: "Lead-focused websites connected to your CRM." },
-    { href: "#solutions", label: "AI Customer Engagement", desc: "AI chat, voice, and instant response." },
-    { href: "#solutions", label: "Marketing & Follow-Up Automation", desc: "Campaigns, nurture, reminders, reviews." },
-    { href: "#solutions", label: "Growth Operations", desc: "Tracking, reporting, and optimization." },
-    { href: "#solutions", label: "Custom AI Solutions", desc: "Workflows, integrations, dashboards." },
+    { href: "#website-layer", label: "AI Website Systems", desc: "Lead-focused websites connected to Connect." },
+    { href: "#pillars", label: "AI Customer Engagement", desc: "AI agents, inbox triage, instant response." },
+    { href: "#pillars", label: "Marketing & Follow-Up Automation", desc: "Nurture, reviews, campaigns, reactivation." },
+    { href: "#pillars", label: "Growth Operations", desc: "Scheduling, dispatch, workflows, insights." },
+    { href: "#pillars", label: "Custom AI Solutions", desc: "Advanced workflows built beyond the platform." },
   ];
   const links = [
     { href: "#proof", label: "Case Studies" },
@@ -191,17 +196,17 @@ function Hero() {
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-4xl text-left pt-8">
           <h1
-            className="font-display text-balance text-[38px] sm:text-5xl lg:text-[60px] leading-[1.05] tracking-[-0.03em] font-semibold text-foreground max-w-3xl animate-reveal"
+            className="font-display text-balance text-[40px] sm:text-5xl lg:text-[64px] leading-[1.03] tracking-[-0.03em] font-semibold text-foreground max-w-3xl animate-reveal"
             style={{ animationDelay: "60ms" }}
           >
-            AI Growth Systems for Service Businesses
+            The Business Command Center for Renovation Contractors
           </h1>
           <p
-            className="mt-6 text-pretty text-[16.5px] sm:text-[17px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
+            className="mt-6 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
             style={{ animationDelay: "200ms" }}
           >
-            Websites, automation, and AI agents that help you capture leads,
-            respond faster, and book more appointments.
+            Manage leads, conversations, estimates, scheduling, marketing, and
+            follow-up in one connected platform.
           </p>
           <div
             className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
@@ -211,8 +216,8 @@ function Hero() {
               Book a Free Strategy Call
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="#solutions" className="btn-ghost">
-              Explore Solutions
+            <a href="#platform" className="btn-ghost">
+              See Connect in Action
             </a>
           </div>
         </div>
@@ -229,7 +234,6 @@ function Hero() {
 function DashboardMockup() {
   return (
     <div className="relative mx-auto max-w-6xl">
-      {/* gold glow */}
       <div
         aria-hidden
         className="absolute -inset-x-10 -top-10 h-40 blur-3xl opacity-60 pointer-events-none"
@@ -239,9 +243,7 @@ function DashboardMockup() {
         }}
       />
       <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden transition-transform duration-700 hover:-translate-y-1 hover:shadow-[0_20px_60px_-24px_oklch(0_0_0/0.18)]">
-        {/* animated top accent */}
         <div className="absolute inset-x-0 top-0 h-px animate-shimmer pointer-events-none" aria-hidden />
-        {/* window bar */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface">
           <div className="flex items-center gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.02_30)]" />
@@ -249,44 +251,27 @@ function DashboardMockup() {
             <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.86_0.05_150)]" />
           </div>
           <div className="text-[11px] text-muted-foreground font-mono">
-            connect.renometa.com / overview
+            connect.renometa.com / command-center
           </div>
           <div className="text-[11px] text-muted-foreground hidden sm:block">Today</div>
         </div>
 
-        <div className="grid grid-cols-12 min-h-[520px]">
-          {/* Sidebar */}
+        <div className="grid grid-cols-12 min-h-[560px]">
           <aside className="hidden md:flex md:col-span-2 flex-col gap-1 border-r border-border p-4 bg-surface/60">
-            <SidebarItem icon={<Zap className="h-3.5 w-3.5" />} label="Overview" active />
-            <SidebarItem icon={<Users className="h-3.5 w-3.5" />} label="Leads" />
-            <SidebarItem icon={<MessageSquare className="h-3.5 w-3.5" />} label="Inbox" />
-            <SidebarItem icon={<Calendar className="h-3.5 w-3.5" />} label="Bookings" />
-            <SidebarItem icon={<Workflow className="h-3.5 w-3.5" />} label="Automations" />
-            <SidebarItem icon={<Star className="h-3.5 w-3.5" />} label="Reviews" />
-            <SidebarItem icon={<LineChart className="h-3.5 w-3.5" />} label="Reports" />
+            <SidebarItem icon={<Zap className="h-3.5 w-3.5" />} label="Command Center" active />
+            <SidebarItem icon={<Inbox className="h-3.5 w-3.5" />} label="Inbox" />
+            <SidebarItem icon={<Users className="h-3.5 w-3.5" />} label="Pipeline" />
+            <SidebarItem icon={<FileText className="h-3.5 w-3.5" />} label="Estimates" />
+            <SidebarItem icon={<Calendar className="h-3.5 w-3.5" />} label="Scheduling" />
+            <SidebarItem icon={<Bot className="h-3.5 w-3.5" />} label="AI Agents" />
+            <SidebarItem icon={<Workflow className="h-3.5 w-3.5" />} label="Workflows" />
+            <SidebarItem icon={<LineChart className="h-3.5 w-3.5" />} label="Insights" />
           </aside>
 
-          {/* Main */}
           <div className="col-span-12 md:col-span-10 p-5 sm:p-6 grid grid-cols-12 gap-4">
-            {/* KPI row */}
-            <Kpi
-              className="col-span-6 lg:col-span-3"
-              label="New Leads"
-              value="184"
-              delta="+24%"
-            />
-            <Kpi
-              className="col-span-6 lg:col-span-3"
-              label="Appointments"
-              value="62"
-              delta="+18%"
-            />
-            <Kpi
-              className="col-span-6 lg:col-span-3"
-              label="AI Chats"
-              value="1,247"
-              delta="+41%"
-            />
+            <Kpi className="col-span-6 lg:col-span-3" label="New Leads" value="184" delta="+24%" />
+            <Kpi className="col-span-6 lg:col-span-3" label="Booked Jobs" value="62" delta="+18%" />
+            <Kpi className="col-span-6 lg:col-span-3" label="AI Agent Runs" value="1,247" delta="+41%" />
             <Kpi
               className="col-span-6 lg:col-span-3"
               label="Response Time"
@@ -295,88 +280,129 @@ function DashboardMockup() {
               positive
             />
 
-            {/* Chat + Pipeline */}
-            <div className="col-span-12 lg:col-span-7 rounded-xl border border-border bg-background p-4">
+            {/* Unified inbox */}
+            <div className="col-span-12 lg:col-span-5 rounded-xl border border-border bg-background p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-md grid place-items-center bg-gold-soft">
-                    <Bot className="h-3.5 w-3.5 text-foreground" />
-                  </div>
-                  <div className="text-[13px] font-medium">AI Chat — Sarah, kitchen remodel</div>
+                  <Inbox className="h-3.5 w-3.5 text-foreground" />
+                  <div className="text-[13px] font-medium">Unified Inbox</div>
                 </div>
-                <span className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
-                  Live
-                </span>
+                <span className="text-[11px] text-muted-foreground">5 open</span>
               </div>
-              <div className="mt-4 space-y-2.5">
-                <ChatBubble side="in">
-                  Hi, I'm looking to remodel my kitchen. Do you offer free estimates?
-                </ChatBubble>
-                <ChatBubble side="out">
-                  Absolutely, Sarah. I can pencil you in this week — do Tuesday 10:30 or
-                  Thursday 2:00 work better?
-                </ChatBubble>
-                <ChatBubble side="in">Thursday afternoon is perfect.</ChatBubble>
-                <ChatBubble side="out" gold>
-                  Booked. You'll receive a confirmation SMS shortly.
-                </ChatBubble>
-                <div className="flex justify-start">
-                  <div className="inline-flex items-center gap-1 rounded-2xl border border-border bg-surface px-3 py-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "0ms" }} />
-                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "150ms" }} />
-                    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60 animate-typing" style={{ animationDelay: "300ms" }} />
+              <div className="mt-4 space-y-2">
+                {[
+                  { name: "Sarah M.", msg: "Thursday afternoon works.", ch: "SMS", active: true },
+                  { name: "Daniel R.", msg: "Availability this week?", ch: "WhatsApp" },
+                  { name: "Priya K.", msg: "Thanks for the quote!", ch: "Messenger" },
+                  { name: "Marcus L.", msg: "Missed call — auto reply", ch: "Voice" },
+                ].map((c) => (
+                  <div
+                    key={c.name}
+                    className={`rounded-lg px-3 py-2 border ${
+                      c.active
+                        ? "border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] bg-gold-soft/40"
+                        : "border-border bg-surface"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="text-[12px] font-medium">{c.name}</div>
+                      <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        {c.ch}
+                      </span>
+                    </div>
+                    <div className="mt-0.5 text-[11.5px] text-muted-foreground truncate">
+                      {c.msg}
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-2 rounded-full border border-border px-3 py-2">
-                <input
-                  disabled
-                  placeholder="Message..."
-                  className="flex-1 bg-transparent text-[12.5px] outline-none placeholder:text-muted-foreground"
-                />
-                <Send className="h-3.5 w-3.5 text-muted-foreground" />
+                ))}
               </div>
             </div>
 
-            <div className="col-span-12 lg:col-span-5 rounded-xl border border-border bg-background p-4 flex flex-col">
+            {/* Pipeline */}
+            <div className="col-span-12 lg:col-span-4 rounded-xl border border-border bg-background p-4 flex flex-col">
               <div className="flex items-center justify-between">
-                <div className="text-[13px] font-medium">Pipeline</div>
+                <div className="text-[13px] font-medium">Lead Pipeline</div>
                 <span className="text-[11px] text-muted-foreground">This week</span>
               </div>
               <div className="mt-4 space-y-3 flex-1">
                 <PipelineRow name="Sarah M." stage="Booked" gold />
-                <PipelineRow name="Daniel R." stage="Qualified" />
-                <PipelineRow name="Priya K." stage="Contacted" />
+                <PipelineRow name="Daniel R." stage="Estimate" />
+                <PipelineRow name="Priya K." stage="Qualified" />
                 <PipelineRow name="Marcus L." stage="New Lead" />
               </div>
+            </div>
 
-              <div className="mt-4 pt-4 border-t border-border">
-                <div className="flex items-center justify-between text-[12px]">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <PhoneMissed className="h-3.5 w-3.5" />
-                    Missed call text-back
+            {/* AI Agents + Estimate */}
+            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4 flex flex-col gap-4">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                    <Bot className="h-3.5 w-3.5" /> AI Agents
                   </div>
-                  <span className="text-foreground font-medium">Sent · 2m ago</span>
-                </div>
-                <div className="mt-2 flex items-center justify-between text-[12px]">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Star className="h-3.5 w-3.5" />
-                    Review requests
-                  </div>
-                  <span className="text-foreground font-medium">12 today</span>
-                </div>
-                <div className="mt-2 flex items-center justify-between text-[12px]">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Workflow className="h-3.5 w-3.5" />
-                    Automations
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-foreground font-medium">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.13_150)] animate-pulse-dot" />
-                    8 running
+                  <span className="inline-flex items-center gap-1.5 text-[10.5px] text-muted-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
+                    Active
                   </span>
                 </div>
+                <ul className="mt-2.5 space-y-1.5 text-[11.5px] text-muted-foreground">
+                  <li className="flex justify-between"><span>Lead Qualifier</span><span className="text-foreground">18</span></li>
+                  <li className="flex justify-between"><span>Speed-to-Lead</span><span className="text-foreground">42</span></li>
+                  <li className="flex justify-between"><span>Follow-Up</span><span className="text-foreground">31</span></li>
+                  <li className="flex justify-between"><span>Estimate Drafter</span><span className="text-foreground">9</span></li>
+                </ul>
               </div>
+              <div className="rounded-lg border border-border bg-surface p-3">
+                <div className="flex items-center gap-1.5 text-[11.5px] font-medium">
+                  <FileText className="h-3.5 w-3.5" /> Estimate draft
+                </div>
+                <div className="mt-1.5 text-[10.5px] text-muted-foreground">Kitchen · Sarah M.</div>
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-[10.5px] text-muted-foreground">Total</span>
+                  <span className="font-display text-[15px] font-semibold">$24,800</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom row: booking, review, campaigns, workflows */}
+            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
+              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                <Calendar className="h-3.5 w-3.5" /> Booking
+              </div>
+              <div className="mt-2 text-[11.5px] text-muted-foreground">Thu · 2:00 PM</div>
+              <div className="text-[12.5px] font-medium mt-0.5">Sarah M. · Kitchen estimate</div>
+              <button className="mt-3 w-full text-[11px] px-2 py-1.5 rounded-md border border-border hover:border-foreground transition-colors">
+                Confirm
+              </button>
+            </div>
+            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
+              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                <Star className="h-3.5 w-3.5" /> Review Requests
+              </div>
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="font-display text-2xl font-semibold">12</span>
+                <span className="text-[11px] text-[oklch(0.55_0.14_150)]">sent today</span>
+              </div>
+              <div className="mt-2 text-[11px] text-muted-foreground">4.9 avg · last 30 days</div>
+            </div>
+            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
+              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                <LineChart className="h-3.5 w-3.5" /> Campaigns
+              </div>
+              <div className="mt-2 text-[11.5px] text-muted-foreground">Meta Lead Ads</div>
+              <div className="mt-1 flex items-baseline gap-2">
+                <span className="font-display text-lg font-semibold">$18</span>
+                <span className="text-[10.5px] text-muted-foreground">CPL · –22%</span>
+              </div>
+            </div>
+            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
+              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                <Workflow className="h-3.5 w-3.5" /> Workflows
+              </div>
+              <div className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] text-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.13_150)] animate-pulse-dot" />
+                8 running
+              </div>
+              <div className="mt-2 text-[11px] text-muted-foreground">Missed-call text-back · Nurture · Reviews</div>
             </div>
           </div>
         </div>
@@ -454,33 +480,6 @@ function Kpi({
   );
 }
 
-function ChatBubble({
-  side,
-  gold,
-  children,
-}: {
-  side: "in" | "out";
-  gold?: boolean;
-  children: React.ReactNode;
-}) {
-  const isOut = side === "out";
-  return (
-    <div className={`flex ${isOut ? "justify-end" : "justify-start"}`}>
-      <div
-        className={`max-w-[80%] rounded-2xl px-3 py-2 text-[12.5px] leading-snug border ${
-          isOut
-            ? gold
-              ? "bg-gold-soft border-[color:color-mix(in_oklab,var(--gold)_50%,var(--border))] text-foreground"
-              : "bg-foreground text-background border-foreground"
-            : "bg-surface border-border text-foreground"
-        }`}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
-
 function PipelineRow({
   name,
   stage,
@@ -511,227 +510,7 @@ function PipelineRow({
   );
 }
 
-/* -------------------- CREDIBILITY -------------------- */
-function Credibility() {
-  const items = [
-    "Built for service businesses",
-    "Powered by RenoMeta Connect",
-    "AI-first customer engagement",
-    "Designed to book more appointments",
-  ];
-  return (
-    <section className="border-y border-border bg-surface/60">
-      <div className="mx-auto max-w-7xl px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-        {items.map((t) => (
-          <div key={t} className="flex items-center gap-2.5 text-[13px] text-muted-foreground">
-            <Check className="h-3.5 w-3.5 text-gold shrink-0" />
-            <span className="text-foreground/80">{t}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- PLATFORM ARCHITECTURE -------------------- */
-function PlatformArchitecture() {
-  const layers = [
-    {
-      n: "01",
-      icon: Globe,
-      title: "Website Layer",
-      desc: "High-converting websites built to capture leads and send them into RenoMeta Connect.",
-    },
-    {
-      n: "02",
-      icon: Layers,
-      title: "Platform Layer",
-      desc: "RenoMeta Connect manages your CRM, inbox, pipeline, booking, reviews, reporting, and customer communication.",
-      highlight: true,
-    },
-    {
-      n: "03",
-      icon: Bot,
-      title: "AI & Automation Layer",
-      desc: "AI chat, voice automation, missed call text-back, SMS/email follow-up, lead nurturing, reminders, and review requests — all inside the platform.",
-    },
-    {
-      n: "04",
-      icon: LineChart,
-      title: "Growth Operations Layer",
-      desc: "Tracking, reporting, workflow optimization, lead flow improvement, automation performance, and conversion insights that compound over time.",
-    },
-  ];
-  return (
-    <section id="platform" className="py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Platform Architecture"
-          title="One Platform. Multiple Growth Systems."
-          desc="Most RenoMeta solutions run inside RenoMeta Connect — our CRM and automation platform built to manage leads, conversations, appointments, follow-up, reviews, and customer growth from one place."
-        />
-
-        <Reveal className="mt-12 rounded-2xl border border-border bg-surface-elevated p-8 sm:p-10">
-          <div className="text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
-            <span className="inline-flex items-center gap-2">
-              <span className="h-px w-6 bg-gold" />
-              The idea
-            </span>
-          </div>
-          <p className="mt-5 font-display text-[22px] sm:text-[26px] leading-[1.35] tracking-[-0.01em] text-foreground max-w-3xl">
-            Your website captures attention.{" "}
-            <span className="text-muted-foreground">RenoMeta Connect manages the customer journey.</span>{" "}
-            AI automation helps turn more opportunities into booked appointments.{" "}
-            <span className="text-muted-foreground">Growth Operations improves the system over time.</span>
-          </p>
-          <p className="mt-6 text-[15px] text-muted-foreground leading-relaxed max-w-3xl">
-            Most of our solutions are powered inside RenoMeta Connect — including AI chat, voice
-            automation, missed call text-back, appointment booking, customer messaging, lead
-            follow-up, reviews, and pipeline management. For businesses that need more, we also
-            build custom AI workflows and integrations tailored to their operations.
-          </p>
-        </Reveal>
-
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {layers.map((l, idx) => (
-            <Reveal
-              key={l.n}
-              delay={idx * 90}
-              className={`relative rounded-2xl border p-7 overflow-hidden transition-all duration-500 ${
-                l.highlight
-                  ? "border-[color:color-mix(in_oklab,var(--gold)_45%,var(--border))] bg-gradient-to-b from-[color:var(--gold-soft)]/60 to-surface-elevated shadow-[0_10px_40px_-20px_oklch(0.75_0.13_75/0.35)]"
-                  : "border-border bg-surface-elevated hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-16px_oklch(0_0_0/0.15)]"
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="font-mono text-[11px] tracking-wider text-gold">LAYER {l.n}</div>
-                <l.icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
-              </div>
-              <h3 className="mt-5 font-display text-[19px] font-semibold tracking-tight">
-                {l.title}
-              </h3>
-              <p className="mt-2 text-[13.5px] text-muted-foreground leading-relaxed">{l.desc}</p>
-              {l.highlight && (
-                <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-[color:color-mix(in_oklab,var(--gold)_45%,var(--border))] bg-surface-elevated px-2.5 py-1 text-[10.5px] uppercase tracking-wider text-foreground">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
-                  Core platform
-                </div>
-              )}
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={200} className="mt-4 rounded-2xl border border-dashed border-border-strong bg-surface p-7 flex flex-col sm:flex-row sm:items-center gap-5 justify-between">
-          <div className="flex items-start gap-4 max-w-2xl">
-            <div className="h-10 w-10 rounded-xl border border-border bg-surface-elevated grid place-items-center shrink-0">
-              <Settings2 className="h-5 w-5 text-foreground" strokeWidth={1.5} />
-            </div>
-            <div>
-              <div className="font-display text-[17px] font-semibold tracking-tight">
-                Custom AI Solutions
-              </div>
-              <p className="mt-1.5 text-[13.5px] text-muted-foreground leading-relaxed">
-                Advanced workflows, integrations, dashboards, and automations built around unique
-                business needs — outside the standard platform.
-              </p>
-            </div>
-          </div>
-          <a href="#contact" className="btn-ghost self-start sm:self-auto shrink-0">
-            Discuss a build
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- SOLUTIONS -------------------- */
-function Solutions() {
-  const cards = [
-    {
-      icon: Globe,
-      title: "AI Website Systems",
-      desc: "Lead-focused websites connected to your CRM, automations, and booking flow.",
-      badge: null as string | null,
-    },
-    {
-      icon: Layers,
-      title: "RenoMeta Connect Platform",
-      desc: "CRM, inbox, pipeline, booking, reviews, reporting, and customer communication in one connected platform.",
-      badge: "Platform",
-    },
-    {
-      icon: Bot,
-      title: "AI Customer Engagement",
-      desc: "AI chat, AI voice, missed call text-back, and instant response automation powered through RenoMeta Connect.",
-      badge: "Powered by Connect",
-    },
-    {
-      icon: Workflow,
-      title: "Marketing & Follow-Up Automation",
-      desc: "SMS/email campaigns, lead nurturing, review requests, reactivation, reminders, and follow-up workflows powered through RenoMeta Connect.",
-      badge: "Powered by Connect",
-    },
-    {
-      icon: LineChart,
-      title: "Growth Operations",
-      desc: "Tracking, reporting, workflow optimization, lead flow improvement, automation performance, and conversion insights that help service businesses scale efficiently.",
-      badge: null,
-    },
-    {
-      icon: Settings2,
-      title: "Custom AI Solutions",
-      desc: "Advanced workflows, integrations, dashboards, and business-specific automations built around unique business needs.",
-      badge: "Custom build",
-    },
-  ];
-
-  return (
-    <section id="solutions" className="py-28 bg-surface/50 border-y border-border">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Solutions"
-          title="A complete AI growth stack, built on one platform."
-          desc="Most solutions run inside RenoMeta Connect. A few extend beyond it when your business needs something custom."
-        />
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {cards.map((c, idx) => (
-            <Reveal
-              key={c.title}
-              delay={(idx % 3) * 80}
-              className="card-elegant card-elegant-hover group p-7 relative overflow-hidden"
-            >
-              <div
-                className="absolute top-0 left-7 right-7 h-px gold-line opacity-0 group-hover:opacity-100 transition-opacity"
-                aria-hidden
-              />
-              <div className="flex items-start justify-between gap-3">
-                <div className="h-11 w-11 rounded-xl border border-border bg-surface grid place-items-center">
-                  <c.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
-                </div>
-                {c.badge && (
-                  <span className="text-[10.5px] uppercase tracking-wider px-2 py-1 rounded-full border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] bg-gold-soft/60 text-foreground">
-                    {c.badge}
-                  </span>
-                )}
-              </div>
-              <h3 className="mt-6 font-display text-[20px] font-semibold tracking-tight">
-                {c.title}
-              </h3>
-              <p className="mt-2.5 text-[14px] text-muted-foreground leading-relaxed">
-                {c.desc}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-
+/* -------------------- SECTION HEADER -------------------- */
 function SectionHeader({
   eyebrow,
   title,
@@ -763,143 +542,319 @@ function SectionHeader({
   );
 }
 
-/* -------------------- CONNECT PRODUCT -------------------- */
-function ConnectProduct() {
-  const features = [
-    "Universal inbox for customer messages",
-    "AI chat and voice automation",
-    "Online booking and calendar tools",
-    "Lead pipeline and follow-up automation",
-    "Reviews, reminders, and reporting",
+/* -------------------- PROBLEM STRIP -------------------- */
+function ProblemStrip() {
+  const items = [
+    { icon: Clock, text: "Missed leads from slow response times" },
+    { icon: MessageSquare, text: "Conversations spread across too many channels" },
+    { icon: FileText, text: "Estimates, follow-up, and scheduling handled manually" },
+    { icon: Gauge, text: "No clear visibility into what is working" },
   ];
   return (
-    <section id="connect" className="py-28 relative overflow-hidden">
+    <section className="border-y border-border bg-surface/60">
+      <div className="mx-auto max-w-7xl px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {items.map((i) => (
+          <div key={i.text} className="flex items-start gap-3">
+            <div className="mt-0.5 h-7 w-7 rounded-lg border border-border bg-surface-elevated grid place-items-center shrink-0">
+              <i.icon className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.5} />
+            </div>
+            <p className="text-[13.5px] text-foreground/85 leading-relaxed">{i.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* -------------------- PLATFORM OVERVIEW -------------------- */
+function PlatformOverview() {
+  const chips = [
+    "Unified inbox",
+    "Lead pipeline",
+    "AI agent activity",
+    "Estimate draft",
+    "Appointment booking",
+    "Review request",
+    "Campaign performance",
+    "Workflow automation",
+  ];
+  return (
+    <section id="platform" className="py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="rounded-3xl border border-border bg-charcoal text-charcoal-foreground overflow-hidden relative">
-          <div
-            className="absolute inset-0 opacity-40 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 40% at 20% 0%, color-mix(in oklab, var(--gold) 35%, transparent), transparent 70%)",
-            }}
-          />
-          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-10 sm:p-14 lg:p-16">
-            <div>
-              <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-white/50">
-                <span className="h-px w-6 bg-gold" />
-                RenoMeta Connect
+        <SectionHeader
+          eyebrow="RenoMeta Connect"
+          title="One command center for leads, sales, marketing, and operations."
+          desc="AI agents, sales tools, marketing, and operations — unified in one command center built for renovation contractors."
+        />
+
+        <Reveal className="mt-10 max-w-3xl">
+          <p className="text-[15.5px] text-muted-foreground leading-relaxed">
+            RenoMeta Connect gives renovation and home service businesses one place
+            to manage customer conversations, automate follow-up, create estimates,
+            schedule jobs, track performance, and keep every opportunity moving.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {chips.map((c) => (
+              <span
+                key={c}
+                className="text-[12px] px-3 py-1.5 rounded-full border border-border bg-surface-elevated text-foreground/80"
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------- FEATURE PILLARS -------------------- */
+function FeaturePillars() {
+  const pillars = [
+    {
+      icon: Bot,
+      title: "AI Center",
+      desc: "Autonomous agents and AI tools that help qualify leads, follow up, draft estimates, summarize conversations, update the CRM, request reviews, and surface business insights.",
+      features: [
+        "Lead Qualifier",
+        "Speed-to-Lead Agent",
+        "Follow-Up Agent",
+        "Estimate Drafter",
+        "Proposal Writer",
+        "Review Agent",
+        "Inbox Triage",
+        "Conversation Summary",
+        "Task Extractor",
+        "AI Insights",
+      ],
+    },
+    {
+      icon: MessageSquare,
+      title: "Multi-Channel Inbox",
+      desc: "One inbox for customer conversations across SMS, WhatsApp, Messenger, Instagram Direct, and voice threads.",
+      features: [
+        "SMS conversations",
+        "WhatsApp messaging",
+        "Facebook Messenger",
+        "Instagram Direct",
+        "Voice conversations grouped by phone number",
+        "Missed-call text-back",
+      ],
+    },
+    {
+      icon: Users,
+      title: "CRM & Sales",
+      desc: "Track leads, manage opportunities, create proposals, send quotes, collect signatures, and move jobs through the sales process.",
+      features: [
+        "Lead and customer records",
+        "Visual pipeline",
+        "Deal tracking",
+        "Forecasting",
+        "Proposal and quote workflow",
+        "Invoice workflow",
+        "DocuSign e-signature",
+        "Client portal",
+      ],
+    },
+    {
+      icon: Send,
+      title: "Marketing & Lead Generation",
+      desc: "Run follow-up, lead nurture, reputation, and Meta-powered marketing workflows from the same connected system.",
+      features: [
+        "Meta Lead Ads",
+        "WhatsApp Business",
+        "Messenger",
+        "Instagram Direct",
+        "Meta Ads campaign creation",
+        "Twilio SMS marketing",
+        "Review requests",
+        "Lead nurturing campaigns",
+      ],
+    },
+    {
+      icon: Workflow,
+      title: "Operations & Workflow Automation",
+      desc: "Automate the work behind the work — from scheduling and dispatching to custom workflows and Google Workspace integration.",
+      features: [
+        "Visual workflow builder",
+        "Custom automations",
+        "Job scheduling",
+        "Dispatching",
+        "Job costing",
+        "Mobile field management",
+        "Gmail integration",
+        "Google Calendar",
+        "Google Drive",
+      ],
+    },
+    {
+      icon: LineChart,
+      title: "Insights & Reporting",
+      desc: "See what is happening across leads, sales, communication, campaigns, operations, and team performance.",
+      features: [
+        "Real-time dashboards",
+        "Response time tracking",
+        "Pipeline analytics",
+        "Campaign performance",
+        "AI agent activity logs",
+        "Business efficiency tracking",
+      ],
+    },
+  ];
+
+  return (
+    <section id="pillars" className="py-28 bg-surface/50 border-y border-border">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Feature Pillars"
+          title="Everything a contractor needs to run the customer journey."
+          desc="Six connected pillars that replace the disconnected tools most contractors are stitching together today."
+        />
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {pillars.map((p, idx) => (
+            <Reveal
+              key={p.title}
+              delay={(idx % 3) * 80}
+              className="card-elegant card-elegant-hover group p-7 relative overflow-hidden flex flex-col"
+            >
+              <div
+                className="absolute top-0 left-7 right-7 h-px gold-line opacity-0 group-hover:opacity-100 transition-opacity"
+                aria-hidden
+              />
+              <div className="h-11 w-11 rounded-xl border border-border bg-surface grid place-items-center">
+                <p.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
               </div>
-              <h2 className="mt-4 font-display text-balance text-4xl sm:text-5xl leading-[1.05] tracking-[-0.025em] font-semibold">
-                One platform to manage leads, conversations, appointments, and growth.
-              </h2>
-              <p className="mt-5 text-[16.5px] text-white/60 leading-relaxed max-w-lg">
-                RenoMeta Connect brings your customer communication, automation, scheduling,
-                pipeline, and reporting into one simple platform.
+              <h3 className="mt-6 font-display text-[20px] font-semibold tracking-tight">
+                {p.title}
+              </h3>
+              <p className="mt-2.5 text-[14px] text-muted-foreground leading-relaxed">
+                {p.desc}
               </p>
-              <ul className="mt-8 space-y-3.5">
-                {features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-[14.5px] text-white/85">
-                    <span className="mt-1 h-4 w-4 rounded-full border border-white/20 grid place-items-center shrink-0">
-                      <Check className="h-2.5 w-2.5 text-gold" strokeWidth={3} />
-                    </span>
+              <ul className="mt-5 pt-5 border-t border-border grid grid-cols-1 gap-1.5">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-[12.5px] text-foreground/80">
+                    <Check className="h-3 w-3 text-gold shrink-0 mt-1" strokeWidth={2.5} />
                     {f}
                   </li>
                 ))}
               </ul>
-              <div className="mt-10 flex flex-wrap gap-3">
-                <a href="#contact" className="btn-gold">
-                  See Connect in action
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-
-            <div className="relative">
-              <ConnectMockup />
-            </div>
-          </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function ConnectMockup() {
+/* -------------------- WHY DIFFERENT -------------------- */
+function WhyDifferent() {
+  const cards = [
+    {
+      title: "Built for contractors, not generic sales teams",
+      desc: "RenoMeta Connect is designed around renovation, construction, and home service workflows — from first inquiry to estimate, booking, follow-up, and project communication.",
+    },
+    {
+      title: "Everything talks to everything",
+      desc: "Your inbox, CRM, estimates, calendar, campaigns, automations, and AI agents work together, reducing double-entry and disconnected tools.",
+    },
+    {
+      title: "AI Center included across plans",
+      desc: "Core AI agents and tools are part of the platform experience. Pricing tiers differ by usage limits like seats, contacts, SMS, and AI runs — not by locking away the core system.",
+    },
+    {
+      title: "True organization-level separation",
+      desc: "Each contractor organization operates in its own isolated workspace, keeping customer data, messages, automations, and reports separated.",
+    },
+  ];
   return (
-    <div className="rounded-2xl border border-white/10 bg-[oklch(0.14_0.008_260)] shadow-2xl overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/10">
-        <span className="h-2 w-2 rounded-full bg-white/15" />
-        <span className="h-2 w-2 rounded-full bg-white/15" />
-        <span className="h-2 w-2 rounded-full bg-white/15" />
-        <span className="ml-3 text-[11px] text-white/40 font-mono">inbox</span>
+    <section className="py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Why RenoMeta Connect is different"
+          title="Built for the way renovation and home service businesses actually work."
+        />
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {cards.map((c, idx) => (
+            <Reveal key={c.title} delay={(idx % 2) * 90} className="card-elegant card-elegant-hover p-8">
+              <h3 className="font-display text-[22px] font-semibold tracking-tight">
+                {c.title}
+              </h3>
+              <p className="mt-3 text-[14.5px] text-muted-foreground leading-relaxed">
+                {c.desc}
+              </p>
+            </Reveal>
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-12 min-h-[420px]">
-        <div className="col-span-5 border-r border-white/10 p-3 space-y-1.5">
-          {[
-            { name: "Sarah M.", msg: "Thursday afternoon is perfect.", channel: "AI Chat", active: true },
-            { name: "Daniel R.", msg: "What's your soonest availability?", channel: "SMS" },
-            { name: "Priya K.", msg: "Thanks for the quote!", channel: "Email" },
-            { name: "Marcus L.", msg: "Missed call — auto reply sent", channel: "Voice" },
-            { name: "Alex T.", msg: "Booking confirmed for Fri.", channel: "AI Chat" },
-          ].map((c) => (
-            <div
-              key={c.name}
-              className={`rounded-lg px-3 py-2.5 border ${
-                c.active
-                  ? "bg-white/[0.06] border-white/10"
-                  : "bg-transparent border-transparent hover:bg-white/[0.03]"
+    </section>
+  );
+}
+
+/* -------------------- WEBSITE LAYER -------------------- */
+function WebsiteLayer() {
+  const layers = [
+    {
+      icon: Globe,
+      tag: "Front door",
+      title: "Web Design",
+      desc: "Conversion-focused websites that capture leads and route them into RenoMeta Connect.",
+    },
+    {
+      icon: Layers,
+      tag: "Command center",
+      title: "RenoMeta Connect",
+      desc: "The platform that manages and converts the lead — inbox, CRM, estimates, scheduling, automation.",
+      highlight: true,
+    },
+    {
+      icon: Settings2,
+      tag: "Advanced",
+      title: "Custom AI Solutions",
+      desc: "Advanced workflows and integrations built beyond the standard platform for unique operations.",
+    },
+  ];
+  return (
+    <section id="website-layer" className="py-28 bg-surface/50 border-y border-border">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Website Layer"
+          title="Your website becomes the front door to RenoMeta Connect."
+          desc="RenoMeta can build conversion-focused websites that capture leads and send them directly into your CRM, inbox, booking, and follow-up workflows."
+        />
+
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+          {layers.map((l, idx) => (
+            <Reveal
+              key={l.title}
+              delay={idx * 90}
+              className={`relative rounded-2xl border p-7 overflow-hidden transition-all duration-500 ${
+                l.highlight
+                  ? "border-[color:color-mix(in_oklab,var(--gold)_45%,var(--border))] bg-gradient-to-b from-[color:var(--gold-soft)]/60 to-surface-elevated shadow-[0_10px_40px_-20px_oklch(0.75_0.13_75/0.35)]"
+                  : "border-border bg-surface-elevated hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-16px_oklch(0_0_0/0.15)]"
               }`}
             >
               <div className="flex items-center justify-between">
-                <div className="text-[12.5px] font-medium text-white">{c.name}</div>
-                <span className="text-[9.5px] uppercase tracking-wider text-gold/80">
-                  {c.channel}
-                </span>
+                <div className="font-mono text-[11px] tracking-wider text-gold uppercase">
+                  {l.tag}
+                </div>
+                <l.icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
               </div>
-              <div className="mt-0.5 text-[11.5px] text-white/50 truncate">{c.msg}</div>
-            </div>
+              <h3 className="mt-5 font-display text-[19px] font-semibold tracking-tight">
+                {l.title}
+              </h3>
+              <p className="mt-2 text-[13.5px] text-muted-foreground leading-relaxed">{l.desc}</p>
+              {l.highlight && (
+                <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-[color:color-mix(in_oklab,var(--gold)_45%,var(--border))] bg-surface-elevated px-2.5 py-1 text-[10.5px] uppercase tracking-wider text-foreground">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-dot" />
+                  Core platform
+                </div>
+              )}
+            </Reveal>
           ))}
         </div>
-        <div className="col-span-7 p-4 flex flex-col">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <div className="flex items-center gap-2.5">
-              <div className="h-7 w-7 rounded-full bg-gradient-to-br from-gold-soft to-white/10 border border-white/10" />
-              <div>
-                <div className="text-[12.5px] font-medium text-white">Sarah M.</div>
-                <div className="text-[10.5px] text-white/40">Kitchen remodel · Lead</div>
-              </div>
-            </div>
-            <button className="text-[11px] px-2.5 py-1 rounded-full border border-white/15 text-white/80">
-              Book appointment
-            </button>
-          </div>
-          <div className="flex-1 py-4 space-y-2">
-            <div className="max-w-[80%] rounded-2xl px-3 py-2 text-[12px] bg-white/[0.06] text-white/90 border border-white/10">
-              Hi, do you offer free estimates?
-            </div>
-            <div className="ml-auto max-w-[80%] rounded-2xl px-3 py-2 text-[12px] bg-gold-soft text-foreground border border-[color:color-mix(in_oklab,var(--gold)_45%,white)]">
-              Yes — Tuesday 10:30 or Thursday 2:00?
-            </div>
-            <div className="max-w-[80%] rounded-2xl px-3 py-2 text-[12px] bg-white/[0.06] text-white/90 border border-white/10">
-              Thursday afternoon works.
-            </div>
-            <div className="ml-auto inline-flex items-center gap-1 rounded-2xl px-3 py-2 bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_45%,white)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "0ms" }} />
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "150ms" }} />
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground/50 animate-typing" style={{ animationDelay: "300ms" }} />
-            </div>
-          </div>
-          <div className="flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 transition-colors hover:border-white/30">
-            <Sparkles className="h-3.5 w-3.5 text-gold animate-pulse-dot" />
-            <input
-              disabled
-              placeholder="AI-suggested reply — Booking Thursday 2:00pm…"
-              className="flex-1 bg-transparent text-[12px] outline-none text-white/70 placeholder:text-white/40"
-            />
-          </div>
-        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -908,42 +863,42 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Identify growth gaps",
-      desc: "We review your website, lead flow, customer response process, and automation opportunities.",
+      title: "Capture the lead",
+      desc: "Website forms, calls, messages, Meta leads, and inbound inquiries enter RenoMeta Connect.",
     },
     {
       n: "02",
-      title: "Build your AI system",
-      desc: "We create the website, automations, AI agents, CRM workflows, and tracking systems your business needs.",
+      title: "Respond instantly",
+      desc: "AI agents, missed-call text-back, inbox automation, and follow-up workflows help keep leads warm.",
     },
     {
       n: "03",
-      title: "Launch, optimize, and scale",
-      desc: "We monitor performance, improve conversions, and keep your systems running smoothly.",
+      title: "Manage the opportunity",
+      desc: "Track conversations, pipeline stage, estimates, proposals, appointments, and next steps in one place.",
+    },
+    {
+      n: "04",
+      title: "Automate follow-up",
+      desc: "SMS, email, review requests, reminders, reactivation, and lead nurturing workflows keep opportunities moving.",
+    },
+    {
+      n: "05",
+      title: "Measure and improve",
+      desc: "Dashboards, insights, and agent activity logs show what is working and where to improve.",
     },
   ];
   return (
-    <section id="how" className="py-28 bg-surface/50 border-y border-border">
+    <section id="how" className="py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="How it works"
-          title="From growth audit to launched AI system."
-        />
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <SectionHeader eyebrow="How it works" title="From first inquiry to booked job." />
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {steps.map((s, idx) => (
-            <Reveal key={s.n} delay={idx * 100} className="card-elegant card-elegant-hover p-8">
-              <div className="flex items-center justify-between">
-                <div className="font-mono text-[12px] text-gold tracking-wider">
-                  STEP {s.n}
-                </div>
-                <div className="h-8 w-8 rounded-full border border-border grid place-items-center text-[13px] font-display font-semibold">
-                  {s.n[1]}
-                </div>
-              </div>
-              <h3 className="mt-6 font-display text-[22px] font-semibold tracking-tight">
+            <Reveal key={s.n} delay={idx * 90} className="card-elegant card-elegant-hover p-6 flex flex-col">
+              <div className="font-mono text-[11px] text-gold tracking-wider">STEP {s.n}</div>
+              <h3 className="mt-4 font-display text-[18px] font-semibold tracking-tight leading-snug">
                 {s.title}
               </h3>
-              <p className="mt-2.5 text-[14.5px] text-muted-foreground leading-relaxed">
+              <p className="mt-2 text-[13.5px] text-muted-foreground leading-relaxed">
                 {s.desc}
               </p>
             </Reveal>
@@ -954,142 +909,40 @@ function HowItWorks() {
   );
 }
 
-/* -------------------- BENEFITS -------------------- */
-function Benefits() {
+/* -------------------- OUTCOMES -------------------- */
+function Outcomes() {
   const items = [
-    {
-      icon: Zap,
-      title: "Respond faster",
-      desc: "Never miss high-intent leads because of slow replies or missed calls.",
-    },
-    {
-      icon: Calendar,
-      title: "Book more appointments",
-      desc: "Guide visitors and prospects toward scheduling with smart automation.",
-    },
-    {
-      icon: Workflow,
-      title: "Scale with less manual work",
-      desc: "Automate repetitive follow-up, communication, and lead management tasks.",
-    },
+    { icon: Zap, title: "Respond faster to new leads" },
+    { icon: PhoneMissed, title: "Reduce missed opportunities" },
+    { icon: Inbox, title: "Keep conversations organized" },
+    { icon: Workflow, title: "Automate repetitive follow-up" },
+    { icon: FileText, title: "Create estimates and proposals faster" },
+    { icon: Gauge, title: "Improve visibility across the business" },
+    { icon: Layers, title: "Reduce double-entry between tools" },
+    { icon: Calendar, title: "Book more appointments and jobs" },
   ];
   return (
-    <section className="py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="Why RenoMeta" title="Built for measurable outcomes." />
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {items.map((i, idx) => (
-            <Reveal key={i.title} delay={idx * 100} className="card-elegant card-elegant-hover p-8">
-              <div className="h-11 w-11 rounded-xl bg-gold-soft border border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] grid place-items-center transition-transform duration-300 group-hover:scale-105">
-                <i.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
-              </div>
-              <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">
-                {i.title}
-              </h3>
-              <p className="mt-2 text-[14.5px] text-muted-foreground leading-relaxed">
-                {i.desc}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- FEATURED GRID -------------------- */
-function FeaturedGrid() {
-  const items = [
-    { icon: MessageSquare, title: "AI Chat Assistant", desc: "24/7 lead capture and qualification." },
-    { icon: Mic, title: "AI Voice Assistant", desc: "Answer calls, book jobs, route requests." },
-    { icon: PhoneMissed, title: "Missed Call Text-Back", desc: "Instant SMS the moment a call is missed." },
-    { icon: Globe, title: "Website Design", desc: "High-converting conversion-first websites." },
-    { icon: LineChart, title: "Reporting & Insights", desc: "Track pipeline, response, and revenue." },
-    { icon: Star, title: "Review Automation", desc: "Request, monitor, and reply automatically." },
-    { icon: Calendar, title: "Appointment Booking", desc: "Real-time scheduling and reminders." },
-    { icon: Send, title: "Lead Nurturing", desc: "Personalized long-cycle follow-up." },
-    { icon: Users, title: "CRM & Pipeline", desc: "See every deal, stage, and next step." },
-    { icon: Workflow, title: "SMS & Email Automation", desc: "Trigger-based cross-channel workflows." },
-  ];
-  return (
-    <section className="py-28 bg-surface/50 border-y border-border">
+    <section id="proof" className="py-28 bg-surface/50 border-y border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
-          eyebrow="Capabilities"
-          title="Every touchpoint, automated."
-          desc="Composable modules that plug into your existing tools or run inside RenoMeta Connect."
+          eyebrow="Outcomes"
+          title="Designed to help contractors move faster and win more work."
         />
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {items.map((i, idx) => (
             <Reveal
               key={i.title}
-              delay={(idx % 5) * 60}
+              delay={(idx % 4) * 60}
               className="group rounded-xl border border-border bg-surface-elevated p-5 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-16px_oklch(0_0_0/0.15)] transition-all duration-300"
             >
               <i.icon
                 className="h-4 w-4 text-muted-foreground group-hover:text-gold transition-all duration-300 group-hover:scale-110"
                 strokeWidth={1.5}
               />
-              <div className="mt-4 text-[14px] font-medium tracking-tight">{i.title}</div>
-              <div className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">
-                {i.desc}
+              <div className="mt-4 text-[14px] font-medium tracking-tight leading-snug">
+                {i.title}
               </div>
             </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- PROOF -------------------- */
-function Proof() {
-  const metrics = [
-    { value: "103%", label: "Increase in qualified leads" },
-    { value: "32%", label: "Lower cost per lead" },
-    { value: "<1m", label: "Average response time" },
-    { value: "3.4x", label: "More booked appointments" },
-  ];
-  return (
-    <section id="proof" className="py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
-          <div className="lg:col-span-7">
-            <SectionHeader
-              eyebrow="Proof"
-              title="Built to turn more visitors into booked opportunities."
-              desc="Sample outcomes across service businesses running RenoMeta systems."
-            />
-          </div>
-          <div className="lg:col-span-5 flex lg:justify-end">
-            <a href="#contact" className="btn-ghost">
-              Request a case study
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-
-        <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 rounded-2xl border border-border bg-surface-elevated overflow-hidden">
-          {metrics.map((m, i) => (
-            <div
-              key={m.label}
-              className={`p-8 ${i !== 0 ? "border-l border-border" : ""} ${
-                i >= 2 ? "border-t lg:border-t-0" : ""
-              }`}
-            >
-              <div className="font-display text-5xl font-semibold tracking-[-0.03em]">
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(180deg, oklch(0.22 0.01 80), var(--gold))",
-                  }}
-                >
-                  {m.value}
-                </span>
-              </div>
-              <div className="mt-3 text-[13px] text-muted-foreground">{m.label}</div>
-            </div>
           ))}
         </div>
       </div>
@@ -1105,20 +958,25 @@ function FinalCTA() {
         <div className="relative rounded-3xl border border-border bg-hero-radial p-10 sm:p-16 text-center overflow-hidden">
           <div className="absolute inset-0 bg-grid-fade opacity-60 pointer-events-none" />
           <div className="relative">
-            <h2 className="font-display text-balance text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-[-0.025em] font-semibold">
-              Ready to build an AI growth system for your business?
+            <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground justify-center">
+              <span className="h-px w-6 bg-gold" />
+              <Sparkles className="h-3 w-3 text-gold" />
+              RenoMeta Connect
+            </div>
+            <h2 className="mt-4 font-display text-balance text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-[-0.025em] font-semibold">
+              Run your customer journey from one command center.
             </h2>
             <p className="mt-5 text-[16.5px] text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Let's create a smarter website, stronger follow-up system, and AI-powered
-              customer experience built to help your business grow.
+              Bring leads, conversations, estimates, scheduling, marketing, and
+              follow-up into one connected platform built for renovation contractors.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
               <a href="#" className="btn-primary">
                 Book a Free Strategy Call
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="#solutions" className="btn-ghost">
-                Explore Solutions
+              <a href="#platform" className="btn-ghost">
+                See Connect in Action
               </a>
             </div>
           </div>
@@ -1137,8 +995,11 @@ function Footer() {
           <div className="flex items-center">
             <Logo className="h-9 w-auto" />
           </div>
-          <p className="mt-4 text-[14px] text-muted-foreground max-w-xs leading-relaxed">
-            AI systems and marketing automation for modern service businesses.
+          <p className="mt-4 text-[14px] text-muted-foreground max-w-sm leading-relaxed">
+            RenoMeta Connect is a business command center for renovation
+            contractors and home service businesses — bringing leads,
+            conversations, estimates, follow-up, scheduling, marketing,
+            automation, and insights into one connected platform.
           </p>
           <a
             href="#contact"
@@ -1148,10 +1009,7 @@ function Footer() {
             <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
-        <FooterCol
-          title="Platform"
-          links={["RenoMeta Connect"]}
-        />
+        <FooterCol title="Platform" links={["RenoMeta Connect"]} />
         <FooterCol
           title="Solutions"
           links={[
@@ -1162,10 +1020,7 @@ function Footer() {
             "Custom AI Solutions",
           ]}
         />
-        <FooterCol
-          title="Company"
-          links={["Case Studies", "Pricing", "Contact"]}
-        />
+        <FooterCol title="Company" links={["Case Studies", "Pricing", "Contact"]} />
       </div>
       <div className="border-t border-border">
         <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -1173,7 +1028,7 @@ function Footer() {
             © {new Date().getFullYear()} RenoMeta. All rights reserved.
           </div>
           <div className="text-[12.5px] text-muted-foreground">
-            Crafted with care · Built for service businesses
+            Built for renovation contractors and home service businesses
           </div>
         </div>
       </div>
