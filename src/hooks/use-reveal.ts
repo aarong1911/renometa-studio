@@ -11,6 +11,13 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // If element is already at/above the viewport on mount, reveal immediately.
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh - 40) {
+      el.classList.add("is-visible");
+      return;
+    }
     if (typeof IntersectionObserver === "undefined") {
       el.classList.add("is-visible");
       return;
@@ -25,8 +32,8 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
         }
       },
       {
-        threshold: options?.threshold ?? 0.12,
-        rootMargin: options?.rootMargin ?? "0px 0px -60px 0px",
+        threshold: options?.threshold ?? 0.01,
+        rootMargin: options?.rootMargin ?? "0px 0px 0px 0px",
       },
     );
     io.observe(el);
