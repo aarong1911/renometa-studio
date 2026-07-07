@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import logoAsset from "@/assets/renometa-logo.png.asset.json";
 
@@ -29,6 +29,7 @@ export function Logo({ className = "h-8 w-auto" }: { className?: string }) {
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -59,7 +60,15 @@ export function SiteNav() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center group" aria-label="RenoMeta home" onClick={() => setMobileOpen(false)}>
+        <Link
+          to="/"
+          className="flex items-center group"
+          aria-label="RenoMeta home"
+          onClick={() => {
+            setMobileOpen(false);
+            setMobileSolutionsOpen(false);
+          }}
+        >
           <Logo className="h-8 w-auto" />
         </Link>
         <nav className="hidden md:flex items-center gap-7">
@@ -93,7 +102,12 @@ export function SiteNav() {
             className="md:hidden inline-flex items-center justify-center h-10 w-10 -mr-2 rounded-md text-foreground hover:bg-surface transition-colors"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={() => {
+              setMobileOpen((v) => {
+                if (v) setMobileSolutionsOpen(false);
+                return !v;
+              });
+            }}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -104,15 +118,31 @@ export function SiteNav() {
         <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="px-6 py-6 space-y-6">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              <button
+                type="button"
+                className="flex w-full items-center justify-between text-left text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
+                aria-expanded={mobileSolutionsOpen}
+                aria-controls="mobile-solutions-menu"
+                onClick={() => setMobileSolutionsOpen((v) => !v)}
+              >
                 Solutions
-              </div>
-              <div className="mt-3 space-y-1">
+                <ChevronDown className={`h-4 w-4 transition-transform ${mobileSolutionsOpen ? "rotate-180" : ""}`} />
+              </button>
+              <div
+                id="mobile-solutions-menu"
+                className={`grid transition-all duration-300 ease-out ${
+                  mobileSolutionsOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 mt-0"
+                }`}
+              >
+                <div className="min-h-0 overflow-hidden space-y-1">
                 {SOLUTIONS.map((item) => (
                   <Link
                     key={item.to}
                     to={item.to}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileSolutionsOpen(false);
+                    }}
                     className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
                   >
                     <div className="text-[14px] font-medium text-foreground">{item.label}</div>
@@ -121,6 +151,7 @@ export function SiteNav() {
                     </div>
                   </Link>
                 ))}
+                </div>
               </div>
             </div>
             <div className="border-t border-border pt-5">
@@ -132,7 +163,10 @@ export function SiteNav() {
                   <Link
                     key={l.to}
                     to={l.to}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setMobileSolutionsOpen(false);
+                    }}
                     className="py-2.5 text-[15px] text-foreground"
                   >
                     {l.label}
@@ -143,7 +177,10 @@ export function SiteNav() {
                   target="_blank"
                   rel="noreferrer"
                   className="py-2.5 text-[15px] text-foreground"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setMobileSolutionsOpen(false);
+                  }}
                 >
                   Login
                 </a>
@@ -151,7 +188,10 @@ export function SiteNav() {
             </div>
             <Link
               to="/contact"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                setMobileOpen(false);
+                setMobileSolutionsOpen(false);
+              }}
               className="btn-primary w-full justify-center text-[14px]"
             >
               Contact Us
@@ -166,34 +206,41 @@ export function SiteNav() {
 
 function SolutionsDropdown() {
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
-    const onClick = (e: MouseEvent) => {
-      const t = e.target as HTMLElement;
-      if (!t.closest("[data-solutions-dropdown]")) setOpen(false);
+    const onPointerDown = (e: PointerEvent) => {
+      if (!dropdownRef.current?.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    window.addEventListener("click", onClick);
+    window.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("keydown", onKey);
     return () => {
-      window.removeEventListener("click", onClick);
+      window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
   return (
     <div
+      ref={dropdownRef}
       className="relative"
       data-solutions-dropdown
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onPointerEnter={() => setOpen(true)}
+      onPointerLeave={() => setOpen(false)}
+      onFocusCapture={() => setOpen(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
+      }}
     >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
+        aria-haspopup="menu"
         className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors"
       >
         Solutions
@@ -201,15 +248,16 @@ function SolutionsDropdown() {
       </button>
       <div
         className={`absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 transition-all duration-200 ${
-          open ? "opacity-100 visible" : "opacity-0 invisible"
+          open ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
         }`}
       >
-        <div className="w-[380px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2">
+        <div className="w-[380px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2" role="menu">
           {SOLUTIONS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
               onClick={() => setOpen(false)}
+              role="menuitem"
               className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
             >
               <div className="text-[13.5px] font-medium text-foreground">{item.label}</div>
