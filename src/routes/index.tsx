@@ -113,13 +113,9 @@ function Hero() {
         </div>
 
         <div className="mt-16 sm:mt-20 animate-reveal" style={{ animationDelay: "120ms" }}>
-          <div className="hidden md:block">
-            <DashboardMockup />
-          </div>
-          <div className="md:hidden">
-            <MobileHeroCard />
-          </div>
+          <DashboardMockup />
         </div>
+
       </div>
     </section>
   );
