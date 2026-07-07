@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Nav />
+      <SiteNav />
       <main>
         <Hero />
         <ProblemStrip />
@@ -45,7 +45,7 @@ function HomePage() {
         <Outcomes />
         <FinalCTA />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
