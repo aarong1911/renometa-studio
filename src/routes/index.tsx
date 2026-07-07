@@ -102,13 +102,13 @@ function Hero() {
             className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
             style={{ animationDelay: "340ms" }}
           >
-            <a href="#contact" className="btn-primary">
-              Book a Free Strategy Call
+            <Link to="/contact" className="btn-primary">
+              Contact Us
               <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#platform" className="btn-ghost">
+            </Link>
+            <Link to="/renometa-connect" className="btn-ghost">
               See Connect in Action
-            </a>
+            </Link>
           </div>
         </div>
 
