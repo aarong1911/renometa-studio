@@ -1,14 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode, type HTMLAttributes } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { type ReactNode, type HTMLAttributes } from "react";
 import { useReveal } from "@/hooks/use-reveal";
-import logoAsset from "@/assets/renometa-logo.png.asset.json";
+import { SiteNav, SiteFooter } from "@/components/site-chrome";
 
 import {
   ArrowRight,
   Bot,
   Calendar,
   Check,
-  ChevronDown,
   Clock,
   FileText,
   Gauge,
@@ -34,7 +33,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Nav />
+      <SiteNav />
       <main>
         <Hero />
         <ProblemStrip />
@@ -46,7 +45,7 @@ function HomePage() {
         <Outcomes />
         <FinalCTA />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
@@ -77,116 +76,7 @@ function Reveal({
   );
 }
 
-/* -------------------- NAV -------------------- */
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const platformItems = [
-    {
-      href: "#platform",
-      label: "RenoMeta Connect",
-      desc: "The business command center for renovation contractors.",
-    },
-  ];
-  const solutionItems = [
-    { href: "#website-layer", label: "AI Website Systems", desc: "Lead-focused websites connected to Connect." },
-    { href: "#pillars", label: "AI Customer Engagement", desc: "AI agents, inbox triage, instant response." },
-    { href: "#pillars", label: "Marketing & Follow-Up Automation", desc: "Nurture, reviews, campaigns, reactivation." },
-    { href: "#pillars", label: "Growth Operations", desc: "Scheduling, dispatch, workflows, insights." },
-    { href: "#pillars", label: "Custom AI Solutions", desc: "Advanced workflows built beyond the platform." },
-  ];
-  const links = [
-    { href: "#proof", label: "Case Studies" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#contact", label: "Contact" },
-  ];
-
-  return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/75 backdrop-blur-xl border-b border-border shadow-[0_1px_0_oklch(0_0_0/0.03),0_8px_24px_-16px_oklch(0_0_0/0.12)]"
-          : "bg-transparent border-b border-transparent"
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center group">
-          <Logo className="h-8 w-auto" />
-        </a>
-        <nav className="hidden md:flex items-center gap-7">
-          <NavDropdown label="Platform" items={platformItems} />
-          <NavDropdown label="Solutions" items={solutionItems} />
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-[13.5px] text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <a href="#contact" className="hidden sm:inline-flex btn-primary text-[13.5px] px-4 py-2">
-            Book a Call
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function Logo({ className = "h-8 w-auto" }: { className?: string }) {
-  return (
-    <img
-      src={logoAsset.url}
-      alt="RenoMeta"
-      className={className}
-      loading="eager"
-      decoding="async"
-    />
-  );
-}
-
-function NavDropdown({
-  label,
-  items,
-}: {
-  label: string;
-  items: { href: string; label: string; desc: string }[];
-}) {
-  return (
-    <div className="relative group">
-      <button className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors">
-        {label}
-        <ChevronDown className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
-      </button>
-      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-        <div className="w-[360px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2">
-          {items.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
-            >
-              <div className="text-[13.5px] font-medium text-foreground">{item.label}</div>
-              <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
-                {item.desc}
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+/* Nav, Logo, NavDropdown moved to src/components/site-chrome.tsx */
 
 /* -------------------- HERO -------------------- */
 function Hero() {
@@ -212,13 +102,13 @@ function Hero() {
             className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
             style={{ animationDelay: "340ms" }}
           >
-            <a href="#contact" className="btn-primary">
-              Book a Free Strategy Call
+            <Link to="/contact" className="btn-primary">
+              Contact Us
               <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#platform" className="btn-ghost">
+            </Link>
+            <Link to="/renometa-connect" className="btn-ghost">
               See Connect in Action
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -542,7 +432,7 @@ function SectionHeader({
   );
 }
 
-/* -------------------- PROBLEM STRIP -------------------- */
+/* -------------------- PROBLEM / SOLUTION -------------------- */
 function ProblemStrip() {
   const items = [
     { icon: Clock, text: "Missed leads from slow response times" },
@@ -552,15 +442,35 @@ function ProblemStrip() {
   ];
   return (
     <section className="border-y border-border bg-surface/60">
-      <div className="mx-auto max-w-7xl px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {items.map((i) => (
-          <div key={i.text} className="flex items-start gap-3">
-            <div className="mt-0.5 h-7 w-7 rounded-lg border border-border bg-surface-elevated grid place-items-center shrink-0">
-              <i.icon className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.5} />
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="h-px w-6 bg-gold" />
+          Problems contractors face daily
+        </div>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {items.map((i) => (
+            <div key={i.text} className="flex items-start gap-3">
+              <div className="mt-0.5 h-7 w-7 rounded-lg border border-border bg-surface-elevated grid place-items-center shrink-0">
+                <i.icon className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.5} />
+              </div>
+              <p className="text-[13.5px] text-foreground/85 leading-relaxed">{i.text}</p>
             </div>
-            <p className="text-[13.5px] text-foreground/85 leading-relaxed">{i.text}</p>
+          ))}
+        </div>
+        <div className="mt-14 pt-10 border-t border-border max-w-3xl">
+          <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-px w-6 bg-gold" />
+            The Solution
           </div>
-        ))}
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-[44px] leading-[1.08] tracking-[-0.025em] font-semibold text-balance">
+            One connected platform for the full customer journey.
+          </h2>
+          <p className="mt-5 text-[16px] text-muted-foreground leading-relaxed">
+            RenoMeta Connect brings your leads, conversations, estimates,
+            scheduling, marketing, and follow-up into one connected platform
+            built for renovation and home service businesses.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -971,89 +881,17 @@ function FinalCTA() {
               follow-up into one connected platform built for renovation contractors.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <a href="#" className="btn-primary">
-                Book a Free Strategy Call
+              <Link to="/contact" className="btn-primary">
+                Contact Us
                 <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="#platform" className="btn-ghost">
+              </Link>
+              <Link to="/renometa-connect" className="btn-ghost">
                 See Connect in Action
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-/* -------------------- FOOTER -------------------- */
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-surface/60">
-      <div className="mx-auto max-w-7xl px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
-        <div className="col-span-2 md:col-span-2">
-          <div className="flex items-center">
-            <Logo className="h-9 w-auto" />
-          </div>
-          <p className="mt-4 text-[14px] text-muted-foreground max-w-sm leading-relaxed">
-            RenoMeta Connect is a business command center for renovation
-            contractors and home service businesses — bringing leads,
-            conversations, estimates, follow-up, scheduling, marketing,
-            automation, and insights into one connected platform.
-          </p>
-          <a
-            href="#contact"
-            className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-foreground hover:text-gold transition-colors"
-          >
-            Book a call
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-        <FooterCol title="Platform" links={["RenoMeta Connect"]} />
-        <FooterCol
-          title="Solutions"
-          links={[
-            "AI Website Systems",
-            "AI Customer Engagement",
-            "Marketing & Follow-Up Automation",
-            "Growth Operations",
-            "Custom AI Solutions",
-          ]}
-        />
-        <FooterCol title="Company" links={["Case Studies", "Pricing", "Contact"]} />
-      </div>
-      <div className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-[12.5px] text-muted-foreground">
-            © {new Date().getFullYear()} RenoMeta. All rights reserved.
-          </div>
-          <div className="text-[12.5px] text-muted-foreground">
-            Built for renovation contractors and home service businesses
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-function FooterCol({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <div className="text-[12px] uppercase tracking-[0.16em] text-muted-foreground">
-        {title}
-      </div>
-      <ul className="mt-4 space-y-2.5">
-        {links.map((l) => (
-          <li key={l}>
-            <a
-              href="#"
-              className="text-[13.5px] text-foreground/80 hover:text-foreground transition-colors"
-            >
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
