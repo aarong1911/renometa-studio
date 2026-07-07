@@ -273,43 +273,65 @@ export function PageShell({
   eyebrow,
   headline,
   subheading,
+  primaryCta = { label: "Contact Us", to: "/contact" },
+  secondaryCta = { label: "Explore Solutions", to: "/solutions" },
+  heroVisual,
   children,
 }: {
   eyebrow?: string;
   headline: string;
   subheading: string;
+  primaryCta?: { label: string; to: string };
+  secondaryCta?: { label: string; to: string } | null;
+  heroVisual?: ReactNode;
   children?: ReactNode;
 }) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteNav />
       <main className="flex-1">
-        <section className="relative pt-32 pb-24 overflow-hidden bg-hero-radial">
+        <section className="relative pt-32 pb-20 overflow-hidden bg-hero-radial">
           <div className="absolute inset-0 bg-grid-fade opacity-70 pointer-events-none" />
           <div className="relative mx-auto max-w-7xl px-6">
             <div className="max-w-4xl">
               {eyebrow && (
-                <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+                <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground animate-reveal">
                   <span className="h-px w-6 bg-gold" />
                   {eyebrow}
                 </div>
               )}
-              <h1 className="mt-5 font-display text-balance text-[40px] sm:text-5xl lg:text-[60px] leading-[1.04] tracking-[-0.03em] font-semibold text-foreground">
+              <h1
+                className="mt-5 font-display text-balance text-[40px] sm:text-5xl lg:text-[60px] leading-[1.04] tracking-[-0.03em] font-semibold text-foreground animate-reveal"
+                style={{ animationDelay: "80ms" }}
+              >
                 {headline}
               </h1>
-              <p className="mt-6 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-2xl leading-relaxed">
+              <p
+                className="mt-6 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-2xl leading-relaxed animate-reveal"
+                style={{ animationDelay: "180ms" }}
+              >
                 {subheading}
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link to="/contact" className="btn-primary">
-                  Contact Us
+              <div
+                className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
+                style={{ animationDelay: "280ms" }}
+              >
+                <Link to={primaryCta.to} className="btn-primary">
+                  {primaryCta.label}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link to="/solutions" className="btn-ghost">
-                  Explore Solutions
-                </Link>
+                {secondaryCta && (
+                  <Link to={secondaryCta.to} className="btn-ghost">
+                    {secondaryCta.label}
+                  </Link>
+                )}
               </div>
             </div>
+            {heroVisual && (
+              <div className="mt-14 animate-reveal" style={{ animationDelay: "360ms" }}>
+                {heroVisual}
+              </div>
+            )}
           </div>
         </section>
         {children}
@@ -318,3 +340,4 @@ export function PageShell({
     </div>
   );
 }
+

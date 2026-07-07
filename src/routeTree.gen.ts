@@ -23,6 +23,7 @@ import { Route as AiWebsiteSystemsRouteImport } from './routes/ai-website-system
 import { Route as AiCenterRouteImport } from './routes/ai-center'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
@@ -95,13 +96,18 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ai-center': typeof AiCenterRoute
   '/ai-website-systems': typeof AiWebsiteSystemsRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/crm-sales': typeof CrmSalesRoute
   '/custom-ai-solutions': typeof CustomAiSolutionsRoute
@@ -111,13 +117,14 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/renometa-connect': typeof RenometaConnectRoute
   '/solutions': typeof SolutionsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ai-center': typeof AiCenterRoute
   '/ai-website-systems': typeof AiWebsiteSystemsRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/crm-sales': typeof CrmSalesRoute
   '/custom-ai-solutions': typeof CustomAiSolutionsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/renometa-connect': typeof RenometaConnectRoute
   '/solutions': typeof SolutionsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,7 +142,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/ai-center': typeof AiCenterRoute
   '/ai-website-systems': typeof AiWebsiteSystemsRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/crm-sales': typeof CrmSalesRoute
   '/custom-ai-solutions': typeof CustomAiSolutionsRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/renometa-connect': typeof RenometaConnectRoute
   '/solutions': typeof SolutionsRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/renometa-connect'
     | '/solutions'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -178,6 +188,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/renometa-connect'
     | '/solutions'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
@@ -194,6 +205,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/renometa-connect'
     | '/solutions'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -201,7 +213,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AiCenterRoute: typeof AiCenterRoute
   AiWebsiteSystemsRoute: typeof AiWebsiteSystemsRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   CrmSalesRoute: typeof CrmSalesRoute
   CustomAiSolutionsRoute: typeof CustomAiSolutionsRoute
@@ -313,15 +325,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AiCenterRoute: AiCenterRoute,
   AiWebsiteSystemsRoute: AiWebsiteSystemsRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   CrmSalesRoute: CrmSalesRoute,
   CustomAiSolutionsRoute: CustomAiSolutionsRoute,
