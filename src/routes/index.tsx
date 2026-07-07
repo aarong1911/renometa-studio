@@ -881,89 +881,17 @@ function FinalCTA() {
               follow-up into one connected platform built for renovation contractors.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <a href="#" className="btn-primary">
-                Book a Free Strategy Call
+              <Link to="/contact" className="btn-primary">
+                Contact Us
                 <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="#platform" className="btn-ghost">
+              </Link>
+              <Link to="/renometa-connect" className="btn-ghost">
                 See Connect in Action
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-/* -------------------- FOOTER -------------------- */
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-surface/60">
-      <div className="mx-auto max-w-7xl px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
-        <div className="col-span-2 md:col-span-2">
-          <div className="flex items-center">
-            <Logo className="h-9 w-auto" />
-          </div>
-          <p className="mt-4 text-[14px] text-muted-foreground max-w-sm leading-relaxed">
-            RenoMeta Connect is a business command center for renovation
-            contractors and home service businesses — bringing leads,
-            conversations, estimates, follow-up, scheduling, marketing,
-            automation, and insights into one connected platform.
-          </p>
-          <a
-            href="#contact"
-            className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium text-foreground hover:text-gold transition-colors"
-          >
-            Book a call
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-        <FooterCol title="Platform" links={["RenoMeta Connect"]} />
-        <FooterCol
-          title="Solutions"
-          links={[
-            "AI Website Systems",
-            "AI Customer Engagement",
-            "Marketing & Follow-Up Automation",
-            "Growth Operations",
-            "Custom AI Solutions",
-          ]}
-        />
-        <FooterCol title="Company" links={["Case Studies", "Pricing", "Contact"]} />
-      </div>
-      <div className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-[12.5px] text-muted-foreground">
-            © {new Date().getFullYear()} RenoMeta. All rights reserved.
-          </div>
-          <div className="text-[12.5px] text-muted-foreground">
-            Built for renovation contractors and home service businesses
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-function FooterCol({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <div className="text-[12px] uppercase tracking-[0.16em] text-muted-foreground">
-        {title}
-      </div>
-      <ul className="mt-4 space-y-2.5">
-        {links.map((l) => (
-          <li key={l}>
-            <a
-              href="#"
-              className="text-[13.5px] text-foreground/80 hover:text-foreground transition-colors"
-            >
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
