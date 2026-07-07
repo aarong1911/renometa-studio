@@ -432,7 +432,7 @@ function SectionHeader({
   );
 }
 
-/* -------------------- PROBLEM STRIP -------------------- */
+/* -------------------- PROBLEM / SOLUTION -------------------- */
 function ProblemStrip() {
   const items = [
     { icon: Clock, text: "Missed leads from slow response times" },
@@ -442,15 +442,35 @@ function ProblemStrip() {
   ];
   return (
     <section className="border-y border-border bg-surface/60">
-      <div className="mx-auto max-w-7xl px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {items.map((i) => (
-          <div key={i.text} className="flex items-start gap-3">
-            <div className="mt-0.5 h-7 w-7 rounded-lg border border-border bg-surface-elevated grid place-items-center shrink-0">
-              <i.icon className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.5} />
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="h-px w-6 bg-gold" />
+          Problems contractors face daily
+        </div>
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {items.map((i) => (
+            <div key={i.text} className="flex items-start gap-3">
+              <div className="mt-0.5 h-7 w-7 rounded-lg border border-border bg-surface-elevated grid place-items-center shrink-0">
+                <i.icon className="h-3.5 w-3.5 text-muted-foreground" strokeWidth={1.5} />
+              </div>
+              <p className="text-[13.5px] text-foreground/85 leading-relaxed">{i.text}</p>
             </div>
-            <p className="text-[13.5px] text-foreground/85 leading-relaxed">{i.text}</p>
+          ))}
+        </div>
+        <div className="mt-14 pt-10 border-t border-border max-w-3xl">
+          <div className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-px w-6 bg-gold" />
+            The Solution
           </div>
-        ))}
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-[44px] leading-[1.08] tracking-[-0.025em] font-semibold text-balance">
+            One connected platform for the full customer journey.
+          </h2>
+          <p className="mt-5 text-[16px] text-muted-foreground leading-relaxed">
+            RenoMeta Connect brings your leads, conversations, estimates,
+            scheduling, marketing, and follow-up into one connected platform
+            built for renovation and home service businesses.
+          </p>
+        </div>
       </div>
     </section>
   );
