@@ -1,14 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode, type HTMLAttributes } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { type ReactNode, type HTMLAttributes } from "react";
 import { useReveal } from "@/hooks/use-reveal";
-import logoAsset from "@/assets/renometa-logo.png.asset.json";
+import { SiteNav, SiteFooter } from "@/components/site-chrome";
 
 import {
   ArrowRight,
   Bot,
   Calendar,
   Check,
-  ChevronDown,
   Clock,
   FileText,
   Gauge,

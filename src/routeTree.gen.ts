@@ -9,8 +9,87 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as RenometaConnectRouteImport } from './routes/renometa-connect'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as MultiChannelInboxRouteImport } from './routes/multi-channel-inbox'
+import { Route as MarketingFollowUpAutomationRouteImport } from './routes/marketing-follow-up-automation'
+import { Route as GrowthOperationsRouteImport } from './routes/growth-operations'
+import { Route as CustomAiSolutionsRouteImport } from './routes/custom-ai-solutions'
+import { Route as CrmSalesRouteImport } from './routes/crm-sales'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AiWebsiteSystemsRouteImport } from './routes/ai-website-systems'
+import { Route as AiCenterRouteImport } from './routes/ai-center'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RenometaConnectRoute = RenometaConnectRouteImport.update({
+  id: '/renometa-connect',
+  path: '/renometa-connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MultiChannelInboxRoute = MultiChannelInboxRouteImport.update({
+  id: '/multi-channel-inbox',
+  path: '/multi-channel-inbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingFollowUpAutomationRoute =
+  MarketingFollowUpAutomationRouteImport.update({
+    id: '/marketing-follow-up-automation',
+    path: '/marketing-follow-up-automation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GrowthOperationsRoute = GrowthOperationsRouteImport.update({
+  id: '/growth-operations',
+  path: '/growth-operations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomAiSolutionsRoute = CustomAiSolutionsRouteImport.update({
+  id: '/custom-ai-solutions',
+  path: '/custom-ai-solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmSalesRoute = CrmSalesRouteImport.update({
+  id: '/crm-sales',
+  path: '/crm-sales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiWebsiteSystemsRoute = AiWebsiteSystemsRouteImport.update({
+  id: '/ai-website-systems',
+  path: '/ai-website-systems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiCenterRoute = AiCenterRouteImport.update({
+  id: '/ai-center',
+  path: '/ai-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +98,214 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-center': typeof AiCenterRoute
+  '/ai-website-systems': typeof AiWebsiteSystemsRoute
+  '/blog': typeof BlogRoute
+  '/contact': typeof ContactRoute
+  '/crm-sales': typeof CrmSalesRoute
+  '/custom-ai-solutions': typeof CustomAiSolutionsRoute
+  '/growth-operations': typeof GrowthOperationsRoute
+  '/marketing-follow-up-automation': typeof MarketingFollowUpAutomationRoute
+  '/multi-channel-inbox': typeof MultiChannelInboxRoute
+  '/pricing': typeof PricingRoute
+  '/renometa-connect': typeof RenometaConnectRoute
+  '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-center': typeof AiCenterRoute
+  '/ai-website-systems': typeof AiWebsiteSystemsRoute
+  '/blog': typeof BlogRoute
+  '/contact': typeof ContactRoute
+  '/crm-sales': typeof CrmSalesRoute
+  '/custom-ai-solutions': typeof CustomAiSolutionsRoute
+  '/growth-operations': typeof GrowthOperationsRoute
+  '/marketing-follow-up-automation': typeof MarketingFollowUpAutomationRoute
+  '/multi-channel-inbox': typeof MultiChannelInboxRoute
+  '/pricing': typeof PricingRoute
+  '/renometa-connect': typeof RenometaConnectRoute
+  '/solutions': typeof SolutionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-center': typeof AiCenterRoute
+  '/ai-website-systems': typeof AiWebsiteSystemsRoute
+  '/blog': typeof BlogRoute
+  '/contact': typeof ContactRoute
+  '/crm-sales': typeof CrmSalesRoute
+  '/custom-ai-solutions': typeof CustomAiSolutionsRoute
+  '/growth-operations': typeof GrowthOperationsRoute
+  '/marketing-follow-up-automation': typeof MarketingFollowUpAutomationRoute
+  '/multi-channel-inbox': typeof MultiChannelInboxRoute
+  '/pricing': typeof PricingRoute
+  '/renometa-connect': typeof RenometaConnectRoute
+  '/solutions': typeof SolutionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/ai-center'
+    | '/ai-website-systems'
+    | '/blog'
+    | '/contact'
+    | '/crm-sales'
+    | '/custom-ai-solutions'
+    | '/growth-operations'
+    | '/marketing-follow-up-automation'
+    | '/multi-channel-inbox'
+    | '/pricing'
+    | '/renometa-connect'
+    | '/solutions'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/ai-center'
+    | '/ai-website-systems'
+    | '/blog'
+    | '/contact'
+    | '/crm-sales'
+    | '/custom-ai-solutions'
+    | '/growth-operations'
+    | '/marketing-follow-up-automation'
+    | '/multi-channel-inbox'
+    | '/pricing'
+    | '/renometa-connect'
+    | '/solutions'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/ai-center'
+    | '/ai-website-systems'
+    | '/blog'
+    | '/contact'
+    | '/crm-sales'
+    | '/custom-ai-solutions'
+    | '/growth-operations'
+    | '/marketing-follow-up-automation'
+    | '/multi-channel-inbox'
+    | '/pricing'
+    | '/renometa-connect'
+    | '/solutions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AiCenterRoute: typeof AiCenterRoute
+  AiWebsiteSystemsRoute: typeof AiWebsiteSystemsRoute
+  BlogRoute: typeof BlogRoute
+  ContactRoute: typeof ContactRoute
+  CrmSalesRoute: typeof CrmSalesRoute
+  CustomAiSolutionsRoute: typeof CustomAiSolutionsRoute
+  GrowthOperationsRoute: typeof GrowthOperationsRoute
+  MarketingFollowUpAutomationRoute: typeof MarketingFollowUpAutomationRoute
+  MultiChannelInboxRoute: typeof MultiChannelInboxRoute
+  PricingRoute: typeof PricingRoute
+  RenometaConnectRoute: typeof RenometaConnectRoute
+  SolutionsRoute: typeof SolutionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/renometa-connect': {
+      id: '/renometa-connect'
+      path: '/renometa-connect'
+      fullPath: '/renometa-connect'
+      preLoaderRoute: typeof RenometaConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/multi-channel-inbox': {
+      id: '/multi-channel-inbox'
+      path: '/multi-channel-inbox'
+      fullPath: '/multi-channel-inbox'
+      preLoaderRoute: typeof MultiChannelInboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing-follow-up-automation': {
+      id: '/marketing-follow-up-automation'
+      path: '/marketing-follow-up-automation'
+      fullPath: '/marketing-follow-up-automation'
+      preLoaderRoute: typeof MarketingFollowUpAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/growth-operations': {
+      id: '/growth-operations'
+      path: '/growth-operations'
+      fullPath: '/growth-operations'
+      preLoaderRoute: typeof GrowthOperationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-ai-solutions': {
+      id: '/custom-ai-solutions'
+      path: '/custom-ai-solutions'
+      fullPath: '/custom-ai-solutions'
+      preLoaderRoute: typeof CustomAiSolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm-sales': {
+      id: '/crm-sales'
+      path: '/crm-sales'
+      fullPath: '/crm-sales'
+      preLoaderRoute: typeof CrmSalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-website-systems': {
+      id: '/ai-website-systems'
+      path: '/ai-website-systems'
+      fullPath: '/ai-website-systems'
+      preLoaderRoute: typeof AiWebsiteSystemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-center': {
+      id: '/ai-center'
+      path: '/ai-center'
+      fullPath: '/ai-center'
+      preLoaderRoute: typeof AiCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +318,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AiCenterRoute: AiCenterRoute,
+  AiWebsiteSystemsRoute: AiWebsiteSystemsRoute,
+  BlogRoute: BlogRoute,
+  ContactRoute: ContactRoute,
+  CrmSalesRoute: CrmSalesRoute,
+  CustomAiSolutionsRoute: CustomAiSolutionsRoute,
+  GrowthOperationsRoute: GrowthOperationsRoute,
+  MarketingFollowUpAutomationRoute: MarketingFollowUpAutomationRoute,
+  MultiChannelInboxRoute: MultiChannelInboxRoute,
+  PricingRoute: PricingRoute,
+  RenometaConnectRoute: RenometaConnectRoute,
+  SolutionsRoute: SolutionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
