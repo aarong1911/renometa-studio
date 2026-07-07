@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { CTASection, Reveal } from "@/components/page-primitives";
-import { ARTICLES, getArticle, getRelated } from "@/lib/blog-articles";
+import { ARTICLES, getArticle, getRelated, type BlogArticle } from "@/lib/blog-articles";
 import { ArrowLeft, ArrowRight, User } from "lucide-react";
 
 export const Route = createFileRoute("/blog/$slug")({
