@@ -306,6 +306,87 @@ function DashboardMockup() {
   );
 }
 
+function MobileHeroCard() {
+  return (
+    <div className="relative mx-auto max-w-sm">
+      <div
+        aria-hidden
+        className="absolute -inset-x-6 -top-6 h-32 blur-3xl opacity-60 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 35%, transparent), transparent 70%)",
+        }}
+      />
+      <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-px animate-shimmer pointer-events-none" aria-hidden />
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-surface">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-[oklch(0.85_0.02_30)]" />
+            <span className="h-2 w-2 rounded-full bg-[oklch(0.88_0.02_80)]" />
+            <span className="h-2 w-2 rounded-full bg-[oklch(0.86_0.05_150)]" />
+          </div>
+          <div className="text-[10px] text-muted-foreground font-mono">connect.renometa.com</div>
+        </div>
+        <div className="p-4 space-y-3">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="rounded-lg border border-border bg-background p-3">
+              <div className="text-[10px] text-muted-foreground">New Leads</div>
+              <div className="mt-1 font-display text-lg font-semibold">184</div>
+              <div className="text-[10px] text-[oklch(0.55_0.14_150)]">+24%</div>
+            </div>
+            <div className="rounded-lg border border-border bg-background p-3">
+              <div className="text-[10px] text-muted-foreground">Booked</div>
+              <div className="mt-1 font-display text-lg font-semibold">62</div>
+              <div className="text-[10px] text-[oklch(0.55_0.14_150)]">+18%</div>
+            </div>
+          </div>
+          <div className="rounded-lg border border-border bg-background p-3">
+            <div className="flex items-center gap-1.5 text-[11.5px] font-medium">
+              <Inbox className="h-3 w-3" /> Unified Inbox
+            </div>
+            <div className="mt-2 space-y-1.5">
+              {[
+                { name: "Sarah M.", ch: "SMS", active: true },
+                { name: "Daniel R.", ch: "WhatsApp" },
+                { name: "Priya K.", ch: "Messenger" },
+              ].map((c) => (
+                <div
+                  key={c.name}
+                  className={`flex items-center justify-between rounded-md px-2 py-1.5 border ${
+                    c.active
+                      ? "border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] bg-gold-soft/40"
+                      : "border-border bg-surface"
+                  }`}
+                >
+                  <span className="text-[11px] font-medium">{c.name}</span>
+                  <span className="text-[9.5px] uppercase tracking-wider text-muted-foreground">
+                    {c.ch}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-lg border border-border bg-background p-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-[11.5px] font-medium">
+                <Bot className="h-3 w-3" /> AI Agents
+              </div>
+              <span className="inline-flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
+                Active
+              </span>
+            </div>
+            <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[10.5px] text-muted-foreground">
+              <div className="flex justify-between"><span>Speed-to-Lead</span><span className="text-foreground">42</span></div>
+              <div className="flex justify-between"><span>Follow-Up</span><span className="text-foreground">31</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SidebarItem({
   icon,
   label,
