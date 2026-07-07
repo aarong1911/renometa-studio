@@ -165,18 +165,51 @@ export function SiteNav() {
 }
 
 function SolutionsDropdown() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (!t.closest("[data-solutions-dropdown]")) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("click", onClick);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("click", onClick);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
-    <div className="relative group">
-      <button className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors">
+    <div
+      className="relative"
+      data-solutions-dropdown
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors"
+      >
         Solutions
-        <ChevronDown className="h-3 w-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+        <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
-      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 transition-all duration-200 ${
+          open ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+      >
         <div className="w-[380px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2">
           {SOLUTIONS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
+              onClick={() => setOpen(false)}
               className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
             >
               <div className="text-[13.5px] font-medium text-foreground">{item.label}</div>
@@ -190,6 +223,7 @@ function SolutionsDropdown() {
     </div>
   );
 }
+
 
 export function SiteFooter() {
   return (
