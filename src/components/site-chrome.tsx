@@ -238,7 +238,7 @@ function SolutionsDropdown() {
     >
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-haspopup="menu"
         className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors"
