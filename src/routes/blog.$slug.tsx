@@ -35,7 +35,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function ArticlePage() {
-  const { article, related } = Route.useLoaderData();
+  const { article, related } = Route.useLoaderData() as { article: BlogArticle; related: BlogArticle[] };
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteNav />
