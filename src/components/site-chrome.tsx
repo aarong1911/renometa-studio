@@ -233,7 +233,7 @@ function SolutionsDropdown() {
       onPointerLeave={() => setOpen(false)}
       onFocusCapture={() => setOpen(true)}
       onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpen(false);
       }}
     >
       <button
