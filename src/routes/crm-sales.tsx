@@ -135,7 +135,8 @@ function CrmPage() {
 }
 
 function PipelineMockup() {
-  const cols = [
+  type Card = { n: string; s: string; gold?: boolean };
+  const cols: { title: string; items: Card[] }[] = [
     { title: "New", items: [{ n: "Ben H.", s: "Roofing" }, { n: "Nora J.", s: "Kitchen" }, { n: "Ava P.", s: "Deck" }] },
     { title: "Qualified", items: [{ n: "Daniel R.", s: "Bath" }, { n: "Ellie T.", s: "Basement" }] },
     { title: "Estimate", items: [{ n: "Priya K.", s: "Whole home" }, { n: "Marcus L.", s: "Reno" }] },
