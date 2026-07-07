@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import logoAsset from "@/assets/renometa-logo.png.asset.json";
 
 export const SOLUTIONS: { to: string; label: string; desc: string }[] = [
