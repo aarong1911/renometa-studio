@@ -98,6 +98,14 @@ function Hero() {
             Manage leads, conversations, estimates, scheduling, marketing, and
             follow-up in one connected platform.
           </p>
+          <p
+            className="mt-4 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
+            style={{ animationDelay: "260ms" }}
+          >
+            Built for renovation contractors who want fewer tools, faster
+            responses, and a clear view of every job from first inquiry to
+            final review.
+          </p>
           <div
             className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
             style={{ animationDelay: "340ms" }}
