@@ -143,7 +143,7 @@ function DashboardMockup() {
           style={{
             width: "1200px",
             height: "760px",
-            transform: "scale(calc(100cqi / 1200))",
+            transform: "scale(calc(100cqi / 1200px))",
           }}
         >
           <div className="flex h-full w-full flex-col">
