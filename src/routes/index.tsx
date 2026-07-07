@@ -123,8 +123,11 @@ function Hero() {
 
 /* -------------------- DASHBOARD MOCKUP -------------------- */
 function DashboardMockup() {
+  // The mockup renders at a fixed intrinsic size and is uniformly scaled to
+  // fill an aspect-ratio box. This guarantees identical framing, cropping,
+  // and internal proportions across every breakpoint.
   return (
-    <div className="relative mx-auto max-w-6xl">
+    <div className="relative mx-auto w-full max-w-6xl [container-type:inline-size]">
       <div
         aria-hidden
         className="absolute -inset-x-10 -top-10 h-40 blur-3xl opacity-60 pointer-events-none"
@@ -133,167 +136,178 @@ function DashboardMockup() {
             "radial-gradient(ellipse at center, color-mix(in oklab, var(--gold) 35%, transparent), transparent 70%)",
         }}
       />
-      <div className="relative rounded-2xl border border-border bg-surface-elevated shadow-elegant overflow-hidden transition-transform duration-700 hover:-translate-y-1 hover:shadow-[0_20px_60px_-24px_oklch(0_0_0/0.18)]">
-        <div className="absolute inset-x-0 top-0 h-px animate-shimmer pointer-events-none" aria-hidden />
-        <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface">
-          <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.02_30)]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.88_0.02_80)]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.86_0.05_150)]" />
-          </div>
-          <div className="text-[11px] text-muted-foreground font-mono">
-            connect.renometa.com / command-center
-          </div>
-          <div className="text-[11px] text-muted-foreground hidden sm:block">Today</div>
-        </div>
-
-        <div className="grid grid-cols-12 min-h-[560px]">
-          <aside className="hidden md:flex md:col-span-2 flex-col gap-1 border-r border-border p-4 bg-surface/60">
-            <SidebarItem icon={<Zap className="h-3.5 w-3.5" />} label="Command Center" active />
-            <SidebarItem icon={<Inbox className="h-3.5 w-3.5" />} label="Inbox" />
-            <SidebarItem icon={<Users className="h-3.5 w-3.5" />} label="Pipeline" />
-            <SidebarItem icon={<FileText className="h-3.5 w-3.5" />} label="Estimates" />
-            <SidebarItem icon={<Calendar className="h-3.5 w-3.5" />} label="Scheduling" />
-            <SidebarItem icon={<Bot className="h-3.5 w-3.5" />} label="AI Agents" />
-            <SidebarItem icon={<Workflow className="h-3.5 w-3.5" />} label="Workflows" />
-            <SidebarItem icon={<LineChart className="h-3.5 w-3.5" />} label="Insights" />
-          </aside>
-
-          <div className="col-span-12 md:col-span-10 p-5 sm:p-6 grid grid-cols-12 gap-4">
-            <Kpi className="col-span-6 lg:col-span-3" label="New Leads" value="184" delta="+24%" />
-            <Kpi className="col-span-6 lg:col-span-3" label="Booked Jobs" value="62" delta="+18%" />
-            <Kpi className="col-span-6 lg:col-span-3" label="AI Agent Runs" value="1,247" delta="+41%" />
-            <Kpi
-              className="col-span-6 lg:col-span-3"
-              label="Response Time"
-              value="0:42"
-              delta="-63%"
-              positive
-            />
-
-            {/* Unified inbox */}
-            <div className="col-span-12 lg:col-span-5 rounded-xl border border-border bg-background p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Inbox className="h-3.5 w-3.5 text-foreground" />
-                  <div className="text-[13px] font-medium">Unified Inbox</div>
-                </div>
-                <span className="text-[11px] text-muted-foreground">5 open</span>
+      <div className="relative w-full aspect-[1200/760] overflow-hidden rounded-2xl border border-border bg-surface-elevated shadow-elegant transition-transform duration-700 hover:-translate-y-1 hover:shadow-[0_20px_60px_-24px_oklch(0_0_0/0.18)]">
+        <div className="absolute inset-x-0 top-0 h-px animate-shimmer pointer-events-none z-10" aria-hidden />
+        <div
+          className="absolute top-0 left-0 origin-top-left"
+          style={{
+            width: "1200px",
+            height: "760px",
+            transform: "scale(calc(100cqi / 1200))",
+          }}
+        >
+          <div className="flex h-full w-full flex-col">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-surface shrink-0">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.85_0.02_30)]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.88_0.02_80)]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[oklch(0.86_0.05_150)]" />
               </div>
-              <div className="mt-4 space-y-2">
-                {[
-                  { name: "Sarah M.", msg: "Thursday afternoon works.", ch: "SMS", active: true },
-                  { name: "Daniel R.", msg: "Availability this week?", ch: "WhatsApp" },
-                  { name: "Priya K.", msg: "Thanks for the quote!", ch: "Messenger" },
-                  { name: "Marcus L.", msg: "Missed call — auto reply", ch: "Voice" },
-                ].map((c) => (
-                  <div
-                    key={c.name}
-                    className={`rounded-lg px-3 py-2 border ${
-                      c.active
-                        ? "border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] bg-gold-soft/40"
-                        : "border-border bg-surface"
-                    }`}
-                  >
+              <div className="text-[11px] text-muted-foreground font-mono">
+                connect.renometa.com / command-center
+              </div>
+              <div className="text-[11px] text-muted-foreground">Today</div>
+            </div>
+
+            <div className="grid grid-cols-12 flex-1 min-h-0">
+              <aside className="col-span-2 flex flex-col gap-1 border-r border-border p-4 bg-surface/60">
+                <SidebarItem icon={<Zap className="h-3.5 w-3.5" />} label="Command Center" active />
+                <SidebarItem icon={<Inbox className="h-3.5 w-3.5" />} label="Inbox" />
+                <SidebarItem icon={<Users className="h-3.5 w-3.5" />} label="Pipeline" />
+                <SidebarItem icon={<FileText className="h-3.5 w-3.5" />} label="Estimates" />
+                <SidebarItem icon={<Calendar className="h-3.5 w-3.5" />} label="Scheduling" />
+                <SidebarItem icon={<Bot className="h-3.5 w-3.5" />} label="AI Agents" />
+                <SidebarItem icon={<Workflow className="h-3.5 w-3.5" />} label="Workflows" />
+                <SidebarItem icon={<LineChart className="h-3.5 w-3.5" />} label="Insights" />
+              </aside>
+
+              <div className="col-span-10 p-6 grid grid-cols-12 gap-4">
+                <Kpi className="col-span-3" label="New Leads" value="184" delta="+24%" />
+                <Kpi className="col-span-3" label="Booked Jobs" value="62" delta="+18%" />
+                <Kpi className="col-span-3" label="AI Agent Runs" value="1,247" delta="+41%" />
+                <Kpi
+                  className="col-span-3"
+                  label="Response Time"
+                  value="0:42"
+                  delta="-63%"
+                  positive
+                />
+
+                {/* Unified inbox */}
+                <div className="col-span-5 rounded-xl border border-border bg-background p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Inbox className="h-3.5 w-3.5 text-foreground" />
+                      <div className="text-[13px] font-medium">Unified Inbox</div>
+                    </div>
+                    <span className="text-[11px] text-muted-foreground">5 open</span>
+                  </div>
+                  <div className="mt-4 space-y-2">
+                    {[
+                      { name: "Sarah M.", msg: "Thursday afternoon works.", ch: "SMS", active: true },
+                      { name: "Daniel R.", msg: "Availability this week?", ch: "WhatsApp" },
+                      { name: "Priya K.", msg: "Thanks for the quote!", ch: "Messenger" },
+                      { name: "Marcus L.", msg: "Missed call — auto reply", ch: "Voice" },
+                    ].map((c) => (
+                      <div
+                        key={c.name}
+                        className={`rounded-lg px-3 py-2 border ${
+                          c.active
+                            ? "border-[color:color-mix(in_oklab,var(--gold)_35%,var(--border))] bg-gold-soft/40"
+                            : "border-border bg-surface"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="text-[12px] font-medium">{c.name}</div>
+                          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                            {c.ch}
+                          </span>
+                        </div>
+                        <div className="mt-0.5 text-[11.5px] text-muted-foreground truncate">
+                          {c.msg}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pipeline */}
+                <div className="col-span-4 rounded-xl border border-border bg-background p-4 flex flex-col">
+                  <div className="flex items-center justify-between">
+                    <div className="text-[13px] font-medium">Lead Pipeline</div>
+                    <span className="text-[11px] text-muted-foreground">This week</span>
+                  </div>
+                  <div className="mt-4 space-y-3 flex-1">
+                    <PipelineRow name="Sarah M." stage="Booked" gold />
+                    <PipelineRow name="Daniel R." stage="Estimate" />
+                    <PipelineRow name="Priya K." stage="Qualified" />
+                    <PipelineRow name="Marcus L." stage="New Lead" />
+                  </div>
+                </div>
+
+                {/* AI Agents + Estimate */}
+                <div className="col-span-3 rounded-xl border border-border bg-background p-4 flex flex-col gap-4">
+                  <div>
                     <div className="flex items-center justify-between">
-                      <div className="text-[12px] font-medium">{c.name}</div>
-                      <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                        {c.ch}
+                      <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                        <Bot className="h-3.5 w-3.5" /> AI Agents
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-[10.5px] text-muted-foreground">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
+                        Active
                       </span>
                     </div>
-                    <div className="mt-0.5 text-[11.5px] text-muted-foreground truncate">
-                      {c.msg}
+                    <ul className="mt-2.5 space-y-1.5 text-[11.5px] text-muted-foreground">
+                      <li className="flex justify-between"><span>Lead Qualifier</span><span className="text-foreground">18</span></li>
+                      <li className="flex justify-between"><span>Speed-to-Lead</span><span className="text-foreground">42</span></li>
+                      <li className="flex justify-between"><span>Follow-Up</span><span className="text-foreground">31</span></li>
+                      <li className="flex justify-between"><span>Estimate Drafter</span><span className="text-foreground">9</span></li>
+                    </ul>
+                  </div>
+                  <div className="rounded-lg border border-border bg-surface p-3">
+                    <div className="flex items-center gap-1.5 text-[11.5px] font-medium">
+                      <FileText className="h-3.5 w-3.5" /> Estimate draft
+                    </div>
+                    <div className="mt-1.5 text-[10.5px] text-muted-foreground">Kitchen · Sarah M.</div>
+                    <div className="mt-2 flex items-center justify-between">
+                      <span className="text-[10.5px] text-muted-foreground">Total</span>
+                      <span className="font-display text-[15px] font-semibold">$24,800</span>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* Pipeline */}
-            <div className="col-span-12 lg:col-span-4 rounded-xl border border-border bg-background p-4 flex flex-col">
-              <div className="flex items-center justify-between">
-                <div className="text-[13px] font-medium">Lead Pipeline</div>
-                <span className="text-[11px] text-muted-foreground">This week</span>
-              </div>
-              <div className="mt-4 space-y-3 flex-1">
-                <PipelineRow name="Sarah M." stage="Booked" gold />
-                <PipelineRow name="Daniel R." stage="Estimate" />
-                <PipelineRow name="Priya K." stage="Qualified" />
-                <PipelineRow name="Marcus L." stage="New Lead" />
-              </div>
-            </div>
-
-            {/* AI Agents + Estimate */}
-            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4 flex flex-col gap-4">
-              <div>
-                <div className="flex items-center justify-between">
+                {/* Bottom row: booking, review, campaigns, workflows */}
+                <div className="col-span-3 rounded-xl border border-border bg-background p-4">
                   <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
-                    <Bot className="h-3.5 w-3.5" /> AI Agents
+                    <Calendar className="h-3.5 w-3.5" /> Booking
                   </div>
-                  <span className="inline-flex items-center gap-1.5 text-[10.5px] text-muted-foreground">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.14_150)] animate-pulse-dot" />
-                    Active
-                  </span>
+                  <div className="mt-2 text-[11.5px] text-muted-foreground">Thu · 2:00 PM</div>
+                  <div className="text-[12.5px] font-medium mt-0.5">Sarah M. · Kitchen estimate</div>
+                  <button className="mt-3 w-full text-[11px] px-2 py-1.5 rounded-md border border-border hover:border-foreground transition-colors">
+                    Confirm
+                  </button>
                 </div>
-                <ul className="mt-2.5 space-y-1.5 text-[11.5px] text-muted-foreground">
-                  <li className="flex justify-between"><span>Lead Qualifier</span><span className="text-foreground">18</span></li>
-                  <li className="flex justify-between"><span>Speed-to-Lead</span><span className="text-foreground">42</span></li>
-                  <li className="flex justify-between"><span>Follow-Up</span><span className="text-foreground">31</span></li>
-                  <li className="flex justify-between"><span>Estimate Drafter</span><span className="text-foreground">9</span></li>
-                </ul>
-              </div>
-              <div className="rounded-lg border border-border bg-surface p-3">
-                <div className="flex items-center gap-1.5 text-[11.5px] font-medium">
-                  <FileText className="h-3.5 w-3.5" /> Estimate draft
+                <div className="col-span-3 rounded-xl border border-border bg-background p-4">
+                  <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                    <Star className="h-3.5 w-3.5" /> Review Requests
+                  </div>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="font-display text-2xl font-semibold">12</span>
+                    <span className="text-[11px] text-[oklch(0.55_0.14_150)]">sent today</span>
+                  </div>
+                  <div className="mt-2 text-[11px] text-muted-foreground">4.9 avg · last 30 days</div>
                 </div>
-                <div className="mt-1.5 text-[10.5px] text-muted-foreground">Kitchen · Sarah M.</div>
-                <div className="mt-2 flex items-center justify-between">
-                  <span className="text-[10.5px] text-muted-foreground">Total</span>
-                  <span className="font-display text-[15px] font-semibold">$24,800</span>
+                <div className="col-span-3 rounded-xl border border-border bg-background p-4">
+                  <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                    <LineChart className="h-3.5 w-3.5" /> Campaigns
+                  </div>
+                  <div className="mt-2 text-[11.5px] text-muted-foreground">Meta Lead Ads</div>
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <span className="font-display text-lg font-semibold">$18</span>
+                    <span className="text-[10.5px] text-muted-foreground">CPL · –22%</span>
+                  </div>
+                </div>
+                <div className="col-span-3 rounded-xl border border-border bg-background p-4">
+                  <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
+                    <Workflow className="h-3.5 w-3.5" /> Workflows
+                  </div>
+                  <div className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] text-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.13_150)] animate-pulse-dot" />
+                    8 running
+                  </div>
+                  <div className="mt-2 text-[11px] text-muted-foreground">Missed-call text-back · Nurture · Reviews</div>
                 </div>
               </div>
-            </div>
-
-            {/* Bottom row: booking, review, campaigns, workflows */}
-            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
-              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
-                <Calendar className="h-3.5 w-3.5" /> Booking
-              </div>
-              <div className="mt-2 text-[11.5px] text-muted-foreground">Thu · 2:00 PM</div>
-              <div className="text-[12.5px] font-medium mt-0.5">Sarah M. · Kitchen estimate</div>
-              <button className="mt-3 w-full text-[11px] px-2 py-1.5 rounded-md border border-border hover:border-foreground transition-colors">
-                Confirm
-              </button>
-            </div>
-            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
-              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
-                <Star className="h-3.5 w-3.5" /> Review Requests
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="font-display text-2xl font-semibold">12</span>
-                <span className="text-[11px] text-[oklch(0.55_0.14_150)]">sent today</span>
-              </div>
-              <div className="mt-2 text-[11px] text-muted-foreground">4.9 avg · last 30 days</div>
-            </div>
-            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
-              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
-                <LineChart className="h-3.5 w-3.5" /> Campaigns
-              </div>
-              <div className="mt-2 text-[11.5px] text-muted-foreground">Meta Lead Ads</div>
-              <div className="mt-1 flex items-baseline gap-2">
-                <span className="font-display text-lg font-semibold">$18</span>
-                <span className="text-[10.5px] text-muted-foreground">CPL · –22%</span>
-              </div>
-            </div>
-            <div className="col-span-12 lg:col-span-3 rounded-xl border border-border bg-background p-4">
-              <div className="flex items-center gap-1.5 text-[12.5px] font-medium">
-                <Workflow className="h-3.5 w-3.5" /> Workflows
-              </div>
-              <div className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] text-foreground">
-                <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.7_0.13_150)] animate-pulse-dot" />
-                8 running
-              </div>
-              <div className="mt-2 text-[11px] text-muted-foreground">Missed-call text-back · Nurture · Reviews</div>
             </div>
           </div>
         </div>
@@ -301,6 +315,7 @@ function DashboardMockup() {
     </div>
   );
 }
+
 
 function MobileHeroCard() {
   return (
