@@ -89,7 +89,7 @@ function Hero() {
             className="font-display text-balance text-[40px] sm:text-5xl lg:text-[64px] leading-[1.03] tracking-[-0.03em] font-semibold text-foreground max-w-3xl animate-reveal"
             style={{ animationDelay: "60ms" }}
           >
-            The Business Command Center for Renovation Contractors
+            The Business Command Center<br />for Renovation Contractors
           </h1>
           <p
             className="mt-6 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
