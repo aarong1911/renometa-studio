@@ -87,11 +87,11 @@ function Hero() {
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-4xl text-left pt-8">
           <h1
-            className="font-display text-[40px] sm:text-5xl lg:text-[64px] leading-[1.03] tracking-[-0.03em] font-semibold text-foreground animate-reveal"
+            className="font-display text-[32px] sm:text-5xl lg:text-[64px] leading-[1.08] sm:leading-[1.03] tracking-[-0.03em] font-semibold text-foreground animate-reveal"
             style={{ animationDelay: "60ms" }}
           >
-            <span className="block whitespace-nowrap">The Business Command Center</span>
-            <span className="block whitespace-nowrap">for Renovation Contractors</span>
+            <span className="block sm:whitespace-nowrap">The Business Command Center</span>
+            <span className="block sm:whitespace-nowrap">for Renovation Contractors</span>
           </h1>
           <p
             className="mt-6 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
