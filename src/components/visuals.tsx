@@ -59,47 +59,47 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
   const { main, faint } = strokes(tone);
   const cx = 250;
   const cy = 150;
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
+  const mutedText = tone === "dark" ? "rgba(230,225,215,0.7)" : "rgba(20,20,22,0.65)";
+  // 4 primary agent nodes only — simpler, readable
   const agents = [
-    { label: "QUALIFY", r: 70, angle: -30 },
-    { label: "FOLLOW-UP", r: 70, angle: 60 },
-    { label: "ESTIMATE", r: 70, angle: 150 },
-    { label: "REVIEW", r: 70, angle: 220 },
-    { label: "TRIAGE", r: 105, angle: 10 },
-    { label: "SUMMARY", r: 105, angle: 110 },
-    { label: "INSIGHTS", r: 105, angle: 200 },
-    { label: "TASKS", r: 105, angle: 300 },
+    { label: "QUALIFY", angle: -60 },
+    { label: "FOLLOW-UP", angle: 30 },
+    { label: "ESTIMATE", angle: 120 },
+    { label: "REVIEW", angle: 210 },
   ];
+  const orbitR = 100;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {/* radial scan lines */}
-        {Array.from({ length: 12 }).map((_, i) => {
-          const a = (i * Math.PI * 2) / 12;
+        {/* subtle radial lines */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const a = (i * Math.PI * 2) / 8;
           return (
             <line
               key={i}
-              x1={cx + Math.cos(a) * 40}
-              y1={cy + Math.sin(a) * 40}
-              x2={cx + Math.cos(a) * 130}
-              y2={cy + Math.sin(a) * 130}
+              x1={cx + Math.cos(a) * 42}
+              y1={cy + Math.sin(a) * 42}
+              x2={cx + Math.cos(a) * 96}
+              y2={cy + Math.sin(a) * 96}
               stroke={faint}
               strokeWidth={0.5}
             />
           );
         })}
         {/* orbital rings */}
-        {[50, 70, 105, 130].map((r, i) => (
+        {[60, 100, 130].map((r, i) => (
           <circle
             key={r}
             cx={cx} cy={cy} r={r}
             fill="none"
-            stroke={i === 1 || i === 2 ? main : faint}
-            strokeWidth={0.6}
-            strokeDasharray={i % 2 === 0 ? "2 4" : undefined}
-            opacity={i === 1 || i === 2 ? 0.55 : 0.9}
+            stroke={i === 1 ? main : faint}
+            strokeWidth={0.7}
+            strokeDasharray={i === 0 ? "2 4" : undefined}
+            opacity={i === 1 ? 0.6 : 0.8}
           />
         ))}
-        {/* rotating outer ring group with tick marks */}
+        {/* rotating outer ticks */}
         <g style={{ transformOrigin: `${cx}px ${cy}px` }}>
           {Array.from({ length: 24 }).map((_, i) => {
             const a = (i * Math.PI * 2) / 24;
@@ -112,47 +112,47 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
             );
           })}
           <animateTransform attributeName="transform" type="rotate"
-            from={`0 ${cx} ${cy}`} to={`360 ${cx} ${cy}`} dur="60s" repeatCount="indefinite" />
+            from={`0 ${cx} ${cy}`} to={`360 ${cx} ${cy}`} dur="80s" repeatCount="indefinite" />
         </g>
         {/* core */}
-        <circle cx={cx} cy={cy} r={26} fill="none" stroke={GOLD} strokeWidth={1} />
-        <circle cx={cx} cy={cy} r={26} fill={GOLD} opacity={0.08} />
-        <circle cx={cx} cy={cy} r={4} fill={GOLD}>
+        <circle cx={cx} cy={cy} r={38} fill="none" stroke={GOLD} strokeWidth={1.2} />
+        <circle cx={cx} cy={cy} r={38} fill={GOLD} opacity={0.08} />
+        <circle cx={cx} cy={cy} r={5} fill={GOLD}>
           <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
         </circle>
-        <text x={cx} y={cy + 3} fontSize="8" fill={tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.95)"} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1.5" fontWeight="600">
+        <text x={cx} y={cy - 8} fontSize="11" fill={textColor} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="2" fontWeight="700">
           AI CORE
         </text>
+        <text x={cx} y={cy + 20} fontSize="7" fill={mutedText} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1.2">
+          RENOMETA
+        </text>
         {/* expanding pulse */}
-        <circle cx={cx} cy={cy} r={26} fill="none" stroke={GOLD} strokeWidth={0.75}>
-          <animate attributeName="r" values="26;110;26" dur="6s" repeatCount="indefinite" />
+        <circle cx={cx} cy={cy} r={38} fill="none" stroke={GOLD} strokeWidth={0.75}>
+          <animate attributeName="r" values="38;120;38" dur="6s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.6;0;0.6" dur="6s" repeatCount="indefinite" />
         </circle>
-        {/* agent nodes */}
+        {/* 4 agent nodes */}
         {agents.map((a, i) => {
           const rad = (a.angle * Math.PI) / 180;
-          const x = cx + Math.cos(rad) * a.r;
-          const y = cy + Math.sin(rad) * a.r;
-          const isInner = a.r === 70;
+          const x = cx + Math.cos(rad) * orbitR;
+          const y = cy + Math.sin(rad) * orbitR;
+          const right = Math.cos(rad) >= 0;
           return (
             <g key={a.label}>
-              <line x1={cx} y1={cy} x2={x} y2={y} stroke={faint} strokeWidth={0.5} />
-              <circle cx={x} cy={y} r={isInner ? 6 : 4.5} fill="none"
-                stroke={isInner ? GOLD : main}
-                strokeWidth={isInner ? 1 : 0.75}
-                opacity={isInner ? 0.95 : 0.7} />
-              <circle cx={x} cy={y} r={1.6} fill={isInner ? GOLD : main}>
-                <animate attributeName="opacity" values="0.3;1;0.3"
-                  dur={`${3 + (i % 3)}s`} begin={`${i * 0.3}s`} repeatCount="indefinite" />
+              <line x1={cx + Math.cos(rad) * 40} y1={cy + Math.sin(rad) * 40} x2={x} y2={y} stroke={faint} strokeWidth={0.6} />
+              <circle cx={x} cy={y} r={8} fill={tone === "dark" ? "rgba(20,20,22,0.9)" : "rgba(255,253,247,0.95)"} stroke={GOLD} strokeWidth={1.1} />
+              <circle cx={x} cy={y} r={2.2} fill={GOLD}>
+                <animate attributeName="opacity" values="0.4;1;0.4"
+                  dur={`${3 + (i % 2)}s`} begin={`${i * 0.4}s`} repeatCount="indefinite" />
               </circle>
               <text
-                x={x + (Math.cos(rad) >= 0 ? 11 : -11)}
+                x={x + (right ? 14 : -14)}
                 y={y + 3}
-                fontSize="6.5"
-                fill={tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.9)"}
-                textAnchor={Math.cos(rad) >= 0 ? "start" : "end"}
+                fontSize="9"
+                fill={textColor}
+                textAnchor={right ? "start" : "end"}
                 fontFamily="ui-monospace, monospace"
-                letterSpacing="0.5"
+                letterSpacing="1"
                 fontWeight="600"
               >
                 {a.label}
@@ -164,6 +164,8 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
     </Frame>
   );
 }
+
+
 
 
 /* ------------ 2. Unified Inbox ------------ */
