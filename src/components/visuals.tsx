@@ -281,17 +281,12 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
 export function OperationsBlocksVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
   const blocks = [
-    { x: 60, y: 60, label: "SCHEDULE" },
-    { x: 200, y: 60, label: "DISPATCH" },
-    { x: 340, y: 60, label: "COSTING" },
-    { x: 60, y: 180, label: "JOBS" },
-    { x: 200, y: 180, label: "CREW" },
-    { x: 340, y: 180, label: "WORKFLOW" },
+    { x: 60, y: 60 }, { x: 200, y: 60 }, { x: 340, y: 60 },
+    { x: 60, y: 180 }, { x: 200, y: 180 }, { x: 340, y: 180 },
   ];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {/* connecting lines */}
         {[
           "M 110 90 L 200 90", "M 250 90 L 340 90",
           "M 110 210 L 200 210", "M 250 210 L 340 210",
@@ -299,27 +294,29 @@ export function OperationsBlocksVisual({ tone = "light", size = "md", className 
         ].map((d, i) => (
           <path key={i} d={d} stroke={faint} strokeWidth={0.75} fill="none" strokeDasharray="3 3" />
         ))}
-        {blocks.map((b, i) => (
-          <g key={b.label}>
-            {/* 3d block */}
-            <path d={`M ${b.x} ${b.y} L ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 10} ${b.y - 10} Z`}
-              fill="none" stroke={faint} strokeWidth={0.75} />
-            <path d={`M ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 100} ${b.y + 40} L ${b.x + 90} ${b.y + 50} Z`}
-              fill="none" stroke={faint} strokeWidth={0.75} />
-            <rect x={b.x} y={b.y} width={90} height={50} rx={2}
-              fill="none" stroke={i === 1 || i === 4 ? GOLD : main}
-              strokeWidth={i === 1 || i === 4 ? 1 : 0.75}
-              opacity={i === 1 || i === 4 ? 0.9 : 0.7} />
-            <text x={b.x + 45} y={b.y + 30} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-              {b.label}
-            </text>
-            {(i === 1 || i === 4) && (
-              <circle cx={b.x + 82} cy={b.y + 8} r={1.8} fill={GOLD}>
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
-              </circle>
-            )}
-          </g>
-        ))}
+        {blocks.map((b, i) => {
+          const accent = i === 1 || i === 4;
+          return (
+            <g key={i}>
+              <path d={`M ${b.x} ${b.y} L ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 10} ${b.y - 10} Z`}
+                fill="none" stroke={faint} strokeWidth={0.75} />
+              <path d={`M ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 100} ${b.y + 40} L ${b.x + 90} ${b.y + 50} Z`}
+                fill="none" stroke={faint} strokeWidth={0.75} />
+              <rect x={b.x} y={b.y} width={90} height={50} rx={2}
+                fill="none" stroke={accent ? GOLD : main}
+                strokeWidth={accent ? 1 : 0.75}
+                opacity={accent ? 0.9 : 0.7} />
+              {accent && <rect x={b.x} y={b.y} width={90} height={50} rx={2} fill={GOLD} opacity={0.06} />}
+              <line x1={b.x + 12} y1={b.y + 18} x2={b.x + 60} y2={b.y + 18} stroke={main} strokeWidth={0.6} opacity={0.55} />
+              <line x1={b.x + 12} y1={b.y + 30} x2={b.x + 48} y2={b.y + 30} stroke={main} strokeWidth={0.6} opacity={0.35} />
+              {accent && (
+                <circle cx={b.x + 78} cy={b.y + 24} r={2.2} fill={GOLD}>
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+                </circle>
+              )}
+            </g>
+          );
+        })}
       </svg>
     </Frame>
   );
