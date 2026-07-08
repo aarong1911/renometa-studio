@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
+import { OperationsBlocksVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -44,7 +45,7 @@ function GrowthOpsPage() {
       subheading="Optimize lead flow, response time, follow-up performance, conversion tracking, reporting, and workflow efficiency over time."
       primaryCta={{ label: "Improve My Growth System", to: "/contact" }}
       secondaryCta={{ label: "See the Platform", to: "/renometa-connect" }}
-      heroVisual={<OpsDashboard />}
+      heroVisual={<OperationsBlocksVisual size="lg" />}
     >
       <Section>
         <SectionHeader

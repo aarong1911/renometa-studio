@@ -7,6 +7,7 @@ import {
   Reveal,
 } from "@/components/page-primitives";
 import { ARTICLES, CATEGORIES } from "@/lib/blog-articles";
+import { BlogCategoryVisual } from "@/components/visuals";
 import { ArrowRight, Mail } from "lucide-react";
 
 export const Route = createFileRoute("/blog")({
@@ -154,13 +155,8 @@ function BlogGrid() {
                 <ArrowRight className="h-3.5 w-3.5" />
               </div>
             </div>
-            <div className="relative min-h-[220px] bg-gradient-to-br from-gold-soft/50 via-surface to-background border-l border-border overflow-hidden">
-              <div className="absolute inset-0 bg-grid-fade opacity-70" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="font-serif italic text-6xl text-foreground/20 tracking-tight">
-                  RM
-                </div>
-              </div>
+            <div className="relative min-h-[240px] border-l border-border overflow-hidden p-6 flex items-center justify-center bg-gradient-to-br from-gold-soft/30 via-surface to-background">
+              <BlogCategoryVisual category={featured.category} size="md" className="w-full max-w-md" />
             </div>
           </div>
         </Link>
@@ -190,8 +186,8 @@ function BlogGrid() {
               params={{ slug: a.slug }}
               className="block group card-elegant card-elegant-hover h-full overflow-hidden"
             >
-              <div className="relative h-32 bg-gradient-to-br from-gold-soft/40 via-surface to-background border-b border-border overflow-hidden">
-                <div className="absolute inset-0 bg-grid-fade opacity-60" />
+              <div className="relative border-b border-border overflow-hidden p-3">
+                <BlogCategoryVisual category={a.category} size="sm" className="w-full" />
               </div>
               <div className="p-6">
                 <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">

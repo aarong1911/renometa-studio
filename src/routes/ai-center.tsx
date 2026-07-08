@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
+import { AgentNetworkVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -61,7 +62,7 @@ function AiCenterPage() {
       subheading="Qualify leads, follow up, draft estimates, summarize conversations, update your CRM, request reviews, and uncover insights."
       primaryCta={{ label: "Explore AI Agents", to: "/contact" }}
       secondaryCta={{ label: "See the Platform", to: "/renometa-connect" }}
-      heroVisual={<AiCenterMockup />}
+      heroVisual={<AgentNetworkVisual size="lg" />}
     >
       <Section>
         <SectionHeader
