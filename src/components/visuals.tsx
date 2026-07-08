@@ -3,7 +3,7 @@
  * Minimal SVG line art with subtle gold accent and slow motion.
  * Reusable across homepage feature cards, inner page heroes, and blog cards.
  */
-import { type ReactNode } from "react";
+import { type ReactNode, type ReactElement } from "react";
 
 type Tone = "light" | "dark";
 type Size = "sm" | "md" | "lg";
@@ -456,7 +456,7 @@ export function CustomBuildVisual({ tone = "light", size = "md", className }: Vi
 }
 
 /* ------------ Visual selector for pillars ------------ */
-export const PILLAR_VISUALS: Record<string, (p: VisualProps) => JSX.Element> = {
+export const PILLAR_VISUALS: Record<string, (p: VisualProps) => ReactElement> = {
   "AI Center": AgentNetworkVisual,
   "Multi-Channel Inbox": UnifiedInboxVisual,
   "CRM & Sales": PipelineStackVisual,
@@ -476,7 +476,7 @@ export function PillarVisual({ name, ...rest }: { name: string } & VisualProps) 
 }
 
 /* ------------ Blog category visual selector ------------ */
-const CATEGORY_MAP: Record<string, (p: VisualProps) => JSX.Element> = {
+const CATEGORY_MAP: Record<string, (p: VisualProps) => ReactElement> = {
   "Lead Response": UnifiedInboxVisual,
   "CRM": PipelineStackVisual,
   "Automation": AutomationFlowVisual,
