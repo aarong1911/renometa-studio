@@ -54,49 +54,117 @@ function strokes(tone: Tone) {
   };
 }
 
-/* ------------ 1. Agent Network ------------ */
+/* ------------ 1. Agent Network — orbiting AI core ------------ */
 export function AgentNetworkVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
-  const nodes = [
-    { x: 90, y: 60 }, { x: 240, y: 40 }, { x: 380, y: 90 },
-    { x: 150, y: 150 }, { x: 300, y: 170 }, { x: 430, y: 180 },
-    { x: 90, y: 220 }, { x: 240, y: 250 }, { x: 400, y: 260 },
-  ];
-  const edges: [number, number][] = [
-    [0, 1], [1, 2], [0, 3], [3, 4], [1, 4], [4, 5], [2, 5],
-    [3, 6], [6, 7], [4, 7], [7, 8], [5, 8],
+  const cx = 250;
+  const cy = 150;
+  const agents = [
+    { label: "QUALIFY", r: 70, angle: -30 },
+    { label: "FOLLOW-UP", r: 70, angle: 60 },
+    { label: "ESTIMATE", r: 70, angle: 150 },
+    { label: "REVIEW", r: 70, angle: 220 },
+    { label: "TRIAGE", r: 105, angle: 10 },
+    { label: "SUMMARY", r: 105, angle: 110 },
+    { label: "INSIGHTS", r: 105, angle: 200 },
+    { label: "TASKS", r: 105, angle: 300 },
   ];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {edges.map(([a, b], i) => (
-          <line
-            key={i}
-            x1={nodes[a].x} y1={nodes[a].y}
-            x2={nodes[b].x} y2={nodes[b].y}
-            stroke={main} strokeWidth={0.75}
+        {/* radial scan lines */}
+        {Array.from({ length: 12 }).map((_, i) => {
+          const a = (i * Math.PI * 2) / 12;
+          return (
+            <line
+              key={i}
+              x1={cx + Math.cos(a) * 40}
+              y1={cy + Math.sin(a) * 40}
+              x2={cx + Math.cos(a) * 130}
+              y2={cy + Math.sin(a) * 130}
+              stroke={faint}
+              strokeWidth={0.5}
+            />
+          );
+        })}
+        {/* orbital rings */}
+        {[50, 70, 105, 130].map((r, i) => (
+          <circle
+            key={r}
+            cx={cx} cy={cy} r={r}
+            fill="none"
+            stroke={i === 1 || i === 2 ? main : faint}
+            strokeWidth={0.6}
+            strokeDasharray={i % 2 === 0 ? "2 4" : undefined}
+            opacity={i === 1 || i === 2 ? 0.55 : 0.9}
           />
         ))}
-        {nodes.map((n, i) => (
-          <g key={i}>
-            <circle cx={n.x} cy={n.y} r={12} fill="none" stroke={faint} strokeWidth={0.75} />
-            <circle cx={n.x} cy={n.y} r={2.5} fill={i % 4 === 0 ? GOLD : main}>
-              <animate attributeName="opacity"
-                values="0.35;1;0.35"
-                dur={`${4 + (i % 3)}s`} begin={`${i * 0.4}s`} repeatCount="indefinite" />
-            </circle>
-            {i % 4 === 0 && (
-              <circle cx={n.x} cy={n.y} r={4} fill="none" stroke={GOLD} strokeWidth={0.75} opacity={0.6}>
-                <animate attributeName="r" values="4;18;4" dur="5s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.6;0;0.6" dur="5s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+        {/* rotating outer ring group with tick marks */}
+        <g style={{ transformOrigin: `${cx}px ${cy}px` }}>
+          {Array.from({ length: 24 }).map((_, i) => {
+            const a = (i * Math.PI * 2) / 24;
+            const x1 = cx + Math.cos(a) * 128;
+            const y1 = cy + Math.sin(a) * 128;
+            const x2 = cx + Math.cos(a) * 134;
+            const y2 = cy + Math.sin(a) * 134;
+            return (
+              <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={main} strokeWidth={0.5} opacity={i % 6 === 0 ? 0.9 : 0.35} />
+            );
+          })}
+          <animateTransform attributeName="transform" type="rotate"
+            from={`0 ${cx} ${cy}`} to={`360 ${cx} ${cy}`} dur="60s" repeatCount="indefinite" />
+        </g>
+        {/* core */}
+        <circle cx={cx} cy={cy} r={26} fill="none" stroke={GOLD} strokeWidth={1} />
+        <circle cx={cx} cy={cy} r={26} fill={GOLD} opacity={0.08} />
+        <circle cx={cx} cy={cy} r={4} fill={GOLD}>
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
+        </circle>
+        <text x={cx} y={cy + 3} fontSize="8" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1.5">
+          AI CORE
+        </text>
+        {/* expanding pulse */}
+        <circle cx={cx} cy={cy} r={26} fill="none" stroke={GOLD} strokeWidth={0.75}>
+          <animate attributeName="r" values="26;110;26" dur="6s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="6s" repeatCount="indefinite" />
+        </circle>
+        {/* agent nodes */}
+        {agents.map((a, i) => {
+          const rad = (a.angle * Math.PI) / 180;
+          const x = cx + Math.cos(rad) * a.r;
+          const y = cy + Math.sin(rad) * a.r;
+          const isInner = a.r === 70;
+          return (
+            <g key={a.label}>
+              <line x1={cx} y1={cy} x2={x} y2={y} stroke={faint} strokeWidth={0.5} />
+              <circle cx={x} cy={y} r={isInner ? 6 : 4.5} fill="none"
+                stroke={isInner ? GOLD : main}
+                strokeWidth={isInner ? 1 : 0.75}
+                opacity={isInner ? 0.95 : 0.7} />
+              <circle cx={x} cy={y} r={1.6} fill={isInner ? GOLD : main}>
+                <animate attributeName="opacity" values="0.3;1;0.3"
+                  dur={`${3 + (i % 3)}s`} begin={`${i * 0.3}s`} repeatCount="indefinite" />
               </circle>
-            )}
-          </g>
-        ))}
+              <text
+                x={x + (Math.cos(rad) >= 0 ? 11 : -11)}
+                y={y + 3}
+                fontSize="6.5"
+                fill={main}
+                textAnchor={Math.cos(rad) >= 0 ? "start" : "end"}
+                fontFamily="ui-monospace, monospace"
+                letterSpacing="0.5"
+                opacity={0.7}
+              >
+                {a.label}
+              </text>
+            </g>
+          );
+        })}
       </svg>
     </Frame>
   );
 }
+
 
 /* ------------ 2. Unified Inbox ------------ */
 export function UnifiedInboxVisual({ tone = "light", size = "md", className }: VisualProps) {
