@@ -242,28 +242,24 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {/* trigger */}
-        <g>
-          <rect x={30} y={130} width={90} height={40} rx={8} fill="none" stroke={GOLD} strokeWidth={1} />
-          <rect x={30} y={130} width={90} height={40} rx={8} fill={GOLD} opacity={0.06} />
-          <text x={75} y={155} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-            TRIGGER
-          </text>
-        </g>
+        {/* trigger node */}
+        <circle cx={75} cy={150} r={16} fill="none" stroke={GOLD} strokeWidth={1.2} />
+        <circle cx={75} cy={150} r={16} fill={GOLD} opacity={0.08} />
+        <circle cx={75} cy={150} r={4} fill={GOLD} />
         {/* connector to split */}
-        <path d="M 120 150 L 180 150" stroke={main} strokeWidth={0.75} fill="none" />
+        <path d="M 91 150 L 180 150" stroke={main} strokeWidth={0.75} fill="none" />
         {/* branch lines */}
         <path d="M 180 150 C 210 150, 220 70, 270 70" stroke={main} strokeWidth={0.75} fill="none" />
         <path d="M 180 150 L 270 150" stroke={main} strokeWidth={0.75} fill="none" />
         <path d="M 180 150 C 210 150, 220 230, 270 230" stroke={main} strokeWidth={0.75} fill="none" />
         <circle cx={180} cy={150} r={3} fill={GOLD} />
-        {/* actions */}
+        {/* action nodes */}
         {[70, 150, 230].map((y, i) => (
           <g key={y}>
-            <rect x={270} y={y - 20} width={90} height={40} rx={8} fill="none" stroke={main} strokeWidth={0.75} />
-            <text x={315} y={y + 3} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-              {["SMS", "EMAIL", "TASK"][i]}
-            </text>
+            <rect x={270} y={y - 18} width={90} height={36} rx={8} fill="none" stroke={i === 1 ? GOLD : main} strokeWidth={i === 1 ? 1 : 0.75} opacity={i === 1 ? 0.95 : 0.7} />
+            {i === 1 && <rect x={270} y={y - 18} width={90} height={36} rx={8} fill={GOLD} opacity={0.06} />}
+            <line x1={282} y1={y - 4} x2={348} y2={y - 4} stroke={faint} strokeWidth={0.5} />
+            <line x1={282} y1={y + 6} x2={330} y2={y + 6} stroke={faint} strokeWidth={0.5} />
             <path d={`M 360 ${y} L 420 ${y}`} stroke={faint} strokeWidth={0.75} fill="none" />
             <circle cx={425} cy={y} r={5} fill="none" stroke={i === 1 ? GOLD : main} strokeWidth={0.75} />
             <circle cx={425} cy={y} r={2} fill={i === 1 ? GOLD : main}>
@@ -274,7 +270,7 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
         {/* pulse along middle path */}
         <circle r={2.5} fill={GOLD}>
           <animateMotion dur="4s" repeatCount="indefinite"
-            path="M 120 150 L 180 150 L 270 150" />
+            path="M 91 150 L 180 150 L 270 150" />
         </circle>
       </svg>
     </Frame>
