@@ -120,7 +120,7 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
         <circle cx={cx} cy={cy} r={4} fill={GOLD}>
           <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
         </circle>
-        <text x={cx} y={cy + 3} fontSize="8" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1.5">
+        <text x={cx} y={cy + 3} fontSize="8" fill={tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.95)"} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1.5" fontWeight="600">
           AI CORE
         </text>
         {/* expanding pulse */}
@@ -149,11 +149,11 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
                 x={x + (Math.cos(rad) >= 0 ? 11 : -11)}
                 y={y + 3}
                 fontSize="6.5"
-                fill={main}
+                fill={tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.9)"}
                 textAnchor={Math.cos(rad) >= 0 ? "start" : "end"}
                 fontFamily="ui-monospace, monospace"
                 letterSpacing="0.5"
-                opacity={0.7}
+                fontWeight="600"
               >
                 {a.label}
               </text>
