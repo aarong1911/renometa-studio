@@ -65,8 +65,8 @@ function ContactPage() {
                 <ul className="space-y-3 text-[14px]">
                   <li className="flex items-start gap-3">
                     <Mail className="h-4 w-4 text-gold mt-0.5" />
-                    <a href="mailto:hello@renometa.com" className="hover:text-foreground">
-                      hello@renometa.com
+                    <a href="mailto:support@renometa.com" className="hover:text-foreground">
+                      support@renometa.com
                     </a>
                   </li>
                   <li className="flex items-start gap-3">
@@ -75,7 +75,7 @@ function ContactPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <Clock className="h-4 w-4 text-gold mt-0.5" />
-                    <span>Mon–Fri · 8 AM – 6 PM local</span>
+                    <span>Mon–Fri · 8 AM – 6 PM EST</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <MapPin className="h-4 w-4 text-gold mt-0.5" />
