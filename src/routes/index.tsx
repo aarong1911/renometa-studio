@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { type ReactNode, type HTMLAttributes } from "react";
 import { useReveal } from "@/hooks/use-reveal";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
+import { PillarVisual } from "@/components/visuals";
 
 import {
   ArrowRight,
@@ -730,6 +731,7 @@ function FeaturePillars() {
                 className="absolute top-0 left-7 right-7 h-px gold-line opacity-0 group-hover:opacity-100 transition-opacity"
                 aria-hidden
               />
+              <PillarVisual name={p.title} size="sm" className="mb-6" />
               <div className="h-11 w-11 rounded-xl border border-border bg-surface grid place-items-center">
                 <p.icon className="h-5 w-5 text-foreground" strokeWidth={1.5} />
               </div>
