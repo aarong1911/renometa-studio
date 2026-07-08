@@ -185,20 +185,21 @@ export function UnifiedInboxVisual({ tone = "light", size = "md", className }: V
 /* ------------ 3. Pipeline Stack ------------ */
 export function PipelineStackVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
-  const stages = ["Lead", "Qualified", "Estimate", "Won"];
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
+  const stages = [0, 1, 2, 3];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {stages.map((s, i) => {
+        <text x={30} y={50} fontSize="12" fill={textColor} fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          PIPELINE
+        </text>
+        {stages.map((i) => {
           const x = 30 + i * 115;
           return (
-            <g key={s}>
+            <g key={i}>
               <rect x={x} y={70} width={100} height={160} rx={10}
                 fill="none" stroke={faint} strokeWidth={0.75} />
-              <text x={x + 10} y={90} fontSize="9" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-                {s.toUpperCase()}
-              </text>
-              <line x1={x + 10} y1={100} x2={x + 90} y2={100} stroke={faint} strokeWidth={0.5} />
+              <line x1={x + 10} y1={92} x2={x + 40} y2={92} stroke={main} strokeWidth={1.2} opacity={0.7} />
               {[0, 1, 2].map((k) => {
                 const cy = 118 + k * 34;
                 const highlight = (i + k) % 3 === 0;
