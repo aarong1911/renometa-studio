@@ -92,7 +92,6 @@ function Hero() {
             <span className="block whitespace-nowrap">The Business Command Center</span>
             <span className="block whitespace-nowrap">for Renovation Contractors</span>
           </h1>
-          </h1>
           <p
             className="mt-6 text-pretty text-[16.5px] sm:text-[17.5px] text-muted-foreground max-w-xl leading-relaxed animate-reveal"
             style={{ animationDelay: "200ms" }}
