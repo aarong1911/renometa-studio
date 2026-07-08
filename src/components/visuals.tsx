@@ -138,27 +138,25 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
 /* ------------ 2. Unified Inbox ------------ */
 export function UnifiedInboxVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
-  const channels = ["SMS", "WhatsApp", "Messenger", "Instagram", "Voice"];
-  const startX = 40;
-  const endX = 380;
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
+  const rows = [0, 1, 2, 3, 4];
+  const endX = 340;
   const centerY = 150;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {channels.map((c, i) => {
+        {rows.map((i) => {
           const y = 50 + i * 50;
-          const cx = 100;
+          const cx = 80;
           return (
-            <g key={c}>
-              <text x={startX} y={y - 8} fontSize="9" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-                {c.toUpperCase()}
-              </text>
-              <circle cx={cx} cy={y} r={3} fill={GOLD} />
+            <g key={i}>
+              <circle cx={cx} cy={y} r={4} fill="none" stroke={main} strokeWidth={0.75} />
+              <circle cx={cx} cy={y} r={2} fill={GOLD} opacity={i === 2 ? 1 : 0.55} />
               <path
                 d={`M ${cx} ${y} C 200 ${y}, 260 ${centerY}, ${endX} ${centerY}`}
-                stroke={main} strokeWidth={0.75} fill="none"
+                stroke={main} strokeWidth={0.75} fill="none" opacity={0.7}
               />
-              <circle r={2} fill={GOLD}>
+              <circle r={2.5} fill={GOLD}>
                 <animateMotion
                   dur={`${5 + i}s`}
                   begin={`${i * 0.6}s`}
@@ -169,16 +167,16 @@ export function UnifiedInboxVisual({ tone = "light", size = "md", className }: V
             </g>
           );
         })}
-        <rect x={endX - 8} y={centerY - 22} width={70} height={44} rx={8}
-          fill="none" stroke={GOLD} strokeWidth={1} />
-        <rect x={endX - 8} y={centerY - 22} width={70} height={44} rx={8}
+        <rect x={endX} y={centerY - 45} width={130} height={90} rx={10}
+          fill="none" stroke={GOLD} strokeWidth={1.1} />
+        <rect x={endX} y={centerY - 45} width={130} height={90} rx={10}
           fill={GOLD} opacity={0.06} />
-        <text x={endX + 27} y={centerY + 3} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
+        {[-22, -4, 14].map((dy) => (
+          <line key={dy} x1={endX + 14} y1={centerY + dy} x2={endX + 116} y2={centerY + dy} stroke={faint} strokeWidth={0.5} />
+        ))}
+        <text x={endX + 65} y={centerY + 38} fontSize="12" fill={textColor} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
           INBOX
         </text>
-        <line x1={endX - 2} y1={centerY - 12} x2={endX + 60} y2={centerY - 12} stroke={faint} strokeWidth={0.5} />
-        <line x1={endX - 2} y1={centerY} x2={endX + 60} y2={centerY} stroke={faint} strokeWidth={0.5} />
-        <line x1={endX - 2} y1={centerY + 12} x2={endX + 60} y2={centerY + 12} stroke={faint} strokeWidth={0.5} />
       </svg>
     </Frame>
   );
