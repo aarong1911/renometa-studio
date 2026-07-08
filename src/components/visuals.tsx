@@ -383,16 +383,11 @@ export function WebsiteToCrmVisual({ tone = "light", size = "md", className }: V
           <circle cx={42} cy={71} r={2} fill={main} opacity={0.5} />
           <circle cx={50} cy={71} r={2} fill={main} opacity={0.5} />
           <circle cx={58} cy={71} r={2} fill={main} opacity={0.5} />
-          <text x={40} y={102} fontSize="8" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-            /CONTACT
-          </text>
-          <rect x={40} y={115} width={160} height={10} rx={2} fill={faint} />
-          <rect x={40} y={132} width={120} height={10} rx={2} fill={faint} />
-          <rect x={40} y={150} width={160} height={30} rx={4} fill="none" stroke={faint} strokeWidth={0.5} />
-          <rect x={40} y={195} width={70} height={22} rx={4} fill={GOLD} opacity={0.15} stroke={GOLD} strokeWidth={0.75} />
-          <text x={75} y={210} fontSize="8" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-            SUBMIT
-          </text>
+          <rect x={40} y={100} width={100} height={8} rx={2} fill={faint} />
+          <rect x={40} y={118} width={160} height={8} rx={2} fill={faint} />
+          <rect x={40} y={132} width={130} height={8} rx={2} fill={faint} />
+          <rect x={40} y={155} width={160} height={26} rx={4} fill="none" stroke={faint} strokeWidth={0.5} />
+          <rect x={40} y={195} width={70} height={22} rx={4} fill={GOLD} opacity={0.2} stroke={GOLD} strokeWidth={0.9} />
         </g>
         {/* connection */}
         <path d="M 210 170 C 250 170, 260 150, 300 150" stroke={main} strokeWidth={0.75} fill="none" strokeDasharray="3 3" />
@@ -406,22 +401,15 @@ export function WebsiteToCrmVisual({ tone = "light", size = "md", className }: V
         ))}
         {/* CRM card */}
         <g>
-          <rect x={300} y={80} width={170} height={140} rx={10} fill="none" stroke={GOLD} strokeWidth={1} />
+          <rect x={300} y={80} width={170} height={140} rx={10} fill="none" stroke={GOLD} strokeWidth={1.1} />
           <rect x={300} y={80} width={170} height={140} rx={10} fill={GOLD} opacity={0.05} />
-          <text x={315} y={100} fontSize="8" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-            RENOMETA CONNECT
-          </text>
           <line x1={315} y1={108} x2={455} y2={108} stroke={faint} strokeWidth={0.5} />
           {[122, 142, 162, 182].map((y, i) => (
             <g key={y}>
-              <circle cx={322} cy={y + 5} r={2} fill={i === 0 ? GOLD : main} opacity={i === 0 ? 1 : 0.5} />
-              <rect x={332} y={y} width={110} height={10} rx={2} fill={faint} />
+              <circle cx={322} cy={y + 5} r={2.4} fill={i === 0 ? GOLD : main} opacity={i === 0 ? 1 : 0.5} />
+              <rect x={332} y={y + 1} width={110} height={8} rx={2} fill={faint} />
             </g>
           ))}
-          <rect x={315} y={198} width={60} height={14} rx={3} fill={GOLD} opacity={0.15} stroke={GOLD} strokeWidth={0.5} />
-          <text x={345} y={208} fontSize="7" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-            NEW LEAD
-          </text>
         </g>
       </svg>
     </Frame>
