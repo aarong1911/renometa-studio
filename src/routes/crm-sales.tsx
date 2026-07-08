@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
-import { PipelineStackVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -47,7 +46,7 @@ function CrmPage() {
       subheading="Manage customers, deals, estimates, proposals, invoices, signatures, bookings, and client communication in one sales workflow."
       primaryCta={{ label: "Organize My Sales Process", to: "/contact" }}
       secondaryCta={{ label: "See the Inbox", to: "/multi-channel-inbox" }}
-      heroVisual={<PipelineStackVisual size="lg" />}
+      heroVisual={<PipelineMockup />}
     >
       <Section>
         <SectionHeader

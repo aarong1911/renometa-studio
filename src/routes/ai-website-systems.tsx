@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
-import { WebsiteToCrmVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -52,7 +51,7 @@ function AiWebsitePage() {
       subheading="Conversion-focused websites built to capture leads and send them directly into RenoMeta Connect."
       primaryCta={{ label: "Build My Website System", to: "/contact" }}
       secondaryCta={{ label: "See RenoMeta Connect", to: "/renometa-connect" }}
-      heroVisual={<WebsiteToCrmVisual size="lg" />}
+      heroVisual={<WebsiteMockup />}
     >
       <Section>
         <SectionHeader

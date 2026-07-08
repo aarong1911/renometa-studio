@@ -7,7 +7,6 @@ import {
   Reveal,
 } from "@/components/page-primitives";
 import { ARTICLES, CATEGORIES } from "@/lib/blog-articles";
-import { BlogCategoryVisual } from "@/components/visuals";
 import { ArrowRight, Mail } from "lucide-react";
 
 export const Route = createFileRoute("/blog")({
@@ -131,33 +130,26 @@ function BlogGrid() {
         <Link
           to="/blog/$slug"
           params={{ slug: featured.slug }}
-          className="block group rounded-2xl border border-border bg-surface-elevated overflow-hidden shadow-card hover:shadow-elegant transition-shadow"
+          className="block group rounded-2xl border border-border bg-surface-elevated p-8 sm:p-12 shadow-card hover:shadow-elegant transition-shadow"
         >
-          <div className="grid md:grid-cols-[1.1fr_1fr] items-stretch">
-            <div className="p-8 sm:p-10 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                <span className="h-px w-6 bg-gold" />
-                Featured · {featured.category}
-              </div>
-              <h3 className="mt-4 font-display text-2xl sm:text-3xl lg:text-[36px] font-semibold tracking-[-0.02em] leading-tight text-balance">
-                {featured.title}
-              </h3>
-              <p className="mt-4 text-[15px] text-muted-foreground leading-relaxed max-w-lg">
-                {featured.excerpt}
-              </p>
-              <div className="mt-6 flex items-center gap-3 text-[12.5px] text-muted-foreground">
-                <span>{featured.date}</span>
-                <span>·</span>
-                <span>{featured.readTime}</span>
-              </div>
-              <div className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium group-hover:text-gold transition-colors">
-                Read article
-                <ArrowRight className="h-3.5 w-3.5" />
-              </div>
-            </div>
-            <div className="relative min-h-[240px] border-l border-border overflow-hidden p-6 flex items-center justify-center bg-gradient-to-br from-gold-soft/30 via-surface to-background">
-              <BlogCategoryVisual category={featured.category} size="md" className="w-full max-w-md" />
-            </div>
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-px w-6 bg-gold" />
+            Featured · {featured.category}
+          </div>
+          <h3 className="mt-4 font-display text-2xl sm:text-3xl lg:text-[36px] font-semibold tracking-[-0.02em] leading-tight text-balance max-w-3xl">
+            {featured.title}
+          </h3>
+          <p className="mt-4 text-[15px] text-muted-foreground leading-relaxed max-w-2xl">
+            {featured.excerpt}
+          </p>
+          <div className="mt-6 flex items-center gap-3 text-[12.5px] text-muted-foreground">
+            <span>{featured.date}</span>
+            <span>·</span>
+            <span>{featured.readTime}</span>
+          </div>
+          <div className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-medium group-hover:text-gold transition-colors">
+            Read article
+            <ArrowRight className="h-3.5 w-3.5" />
           </div>
         </Link>
       </Reveal>
@@ -184,12 +176,9 @@ function BlogGrid() {
             <Link
               to="/blog/$slug"
               params={{ slug: a.slug }}
-              className="block group card-elegant card-elegant-hover h-full overflow-hidden"
+              className="block group card-elegant card-elegant-hover h-full p-6"
             >
-              <div className="relative border-b border-border overflow-hidden p-3">
-                <BlogCategoryVisual category={a.category} size="sm" className="w-full" />
-              </div>
-              <div className="p-6">
+              <div>
                 <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                   {a.category}
                 </div>
