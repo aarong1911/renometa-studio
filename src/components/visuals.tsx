@@ -60,19 +60,11 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
   const cx = 250;
   const cy = 150;
   const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
-  const mutedText = tone === "dark" ? "rgba(230,225,215,0.7)" : "rgba(20,20,22,0.65)";
-  // 4 primary agent nodes only — simpler, readable
-  const agents = [
-    { label: "QUALIFY", angle: -60 },
-    { label: "FOLLOW-UP", angle: 30 },
-    { label: "ESTIMATE", angle: 120 },
-    { label: "REVIEW", angle: 210 },
-  ];
+  const agents = [-60, 30, 120, 210];
   const orbitR = 100;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {/* subtle radial lines */}
         {Array.from({ length: 8 }).map((_, i) => {
           const a = (i * Math.PI * 2) / 8;
           return (
@@ -87,7 +79,6 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
             />
           );
         })}
-        {/* orbital rings */}
         {[60, 100, 130].map((r, i) => (
           <circle
             key={r}
@@ -99,64 +90,40 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
             opacity={i === 1 ? 0.6 : 0.8}
           />
         ))}
-        {/* rotating outer ticks */}
         <g style={{ transformOrigin: `${cx}px ${cy}px` }}>
           {Array.from({ length: 24 }).map((_, i) => {
             const a = (i * Math.PI * 2) / 24;
-            const x1 = cx + Math.cos(a) * 128;
-            const y1 = cy + Math.sin(a) * 128;
-            const x2 = cx + Math.cos(a) * 134;
-            const y2 = cy + Math.sin(a) * 134;
             return (
-              <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={main} strokeWidth={0.5} opacity={i % 6 === 0 ? 0.9 : 0.35} />
+              <line key={i}
+                x1={cx + Math.cos(a) * 128} y1={cy + Math.sin(a) * 128}
+                x2={cx + Math.cos(a) * 134} y2={cy + Math.sin(a) * 134}
+                stroke={main} strokeWidth={0.5} opacity={i % 6 === 0 ? 0.9 : 0.35} />
             );
           })}
           <animateTransform attributeName="transform" type="rotate"
             from={`0 ${cx} ${cy}`} to={`360 ${cx} ${cy}`} dur="80s" repeatCount="indefinite" />
         </g>
-        {/* core */}
-        <circle cx={cx} cy={cy} r={38} fill="none" stroke={GOLD} strokeWidth={1.2} />
-        <circle cx={cx} cy={cy} r={38} fill={GOLD} opacity={0.08} />
-        <circle cx={cx} cy={cy} r={5} fill={GOLD}>
-          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite" />
-        </circle>
-        <text x={cx} y={cy - 8} fontSize="11" fill={textColor} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="2" fontWeight="700">
-          AI CORE
+        <circle cx={cx} cy={cy} r={42} fill="none" stroke={GOLD} strokeWidth={1.2} />
+        <circle cx={cx} cy={cy} r={42} fill={GOLD} opacity={0.08} />
+        <text x={cx} y={cy + 5} fontSize="13" fill={textColor} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          AI AGENT
         </text>
-        <text x={cx} y={cy + 20} fontSize="7" fill={mutedText} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1.2">
-          RENOMETA
-        </text>
-        {/* expanding pulse */}
-        <circle cx={cx} cy={cy} r={38} fill="none" stroke={GOLD} strokeWidth={0.75}>
-          <animate attributeName="r" values="38;120;38" dur="6s" repeatCount="indefinite" />
+        <circle cx={cx} cy={cy} r={42} fill="none" stroke={GOLD} strokeWidth={0.75}>
+          <animate attributeName="r" values="42;120;42" dur="6s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.6;0;0.6" dur="6s" repeatCount="indefinite" />
         </circle>
-        {/* 4 agent nodes */}
-        {agents.map((a, i) => {
-          const rad = (a.angle * Math.PI) / 180;
+        {agents.map((angle, i) => {
+          const rad = (angle * Math.PI) / 180;
           const x = cx + Math.cos(rad) * orbitR;
           const y = cy + Math.sin(rad) * orbitR;
-          const right = Math.cos(rad) >= 0;
           return (
-            <g key={a.label}>
-              <line x1={cx + Math.cos(rad) * 40} y1={cy + Math.sin(rad) * 40} x2={x} y2={y} stroke={faint} strokeWidth={0.6} />
-              <circle cx={x} cy={y} r={8} fill={tone === "dark" ? "rgba(20,20,22,0.9)" : "rgba(255,253,247,0.95)"} stroke={GOLD} strokeWidth={1.1} />
-              <circle cx={x} cy={y} r={2.2} fill={GOLD}>
+            <g key={i}>
+              <line x1={cx + Math.cos(rad) * 44} y1={cy + Math.sin(rad) * 44} x2={x} y2={y} stroke={faint} strokeWidth={0.6} />
+              <circle cx={x} cy={y} r={9} fill={tone === "dark" ? "rgba(20,20,22,0.9)" : "rgba(255,253,247,0.95)"} stroke={GOLD} strokeWidth={1.1} />
+              <circle cx={x} cy={y} r={2.4} fill={GOLD}>
                 <animate attributeName="opacity" values="0.4;1;0.4"
                   dur={`${3 + (i % 2)}s`} begin={`${i * 0.4}s`} repeatCount="indefinite" />
               </circle>
-              <text
-                x={x + (right ? 14 : -14)}
-                y={y + 3}
-                fontSize="9"
-                fill={textColor}
-                textAnchor={right ? "start" : "end"}
-                fontFamily="ui-monospace, monospace"
-                letterSpacing="1"
-                fontWeight="600"
-              >
-                {a.label}
-              </text>
             </g>
           );
         })}
@@ -171,27 +138,25 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
 /* ------------ 2. Unified Inbox ------------ */
 export function UnifiedInboxVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
-  const channels = ["SMS", "WhatsApp", "Messenger", "Instagram", "Voice"];
-  const startX = 40;
-  const endX = 380;
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
+  const rows = [0, 1, 2, 3, 4];
+  const endX = 340;
   const centerY = 150;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {channels.map((c, i) => {
+        {rows.map((i) => {
           const y = 50 + i * 50;
-          const cx = 100;
+          const cx = 80;
           return (
-            <g key={c}>
-              <text x={startX} y={y - 8} fontSize="9" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-                {c.toUpperCase()}
-              </text>
-              <circle cx={cx} cy={y} r={3} fill={GOLD} />
+            <g key={i}>
+              <circle cx={cx} cy={y} r={4} fill="none" stroke={main} strokeWidth={0.75} />
+              <circle cx={cx} cy={y} r={2} fill={GOLD} opacity={i === 2 ? 1 : 0.55} />
               <path
                 d={`M ${cx} ${y} C 200 ${y}, 260 ${centerY}, ${endX} ${centerY}`}
-                stroke={main} strokeWidth={0.75} fill="none"
+                stroke={main} strokeWidth={0.75} fill="none" opacity={0.7}
               />
-              <circle r={2} fill={GOLD}>
+              <circle r={2.5} fill={GOLD}>
                 <animateMotion
                   dur={`${5 + i}s`}
                   begin={`${i * 0.6}s`}
@@ -202,16 +167,16 @@ export function UnifiedInboxVisual({ tone = "light", size = "md", className }: V
             </g>
           );
         })}
-        <rect x={endX - 8} y={centerY - 22} width={70} height={44} rx={8}
-          fill="none" stroke={GOLD} strokeWidth={1} />
-        <rect x={endX - 8} y={centerY - 22} width={70} height={44} rx={8}
+        <rect x={endX} y={centerY - 45} width={130} height={90} rx={10}
+          fill="none" stroke={GOLD} strokeWidth={1.1} />
+        <rect x={endX} y={centerY - 45} width={130} height={90} rx={10}
           fill={GOLD} opacity={0.06} />
-        <text x={endX + 27} y={centerY + 3} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
+        {[-22, -4, 14].map((dy) => (
+          <line key={dy} x1={endX + 14} y1={centerY + dy} x2={endX + 116} y2={centerY + dy} stroke={faint} strokeWidth={0.5} />
+        ))}
+        <text x={endX + 65} y={centerY + 38} fontSize="12" fill={textColor} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
           INBOX
         </text>
-        <line x1={endX - 2} y1={centerY - 12} x2={endX + 60} y2={centerY - 12} stroke={faint} strokeWidth={0.5} />
-        <line x1={endX - 2} y1={centerY} x2={endX + 60} y2={centerY} stroke={faint} strokeWidth={0.5} />
-        <line x1={endX - 2} y1={centerY + 12} x2={endX + 60} y2={centerY + 12} stroke={faint} strokeWidth={0.5} />
       </svg>
     </Frame>
   );
@@ -220,20 +185,21 @@ export function UnifiedInboxVisual({ tone = "light", size = "md", className }: V
 /* ------------ 3. Pipeline Stack ------------ */
 export function PipelineStackVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
-  const stages = ["Lead", "Qualified", "Estimate", "Won"];
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
+  const stages = [0, 1, 2, 3];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {stages.map((s, i) => {
+        <text x={30} y={50} fontSize="12" fill={textColor} fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          PIPELINE
+        </text>
+        {stages.map((i) => {
           const x = 30 + i * 115;
           return (
-            <g key={s}>
+            <g key={i}>
               <rect x={x} y={70} width={100} height={160} rx={10}
                 fill="none" stroke={faint} strokeWidth={0.75} />
-              <text x={x + 10} y={90} fontSize="9" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-                {s.toUpperCase()}
-              </text>
-              <line x1={x + 10} y1={100} x2={x + 90} y2={100} stroke={faint} strokeWidth={0.5} />
+              <line x1={x + 10} y1={92} x2={x + 40} y2={92} stroke={main} strokeWidth={1.2} opacity={0.7} />
               {[0, 1, 2].map((k) => {
                 const cy = 118 + k * 34;
                 const highlight = (i + k) % 3 === 0;
@@ -276,28 +242,24 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {/* trigger */}
-        <g>
-          <rect x={30} y={130} width={90} height={40} rx={8} fill="none" stroke={GOLD} strokeWidth={1} />
-          <rect x={30} y={130} width={90} height={40} rx={8} fill={GOLD} opacity={0.06} />
-          <text x={75} y={155} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-            TRIGGER
-          </text>
-        </g>
+        {/* trigger node */}
+        <circle cx={75} cy={150} r={16} fill="none" stroke={GOLD} strokeWidth={1.2} />
+        <circle cx={75} cy={150} r={16} fill={GOLD} opacity={0.08} />
+        <circle cx={75} cy={150} r={4} fill={GOLD} />
         {/* connector to split */}
-        <path d="M 120 150 L 180 150" stroke={main} strokeWidth={0.75} fill="none" />
+        <path d="M 91 150 L 180 150" stroke={main} strokeWidth={0.75} fill="none" />
         {/* branch lines */}
         <path d="M 180 150 C 210 150, 220 70, 270 70" stroke={main} strokeWidth={0.75} fill="none" />
         <path d="M 180 150 L 270 150" stroke={main} strokeWidth={0.75} fill="none" />
         <path d="M 180 150 C 210 150, 220 230, 270 230" stroke={main} strokeWidth={0.75} fill="none" />
         <circle cx={180} cy={150} r={3} fill={GOLD} />
-        {/* actions */}
+        {/* action nodes */}
         {[70, 150, 230].map((y, i) => (
           <g key={y}>
-            <rect x={270} y={y - 20} width={90} height={40} rx={8} fill="none" stroke={main} strokeWidth={0.75} />
-            <text x={315} y={y + 3} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-              {["SMS", "EMAIL", "TASK"][i]}
-            </text>
+            <rect x={270} y={y - 18} width={90} height={36} rx={8} fill="none" stroke={i === 1 ? GOLD : main} strokeWidth={i === 1 ? 1 : 0.75} opacity={i === 1 ? 0.95 : 0.7} />
+            {i === 1 && <rect x={270} y={y - 18} width={90} height={36} rx={8} fill={GOLD} opacity={0.06} />}
+            <line x1={282} y1={y - 4} x2={348} y2={y - 4} stroke={faint} strokeWidth={0.5} />
+            <line x1={282} y1={y + 6} x2={330} y2={y + 6} stroke={faint} strokeWidth={0.5} />
             <path d={`M 360 ${y} L 420 ${y}`} stroke={faint} strokeWidth={0.75} fill="none" />
             <circle cx={425} cy={y} r={5} fill="none" stroke={i === 1 ? GOLD : main} strokeWidth={0.75} />
             <circle cx={425} cy={y} r={2} fill={i === 1 ? GOLD : main}>
@@ -308,7 +270,7 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
         {/* pulse along middle path */}
         <circle r={2.5} fill={GOLD}>
           <animateMotion dur="4s" repeatCount="indefinite"
-            path="M 120 150 L 180 150 L 270 150" />
+            path="M 91 150 L 180 150 L 270 150" />
         </circle>
       </svg>
     </Frame>
@@ -319,17 +281,12 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
 export function OperationsBlocksVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
   const blocks = [
-    { x: 60, y: 60, label: "SCHEDULE" },
-    { x: 200, y: 60, label: "DISPATCH" },
-    { x: 340, y: 60, label: "COSTING" },
-    { x: 60, y: 180, label: "JOBS" },
-    { x: 200, y: 180, label: "CREW" },
-    { x: 340, y: 180, label: "WORKFLOW" },
+    { x: 60, y: 60 }, { x: 200, y: 60 }, { x: 340, y: 60 },
+    { x: 60, y: 180 }, { x: 200, y: 180 }, { x: 340, y: 180 },
   ];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {/* connecting lines */}
         {[
           "M 110 90 L 200 90", "M 250 90 L 340 90",
           "M 110 210 L 200 210", "M 250 210 L 340 210",
@@ -337,27 +294,29 @@ export function OperationsBlocksVisual({ tone = "light", size = "md", className 
         ].map((d, i) => (
           <path key={i} d={d} stroke={faint} strokeWidth={0.75} fill="none" strokeDasharray="3 3" />
         ))}
-        {blocks.map((b, i) => (
-          <g key={b.label}>
-            {/* 3d block */}
-            <path d={`M ${b.x} ${b.y} L ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 10} ${b.y - 10} Z`}
-              fill="none" stroke={faint} strokeWidth={0.75} />
-            <path d={`M ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 100} ${b.y + 40} L ${b.x + 90} ${b.y + 50} Z`}
-              fill="none" stroke={faint} strokeWidth={0.75} />
-            <rect x={b.x} y={b.y} width={90} height={50} rx={2}
-              fill="none" stroke={i === 1 || i === 4 ? GOLD : main}
-              strokeWidth={i === 1 || i === 4 ? 1 : 0.75}
-              opacity={i === 1 || i === 4 ? 0.9 : 0.7} />
-            <text x={b.x + 45} y={b.y + 30} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-              {b.label}
-            </text>
-            {(i === 1 || i === 4) && (
-              <circle cx={b.x + 82} cy={b.y + 8} r={1.8} fill={GOLD}>
-                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
-              </circle>
-            )}
-          </g>
-        ))}
+        {blocks.map((b, i) => {
+          const accent = i === 1 || i === 4;
+          return (
+            <g key={i}>
+              <path d={`M ${b.x} ${b.y} L ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 10} ${b.y - 10} Z`}
+                fill="none" stroke={faint} strokeWidth={0.75} />
+              <path d={`M ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 100} ${b.y + 40} L ${b.x + 90} ${b.y + 50} Z`}
+                fill="none" stroke={faint} strokeWidth={0.75} />
+              <rect x={b.x} y={b.y} width={90} height={50} rx={2}
+                fill="none" stroke={accent ? GOLD : main}
+                strokeWidth={accent ? 1 : 0.75}
+                opacity={accent ? 0.9 : 0.7} />
+              {accent && <rect x={b.x} y={b.y} width={90} height={50} rx={2} fill={GOLD} opacity={0.06} />}
+              <line x1={b.x + 12} y1={b.y + 18} x2={b.x + 60} y2={b.y + 18} stroke={main} strokeWidth={0.6} opacity={0.55} />
+              <line x1={b.x + 12} y1={b.y + 30} x2={b.x + 48} y2={b.y + 30} stroke={main} strokeWidth={0.6} opacity={0.35} />
+              {accent && (
+                <circle cx={b.x + 78} cy={b.y + 24} r={2.2} fill={GOLD}>
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+                </circle>
+              )}
+            </g>
+          );
+        })}
       </svg>
     </Frame>
   );
@@ -424,16 +383,11 @@ export function WebsiteToCrmVisual({ tone = "light", size = "md", className }: V
           <circle cx={42} cy={71} r={2} fill={main} opacity={0.5} />
           <circle cx={50} cy={71} r={2} fill={main} opacity={0.5} />
           <circle cx={58} cy={71} r={2} fill={main} opacity={0.5} />
-          <text x={40} y={102} fontSize="8" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-            /CONTACT
-          </text>
-          <rect x={40} y={115} width={160} height={10} rx={2} fill={faint} />
-          <rect x={40} y={132} width={120} height={10} rx={2} fill={faint} />
-          <rect x={40} y={150} width={160} height={30} rx={4} fill="none" stroke={faint} strokeWidth={0.5} />
-          <rect x={40} y={195} width={70} height={22} rx={4} fill={GOLD} opacity={0.15} stroke={GOLD} strokeWidth={0.75} />
-          <text x={75} y={210} fontSize="8" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-            SUBMIT
-          </text>
+          <rect x={40} y={100} width={100} height={8} rx={2} fill={faint} />
+          <rect x={40} y={118} width={160} height={8} rx={2} fill={faint} />
+          <rect x={40} y={132} width={130} height={8} rx={2} fill={faint} />
+          <rect x={40} y={155} width={160} height={26} rx={4} fill="none" stroke={faint} strokeWidth={0.5} />
+          <rect x={40} y={195} width={70} height={22} rx={4} fill={GOLD} opacity={0.2} stroke={GOLD} strokeWidth={0.9} />
         </g>
         {/* connection */}
         <path d="M 210 170 C 250 170, 260 150, 300 150" stroke={main} strokeWidth={0.75} fill="none" strokeDasharray="3 3" />
@@ -447,22 +401,15 @@ export function WebsiteToCrmVisual({ tone = "light", size = "md", className }: V
         ))}
         {/* CRM card */}
         <g>
-          <rect x={300} y={80} width={170} height={140} rx={10} fill="none" stroke={GOLD} strokeWidth={1} />
+          <rect x={300} y={80} width={170} height={140} rx={10} fill="none" stroke={GOLD} strokeWidth={1.1} />
           <rect x={300} y={80} width={170} height={140} rx={10} fill={GOLD} opacity={0.05} />
-          <text x={315} y={100} fontSize="8" fill={main} fontFamily="ui-monospace, monospace" letterSpacing="1">
-            RENOMETA CONNECT
-          </text>
           <line x1={315} y1={108} x2={455} y2={108} stroke={faint} strokeWidth={0.5} />
           {[122, 142, 162, 182].map((y, i) => (
             <g key={y}>
-              <circle cx={322} cy={y + 5} r={2} fill={i === 0 ? GOLD : main} opacity={i === 0 ? 1 : 0.5} />
-              <rect x={332} y={y} width={110} height={10} rx={2} fill={faint} />
+              <circle cx={322} cy={y + 5} r={2.4} fill={i === 0 ? GOLD : main} opacity={i === 0 ? 1 : 0.5} />
+              <rect x={332} y={y + 1} width={110} height={8} rx={2} fill={faint} />
             </g>
           ))}
-          <rect x={315} y={198} width={60} height={14} rx={3} fill={GOLD} opacity={0.15} stroke={GOLD} strokeWidth={0.5} />
-          <text x={345} y={208} fontSize="7" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-            NEW LEAD
-          </text>
         </g>
       </svg>
     </Frame>
@@ -473,15 +420,13 @@ export function WebsiteToCrmVisual({ tone = "light", size = "md", className }: V
 export function CustomBuildVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
   const modules = [
-    { x: 60, y: 80, label: "DATA" },
-    { x: 60, y: 200, label: "AGENT" },
-    { x: 200, y: 140, label: "LOGIC" },
-    { x: 340, y: 80, label: "API" },
-    { x: 340, y: 200, label: "UI" },
+    { x: 60, y: 80 },
+    { x: 60, y: 200 },
+    { x: 200, y: 140 },
+    { x: 340, y: 80 },
+    { x: 340, y: 200 },
   ];
-  const connections = [
-    [0, 2], [1, 2], [2, 3], [2, 4],
-  ];
+  const connections: [number, number][] = [[0, 2], [1, 2], [2, 3], [2, 4]];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
@@ -494,22 +439,23 @@ export function CustomBuildVisual({ tone = "light", size = "md", className }: Vi
           );
         })}
         {modules.map((m, i) => (
-          <g key={m.label}>
+          <g key={i}>
             <rect x={m.x} y={m.y} width={80} height={50} rx={8}
               fill="none" stroke={i === 2 ? GOLD : main}
-              strokeWidth={i === 2 ? 1 : 0.75}
+              strokeWidth={i === 2 ? 1.1 : 0.75}
               opacity={i === 2 ? 0.95 : 0.7} />
             {i === 2 && (
-              <rect x={m.x} y={m.y} width={80} height={50} rx={8} fill={GOLD} opacity={0.06} />
+              <rect x={m.x} y={m.y} width={80} height={50} rx={8} fill={GOLD} opacity={0.08} />
             )}
-            <line x1={m.x + 8} y1={m.y + 16} x2={m.x + 72} y2={m.y + 16} stroke={faint} strokeWidth={0.5} />
-            <line x1={m.x + 8} y1={m.y + 26} x2={m.x + 50} y2={m.y + 26} stroke={faint} strokeWidth={0.5} />
-            <text x={m.x + 40} y={m.y + 43} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-              {m.label}
-            </text>
+            <line x1={m.x + 10} y1={m.y + 18} x2={m.x + 70} y2={m.y + 18} stroke={faint} strokeWidth={0.6} />
+            <line x1={m.x + 10} y1={m.y + 30} x2={m.x + 52} y2={m.y + 30} stroke={faint} strokeWidth={0.6} />
+            {i === 2 && (
+              <circle cx={m.x + 40} cy={m.y + 25} r={3} fill={GOLD}>
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="2.4s" repeatCount="indefinite" />
+              </circle>
+            )}
           </g>
         ))}
-        {/* packet animations */}
         {connections.map(([a, b], i) => {
           const m1 = modules[a]; const m2 = modules[b];
           const p = `M ${m1.x + 80} ${m1.y + 25} C ${m1.x + 130} ${m1.y + 25}, ${m2.x - 30} ${m2.y + 25}, ${m2.x} ${m2.y + 25}`;
