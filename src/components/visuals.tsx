@@ -42,10 +42,10 @@ function Frame({
 
 /* Shared SVG palette */
 const GOLD = "#d9ab57";
-const STROKE_LIGHT = "rgba(20,20,22,0.28)";
-const STROKE_DARK = "rgba(230,225,215,0.28)";
-const FAINT_LIGHT = "rgba(20,20,22,0.10)";
-const FAINT_DARK = "rgba(230,225,215,0.10)";
+const STROKE_LIGHT = "rgba(20,20,22,0.55)";
+const STROKE_DARK = "rgba(230,225,215,0.45)";
+const FAINT_LIGHT = "rgba(20,20,22,0.22)";
+const FAINT_DARK = "rgba(230,225,215,0.20)";
 
 function strokes(tone: Tone) {
   return {
