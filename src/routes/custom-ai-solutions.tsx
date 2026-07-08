@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
+import { CustomBuildVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -45,7 +46,7 @@ function CustomPage() {
       subheading="Advanced workflows, integrations, dashboards, and automations built around unique business needs."
       primaryCta={{ label: "Discuss a Custom Build", to: "/contact" }}
       secondaryCta={{ label: "See the AI Center", to: "/ai-center" }}
-      heroVisual={<WorkflowBuilder />}
+      heroVisual={<CustomBuildVisual size="lg" />}
     >
       <Section>
         <SectionHeader

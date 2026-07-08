@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
+import { AutomationFlowVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -45,7 +46,7 @@ function MarketingPage() {
       subheading="Run campaigns, nurture opportunities, request reviews, and keep your pipeline moving from the same platform."
       primaryCta={{ label: "Automate My Follow-Up", to: "/contact" }}
       secondaryCta={{ label: "See CRM & Sales", to: "/crm-sales" }}
-      heroVisual={<CampaignFlow />}
+      heroVisual={<AutomationFlowVisual size="lg" />}
     >
       <Section>
         <SectionHeader

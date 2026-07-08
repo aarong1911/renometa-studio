@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
+import { UnifiedInboxVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -45,7 +46,7 @@ function InboxPage() {
       subheading="Manage SMS, WhatsApp, Messenger, Instagram Direct, missed calls, and voice conversations from one connected inbox."
       primaryCta={{ label: "Unify My Inbox", to: "/contact" }}
       secondaryCta={{ label: "See the Platform", to: "/renometa-connect" }}
-      heroVisual={<InboxMockup />}
+      heroVisual={<UnifiedInboxVisual size="lg" />}
     >
       <Section>
         <SectionHeader

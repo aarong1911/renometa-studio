@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
+import { AgentNetworkVisual } from "@/components/visuals";
 import {
   Section,
   SectionHeader,
@@ -52,7 +53,7 @@ function ConnectPage() {
       subheading="Manage leads, conversations, estimates, scheduling, marketing, and follow-up in one connected platform."
       primaryCta={{ label: "See Connect in Action", to: "/contact" }}
       secondaryCta={{ label: "Explore Solutions", to: "/solutions" }}
-      heroVisual={<ConnectMockup />}
+      heroVisual={<AgentNetworkVisual size="lg" />}
     >
       <Section>
         <SectionHeader
