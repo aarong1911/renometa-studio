@@ -420,15 +420,13 @@ export function WebsiteToCrmVisual({ tone = "light", size = "md", className }: V
 export function CustomBuildVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
   const modules = [
-    { x: 60, y: 80, label: "DATA" },
-    { x: 60, y: 200, label: "AGENT" },
-    { x: 200, y: 140, label: "LOGIC" },
-    { x: 340, y: 80, label: "API" },
-    { x: 340, y: 200, label: "UI" },
+    { x: 60, y: 80 },
+    { x: 60, y: 200 },
+    { x: 200, y: 140 },
+    { x: 340, y: 80 },
+    { x: 340, y: 200 },
   ];
-  const connections = [
-    [0, 2], [1, 2], [2, 3], [2, 4],
-  ];
+  const connections: [number, number][] = [[0, 2], [1, 2], [2, 3], [2, 4]];
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
@@ -441,22 +439,23 @@ export function CustomBuildVisual({ tone = "light", size = "md", className }: Vi
           );
         })}
         {modules.map((m, i) => (
-          <g key={m.label}>
+          <g key={i}>
             <rect x={m.x} y={m.y} width={80} height={50} rx={8}
               fill="none" stroke={i === 2 ? GOLD : main}
-              strokeWidth={i === 2 ? 1 : 0.75}
+              strokeWidth={i === 2 ? 1.1 : 0.75}
               opacity={i === 2 ? 0.95 : 0.7} />
             {i === 2 && (
-              <rect x={m.x} y={m.y} width={80} height={50} rx={8} fill={GOLD} opacity={0.06} />
+              <rect x={m.x} y={m.y} width={80} height={50} rx={8} fill={GOLD} opacity={0.08} />
             )}
-            <line x1={m.x + 8} y1={m.y + 16} x2={m.x + 72} y2={m.y + 16} stroke={faint} strokeWidth={0.5} />
-            <line x1={m.x + 8} y1={m.y + 26} x2={m.x + 50} y2={m.y + 26} stroke={faint} strokeWidth={0.5} />
-            <text x={m.x + 40} y={m.y + 43} fontSize="9" fill={main} textAnchor="middle" fontFamily="ui-monospace, monospace" letterSpacing="1">
-              {m.label}
-            </text>
+            <line x1={m.x + 10} y1={m.y + 18} x2={m.x + 70} y2={m.y + 18} stroke={faint} strokeWidth={0.6} />
+            <line x1={m.x + 10} y1={m.y + 30} x2={m.x + 52} y2={m.y + 30} stroke={faint} strokeWidth={0.6} />
+            {i === 2 && (
+              <circle cx={m.x + 40} cy={m.y + 25} r={3} fill={GOLD}>
+                <animate attributeName="opacity" values="0.4;1;0.4" dur="2.4s" repeatCount="indefinite" />
+              </circle>
+            )}
           </g>
         ))}
-        {/* packet animations */}
         {connections.map(([a, b], i) => {
           const m1 = modules[a]; const m2 = modules[b];
           const p = `M ${m1.x + 80} ${m1.y + 25} C ${m1.x + 130} ${m1.y + 25}, ${m2.x - 30} ${m2.y + 25}, ${m2.x} ${m2.y + 25}`;
