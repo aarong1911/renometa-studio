@@ -149,11 +149,11 @@ export function AgentNetworkVisual({ tone = "light", size = "md", className }: V
                 x={x + (Math.cos(rad) >= 0 ? 11 : -11)}
                 y={y + 3}
                 fontSize="6.5"
-                fill={main}
+                fill={tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.9)"}
                 textAnchor={Math.cos(rad) >= 0 ? "start" : "end"}
                 fontFamily="ui-monospace, monospace"
                 letterSpacing="0.5"
-                opacity={0.7}
+                fontWeight="600"
               >
                 {a.label}
               </text>
