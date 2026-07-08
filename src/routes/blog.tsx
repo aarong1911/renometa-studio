@@ -7,7 +7,6 @@ import {
   Reveal,
 } from "@/components/page-primitives";
 import { ARTICLES, CATEGORIES } from "@/lib/blog-articles";
-import { BlogCategoryVisual } from "@/components/visuals";
 import { ArrowRight, Mail } from "lucide-react";
 
 export const Route = createFileRoute("/blog")({
