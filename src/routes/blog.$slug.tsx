@@ -93,6 +93,15 @@ function ArticlePage() {
                         {p}
                       </p>
                     ))}
+                    {block.bullets && block.bullets.length > 0 && (
+                      <ul className="mt-2 space-y-2.5 pl-5 list-disc marker:text-gold">
+                        {block.bullets.map((b, k) => (
+                          <li key={k} className="text-[16px] text-foreground/90 leading-[1.7]">
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </Reveal>
