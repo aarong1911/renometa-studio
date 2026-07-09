@@ -346,10 +346,10 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
 export function OperationsBlocksVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint, fillTop, fillSide } = strokes(tone);
   const id = "ops";
-  // Isometric projection helper
+  // Isometric projection helper (scaled up for a bigger scene)
   const iso = (gx: number, gy: number, gz: number = 0) => ({
-    x: 250 + (gx - gy) * 34,
-    y: 160 + (gx + gy) * 17 - gz * 22,
+    x: 250 + (gx - gy) * 40,
+    y: 165 + (gx + gy) * 20 - gz * 26,
   });
 
   // Grid tiles (4x4)
