@@ -10,7 +10,7 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!article) throw notFound();
     return { article, related: getRelated(params.slug) };
   },
-  head: ({ loaderData }) => {
+  head: ({ params, loaderData }) => {
     if (!loaderData) {
       return {
         meta: [
@@ -22,6 +22,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const { article } = loaderData;
     const title = article.metaTitle ?? `${article.title} — RenoMeta Blog`;
     const description = article.metaDescription ?? article.excerpt;
+    const url = `/blog/${params.slug}`;
     return {
       meta: [
         { title },
@@ -32,6 +33,28 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: article.title },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+        { property: "article:section", content: article.category },
+        { property: "article:published_time", content: article.date },
+        { name: "twitter:title", content: article.title },
+        { name: "twitter:description", content: description },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.title,
+            description,
+            datePublished: article.date,
+            articleSection: article.category,
+            author: { "@type": "Organization", name: "RenoMeta" },
+            publisher: { "@type": "Organization", name: "RenoMeta" },
+            mainEntityOfPage: url,
+          }),
+        },
       ],
     };
   },
