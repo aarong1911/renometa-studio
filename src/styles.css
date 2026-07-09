@@ -255,10 +255,12 @@
   will-change: opacity, transform;
   &.reveal-init {
     opacity: 0;
+    visibility: hidden;
     transform: translateY(18px);
   }
   &.is-visible {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 }
