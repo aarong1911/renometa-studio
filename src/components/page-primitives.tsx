@@ -134,7 +134,7 @@ export function FeatureCard({ icon: Icon, title, desc, to }: FeatureItem) {
       </p>
       {to && (
         <div className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground group-hover:text-gold transition-colors">
-          Learn more
+          Explore {title}
           <ArrowRight className="h-3.5 w-3.5" />
         </div>
       )}

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RenometaConnectRouteImport } from './routes/renometa-connect'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MultiChannelInboxRouteImport } from './routes/multi-channel-inbox'
@@ -28,6 +29,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RenometaConnectRoute = RenometaConnectRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/multi-channel-inbox': typeof MultiChannelInboxRoute
   '/pricing': typeof PricingRoute
   '/renometa-connect': typeof RenometaConnectRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/multi-channel-inbox': typeof MultiChannelInboxRoute
   '/pricing': typeof PricingRoute
   '/renometa-connect': typeof RenometaConnectRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/multi-channel-inbox': typeof MultiChannelInboxRoute
   '/pricing': typeof PricingRoute
   '/renometa-connect': typeof RenometaConnectRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/multi-channel-inbox'
     | '/pricing'
     | '/renometa-connect'
+    | '/sitemap.xml'
     | '/solutions'
     | '/blog/$slug'
     | '/blog/'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/multi-channel-inbox'
     | '/pricing'
     | '/renometa-connect'
+    | '/sitemap.xml'
     | '/solutions'
     | '/blog/$slug'
     | '/blog'
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/multi-channel-inbox'
     | '/pricing'
     | '/renometa-connect'
+    | '/sitemap.xml'
     | '/solutions'
     | '/blog/$slug'
     | '/blog/'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   MultiChannelInboxRoute: typeof MultiChannelInboxRoute
   PricingRoute: typeof PricingRoute
   RenometaConnectRoute: typeof RenometaConnectRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/renometa-connect': {
@@ -349,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   MultiChannelInboxRoute: MultiChannelInboxRoute,
   PricingRoute: PricingRoute,
   RenometaConnectRoute: RenometaConnectRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
