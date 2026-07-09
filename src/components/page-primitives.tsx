@@ -265,12 +265,20 @@ export function CTASection({
             </p>
           )}
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link to={primary.to} className="btn-primary">
+            <Link
+              to={primary.to}
+              className="btn-primary"
+              aria-label={`${primary.label} — go to ${primary.to}`}
+            >
               {primary.label}
               <ArrowRight className="h-4 w-4" />
             </Link>
             {secondary && (
-              <Link to={secondary.to} className="btn-ghost">
+              <Link
+                to={secondary.to}
+                className="btn-ghost"
+                aria-label={`${secondary.label} — go to ${secondary.to}`}
+              >
                 {secondary.label}
               </Link>
             )}
