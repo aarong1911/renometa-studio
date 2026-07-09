@@ -34,6 +34,7 @@ function SolutionsPage() {
                 key={s.to}
                 to={s.to}
                 className="card-elegant card-elegant-hover group p-7 flex flex-col"
+                aria-label={`Explore ${s.label}`}
               >
                 <h3 className="font-display text-[20px] font-semibold tracking-tight">
                   {s.label}
