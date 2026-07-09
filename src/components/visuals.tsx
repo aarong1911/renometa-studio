@@ -295,11 +295,15 @@ export function PipelineStackVisual({ tone = "light", size = "md", className }: 
 /* ------------ 4. Automation Flow (3D) ------------ */
 export function AutomationFlowVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
   const id = "auto";
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
         <VisualDefs id={id} tone={tone} />
+        <text x={30} y={40} fontSize="12" fill={textColor} fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          AUTOMATION
+        </text>
         <ellipse cx={75} cy={150} rx={70} ry={50} fill={`url(#${id}-glow)`} />
         {/* trigger sphere */}
         <ellipse cx={77} cy={168} rx={14} ry={4} fill="rgba(0,0,0,0.28)" />
@@ -346,10 +350,10 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
 export function OperationsBlocksVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint, fillTop, fillSide } = strokes(tone);
   const id = "ops";
-  // Isometric projection helper
+  // Isometric projection helper (scaled up for a bigger scene)
   const iso = (gx: number, gy: number, gz: number = 0) => ({
-    x: 250 + (gx - gy) * 34,
-    y: 160 + (gx + gy) * 17 - gz * 22,
+    x: 250 + (gx - gy) * 40,
+    y: 165 + (gx + gy) * 20 - gz * 26,
   });
 
   // Grid tiles (4x4)
@@ -488,12 +492,16 @@ export function OperationsBlocksVisual({ tone = "light", size = "md", className 
 /* ------------ 6. Insights Wave (3D bars) ------------ */
 export function InsightsWaveVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint, fillTop, fillSide } = strokes(tone);
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
   const id = "wave";
   const D = 6;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
         <VisualDefs id={id} tone={tone} />
+        <text x={30} y={30} fontSize="12" fill={textColor} fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          INSIGHTS
+        </text>
         {[60, 110, 160, 210, 260].map((y) => (
           <line key={y} x1={30} y1={y} x2={470} y2={y} stroke={faint} strokeWidth={0.5} />
         ))}
