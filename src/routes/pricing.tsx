@@ -105,6 +105,7 @@ function PricingPage() {
       secondaryCta={{ label: "See the Platform", to: "/renometa-connect" }}
     >
       <Section>
+        <h2 className="sr-only">Pricing Plans</h2>
         <div className="grid gap-6 lg:grid-cols-3">
           {PLANS.map((p, i) => (
             <Reveal key={p.name} delay={i * 70}>
