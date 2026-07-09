@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useId, useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
 const SERVICES = [
@@ -15,6 +15,8 @@ const SERVICES = [
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const serviceId = useId();
+  const messageId = useId();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,10 +51,14 @@ export function ContactForm() {
         <Field label="Phone" name="phone" type="tel" />
       </div>
       <div>
-        <label className="block text-[12.5px] font-medium text-foreground/80 mb-1.5">
+        <label
+          htmlFor={serviceId}
+          className="block text-[12.5px] font-medium text-foreground/80 mb-1.5"
+        >
           Service of Interest
         </label>
         <select
+          id={serviceId}
           name="service"
           defaultValue="General Inquiry"
           className="w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-gold/40"
@@ -65,10 +71,14 @@ export function ContactForm() {
         </select>
       </div>
       <div>
-        <label className="block text-[12.5px] font-medium text-foreground/80 mb-1.5">
+        <label
+          htmlFor={messageId}
+          className="block text-[12.5px] font-medium text-foreground/80 mb-1.5"
+        >
           How can we help?
         </label>
         <textarea
+          id={messageId}
           name="message"
           rows={5}
           className="w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-gold/40"
@@ -94,13 +104,18 @@ function Field({
   type?: string;
   required?: boolean;
 }) {
+  const id = useId();
   return (
     <div>
-      <label className="block text-[12.5px] font-medium text-foreground/80 mb-1.5">
+      <label
+        htmlFor={id}
+        className="block text-[12.5px] font-medium text-foreground/80 mb-1.5"
+      >
         {label}
         {required && <span className="text-gold ml-0.5">*</span>}
       </label>
       <input
+        id={id}
         name={name}
         type={type}
         required={required}

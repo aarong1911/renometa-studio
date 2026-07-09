@@ -155,7 +155,7 @@ function ConnectMockup() {
   return (
     <MockupFrame url="connect.renometa.com / command-center">
       <div className="grid grid-cols-12 min-h-[420px] sm:min-h-[480px]">
-        <aside className="hidden md:flex md:col-span-2 flex-col gap-1 border-r border-border p-4 bg-surface/60">
+        <div className="hidden md:flex md:col-span-2 flex-col gap-1 border-r border-border p-4 bg-surface/60" aria-hidden="true">
           {[
             { icon: <Zap className="h-3.5 w-3.5" />, label: "Command Center", active: true },
             { icon: <Inbox className="h-3.5 w-3.5" />, label: "Inbox" },
@@ -178,7 +178,7 @@ function ConnectMockup() {
               {it.label}
             </div>
           ))}
-        </aside>
+        </div>
         <div className="col-span-12 md:col-span-10 p-5 sm:p-6 grid grid-cols-12 gap-4">
           {[
             { l: "New Leads", v: "184", d: "+24%" },

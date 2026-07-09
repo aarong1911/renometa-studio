@@ -196,7 +196,7 @@ function DashboardMockup() {
                 <SidebarItem icon={<Bot className="h-3.5 w-3.5" />} label="AI Agents" />
                 <SidebarItem icon={<Workflow className="h-3.5 w-3.5" />} label="Workflows" />
                 <SidebarItem icon={<LineChart className="h-3.5 w-3.5" />} label="Insights" />
-              </aside>
+              </div>
 
               <div className="col-span-10 p-6 grid grid-cols-12 gap-4">
                 <Kpi className="col-span-3" label="New Leads" value="184" delta="+24%" />
