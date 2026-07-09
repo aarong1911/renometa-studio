@@ -142,7 +142,7 @@ export function FeatureCard({ icon: Icon, title, desc, to }: FeatureItem) {
   );
   if (to) {
     return (
-      <Link to={to} className="block h-full">
+      <Link to={to} className="block h-full" aria-label={`Explore ${title}`}>
         {inner}
       </Link>
     );
