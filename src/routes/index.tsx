@@ -187,7 +187,7 @@ function DashboardMockup() {
             </div>
 
             <div className="grid grid-cols-12 flex-1 min-h-0">
-              <aside className="col-span-2 flex flex-col gap-1 border-r border-border p-4 bg-surface/60">
+              <div className="col-span-2 flex flex-col gap-1 border-r border-border p-4 bg-surface/60" aria-hidden="true">
                 <SidebarItem icon={<Zap className="h-3.5 w-3.5" />} label="Command Center" active />
                 <SidebarItem icon={<Inbox className="h-3.5 w-3.5" />} label="Inbox" />
                 <SidebarItem icon={<Users className="h-3.5 w-3.5" />} label="Pipeline" />
@@ -196,7 +196,7 @@ function DashboardMockup() {
                 <SidebarItem icon={<Bot className="h-3.5 w-3.5" />} label="AI Agents" />
                 <SidebarItem icon={<Workflow className="h-3.5 w-3.5" />} label="Workflows" />
                 <SidebarItem icon={<LineChart className="h-3.5 w-3.5" />} label="Insights" />
-              </aside>
+              </div>
 
               <div className="col-span-10 p-6 grid grid-cols-12 gap-4">
                 <Kpi className="col-span-3" label="New Leads" value="184" delta="+24%" />
