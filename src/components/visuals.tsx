@@ -492,12 +492,16 @@ export function OperationsBlocksVisual({ tone = "light", size = "md", className 
 /* ------------ 6. Insights Wave (3D bars) ------------ */
 export function InsightsWaveVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint, fillTop, fillSide } = strokes(tone);
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
   const id = "wave";
   const D = 6;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
         <VisualDefs id={id} tone={tone} />
+        <text x={30} y={30} fontSize="12" fill={textColor} fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          INSIGHTS
+        </text>
         {[60, 110, 160, 210, 260].map((y) => (
           <line key={y} x1={30} y1={y} x2={470} y2={y} stroke={faint} strokeWidth={0.5} />
         ))}
