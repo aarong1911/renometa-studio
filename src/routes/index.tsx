@@ -870,7 +870,7 @@ function WebsiteLayer() {
               }`}
             >
               <div className="flex items-center justify-between">
-                <div className="font-mono text-[11px] tracking-wider text-gold uppercase">
+                <div className="font-mono text-[11px] tracking-wider text-gold-strong uppercase">
                   {l.tag}
                 </div>
                 <l.icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
