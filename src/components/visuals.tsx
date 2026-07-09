@@ -295,11 +295,15 @@ export function PipelineStackVisual({ tone = "light", size = "md", className }: 
 /* ------------ 4. Automation Flow (3D) ------------ */
 export function AutomationFlowVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
+  const textColor = tone === "dark" ? "rgba(245,240,230,0.95)" : "rgba(10,10,12,0.92)";
   const id = "auto";
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
         <VisualDefs id={id} tone={tone} />
+        <text x={30} y={40} fontSize="12" fill={textColor} fontFamily="ui-monospace, monospace" letterSpacing="2.5" fontWeight="600">
+          AUTOMATION
+        </text>
         <ellipse cx={75} cy={150} rx={70} ry={50} fill={`url(#${id}-glow)`} />
         {/* trigger sphere */}
         <ellipse cx={77} cy={168} rx={14} ry={4} fill="rgba(0,0,0,0.28)" />
