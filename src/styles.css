@@ -282,6 +282,7 @@
 }
 .visual-frame.is-visible .visual-inner {
   opacity: 1;
+  transform: translateY(0);
 }
 .group:hover .visual-frame {
   transform: translateY(-3px);
