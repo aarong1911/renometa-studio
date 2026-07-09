@@ -29,6 +29,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-gold: var(--gold);
+  --color-gold-strong: var(--gold-strong);
   --color-gold-soft: var(--gold-soft);
   --color-gold-foreground: var(--gold-foreground);
   --color-charcoal: var(--charcoal);
@@ -70,13 +71,14 @@
   --secondary-foreground: oklch(0.22 0.01 80);
 
   --muted: oklch(0.955 0.008 85);
-  --muted-foreground: oklch(0.5 0.012 80);
+  --muted-foreground: oklch(0.42 0.014 80);
 
   --accent: oklch(0.955 0.015 80);
   --accent-foreground: oklch(0.2 0.01 80);
 
   /* RenoMeta gold #d9ab57 */
-  --gold: oklch(0.76 0.13 78);
+  --gold: oklch(0.72 0.14 78);
+  --gold-strong: oklch(0.52 0.14 65);
   --gold-soft: oklch(0.93 0.05 85);
   --gold-foreground: oklch(0.18 0.01 80);
 
@@ -255,10 +257,12 @@
   will-change: opacity, transform;
   &.reveal-init {
     opacity: 0;
+    visibility: hidden;
     transform: translateY(18px);
   }
   &.is-visible {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 }

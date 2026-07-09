@@ -870,7 +870,7 @@ function WebsiteLayer() {
               }`}
             >
               <div className="flex items-center justify-between">
-                <div className="font-mono text-[11px] tracking-wider text-gold uppercase">
+                <div className="font-mono text-[11px] tracking-wider text-gold-strong uppercase">
                   {l.tag}
                 </div>
                 <l.icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
@@ -929,7 +929,7 @@ function HowItWorks() {
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {steps.map((s, idx) => (
             <Reveal key={s.n} delay={idx * 90} className="card-elegant card-elegant-hover p-6 flex flex-col">
-              <div className="font-mono text-[11px] text-gold tracking-wider">STEP {s.n}</div>
+              <div className="font-mono text-[11px] text-gold-strong tracking-wider">STEP {s.n}</div>
               <h3 className="mt-4 font-display text-[18px] font-semibold tracking-tight leading-snug">
                 {s.title}
               </h3>
