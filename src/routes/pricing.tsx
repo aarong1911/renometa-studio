@@ -141,6 +141,7 @@ function PricingPage() {
                 <Link
                   to="/contact"
                   className={`mt-8 w-full text-center ${p.featured ? "btn-primary" : "btn-ghost"}`}
+                  aria-label={`${p.cta} for the ${p.name} plan — contact sales`}
                 >
                   {p.cta}
                   <ArrowRight className="h-4 w-4" />
