@@ -20,12 +20,17 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
     const { article } = loaderData;
+    const title = article.metaTitle ?? `${article.title} — RenoMeta Blog`;
+    const description = article.metaDescription ?? article.excerpt;
     return {
       meta: [
-        { title: `${article.title} — RenoMeta Blog` },
-        { name: "description", content: article.excerpt },
+        { title },
+        { name: "description", content: description },
+        ...(article.keywords?.length
+          ? [{ name: "keywords", content: article.keywords.join(", ") }]
+          : []),
         { property: "og:title", content: article.title },
-        { property: "og:description", content: article.excerpt },
+        { property: "og:description", content: description },
         { property: "og:type", content: "article" },
       ],
     };
@@ -88,6 +93,15 @@ function ArticlePage() {
                         {p}
                       </p>
                     ))}
+                    {block.bullets && block.bullets.length > 0 && (
+                      <ul className="mt-2 space-y-2.5 pl-5 list-disc marker:text-gold">
+                        {block.bullets.map((b, k) => (
+                          <li key={k} className="text-[16px] text-foreground/90 leading-[1.7]">
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </Reveal>
