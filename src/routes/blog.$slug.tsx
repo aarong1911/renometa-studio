@@ -20,12 +20,17 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
     const { article } = loaderData;
+    const title = article.metaTitle ?? `${article.title} — RenoMeta Blog`;
+    const description = article.metaDescription ?? article.excerpt;
     return {
       meta: [
-        { title: `${article.title} — RenoMeta Blog` },
-        { name: "description", content: article.excerpt },
+        { title },
+        { name: "description", content: description },
+        ...(article.keywords?.length
+          ? [{ name: "keywords", content: article.keywords.join(", ") }]
+          : []),
         { property: "og:title", content: article.title },
-        { property: "og:description", content: article.excerpt },
+        { property: "og:description", content: description },
         { property: "og:type", content: "article" },
       ],
     };
