@@ -50,12 +50,12 @@ function ArticlePage() {
           <div className="relative mx-auto max-w-3xl px-6">
             <Link
               to="/blog"
-              className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex w-fit items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               Back to blog
             </Link>
-            <div className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <div className="mt-8 flex w-fit items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
               <span className="h-px w-6 bg-gold" />
               {article.category}
             </div>
