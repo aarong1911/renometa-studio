@@ -39,7 +39,11 @@ export const Route = createFileRoute("/renometa-connect")({
         content:
           "The business command center for renovation contractors and home service businesses.",
       },
+      { property: "og:url", content: "/renometa-connect" },
+      { name: "twitter:title", content: "RenoMeta Connect" },
+      { name: "twitter:description", content: "The business command center for renovation contractors and home service businesses." },
     ],
+    links: [{ rel: "canonical", href: "/renometa-connect" }],
   }),
   component: ConnectPage,
 });

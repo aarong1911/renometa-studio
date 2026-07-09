@@ -38,7 +38,11 @@ export const Route = createFileRoute("/ai-website-systems")({
         content:
           "Websites that feed your contractor growth system.",
       },
+      { property: "og:url", content: "/ai-website-systems" },
+      { name: "twitter:title", content: "AI Website Systems" },
+      { name: "twitter:description", content: "Websites that feed your contractor growth system." },
     ],
+    links: [{ rel: "canonical", href: "/ai-website-systems" }],
   }),
   component: AiWebsitePage,
 });
