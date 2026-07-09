@@ -9,7 +9,7 @@ import {
 import { ARTICLES, CATEGORIES } from "@/lib/blog-articles";
 import { ArrowRight, Mail } from "lucide-react";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Blog — RenoMeta" },
