@@ -45,9 +45,9 @@ function ContactPage() {
                   <Calendar className="h-3.5 w-3.5" />
                   Prefer a call?
                 </div>
-                <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">
+                <h2 className="mt-3 font-display text-xl font-semibold tracking-tight">
                   Book a 30-minute strategy call
-                </h3>
+                </h2>
                 <p className="mt-2 text-[14px] text-muted-foreground leading-relaxed">
                   We'll walk through your current lead flow, follow-up process, and where a
                   connected platform would move the needle.
