@@ -4,7 +4,6 @@
  * Reusable across homepage feature cards, inner page heroes, and blog cards.
  */
 import { type ReactNode, type ReactElement } from "react";
-import { useReveal } from "@/hooks/use-reveal";
 
 type Tone = "light" | "dark";
 type Size = "sm" | "md" | "lg";
@@ -27,29 +26,16 @@ function Frame({
   className = "",
   children,
 }: VisualProps & { children: ReactNode }) {
-  const ref = useReveal<HTMLDivElement>();
   const bg =
     tone === "dark"
       ? "bg-[oklch(0.20_0.01_80)] border-[oklch(0.28_0.01_80)]"
       : "bg-gradient-to-br from-gold-soft/40 via-surface to-background border-border";
   return (
     <div
-      ref={ref}
-      className={`visual-frame relative w-full overflow-hidden rounded-2xl border ${bg} ${sizeClass[size]} ${className}`}
+      className={`relative w-full overflow-hidden rounded-2xl border ${bg} ${sizeClass[size]} ${className}`}
     >
       <div className="absolute inset-0 bg-grid-fade opacity-40 pointer-events-none" />
-      {/* hover gold glow */}
-      <div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 50% 50%, rgba(217,171,87,0.18), transparent 70%)",
-        }}
-        aria-hidden
-      />
-      <div className="visual-inner absolute inset-0 transition-transform duration-[700ms] ease-out group-hover:scale-[1.03]">
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
