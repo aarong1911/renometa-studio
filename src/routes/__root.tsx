@@ -84,14 +84,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "RenoMeta Connect brings leads, conversations, estimates, scheduling, marketing, and follow-up into one connected platform built for renovation contractors and home service businesses.",
       },
       { name: "author", content: "RenoMeta" },
+      { name: "robots", content: "index, follow" },
+      { property: "og:site_name", content: "RenoMeta" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
       { property: "og:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
       {
         property: "og:description",
         content:
           "Manage leads, conversations, estimates, scheduling, marketing, and follow-up in one connected platform built for renovation contractors.",
       },
-      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      {
+        name: "twitter:description",
+        content:
+          "One connected platform for leads, conversations, estimates, scheduling, marketing, and follow-up.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -103,7 +112,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap",
       },
     ],
-
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "RenoMeta",
+          url: "/",
+          description:
+            "Business command center for renovation contractors and home service businesses.",
+          sameAs: [],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
