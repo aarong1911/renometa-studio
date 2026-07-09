@@ -22,7 +22,11 @@ export const Route = createFileRoute("/pricing")({
         property: "og:description",
         content: "Every plan includes the full platform. Pricing scales by usage.",
       },
+      { property: "og:url", content: "/pricing" },
+      { name: "twitter:title", content: "Pricing — RenoMeta" },
+      { name: "twitter:description", content: "Every plan includes the full platform. Pricing scales by usage." },
     ],
+    links: [{ rel: "canonical", href: "/pricing" }],
   }),
   component: PricingPage,
 });

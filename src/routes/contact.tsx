@@ -15,7 +15,11 @@ export const Route = createFileRoute("/contact")({
       },
       { property: "og:title", content: "Contact RenoMeta" },
       { property: "og:description", content: "Let's build your contractor command center." },
+      { property: "og:url", content: "/contact" },
+      { name: "twitter:title", content: "Contact RenoMeta" },
+      { name: "twitter:description", content: "Let's build your contractor command center." },
     ],
+    links: [{ rel: "canonical", href: "/contact" }],
   }),
   component: ContactPage,
 });

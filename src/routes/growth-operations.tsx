@@ -31,7 +31,11 @@ export const Route = createFileRoute("/growth-operations")({
       },
       { property: "og:title", content: "Growth Operations" },
       { property: "og:description", content: "Improve the system behind your growth." },
+      { property: "og:url", content: "/growth-operations" },
+      { name: "twitter:title", content: "Growth Operations" },
+      { name: "twitter:description", content: "Improve the system behind your growth." },
     ],
+    links: [{ rel: "canonical", href: "/growth-operations" }],
   }),
   component: GrowthOpsPage,
 });
