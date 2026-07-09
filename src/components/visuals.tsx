@@ -277,46 +277,49 @@ export function AutomationFlowVisual({ tone = "light", size = "md", className }:
   );
 }
 
-/* ------------ 5. Operations Blocks ------------ */
+/* ------------ 5. Operations Blocks — isometric stack ------------ */
 export function OperationsBlocksVisual({ tone = "light", size = "md", className }: VisualProps) {
   const { main, faint } = strokes(tone);
-  const blocks = [
-    { x: 60, y: 60 }, { x: 200, y: 60 }, { x: 340, y: 60 },
-    { x: 60, y: 180 }, { x: 200, y: 180 }, { x: 340, y: 180 },
+  const fillTop = tone === "dark" ? "rgba(28,28,30,0.95)" : "rgba(250,247,240,0.7)";
+  const fillSide = tone === "dark" ? "rgba(16,16,18,0.98)" : "rgba(230,224,212,0.6)";
+  const cube = (cx: number, cy: number, s: number, accent: boolean, k: number) => {
+    const dx = s * 0.866;
+    const dy = s * 0.5;
+    const top = `M ${cx} ${cy - dy} L ${cx + dx} ${cy} L ${cx} ${cy + dy} L ${cx - dx} ${cy} Z`;
+    const left = `M ${cx - dx} ${cy} L ${cx} ${cy + dy} L ${cx} ${cy + dy + s} L ${cx - dx} ${cy + s} Z`;
+    const right = `M ${cx + dx} ${cy} L ${cx} ${cy + dy} L ${cx} ${cy + dy + s} L ${cx + dx} ${cy + s} Z`;
+    const stroke = accent ? GOLD : main;
+    const sw = accent ? 1.1 : 0.85;
+    return (
+      <g key={k}>
+        <path d={left} fill={fillSide} stroke={stroke} strokeWidth={sw} />
+        <path d={right} fill={fillSide} stroke={stroke} strokeWidth={sw} opacity={0.9} />
+        <path d={top} fill={fillTop} stroke={stroke} strokeWidth={sw} />
+        {accent && <path d={top} fill={GOLD} opacity={0.1} />}
+        <rect x={cx - 5} y={cy - dy + 5} width={10} height={3} rx={0.6}
+          fill={accent ? GOLD : faint} opacity={accent ? 0.95 : 0.75} />
+      </g>
+    );
+  };
+  const cubes: Array<{ x: number; y: number; s: number; accent?: boolean }> = [
+    { x: 250, y: 70, s: 48, accent: true },
+    { x: 175, y: 120, s: 52 },
+    { x: 335, y: 130, s: 44 },
+    { x: 255, y: 165, s: 46 },
+    { x: 365, y: 185, s: 36 },
   ];
+  const baseline = 255;
   return (
     <Frame tone={tone} size={size} className={className}>
       <svg viewBox="0 0 500 300" className="absolute inset-0 h-full w-full">
-        {[
-          "M 110 90 L 200 90", "M 250 90 L 340 90",
-          "M 110 210 L 200 210", "M 250 210 L 340 210",
-          "M 85 110 L 85 180", "M 225 110 L 225 180", "M 365 110 L 365 180",
-        ].map((d, i) => (
-          <path key={i} d={d} stroke={faint} strokeWidth={0.75} fill="none" strokeDasharray="3 3" />
-        ))}
-        {blocks.map((b, i) => {
-          const accent = i === 1 || i === 4;
-          return (
-            <g key={i}>
-              <path d={`M ${b.x} ${b.y} L ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 10} ${b.y - 10} Z`}
-                fill="none" stroke={faint} strokeWidth={0.75} />
-              <path d={`M ${b.x + 90} ${b.y} L ${b.x + 100} ${b.y - 10} L ${b.x + 100} ${b.y + 40} L ${b.x + 90} ${b.y + 50} Z`}
-                fill="none" stroke={faint} strokeWidth={0.75} />
-              <rect x={b.x} y={b.y} width={90} height={50} rx={2}
-                fill="none" stroke={accent ? GOLD : main}
-                strokeWidth={accent ? 1 : 0.75}
-                opacity={accent ? 0.9 : 0.7} />
-              {accent && <rect x={b.x} y={b.y} width={90} height={50} rx={2} fill={GOLD} opacity={0.06} />}
-              <line x1={b.x + 12} y1={b.y + 18} x2={b.x + 60} y2={b.y + 18} stroke={main} strokeWidth={0.6} opacity={0.55} />
-              <line x1={b.x + 12} y1={b.y + 30} x2={b.x + 48} y2={b.y + 30} stroke={main} strokeWidth={0.6} opacity={0.35} />
-              {accent && (
-                <circle cx={b.x + 78} cy={b.y + 24} r={2.2} fill={GOLD}>
-                  <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
-                </circle>
-              )}
-            </g>
-          );
-        })}
+        <line x1={40} y1={baseline} x2={460} y2={baseline} stroke={faint} strokeWidth={0.5} />
+        <g opacity={0.16} transform={`translate(0 ${baseline * 2 + 30}) scale(1 -1)`}>
+          {cubes.map((c, i) => cube(c.x, c.y, c.s, false, i))}
+        </g>
+        {cubes.map((c, i) => cube(c.x, c.y, c.s, !!c.accent, i + 100))}
+        <circle cx={250} cy={70 - 48 * 0.5 + 5} r={2.4} fill={GOLD}>
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
+        </circle>
       </svg>
     </Frame>
   );
