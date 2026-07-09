@@ -263,6 +263,32 @@
   }
 }
 
+/* Visual frame — hover lift + scroll reveal for SVG visuals */
+.visual-frame {
+  transition:
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.6s ease;
+  will-change: transform;
+}
+.visual-frame .visual-inner {
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.visual-frame.reveal-init .visual-inner {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.visual-frame.is-visible .visual-inner {
+  opacity: 1;
+}
+.group:hover .visual-frame {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 60px -34px color-mix(in oklab, var(--gold) 55%, transparent);
+  border-color: color-mix(in oklab, var(--gold) 45%, var(--border));
+}
+
 /* Ambient gold shimmer — used on subtle accent lines */
 @keyframes gold-shimmer {
   0% { background-position: -200% 0; }
