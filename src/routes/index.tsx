@@ -28,6 +28,31 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      {
+        name: "description",
+        content:
+          "RenoMeta Connect unifies leads, conversations, estimates, scheduling, marketing, and follow-up for renovation contractors and home service businesses.",
+      },
+      { property: "og:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      {
+        property: "og:description",
+        content:
+          "One connected platform for leads, conversations, estimates, scheduling, marketing, and follow-up.",
+      },
+      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      {
+        name: "twitter:description",
+        content:
+          "One connected platform for leads, conversations, estimates, scheduling, marketing, and follow-up.",
+      },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
   component: HomePage,
 });
 

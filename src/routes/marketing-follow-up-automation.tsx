@@ -32,7 +32,11 @@ export const Route = createFileRoute("/marketing-follow-up-automation")({
       },
       { property: "og:title", content: "Marketing & Follow-Up Automation" },
       { property: "og:description", content: "Marketing and follow-up connected to your CRM." },
+      { property: "og:url", content: "/marketing-follow-up-automation" },
+      { name: "twitter:title", content: "Marketing & Follow-Up Automation" },
+      { name: "twitter:description", content: "Marketing and follow-up connected to your CRM." },
     ],
+    links: [{ rel: "canonical", href: "/marketing-follow-up-automation" }],
   }),
   component: MarketingPage,
 });

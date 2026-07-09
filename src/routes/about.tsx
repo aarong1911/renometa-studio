@@ -25,7 +25,11 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "Built for contractors who need better systems.",
       },
+      { property: "og:url", content: "/about" },
+      { name: "twitter:title", content: "About — RenoMeta" },
+      { name: "twitter:description", content: "Built for contractors who need better systems." },
     ],
+    links: [{ rel: "canonical", href: "/about" }],
   }),
   component: AboutPage,
 });

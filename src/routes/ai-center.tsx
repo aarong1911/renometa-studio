@@ -35,7 +35,11 @@ export const Route = createFileRoute("/ai-center")({
       },
       { property: "og:title", content: "AI Center" },
       { property: "og:description", content: "AI agents built for contractor workflows." },
+      { property: "og:url", content: "/ai-center" },
+      { name: "twitter:title", content: "AI Center" },
+      { name: "twitter:description", content: "AI agents built for contractor workflows." },
     ],
+    links: [{ rel: "canonical", href: "/ai-center" }],
   }),
   component: AiCenterPage,
 });

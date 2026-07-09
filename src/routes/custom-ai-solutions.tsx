@@ -32,7 +32,11 @@ export const Route = createFileRoute("/custom-ai-solutions")({
       },
       { property: "og:title", content: "Custom AI Solutions" },
       { property: "og:description", content: "Custom AI systems built around your business." },
+      { property: "og:url", content: "/custom-ai-solutions" },
+      { name: "twitter:title", content: "Custom AI Solutions" },
+      { name: "twitter:description", content: "Custom AI systems built around your business." },
     ],
+    links: [{ rel: "canonical", href: "/custom-ai-solutions" }],
   }),
   component: CustomPage,
 });

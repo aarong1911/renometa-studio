@@ -33,7 +33,11 @@ export const Route = createFileRoute("/crm-sales")({
         content:
           "Customers, deals, estimates, proposals, invoices, signatures, bookings, and client communication in one workflow.",
       },
+      { property: "og:url", content: "/crm-sales" },
+      { name: "twitter:title", content: "CRM & Sales" },
+      { name: "twitter:description", content: "Customers, deals, estimates, proposals, invoices, signatures, bookings, and client communication in one workflow." },
     ],
+    links: [{ rel: "canonical", href: "/crm-sales" }],
   }),
   component: CrmPage,
 });
