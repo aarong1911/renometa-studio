@@ -115,9 +115,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "image/webp",
         fetchpriority: "high",
       },
+      // Non-critical: load Google Fonts CSS without blocking first paint.
+      // `media="print"` makes the browser fetch it at low priority without
+      // applying it; the inline script below swaps to `all` on load. With
+      // `display=swap`, fallback fonts render immediately.
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap",
+        media: "print",
+        // @ts-expect-error - data attr used by the swap script below
+        "data-font-css": "true",
       },
     ],
     scripts: [
