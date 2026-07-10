@@ -115,10 +115,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "image/webp",
         fetchpriority: "high",
       },
+      // Non-critical: load Google Fonts CSS without blocking first paint.
+      // `media="print"` makes the browser fetch it at low priority without
+      // applying it; the inline script below swaps to `all` on load. With
+      // `display=swap`, fallback fonts render immediately.
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap",
-      },
+        media: "print",
+        "data-font-css": "true",
+      } as unknown as { rel: string; href: string },
     ],
     scripts: [
       {
@@ -132,6 +138,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "Business command center for renovation contractors and home service businesses.",
           sameAs: [],
         }),
+      },
+      {
+        children:
+          "(function(){var l=document.querySelector('link[data-font-css]');if(!l)return;var swap=function(){l.media='all'};if(l.sheet){swap()}else{l.addEventListener('load',swap,{once:true})}})();",
       },
     ],
   }),
