@@ -139,6 +139,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           sameAs: [],
         }),
       },
+      {
+        children:
+          "(function(){var l=document.querySelector('link[data-font-css]');if(!l)return;var swap=function(){l.media='all'};if(l.sheet){swap()}else{l.addEventListener('load',swap,{once:true})}})();",
+      },
     ],
   }),
   shellComponent: RootShell,
