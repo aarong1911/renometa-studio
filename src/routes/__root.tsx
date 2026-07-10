@@ -123,9 +123,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap",
         media: "print",
-        // @ts-expect-error - data attr used by the swap script below
         "data-font-css": "true",
-      },
+      } as unknown as { rel: string; href: string },
     ],
     scripts: [
       {
