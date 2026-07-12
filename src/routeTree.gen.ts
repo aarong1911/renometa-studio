@@ -9,9 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RenometaConnectRouteImport } from './routes/renometa-connect'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MultiChannelInboxRouteImport } from './routes/multi-channel-inbox'
 import { Route as MarketingFollowUpAutomationRouteImport } from './routes/marketing-follow-up-automation'
@@ -26,6 +28,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
@@ -39,6 +46,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RenometaConnectRoute = RenometaConnectRouteImport.update({
   id: '/renometa-connect',
   path: '/renometa-connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -120,9 +132,11 @@ export interface FileRoutesByFullPath {
   '/marketing-follow-up-automation': typeof MarketingFollowUpAutomationRoute
   '/multi-channel-inbox': typeof MultiChannelInboxRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/renometa-connect': typeof RenometaConnectRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -138,9 +152,11 @@ export interface FileRoutesByTo {
   '/marketing-follow-up-automation': typeof MarketingFollowUpAutomationRoute
   '/multi-channel-inbox': typeof MultiChannelInboxRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/renometa-connect': typeof RenometaConnectRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -157,9 +173,11 @@ export interface FileRoutesById {
   '/marketing-follow-up-automation': typeof MarketingFollowUpAutomationRoute
   '/multi-channel-inbox': typeof MultiChannelInboxRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/renometa-connect': typeof RenometaConnectRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -177,9 +195,11 @@ export interface FileRouteTypes {
     | '/marketing-follow-up-automation'
     | '/multi-channel-inbox'
     | '/pricing'
+    | '/privacy-policy'
     | '/renometa-connect'
     | '/sitemap.xml'
     | '/solutions'
+    | '/terms-of-service'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -195,9 +215,11 @@ export interface FileRouteTypes {
     | '/marketing-follow-up-automation'
     | '/multi-channel-inbox'
     | '/pricing'
+    | '/privacy-policy'
     | '/renometa-connect'
     | '/sitemap.xml'
     | '/solutions'
+    | '/terms-of-service'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -213,9 +235,11 @@ export interface FileRouteTypes {
     | '/marketing-follow-up-automation'
     | '/multi-channel-inbox'
     | '/pricing'
+    | '/privacy-policy'
     | '/renometa-connect'
     | '/sitemap.xml'
     | '/solutions'
+    | '/terms-of-service'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -232,15 +256,24 @@ export interface RootRouteChildren {
   MarketingFollowUpAutomationRoute: typeof MarketingFollowUpAutomationRoute
   MultiChannelInboxRoute: typeof MultiChannelInboxRoute
   PricingRoute: typeof PricingRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RenometaConnectRoute: typeof RenometaConnectRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -260,6 +293,13 @@ declare module '@tanstack/react-router' {
       path: '/renometa-connect'
       fullPath: '/renometa-connect'
       preLoaderRoute: typeof RenometaConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -368,9 +408,11 @@ const rootRouteChildren: RootRouteChildren = {
   MarketingFollowUpAutomationRoute: MarketingFollowUpAutomationRoute,
   MultiChannelInboxRoute: MultiChannelInboxRoute,
   PricingRoute: PricingRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   RenometaConnectRoute: RenometaConnectRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

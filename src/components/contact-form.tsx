@@ -101,11 +101,11 @@ export function ContactForm() {
             Message frequency varies (up to 5 messages per month). Message and data rates may
             apply. Reply STOP to opt out or HELP for help. Consent is not a condition of
             purchase, receiving services, or completing any transaction. View our{" "}
-            <Link to="/" hash="privacy" className="underline hover:text-foreground">
+            <Link to="/privacy-policy" className="underline hover:text-foreground">
               Privacy Policy
             </Link>{" "}
             and{" "}
-            <Link to="/" hash="terms" className="underline hover:text-foreground">
+            <Link to="/terms-of-service" className="underline hover:text-foreground">
               Terms of Service
             </Link>
             .
