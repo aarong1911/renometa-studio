@@ -86,7 +86,7 @@ function TermsOfServicePage() {
                 <h2 className="font-display text-xl font-semibold tracking-tight">6. Data Privacy</h2>
                 <p className="mt-3">
                   Our collection and use of information is described in our{" "}
-                  <a href="/privacy-policy" className="underline hover:text-foreground">Privacy Policy</a>. By using the Services, you consent to the collection, use, and disclosure of information as described in that policy. Your use of the Services does not constitute consent to receive SMS or MMS messages; SMS consent is collected separately as described in our Privacy Policy.
+                  <Link to="/privacy-policy" className="underline hover:text-foreground">Privacy Policy</Link>. By using the Services, you consent to the collection, use, and disclosure of information as described in that policy. Your use of the Services does not constitute consent to receive SMS or MMS messages; SMS consent is collected separately as described in our Privacy Policy.
                 </p>
               </section>
 
