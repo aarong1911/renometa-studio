@@ -91,7 +91,7 @@ export function SiteNav() {
         </nav>
         <div className="flex items-center gap-2">
           <a
-            href="https://connect.renometa.com"
+            href="https://connect.renometa.com/login"
             target="_blank"
             rel="noreferrer"
             className="hidden sm:inline-flex text-[13.5px] px-3 py-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -178,7 +178,7 @@ export function SiteNav() {
                   </Link>
                 ))}
                 <a
-                  href="https://connect.renometa.com"
+                  href="https://connect.renometa.com/login"
                   target="_blank"
                   rel="noreferrer"
                   className="py-2.5 text-[15px] text-foreground"

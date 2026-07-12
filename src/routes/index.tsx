@@ -133,9 +133,14 @@ function Hero() {
               Contact Us
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link to="/renometa-connect" className="btn-ghost">
-              See Connect in Action
-            </Link>
+            <a
+              href="https://connect.renometa.com/signup"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-ghost"
+            >
+              Start Free Trial
+            </a>
           </div>
         </div>
 
