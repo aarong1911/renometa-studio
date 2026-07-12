@@ -1,22 +1,22 @@
 import { useId, useState, type FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 
 const SERVICES = [
   "General Inquiry",
   "RenoMeta Connect",
   "AI Website Systems",
-  "AI Center",
-  "Multi-Channel Inbox",
-  "CRM & Sales",
-  "Marketing & Follow-Up Automation",
-  "Growth Operations",
   "Custom AI Solutions",
+  "Pricing / Demo Request",
+  "Support / Existing Customer",
 ];
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [smsConsent, setSmsConsent] = useState(false);
   const serviceId = useId();
   const messageId = useId();
+  const smsId = useId();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,6 +85,34 @@ export function ContactForm() {
           placeholder="Tell us where leads, follow-up, or operations are falling through the cracks."
         />
       </div>
+
+      <div className="pt-1 pb-1">
+        <label htmlFor={smsId} className="flex items-start gap-3 cursor-pointer">
+          <input
+            id={smsId}
+            name="smsConsent"
+            type="checkbox"
+            checked={smsConsent}
+            onChange={(e) => setSmsConsent(e.target.checked)}
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-border-strong text-gold focus:ring-2 focus:ring-gold/40 accent-[var(--gold-strong)]"
+          />
+          <span className="text-[12.5px] leading-relaxed text-muted-foreground">
+            (Optional) By checking this box, you agree to receive SMS messages from RenoMeta.
+            Message frequency varies (up to 5 messages per month). Message and data rates may
+            apply. Reply STOP to opt out or HELP for help. Consent is not a condition of
+            purchase, receiving services, or completing any transaction. View our{" "}
+            <Link to="/" hash="privacy" className="underline hover:text-foreground">
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link to="/" hash="terms" className="underline hover:text-foreground">
+              Terms of Service
+            </Link>
+            .
+          </span>
+        </label>
+      </div>
+
       <button type="submit" className="btn-primary w-full sm:w-auto">
         Send Message
         <ArrowRight className="h-4 w-4" />
