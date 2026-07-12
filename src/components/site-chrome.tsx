@@ -178,7 +178,7 @@ export function SiteNav() {
                   </Link>
                 ))}
                 <a
-                  href="https://connect.renometa.com"
+                  href="https://connect.renometa.com/login"
                   target="_blank"
                   rel="noreferrer"
                   className="py-2.5 text-[15px] text-foreground"
