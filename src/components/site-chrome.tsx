@@ -319,8 +319,13 @@ export function SiteFooter() {
           <div className="text-[12.5px] text-muted-foreground">
             © {new Date().getFullYear()} RenoMeta. All rights reserved.
           </div>
-          <div className="text-[12.5px] text-muted-foreground">
-            Built for renovation contractors and home service businesses
+          <div className="flex items-center gap-4 text-[12.5px] text-muted-foreground">
+            <Link to="/privacy-policy" className="hover:text-foreground transition-colors">
+              Privacy Policy
+            </Link>
+            <Link to="/terms-of-service" className="hover:text-foreground transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

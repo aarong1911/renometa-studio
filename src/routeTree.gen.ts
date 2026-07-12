@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RenometaConnectRouteImport } from './routes/renometa-connect'
@@ -27,6 +28,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/renometa-connect': typeof RenometaConnectRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/renometa-connect': typeof RenometaConnectRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/renometa-connect': typeof RenometaConnectRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/solutions': typeof SolutionsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/renometa-connect'
     | '/sitemap.xml'
     | '/solutions'
+    | '/terms-of-service'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -209,6 +219,7 @@ export interface FileRouteTypes {
     | '/renometa-connect'
     | '/sitemap.xml'
     | '/solutions'
+    | '/terms-of-service'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -228,6 +239,7 @@ export interface FileRouteTypes {
     | '/renometa-connect'
     | '/sitemap.xml'
     | '/solutions'
+    | '/terms-of-service'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -248,12 +260,20 @@ export interface RootRouteChildren {
   RenometaConnectRoute: typeof RenometaConnectRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SolutionsRoute: typeof SolutionsRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -392,6 +412,7 @@ const rootRouteChildren: RootRouteChildren = {
   RenometaConnectRoute: RenometaConnectRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SolutionsRoute: SolutionsRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
