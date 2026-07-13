@@ -90,7 +90,7 @@ const FEATURES: { group: string; rows: [string, boolean | string, boolean | stri
       ["AI-Powered Follow-Up", true, true, true],
       ["Workflows & Triggers", "Standard", "Advanced", "Custom"],
       ["Review Automation", true, true, true],
-      ["AI Voice", "Add-on", "Add-on", "Included allowance"],
+      ["AI Voice", "Pay-per-use", "Pay-per-use", "Custom usage plan"],
     ],
   },
   {
