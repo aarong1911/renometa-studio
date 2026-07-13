@@ -101,8 +101,8 @@ const FEATURES: { group: string; rows: [string, boolean | string, boolean | stri
       ["Meta Lead Ads", true, true, true],
       ["Facebook Messenger", true, true, true],
       ["Instagram Messaging", true, true, true],
-      ["WhatsApp Business", "Add-on", "Add-on", "Included"],
-      ["Advanced Integrations", false, true, true],
+      ["WhatsApp Business", "Included, usage-based messaging", "Included, usage-based messaging", "Included, custom usage plan"],
+      ["Custom Integrations", "Not included", "Available as add-on", "Included/custom scope"],
     ],
   },
   {
