@@ -287,16 +287,24 @@ function PricingPage() {
               a: "We'll let you know as you approach your included capacity. You can add additional usage or move to a higher plan without interrupting your workflows or lead follow-up.",
             },
             {
+              q: "How does AI Voice usage-based pricing work?",
+              a: "AI Voice is available on Starter and Growth as a pay-per-use add-on, so you only pay for the minutes you use. Scale includes an AI Voice allowance; once that allowance is used, additional minutes are billed based on your calling volume and usage plan.",
+            },
+            {
+              q: "How is WhatsApp usage billed?",
+              a: "WhatsApp Business is included on every plan, but messaging is usage-based. Starter and Growth include usage-based messaging rates, while Scale offers a custom usage plan for higher-volume messaging and teams with specific campaign needs.",
+            },
+            {
+              q: "What's included in Custom Integrations?",
+              a: "Custom Integrations are custom connections to third-party tools, internal systems, APIs, webhooks, or business-specific workflows beyond the standard built-in integrations. They are not included on Starter, available as an add-on on Growth, and included with a custom scope on Scale.",
+            },
+            {
               q: "Can I move between plans?",
               a: "Yes. Upgrade or downgrade as your team, lead volume, and usage change. Billing adjustments are handled based on your current plan and billing cycle.",
             },
             {
               q: "Are onboarding and setup included?",
               a: "Guided onboarding is included on every plan. Custom workflow setup, advanced integrations, and specialized AI implementation may be quoted separately.",
-            },
-            {
-              q: "Is AI Voice included?",
-              a: "AI Voice is available as an add-on on Starter and Growth. Scale includes an AI Voice allowance, with additional usage available based on calling volume.",
             },
             {
               q: "Is there a contract?",
