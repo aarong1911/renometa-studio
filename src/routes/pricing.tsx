@@ -90,7 +90,7 @@ const FEATURES: { group: string; rows: [string, boolean | string, boolean | stri
       ["AI-Powered Follow-Up", true, true, true],
       ["Workflows & Triggers", "Standard", "Advanced", "Custom"],
       ["Review Automation", true, true, true],
-      ["AI Voice", "Add-on", "Add-on", "Included allowance"],
+      ["AI Voice", "Pay-per-use", "Pay-per-use", "Custom usage plan"],
     ],
   },
   {
@@ -101,8 +101,8 @@ const FEATURES: { group: string; rows: [string, boolean | string, boolean | stri
       ["Meta Lead Ads", true, true, true],
       ["Facebook Messenger", true, true, true],
       ["Instagram Messaging", true, true, true],
-      ["WhatsApp Business", "Add-on", "Add-on", "Included"],
-      ["Advanced Integrations", false, true, true],
+      ["WhatsApp Business", "Included, usage-based messaging", "Included, usage-based messaging", "Included, custom usage plan"],
+      ["Custom Integrations", "Not included", "Available as add-on", "Included/custom scope"],
     ],
   },
   {
@@ -233,6 +233,9 @@ function PricingPage() {
         />
         <Reveal>
           <ComparisonTable />
+          <p className="mt-4 text-[13px] text-muted-foreground max-w-3xl">
+            <span className="font-medium text-foreground">Custom Integrations</span> means custom connections to third-party tools, internal systems, APIs, webhooks, or business-specific workflows beyond the standard built-in integrations.
+          </p>
         </Reveal>
       </Section>
 
