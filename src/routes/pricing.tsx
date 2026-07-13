@@ -233,6 +233,9 @@ function PricingPage() {
         />
         <Reveal>
           <ComparisonTable />
+          <p className="mt-4 text-[13px] text-muted-foreground max-w-3xl">
+            <span className="font-medium text-foreground">Custom Integrations</span> means custom connections to third-party tools, internal systems, APIs, webhooks, or business-specific workflows beyond the standard built-in integrations.
+          </p>
         </Reveal>
       </Section>
 
