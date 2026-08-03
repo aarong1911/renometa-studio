@@ -10,6 +10,7 @@ import {
   MockupFrame,
   Reveal,
 } from "@/components/page-primitives";
+import { TryAgentSection } from "@/components/try-agent-section";
 import {
   Bot,
   ClipboardList,
@@ -102,6 +103,8 @@ function AiCenterPage() {
           ]}
         />
       </Section>
+
+      <TryAgentSection tone="surface" />
 
       <Section>
         <SectionHeader eyebrow="Benefits" title="Why teams use the AI Center" />
