@@ -271,6 +271,22 @@ function SolutionsDropdown() {
               </div>
             </Link>
           ))}
+          <div className="my-2 h-px bg-border" />
+          <Link
+            to={TRY_AGENT_ITEM.to}
+            onClick={() => setOpen(false)}
+            role="menuitem"
+            className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
+          >
+            <div className="flex items-center gap-1.5 text-[13.5px] font-medium text-foreground">
+              {TRY_AGENT_ITEM.label}
+              <ArrowRight className="h-3 w-3 text-gold" />
+            </div>
+            <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
+              {TRY_AGENT_ITEM.desc}
+            </div>
+          </Link>
+
         </div>
       </div>
     </div>
