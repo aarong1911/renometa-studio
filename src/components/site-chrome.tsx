@@ -164,26 +164,27 @@ export function SiteNav() {
                     </div>
                   </Link>
                 ))}
-                <div className="my-1 h-px bg-border" />
-                <Link
-                  to={TRY_AGENT_ITEM.to}
-                  onClick={() => {
-                    setMobileOpen(false);
-                    setMobileSolutionsOpen(false);
-                  }}
-                  className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
-                >
-                  <div className="flex items-center gap-1.5 text-[14px] font-medium text-foreground">
-                    {TRY_AGENT_ITEM.label}
-                    <ArrowRight className="h-3 w-3 text-gold" />
-                  </div>
-                  <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
-                    {TRY_AGENT_ITEM.desc}
-                  </div>
-                </Link>
                 </div>
 
               </div>
+            </div>
+            <div className="pt-5 border-t border-border">
+              <Link
+                to={TRY_AGENT_ITEM.to}
+                onClick={() => {
+                  setMobileOpen(false);
+                  setMobileSolutionsOpen(false);
+                }}
+                className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
+              >
+                <div className="flex items-center gap-1.5 text-[14px] font-medium text-foreground">
+                  {TRY_AGENT_ITEM.label}
+                  <ArrowRight className="h-3 w-3 text-gold" />
+                </div>
+                <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
+                  See your customer service agent in action.
+                </div>
+              </Link>
             </div>
             <div className="border-t border-border pt-5">
               <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
