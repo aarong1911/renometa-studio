@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Bot, Check, Globe, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Check, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/page-primitives";
 
 const POINTS = [
@@ -11,9 +11,9 @@ const POINTS = [
 
 /**
  * Marketing-only promo for the AI agent demo.
- * The URL field is intentionally a non-submitting preview until the real
- * crawler/agent endpoint is connected.
+ * The real website-details form lives on /try-agent; this card only links there.
  */
+
 export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surface" }) {
   return (
     <section
@@ -34,26 +34,11 @@ export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surf
                   Try an AI Agent on Your Website
                 </h2>
                 <p className="mt-4 text-[15.5px] text-muted-foreground leading-relaxed max-w-xl">
-                  Enter your website and see how a RenoMeta AI agent could answer
-                  customer questions, capture lead details, and help move visitors
-                  toward booking.
+                  See how a RenoMeta customer service agent can answer questions,
+                  capture lead details, and help visitors move toward booking.
                 </p>
 
-                <div className="mt-7 flex flex-col sm:flex-row gap-2.5 max-w-lg">
-                  <div className="relative flex-1">
-                    <Globe
-                      className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
-                      strokeWidth={1.5}
-                    />
-                    <input
-                      type="url"
-                      inputMode="url"
-                      readOnly
-                      aria-label="Your website URL (preview only)"
-                      placeholder="yourcompany.com"
-                      className="w-full rounded-xl border border-border bg-background pl-10 pr-3 py-3 text-[14px] text-foreground placeholder:text-muted-foreground/80 focus:outline-none focus:ring-2 focus:ring-gold/30"
-                    />
-                  </div>
+                <div className="mt-7">
                   <Link
                     to="/try-agent"
                     className="btn-primary justify-center"
@@ -63,6 +48,7 @@ export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surf
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
+
 
                 <ul className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
                   {POINTS.map((p) => (
