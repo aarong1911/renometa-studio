@@ -97,7 +97,7 @@ function ContactPage() {
                     "We review your message within one business day.",
                     "A short discovery call to understand your workflow and gaps.",
                     "A tailored walkthrough of the RenoMeta Connect setup for your business.",
-                    "A clear next step — no pressure, no generic pitch.",
+                    "A clear next step - no pressure, no generic pitch.",
                   ].map((s, i) => (
                     <li key={s} className="flex items-start gap-3">
                       <span className="mt-0.5 h-5 w-5 rounded-full border border-border bg-surface grid place-items-center text-[11px] font-medium shrink-0">

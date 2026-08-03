@@ -27,7 +27,7 @@ import {
 export const Route = createFileRoute("/renometa-connect")({
   head: () => ({
     meta: [
-      { title: "RenoMeta Connect — Business Command Center for Contractors" },
+      { title: "RenoMeta Connect - Business Command Center for Contractors" },
       {
         name: "description",
         content:
@@ -82,7 +82,7 @@ function ConnectPage() {
         <SectionHeader
           eyebrow="System diagram"
           title="Everything connected in one place"
-          desc="Leads flow in from every source, land in one inbox, become CRM records, trigger the right follow-up, and close as booked jobs — without leaving the platform."
+          desc="Leads flow in from every source, land in one inbox, become CRM records, trigger the right follow-up, and close as booked jobs - without leaving the platform."
         />
         <Reveal>
           <ConnectDiagram />
@@ -115,7 +115,7 @@ function ConnectPage() {
         />
         <StepFlow
           steps={[
-            { title: "Lead lands", desc: "Web form, ad, DM, or missed call — every source flows into one inbox." },
+            { title: "Lead lands", desc: "Web form, ad, DM, or missed call - every source flows into one inbox." },
             { title: "AI qualifies", desc: "The Lead Qualifier tags urgency, project type, and readiness." },
             { title: "Conversation opens", desc: "The team picks up in one thread with full context." },
             { title: "Estimate sent", desc: "Draft the estimate, send for e-signature, generate an invoice." },

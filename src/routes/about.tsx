@@ -60,7 +60,7 @@ function AboutPage() {
         <FeatureGrid
           cols={3}
           items={[
-            { icon: Layers, title: "One record", desc: "The lead, the conversation, and the job live on one profile — not spread across five apps." },
+            { icon: Layers, title: "One record", desc: "The lead, the conversation, and the job live on one profile - not spread across five apps." },
             { icon: Workflow, title: "One workflow", desc: "A defined path from first inquiry to booked job that anyone on the team can follow." },
             { icon: Zap, title: "One system of record", desc: "Owners see the real state of the business without pulling numbers from four tools." },
           ]}
@@ -76,7 +76,7 @@ function AboutPage() {
           items={[
             "Designed around renovation and home service workflows, not generic B2B sales",
             "Multi-channel inbox that includes voice and missed-call text-back",
-            "AI agents shaped for contractor scenarios — not chatbot demos",
+            "AI agents shaped for contractor scenarios - not chatbot demos",
             "Estimate, proposal, and signature in one flow",
             "Marketing and follow-up sitting on the same record as the CRM",
             "A pricing model that includes the platform on every plan",
@@ -118,13 +118,13 @@ function AboutPage() {
             </div>
             <div className="mt-6 space-y-4 text-[15px] text-foreground/90 leading-relaxed">
               <p>
-                RenoMeta started inside real renovation businesses — the kind where the phone rings
+                RenoMeta started inside real renovation businesses - the kind where the phone rings
                 at 8 AM, four crews are on four job sites, and the owner is trying to send an
                 estimate from a truck. The tools we used did not fit that reality.
               </p>
               <p>
                 We built RenoMeta Connect because the contractors we worked with kept asking for
-                the same thing: one place. One inbox, one pipeline, one system of record — with
+                the same thing: one place. One inbox, one pipeline, one system of record - with
                 automation and AI doing the parts that never should have been manual in the first
                 place.
               </p>

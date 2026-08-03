@@ -221,7 +221,7 @@ function PricingPage() {
         <Reveal delay={220}>
           <p className="mt-10 text-center text-[13.5px] text-muted-foreground max-w-2xl mx-auto">
             AI and automation are included on every plan. Plans scale with your business,
-            usage, and team — so you can start lean and add capacity as you grow.
+            usage, and team - so you can start lean and add capacity as you grow.
           </p>
         </Reveal>
       </Section>
@@ -323,7 +323,7 @@ function PricingPage() {
 
       <CTASection
         title="Find the Right Plan"
-        desc="Tell us about your team, lead volume, and automation needs — we'll help you choose the right starting point."
+        desc="Tell us about your team, lead volume, and automation needs - we'll help you choose the right starting point."
         primary={{ label: "Find the Right Plan", to: "/contact" }}
       />
     </PageShell>

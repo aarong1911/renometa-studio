@@ -89,7 +89,7 @@ function InboxPage() {
         <SectionHeader
           eyebrow="Team visibility"
           title="No more asking who replied to Sarah"
-          desc="Assignments, unread status, and internal notes make it obvious who owns what — even across a team spread over multiple crews."
+          desc="Assignments, unread status, and internal notes make it obvious who owns what - even across a team spread over multiple crews."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {[
@@ -138,7 +138,7 @@ function InboxMockup() {
     { name: "Sarah M.", msg: "Thursday afternoon works.", ch: "SMS", active: true, time: "2m" },
     { name: "Daniel R.", msg: "Availability this week?", ch: "WhatsApp", time: "8m" },
     { name: "Priya K.", msg: "Thanks for the quote!", ch: "Messenger", time: "24m" },
-    { name: "Marcus L.", msg: "Missed call — auto reply sent", ch: "Voice", time: "1h" },
+    { name: "Marcus L.", msg: "Missed call - auto reply sent", ch: "Voice", time: "1h" },
     { name: "Ellie T.", msg: "Can we push to next week?", ch: "Instagram", time: "2h" },
   ];
   return (
@@ -183,11 +183,11 @@ function InboxMockup() {
             </span>
           </div>
           <div className="mt-4 space-y-3">
-            <Bubble side="them">Hey — do you handle full kitchen renos in the north end?</Bubble>
+            <Bubble side="them">Hey - do you handle full kitchen renos in the north end?</Bubble>
             <Bubble side="us">Yes, that's most of what we do. Do you have a rough timeline?</Bubble>
             <Bubble side="them">Hoping to start by April. What's next?</Bubble>
             <Bubble side="us" gold>
-              We can book a 30-min site visit — Thursday 2 PM works. Confirm?
+              We can book a 30-min site visit - Thursday 2 PM works. Confirm?
             </Bubble>
             <Bubble side="them">Thursday afternoon works.</Bubble>
           </div>
@@ -252,14 +252,14 @@ function CrmThreadMockup() {
             <Users className="h-3.5 w-3.5" /> Internal note
           </div>
           <div className="mt-1.5 text-muted-foreground">
-            @maya bring the kitchen sample kit — she mentioned quartz.
+            @maya bring the kitchen sample kit - she mentioned quartz.
           </div>
         </div>
         <div className="rounded-lg border border-border bg-background p-3">
           <div className="flex items-center gap-2 text-[11.5px] font-medium">
             <Phone className="h-3.5 w-3.5" /> Next step
           </div>
-          <div className="mt-1.5 text-[11.5px] text-muted-foreground">Site visit — Thursday 2:00 PM</div>
+          <div className="mt-1.5 text-[11.5px] text-muted-foreground">Site visit - Thursday 2:00 PM</div>
         </div>
       </div>
     </MockupFrame>

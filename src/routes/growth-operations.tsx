@@ -59,7 +59,7 @@ function GrowthOpsPage() {
         <FeatureGrid
           cols={3}
           items={[
-            { icon: Activity, title: "Lead flow analysis", desc: "See where leads enter, stall, and drop out — by source and stage." },
+            { icon: Activity, title: "Lead flow analysis", desc: "See where leads enter, stall, and drop out - by source and stage." },
             { icon: Clock, title: "Response time tracking", desc: "Measure first-touch time on every channel." },
             { icon: Workflow, title: "Workflow optimization", desc: "Refine automations against real conversion data." },
             { icon: Sparkles, title: "Automation review", desc: "Audit which agents and sequences are actually earning their keep." },
@@ -72,7 +72,7 @@ function GrowthOpsPage() {
       <Section tone="surface">
         <SectionHeader
           eyebrow="Reporting & recommendations"
-          title="Not just numbers — the next move"
+          title="Not just numbers - the next move"
           desc="Growth Operations pairs live metrics with a set of recommended actions each cycle."
         />
         <Reveal>

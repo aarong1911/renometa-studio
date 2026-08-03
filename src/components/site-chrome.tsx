@@ -288,7 +288,7 @@ export function SiteFooter() {
           </Link>
           <p className="mt-4 text-[14px] text-muted-foreground max-w-sm leading-relaxed">
             RenoMeta Connect is a business command center for renovation
-            contractors and home service businesses — bringing leads,
+            contractors and home service businesses - bringing leads,
             conversations, estimates, follow-up, scheduling, marketing,
             automation, and insights into one connected platform.
           </p>

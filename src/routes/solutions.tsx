@@ -23,7 +23,7 @@ function SolutionsPage() {
     <PageShell
       eyebrow="Solutions"
       headline="Connected Solutions for Renovation Contractors"
-      subheading="Every RenoMeta solution plugs into the same command center — from lead capture and conversations to estimates, marketing, and operations."
+      subheading="Every RenoMeta solution plugs into the same command center - from lead capture and conversations to estimates, marketing, and operations."
     >
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-6">

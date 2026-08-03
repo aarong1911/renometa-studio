@@ -71,7 +71,7 @@ function AiCenterPage() {
         <SectionHeader
           eyebrow="What the AI Center does"
           title="Agents that do the repetitive work"
-          desc="Every agent runs inside RenoMeta Connect against your real leads, conversations, and jobs — not a sandbox."
+          desc="Every agent runs inside RenoMeta Connect against your real leads, conversations, and jobs - not a sandbox."
         />
         <FeatureGrid items={AGENTS} />
       </Section>
@@ -119,7 +119,7 @@ function AiCenterPage() {
 
       <CTASection
         title="Explore AI Agents"
-        desc="Turn on the agents that fit your workflow — no code, no rebuild."
+        desc="Turn on the agents that fit your workflow - no code, no rebuild."
         primary={{ label: "Explore AI Agents", to: "/contact" }}
         secondary={{ label: "See the Platform", to: "/renometa-connect" }}
       />
