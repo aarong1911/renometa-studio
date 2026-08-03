@@ -13,10 +13,10 @@ export const Route = createFileRoute("/contact")({
         content:
           "Tell us about your business and where leads, follow-up, or operations are falling through the cracks.",
       },
-      { property: "og:title", content: "Contact RenoMeta" },
+      { property: "og:title", content: "Contact | RenoMeta" },
       { property: "og:description", content: "Let's build your contractor command center." },
       { property: "og:url", content: "/contact" },
-      { name: "twitter:title", content: "Contact RenoMeta" },
+      { name: "twitter:title", content: "Contact | RenoMeta" },
       { name: "twitter:description", content: "Let's build your contractor command center." },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
