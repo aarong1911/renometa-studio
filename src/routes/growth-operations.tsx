@@ -23,7 +23,7 @@ import {
 export const Route = createFileRoute("/growth-operations")({
   head: () => ({
     meta: [
-      { title: "Growth Operations — RenoMeta" },
+      { title: "Growth Operations | RenoMeta" },
       {
         name: "description",
         content:

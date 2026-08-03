@@ -21,7 +21,7 @@ import {
 export const Route = createFileRoute("/crm-sales")({
   head: () => ({
     meta: [
-      { title: "CRM & Sales — RenoMeta" },
+      { title: "CRM & Sales | RenoMeta" },
       {
         name: "description",
         content:

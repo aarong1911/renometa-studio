@@ -27,7 +27,7 @@ import {
 export const Route = createFileRoute("/renometa-connect")({
   head: () => ({
     meta: [
-      { title: "RenoMeta Connect - Business Command Center for Contractors" },
+      { title: "RenoMeta Connect: Business Command Center for Contractors | RenoMeta" },
       {
         name: "description",
         content:

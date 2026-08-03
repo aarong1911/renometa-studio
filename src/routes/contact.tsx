@@ -7,7 +7,7 @@ import { Calendar, Clock, Mail, MapPin, MessageSquare } from "lucide-react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — RenoMeta" },
+      { title: "Contact | RenoMeta" },
       {
         name: "description",
         content:

@@ -24,7 +24,7 @@ import {
 export const Route = createFileRoute("/multi-channel-inbox")({
   head: () => ({
     meta: [
-      { title: "Multi-Channel Inbox — RenoMeta" },
+      { title: "Multi-Channel Inbox | RenoMeta" },
       {
         name: "description",
         content:

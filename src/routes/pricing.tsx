@@ -11,20 +11,20 @@ import { ArrowRight, Check } from "lucide-react";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — RenoMeta" },
+      { title: "Pricing | RenoMeta" },
       {
         name: "description",
         content:
           "Flexible RenoMeta Connect pricing with AI and automation included on every plan. Choose the capacity, usage, and team size that fits your business.",
       },
-      { property: "og:title", content: "Pricing — RenoMeta" },
+      { property: "og:title", content: "Pricing | RenoMeta" },
       {
         property: "og:description",
         content:
           "AI and automation included on every plan. RenoMeta Connect pricing scales with your business, usage, and team.",
       },
       { property: "og:url", content: "/pricing" },
-      { name: "twitter:title", content: "Pricing — RenoMeta" },
+      { name: "twitter:title", content: "Pricing | RenoMeta" },
       {
         name: "twitter:description",
         content:

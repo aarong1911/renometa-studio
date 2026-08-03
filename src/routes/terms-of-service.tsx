@@ -5,19 +5,19 @@ import { Section, Reveal } from "@/components/page-primitives";
 export const Route = createFileRoute("/terms-of-service")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — RenoMeta" },
+      { title: "Terms of Service | RenoMeta" },
       {
         name: "description",
         content:
           "RenoMeta's Terms of Service govern your access to and use of RenoMeta's software, websites, and services.",
       },
-      { property: "og:title", content: "Terms of Service — RenoMeta" },
+      { property: "og:title", content: "Terms of Service | RenoMeta" },
       {
         property: "og:description",
         content: "RenoMeta's Terms of Service.",
       },
       { property: "og:url", content: "/terms-of-service" },
-      { name: "twitter:title", content: "Terms of Service — RenoMeta" },
+      { name: "twitter:title", content: "Terms of Service | RenoMeta" },
       { name: "twitter:description", content: "RenoMeta's Terms of Service." },
     ],
     links: [{ rel: "canonical", href: "/terms-of-service" }],

@@ -27,7 +27,7 @@ import {
 export const Route = createFileRoute("/ai-center")({
   head: () => ({
     meta: [
-      { title: "AI Center — RenoMeta" },
+      { title: "AI Center | RenoMeta" },
       {
         name: "description",
         content:

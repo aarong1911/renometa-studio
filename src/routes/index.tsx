@@ -30,13 +30,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
+      { title: "Business Command Center for Renovation Contractors | RenoMeta Connect" },
       {
         name: "description",
         content:
           "RenoMeta Connect unifies leads, conversations, estimates, scheduling, marketing, and follow-up for renovation contractors and home service businesses.",
       },
-      { property: "og:title", content: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
+      { property: "og:title", content: "Business Command Center for Renovation Contractors | RenoMeta Connect" },
       {
         property: "og:description",
         content:
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
+      { name: "twitter:title", content: "Business Command Center for Renovation Contractors | RenoMeta Connect" },
       {
         name: "twitter:description",
         content:
