@@ -5,20 +5,20 @@ import { Section, Reveal } from "@/components/page-primitives";
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — RenoMeta" },
+      { title: "Privacy Policy | RenoMeta" },
       {
         name: "description",
         content:
           "RenoMeta's Privacy Policy explains how we collect, use, disclose, and safeguard information when you use our software, websites, and services.",
       },
-      { property: "og:title", content: "Privacy Policy — RenoMeta" },
+      { property: "og:title", content: "Privacy Policy | RenoMeta" },
       {
         property: "og:description",
         content:
           "RenoMeta's Privacy Policy explains how we collect, use, disclose, and safeguard information when you use our services.",
       },
       { property: "og:url", content: "/privacy-policy" },
-      { name: "twitter:title", content: "Privacy Policy — RenoMeta" },
+      { name: "twitter:title", content: "Privacy Policy | RenoMeta" },
       { name: "twitter:description", content: "RenoMeta's Privacy Policy." },
     ],
     links: [{ rel: "canonical", href: "/privacy-policy" }],

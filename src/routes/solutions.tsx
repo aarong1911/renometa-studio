@@ -5,12 +5,12 @@ import { PageShell, SOLUTIONS } from "@/components/site-chrome";
 export const Route = createFileRoute("/solutions")({
   head: () => ({
     meta: [
-      { title: "Solutions — RenoMeta" },
+      { title: "Solutions | RenoMeta" },
       { name: "description", content: "Explore RenoMeta's connected solutions for renovation contractors: Connect, AI Website Systems, AI Center, Inbox, CRM & Sales, Marketing, Growth Operations, and Custom AI." },
-      { property: "og:title", content: "Solutions — RenoMeta" },
+      { property: "og:title", content: "Solutions | RenoMeta" },
       { property: "og:description", content: "Connected solutions built for renovation contractors and home service businesses." },
       { property: "og:url", content: "/solutions" },
-      { name: "twitter:title", content: "Solutions — RenoMeta" },
+      { name: "twitter:title", content: "Solutions | RenoMeta" },
       { name: "twitter:description", content: "Connected solutions built for renovation contractors and home service businesses." },
     ],
     links: [{ rel: "canonical", href: "/solutions" }],

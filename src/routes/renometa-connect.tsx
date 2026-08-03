@@ -27,20 +27,20 @@ import {
 export const Route = createFileRoute("/renometa-connect")({
   head: () => ({
     meta: [
-      { title: "RenoMeta Connect - Business Command Center for Contractors" },
+      { title: "RenoMeta Connect | Business Command Center for Contractors" },
       {
         name: "description",
         content:
           "Manage leads, conversations, estimates, scheduling, marketing, and follow-up in one connected platform built for renovation contractors.",
       },
-      { property: "og:title", content: "RenoMeta Connect" },
+      { property: "og:title", content: "RenoMeta Connect | Business Command Center for Contractors" },
       {
         property: "og:description",
         content:
           "The business command center for renovation contractors and home service businesses.",
       },
       { property: "og:url", content: "/renometa-connect" },
-      { name: "twitter:title", content: "RenoMeta Connect" },
+      { name: "twitter:title", content: "RenoMeta Connect | Business Command Center for Contractors" },
       { name: "twitter:description", content: "The business command center for renovation contractors and home service businesses." },
     ],
     links: [{ rel: "canonical", href: "/renometa-connect" }],

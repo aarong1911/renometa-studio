@@ -21,20 +21,20 @@ import {
 export const Route = createFileRoute("/crm-sales")({
   head: () => ({
     meta: [
-      { title: "CRM & Sales — RenoMeta" },
+      { title: "CRM & Sales | RenoMeta" },
       {
         name: "description",
         content:
           "Track every lead from first inquiry to closed job with a CRM built for renovation contractors.",
       },
-      { property: "og:title", content: "CRM & Sales" },
+      { property: "og:title", content: "CRM & Sales | RenoMeta" },
       {
         property: "og:description",
         content:
           "Customers, deals, estimates, proposals, invoices, signatures, bookings, and client communication in one workflow.",
       },
       { property: "og:url", content: "/crm-sales" },
-      { name: "twitter:title", content: "CRM & Sales" },
+      { name: "twitter:title", content: "CRM & Sales | RenoMeta" },
       { name: "twitter:description", content: "Customers, deals, estimates, proposals, invoices, signatures, bookings, and client communication in one workflow." },
     ],
     links: [{ rel: "canonical", href: "/crm-sales" }],

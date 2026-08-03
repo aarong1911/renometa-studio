@@ -14,13 +14,13 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Article not found — RenoMeta" },
+          { title: "Article not found | RenoMeta" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     const { article } = loaderData;
-    const title = article.metaTitle ?? `${article.title} — RenoMeta Blog`;
+    const title = article.metaTitle ?? `${article.title} | RenoMeta Blog`;
     const description = article.metaDescription ?? article.excerpt;
     const url = `/blog/${params.slug}`;
     return {

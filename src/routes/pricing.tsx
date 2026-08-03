@@ -11,20 +11,20 @@ import { ArrowRight, Check } from "lucide-react";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — RenoMeta" },
+      { title: "Pricing | RenoMeta" },
       {
         name: "description",
         content:
           "Flexible RenoMeta Connect pricing with AI and automation included on every plan. Choose the capacity, usage, and team size that fits your business.",
       },
-      { property: "og:title", content: "Pricing — RenoMeta" },
+      { property: "og:title", content: "Pricing | RenoMeta" },
       {
         property: "og:description",
         content:
           "AI and automation included on every plan. RenoMeta Connect pricing scales with your business, usage, and team.",
       },
       { property: "og:url", content: "/pricing" },
-      { name: "twitter:title", content: "Pricing — RenoMeta" },
+      { name: "twitter:title", content: "Pricing | RenoMeta" },
       {
         name: "twitter:description",
         content:
@@ -209,7 +209,7 @@ function PricingPage() {
                 <Link
                   to="/contact"
                   className={`mt-8 w-full text-center ${p.featured ? "btn-primary" : "btn-ghost"}`}
-                  aria-label={`${p.cta} for the ${p.name} plan — contact sales`}
+                  aria-label={`${p.cta} for the ${p.name} plan - contact sales`}
                 >
                   {p.cta}
                   <ArrowRight className="h-4 w-4" />

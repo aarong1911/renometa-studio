@@ -14,19 +14,19 @@ import { Compass, Layers, Sparkles, Users, Workflow, Zap } from "lucide-react";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — RenoMeta" },
+      { title: "About | RenoMeta" },
       {
         name: "description",
         content:
           "RenoMeta helps renovation and home service businesses organize leads, automate follow-up, and manage growth from one connected platform.",
       },
-      { property: "og:title", content: "About — RenoMeta" },
+      { property: "og:title", content: "About | RenoMeta" },
       {
         property: "og:description",
         content: "Built for contractors who need better systems.",
       },
       { property: "og:url", content: "/about" },
-      { name: "twitter:title", content: "About — RenoMeta" },
+      { name: "twitter:title", content: "About | RenoMeta" },
       { name: "twitter:description", content: "Built for contractors who need better systems." },
     ],
     links: [{ rel: "canonical", href: "/about" }],

@@ -12,16 +12,16 @@ import { ArrowRight, Mail } from "lucide-react";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog — RenoMeta" },
+      { title: "Blog | RenoMeta" },
       {
         name: "description",
         content:
           "Practical articles on lead response, automation, CRM workflows, estimates, marketing, and operations for contractors.",
       },
-      { property: "og:title", content: "Blog — RenoMeta" },
+      { property: "og:title", content: "Blog | RenoMeta" },
       { property: "og:description", content: "Ideas for smarter contractor growth." },
       { property: "og:url", content: "/blog" },
-      { name: "twitter:title", content: "Blog — RenoMeta" },
+      { name: "twitter:title", content: "Blog | RenoMeta" },
       { name: "twitter:description", content: "Ideas for smarter contractor growth." },
     ],
     links: [{ rel: "canonical", href: "/blog" }],
