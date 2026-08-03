@@ -14,6 +14,14 @@ export const SOLUTIONS: { to: string; label: string; desc: string }[] = [
   { to: "/custom-ai-solutions", label: "Custom AI Solutions", desc: "Advanced workflows built beyond the platform." },
 ];
 
+/** Featured entry point for the Try Agent Live feature (nav only, not a solution card). */
+export const TRY_AGENT_ITEM = {
+  to: "/try-agent",
+  label: "Try Agent Live",
+  desc: "See an AI agent trained on your own website content.",
+} as const;
+
+
 export const LOGO_URL = logoAsset.url;
 
 export function Logo({ className = "h-8 w-auto" }: { className?: string }) {
