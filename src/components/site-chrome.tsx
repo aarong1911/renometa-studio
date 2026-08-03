@@ -14,6 +14,14 @@ export const SOLUTIONS: { to: string; label: string; desc: string }[] = [
   { to: "/custom-ai-solutions", label: "Custom AI Solutions", desc: "Advanced workflows built beyond the platform." },
 ];
 
+/** Featured entry point for the Try Agent Live feature (nav only, not a solution card). */
+export const TRY_AGENT_ITEM = {
+  to: "/try-agent",
+  label: "Try Agent Live",
+  desc: "See an AI agent trained on your own website content.",
+} as const;
+
+
 export const LOGO_URL = logoAsset.url;
 
 export function Logo({ className = "h-8 w-auto" }: { className?: string }) {
@@ -156,7 +164,25 @@ export function SiteNav() {
                     </div>
                   </Link>
                 ))}
+                <div className="my-1 h-px bg-border" />
+                <Link
+                  to={TRY_AGENT_ITEM.to}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setMobileSolutionsOpen(false);
+                  }}
+                  className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
+                >
+                  <div className="flex items-center gap-1.5 text-[14px] font-medium text-foreground">
+                    {TRY_AGENT_ITEM.label}
+                    <ArrowRight className="h-3 w-3 text-gold" />
+                  </div>
+                  <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
+                    {TRY_AGENT_ITEM.desc}
+                  </div>
+                </Link>
                 </div>
+
               </div>
             </div>
             <div className="border-t border-border pt-5">
@@ -271,6 +297,22 @@ function SolutionsDropdown() {
               </div>
             </Link>
           ))}
+          <div className="my-2 h-px bg-border" />
+          <Link
+            to={TRY_AGENT_ITEM.to}
+            onClick={() => setOpen(false)}
+            role="menuitem"
+            className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
+          >
+            <div className="flex items-center gap-1.5 text-[13.5px] font-medium text-foreground">
+              {TRY_AGENT_ITEM.label}
+              <ArrowRight className="h-3 w-3 text-gold" />
+            </div>
+            <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
+              {TRY_AGENT_ITEM.desc}
+            </div>
+          </Link>
+
         </div>
       </div>
     </div>
