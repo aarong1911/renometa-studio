@@ -80,12 +80,12 @@ function AiWebsitePage() {
         <SectionHeader
           eyebrow="Booking-focused service pages"
           title="Turn service pages into booked appointments"
-          desc="Every service page is structured around a single next step — book, request an estimate, or start a conversation."
+          desc="Every service page is structured around a single next step - book, request an estimate, or start a conversation."
         />
         <SplitCallout
           eyebrow="Structure"
           title="A page layout tuned for contractor sales"
-          desc="Value proposition, proof, scope, pricing framing, and a booking module — in that order, on every page."
+          desc="Value proposition, proof, scope, pricing framing, and a booking module - in that order, on every page."
           bullets={[
             "Above-the-fold form or booking widget",
             "Trust signals: reviews, badges, past projects",
@@ -116,7 +116,7 @@ function AiWebsitePage() {
         <SectionHeader
           eyebrow="How it connects"
           title="From website visit to booked job"
-          desc="Every lead a website generates flows straight into RenoMeta Connect — no exports, no manual entry."
+          desc="Every lead a website generates flows straight into RenoMeta Connect - no exports, no manual entry."
         />
         <StepFlow
           steps={[

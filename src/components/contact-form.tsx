@@ -30,7 +30,7 @@ export function ContactForm() {
           <Check className="h-5 w-5 text-gold" strokeWidth={2} />
         </div>
         <h2 className="mt-5 font-display text-2xl font-semibold tracking-tight">
-          Thanks — we'll be in touch shortly.
+          Thanks - we'll be in touch shortly.
         </h2>
         <p className="mt-3 text-[14.5px] text-muted-foreground">
           A member of our team will reach out within one business day.

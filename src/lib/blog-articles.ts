@@ -153,7 +153,7 @@ export const ARTICLES: BlogArticle[] = [
         heading: "The importance of connected communication",
         paragraphs: [
           "The single most important upgrade over a basic CRM is a shared inbox tied to the lead record. Text, email, phone, web form, and social messages all land in one place, attached to the homeowner.",
-          "Any team member can pick up any conversation with full context. There is no more asking, \"Did anyone reply to the Johnsons?\" — the thread is right there on the record.",
+          "Any team member can pick up any conversation with full context. There is no more asking, \"Did anyone reply to the Johnsons?\" - the thread is right there on the record.",
         ],
       },
       {
@@ -186,7 +186,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "Final takeaway",
         paragraphs: [
-          "A contact list is not a CRM. For a remodeling business, the CRM needs to be the place the work actually happens — the inbox, the pipeline, the estimates, the schedule, and the follow-up in one connected system. That is when it stops being another tool and starts being the command center for the business.",
+          "A contact list is not a CRM. For a remodeling business, the CRM needs to be the place the work actually happens - the inbox, the pipeline, the estimates, the schedule, and the follow-up in one connected system. That is when it stops being another tool and starts being the command center for the business.",
         ],
       },
       CTA_BLOCK,
@@ -213,7 +213,7 @@ export const ARTICLES: BlogArticle[] = [
     content: [
       {
         paragraphs: [
-          "For most contractors, the phone is still the main way new work comes in. And for most contractors, a large share of those calls get missed. On a ladder, driving between jobs, on a loud site — the phone rings, and the moment passes.",
+          "For most contractors, the phone is still the main way new work comes in. And for most contractors, a large share of those calls get missed. On a ladder, driving between jobs, on a loud site - the phone rings, and the moment passes.",
           "Very few of those callers leave a voicemail. Almost none call back a second time. They dial the next number on their list, and whoever answers wins the job.",
         ],
       },
@@ -234,7 +234,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "Why speed-to-lead matters",
         paragraphs: [
-          "Studies of home service and remodeling leads consistently show the same pattern: the business that responds first is the one that books the job. Not the cheapest, not the most polished — the fastest.",
+          "Studies of home service and remodeling leads consistently show the same pattern: the business that responds first is the one that books the job. Not the cheapest, not the most polished - the fastest.",
           "A missed call answered by an automated text within seconds is often faster than a competitor's live receptionist. And because it opens a text thread, the conversation continues at the pace the homeowner wants.",
         ],
       },
@@ -243,7 +243,7 @@ export const ARTICLES: BlogArticle[] = [
         paragraphs: ["Here is what it looks like end to end:"],
         bullets: [
           "A homeowner calls a roofing company at 2:14 PM. The owner is on a roof and cannot answer.",
-          "At 2:14 PM, the caller receives a text: \"Hi, this is Jake at Northline Roofing — sorry I missed your call. What can I help you with?\"",
+          "At 2:14 PM, the caller receives a text: \"Hi, this is Jake at Northline Roofing - sorry I missed your call. What can I help you with?\"",
           "The homeowner texts back a photo of a leak and asks for an estimate.",
           "The AI agent inside the CRM replies within a minute, asks two qualifying questions, and offers a site visit slot.",
           "By the time the owner is off the roof at 3:30 PM, the homeowner is booked for Thursday morning.",
@@ -252,7 +252,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "Benefits for remodeling and home service businesses",
         paragraphs: [
-          "The direct benefit is more booked jobs from the same call volume. The indirect benefit is a better customer experience — homeowners feel respected instead of ignored, even when the team cannot pick up in person.",
+          "The direct benefit is more booked jobs from the same call volume. The indirect benefit is a better customer experience - homeowners feel respected instead of ignored, even when the team cannot pick up in person.",
           "There is also a compounding effect. Every text-back conversation creates a written record on the lead. Follow-up, quoting, and scheduling all become easier because the context is already there.",
         ],
       },
@@ -307,7 +307,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "What connected automation means",
         paragraphs: [
-          "Connected automation means the tools live in one platform, share one record for each lead, and trigger each other automatically. A website form does not just capture data — it creates a lead, opens a conversation, sends the first reply, and books the appointment inside the same system.",
+          "Connected automation means the tools live in one platform, share one record for each lead, and trigger each other automatically. A website form does not just capture data - it creates a lead, opens a conversation, sends the first reply, and books the appointment inside the same system.",
           "It is not about doing more with automation. It is about doing less by hand.",
         ],
       },
@@ -340,7 +340,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "How RenoMeta Connect acts as the command center",
         paragraphs: [
-          "RenoMeta Connect is designed to be that single platform. The website, inbox, CRM, estimates, scheduling, marketing, and reporting all sit on the same lead record. Automation is not an add-on — it is the connective tissue between the parts.",
+          "RenoMeta Connect is designed to be that single platform. The website, inbox, CRM, estimates, scheduling, marketing, and reporting all sit on the same lead record. Automation is not an add-on - it is the connective tissue between the parts.",
           "The result is fewer tools to pay for, fewer places to check, and fewer leads that slip.",
         ],
       },
@@ -358,7 +358,7 @@ export const ARTICLES: BlogArticle[] = [
     title: "What Contractors Should Track Before Spending More on Ads",
     category: "Marketing",
     excerpt:
-      "More ad spend on a broken pipeline just wastes more money. Here are the numbers to fix first — and the ones that quietly decide whether ads pay off.",
+      "More ad spend on a broken pipeline just wastes more money. Here are the numbers to fix first - and the ones that quietly decide whether ads pay off.",
     date: "March 10, 2026",
     readTime: "8 min read",
     metaTitle: "What Contractors Should Track Before Spending More on Ads | RenoMeta",
@@ -382,7 +382,7 @@ export const ARTICLES: BlogArticle[] = [
         heading: "Why more leads do not always mean more jobs",
         paragraphs: [
           "A remodeling business getting 40 leads a month and closing 4 of them does not need 80 leads a month. It needs to understand why 36 of the current 40 are not becoming jobs.",
-          "Some of that is normal — not every lead is qualified. But most contractors who look honestly at the numbers find that a large share of lost leads were losable to a faster reply, a clearer estimate, or a single follow-up nobody sent.",
+          "Some of that is normal - not every lead is qualified. But most contractors who look honestly at the numbers find that a large share of lost leads were losable to a faster reply, a clearer estimate, or a single follow-up nobody sent.",
         ],
       },
       {
@@ -396,14 +396,14 @@ export const ARTICLES: BlogArticle[] = [
         heading: "Metrics contractors should track",
         paragraphs: ["Before increasing ad spend, get honest numbers on these:"],
         bullets: [
-          "Lead source — where each inquiry came from.",
-          "Response time — how long until the first human or automated reply.",
-          "Contact rate — the percentage of leads you actually reached.",
-          "Appointment rate — the percentage that booked a site visit or call.",
-          "Estimate sent rate — the percentage that received a real quote.",
-          "Close rate — the percentage that signed and became a job.",
+          "Lead source - where each inquiry came from.",
+          "Response time - how long until the first human or automated reply.",
+          "Contact rate - the percentage of leads you actually reached.",
+          "Appointment rate - the percentage that booked a site visit or call.",
+          "Estimate sent rate - the percentage that received a real quote.",
+          "Close rate - the percentage that signed and became a job.",
           "Average job value by source.",
-          "Follow-up activity — how many touches each lead received.",
+          "Follow-up activity - how many touches each lead received.",
         ],
       },
       {
@@ -461,7 +461,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "What to change first",
         paragraphs: [
-          "Start with response time. Automate the first reply so it goes out within a minute — even a short, personal acknowledgement dramatically improves conversion. Then make sure every conversation, from any channel, lands in one inbox tied to the lead record. That single change eliminates most of the leaks.",
+          "Start with response time. Automate the first reply so it goes out within a minute - even a short, personal acknowledgement dramatically improves conversion. Then make sure every conversation, from any channel, lands in one inbox tied to the lead record. That single change eliminates most of the leaks.",
         ],
       },
     ],
@@ -500,7 +500,7 @@ export const ARTICLES: BlogArticle[] = [
     content: [
       {
         paragraphs: [
-          "Follow-up is the single most consistent failure point in a renovation sales process. AI agents built specifically for contractor workflows can qualify a new lead in seconds, draft an estimate from a photo, and nudge a cold opportunity back into the pipeline — without the owner touching a keyboard.",
+          "Follow-up is the single most consistent failure point in a renovation sales process. AI agents built specifically for contractor workflows can qualify a new lead in seconds, draft an estimate from a photo, and nudge a cold opportunity back into the pipeline - without the owner touching a keyboard.",
         ],
       },
       {
@@ -573,7 +573,7 @@ export const ARTICLES: BlogArticle[] = [
       {
         heading: "How to do it without feeling pushy",
         paragraphs: [
-          "Time the request to the moment the homeowner is happiest — usually 24 to 48 hours after project completion. Keep the message short, personal, and easy to act on. Route negative feedback privately so it can be handled before it becomes a public review.",
+          "Time the request to the moment the homeowner is happiest - usually 24 to 48 hours after project completion. Keep the message short, personal, and easy to act on. Route negative feedback privately so it can be handled before it becomes a public review.",
         ],
       },
     ],

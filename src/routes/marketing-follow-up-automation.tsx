@@ -28,7 +28,7 @@ export const Route = createFileRoute("/marketing-follow-up-automation")({
       {
         name: "description",
         content:
-          "Run campaigns, nurture opportunities, request reviews, and keep your pipeline moving — all connected to your CRM.",
+          "Run campaigns, nurture opportunities, request reviews, and keep your pipeline moving - all connected to your CRM.",
       },
       { property: "og:title", content: "Marketing & Follow-Up Automation" },
       { property: "og:description", content: "Marketing and follow-up connected to your CRM." },
@@ -55,7 +55,7 @@ function MarketingPage() {
         <SectionHeader
           eyebrow="Follow-up automation"
           title="Every lead, on the right cadence"
-          desc="Nurture sequences, review requests, reminders, and reactivation — running against real CRM records."
+          desc="Nurture sequences, review requests, reminders, and reactivation - running against real CRM records."
         />
         <FeatureGrid
           cols={3}
@@ -85,7 +85,7 @@ function MarketingPage() {
         <SectionHeader
           eyebrow="Campaign performance"
           title="See what is working"
-          desc="Every campaign, every channel — measured against the pipeline it actually generated."
+          desc="Every campaign, every channel - measured against the pipeline it actually generated."
         />
         <Reveal>
           <CampaignPerf />
@@ -156,7 +156,7 @@ function MetaMockup() {
       <MockupFrame url="business.facebook.com / lead-ads">
         <div className="p-5">
           <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Active campaign</div>
-          <div className="mt-1.5 text-[13.5px] font-medium">Spring Kitchen Reno — Meta Lead Ads</div>
+          <div className="mt-1.5 text-[13.5px] font-medium">Spring Kitchen Reno - Meta Lead Ads</div>
           <div className="mt-4 grid grid-cols-3 gap-3">
             <Stat label="Spend" value="$1,240" />
             <Stat label="Leads" value="68" />
@@ -216,8 +216,8 @@ function Stat({ label, value, gold }: { label: string; value: string; gold?: boo
 
 function CampaignPerf() {
   const rows = [
-    { name: "Spring Kitchen — Meta", ch: "Lead Ads", leads: 68, booked: 14, cost: "$18" },
-    { name: "Deck season — Google", ch: "Search", leads: 41, booked: 9, cost: "$26" },
+    { name: "Spring Kitchen - Meta", ch: "Lead Ads", leads: 68, booked: 14, cost: "$18" },
+    { name: "Deck season - Google", ch: "Search", leads: 41, booked: 9, cost: "$26" },
     { name: "Post-project review", ch: "Email/SMS", leads: 0, booked: 0, cost: "—" },
     { name: "Reactivate 90-day cold", ch: "SMS", leads: 12, booked: 3, cost: "—" },
   ];

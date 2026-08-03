@@ -56,7 +56,7 @@ function CrmPage() {
         <SectionHeader
           eyebrow="CRM overview"
           title="A sales workflow shaped like a contractor job"
-          desc="Every stage, artifact, and next step in one record — not spread across a spreadsheet, a document tool, and a booking app."
+          desc="Every stage, artifact, and next step in one record - not spread across a spreadsheet, a document tool, and a booking app."
         />
         <FeatureGrid
           cols={3}
@@ -75,7 +75,7 @@ function CrmPage() {
         <SplitCallout
           eyebrow="Estimate & proposal workflow"
           title="From site notes to a signed proposal in one flow"
-          desc="Draft the estimate from templates, adjust line items, generate the proposal, and send for signature — without exporting anything to a separate document tool."
+          desc="Draft the estimate from templates, adjust line items, generate the proposal, and send for signature - without exporting anything to a separate document tool."
           bullets={[
             "Reusable line items and pricing templates",
             "Automatic totals, taxes, and deposits",
@@ -106,7 +106,7 @@ function CrmPage() {
         <SectionHeader
           eyebrow="Reporting"
           title="See the pipeline like a business owner"
-          desc="Close rate, average deal size, response time, and lead source — all in one view, without pulling a report."
+          desc="Close rate, average deal size, response time, and lead source - all in one view, without pulling a report."
         />
         <Reveal>
           <div className="mt-12 grid gap-4 md:grid-cols-4">
@@ -130,7 +130,7 @@ function CrmPage() {
 
       <CTASection
         title="Organize My Sales Process"
-        desc="Every deal, every document, every next step — in one system."
+        desc="Every deal, every document, every next step - in one system."
         primary={{ label: "Organize My Sales Process", to: "/contact" }}
         secondary={{ label: "See RenoMeta Connect", to: "/renometa-connect" }}
       />
@@ -183,7 +183,7 @@ function PipelineMockup() {
 function EstimateMockup() {
   const lines = [
     { l: "Demo & disposal", q: 1, p: "$1,800" },
-    { l: "Cabinetry — custom", q: 1, p: "$9,400" },
+    { l: "Cabinetry - custom", q: 1, p: "$9,400" },
     { l: "Quartz countertop", q: 1, p: "$4,200" },
     { l: "Plumbing rough-in", q: 1, p: "$2,100" },
     { l: "Electrical & lighting", q: 1, p: "$2,600" },

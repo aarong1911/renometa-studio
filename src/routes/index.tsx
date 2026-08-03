@@ -30,13 +30,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      { title: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
       {
         name: "description",
         content:
           "RenoMeta Connect unifies leads, conversations, estimates, scheduling, marketing, and follow-up for renovation contractors and home service businesses.",
       },
-      { property: "og:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      { property: "og:title", content: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
       {
         property: "og:description",
         content:
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:url", content: "/" },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      { name: "twitter:title", content: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
       {
         name: "twitter:description",
         content:
@@ -229,7 +229,7 @@ function DashboardMockup() {
                       { name: "Sarah M.", msg: "Thursday afternoon works.", ch: "SMS", active: true },
                       { name: "Daniel R.", msg: "Availability this week?", ch: "WhatsApp" },
                       { name: "Priya K.", msg: "Thanks for the quote!", ch: "Messenger" },
-                      { name: "Marcus L.", msg: "Missed call — auto reply", ch: "Voice" },
+                      { name: "Marcus L.", msg: "Missed call - auto reply", ch: "Voice" },
                     ].map((c) => (
                       <div
                         key={c.name}
@@ -623,7 +623,7 @@ function PlatformOverview() {
         <SectionHeader
           eyebrow="RenoMeta Connect"
           title="One command center for leads, sales, marketing, and operations."
-          desc="AI agents, sales tools, marketing, and operations — unified in one command center built for renovation contractors."
+          desc="AI agents, sales tools, marketing, and operations - unified in one command center built for renovation contractors."
         />
 
         <Reveal className="mt-10 max-w-3xl">
@@ -714,7 +714,7 @@ function FeaturePillars() {
     {
       icon: Workflow,
       title: "Operations & Workflow Automation",
-      desc: "Automate the work behind the work — from scheduling and dispatching to custom workflows and Google Workspace integration.",
+      desc: "Automate the work behind the work - from scheduling and dispatching to custom workflows and Google Workspace integration.",
       features: [
         "Visual workflow builder",
         "Custom automations",
@@ -792,7 +792,7 @@ function WhyDifferent() {
   const cards = [
     {
       title: "Built for contractors, not generic sales teams",
-      desc: "RenoMeta Connect is designed around renovation, construction, and home service workflows — from first inquiry to estimate, booking, follow-up, and project communication.",
+      desc: "RenoMeta Connect is designed around renovation, construction, and home service workflows - from first inquiry to estimate, booking, follow-up, and project communication.",
     },
     {
       title: "Everything talks to everything",
@@ -800,7 +800,7 @@ function WhyDifferent() {
     },
     {
       title: "AI Center included across plans",
-      desc: "Core AI agents and tools are part of the platform experience. Pricing tiers differ by usage limits like seats, contacts, SMS, and AI runs — not by locking away the core system.",
+      desc: "Core AI agents and tools are part of the platform experience. Pricing tiers differ by usage limits like seats, contacts, SMS, and AI runs - not by locking away the core system.",
     },
     {
       title: "True organization-level separation",
@@ -844,7 +844,7 @@ function WebsiteLayer() {
       icon: Layers,
       tag: "Command center",
       title: "RenoMeta Connect",
-      desc: "The platform that manages and converts the lead — inbox, CRM, estimates, scheduling, automation.",
+      desc: "The platform that manages and converts the lead - inbox, CRM, estimates, scheduling, automation.",
       highlight: true,
     },
     {

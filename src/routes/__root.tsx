@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      { title: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
       {
         name: "description",
         content:
@@ -89,14 +89,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "RenoMeta" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      { property: "og:title", content: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
       {
         property: "og:description",
         content:
           "Manage leads, conversations, estimates, scheduling, marketing, and follow-up in one connected platform built for renovation contractors.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "RenoMeta Connect — Business Command Center for Renovation Contractors" },
+      { name: "twitter:title", content: "RenoMeta Connect - Business Command Center for Renovation Contractors" },
       {
         name: "twitter:description",
         content:

@@ -97,7 +97,7 @@ function CustomPage() {
 
       <CTASection
         title="Discuss a Custom Build"
-        desc="Bring us your workflow — we'll show you what's possible on top of Connect."
+        desc="Bring us your workflow - we'll show you what's possible on top of Connect."
         primary={{ label: "Discuss a Custom Build", to: "/contact" }}
         secondary={{ label: "See AI Agents", to: "/ai-center" }}
       />
