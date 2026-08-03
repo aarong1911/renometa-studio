@@ -30,10 +30,10 @@ export const Route = createFileRoute("/multi-channel-inbox")({
         content:
           "SMS, WhatsApp, Messenger, Instagram DMs, missed calls, and voice conversations in one connected inbox.",
       },
-      { property: "og:title", content: "Multi-Channel Inbox" },
+      { property: "og:title", content: "Multi-Channel Inbox | RenoMeta" },
       { property: "og:description", content: "Every customer conversation in one inbox." },
       { property: "og:url", content: "/multi-channel-inbox" },
-      { name: "twitter:title", content: "Multi-Channel Inbox" },
+      { name: "twitter:title", content: "Multi-Channel Inbox | RenoMeta" },
       { name: "twitter:description", content: "Every customer conversation in one inbox." },
     ],
     links: [{ rel: "canonical", href: "/multi-channel-inbox" }],

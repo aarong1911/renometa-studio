@@ -29,10 +29,10 @@ export const Route = createFileRoute("/growth-operations")({
         content:
           "Optimize lead flow, response time, follow-up performance, conversion tracking, reporting, and workflow efficiency over time.",
       },
-      { property: "og:title", content: "Growth Operations" },
+      { property: "og:title", content: "Growth Operations | RenoMeta" },
       { property: "og:description", content: "Improve the system behind your growth." },
       { property: "og:url", content: "/growth-operations" },
-      { name: "twitter:title", content: "Growth Operations" },
+      { name: "twitter:title", content: "Growth Operations | RenoMeta" },
       { name: "twitter:description", content: "Improve the system behind your growth." },
     ],
     links: [{ rel: "canonical", href: "/growth-operations" }],

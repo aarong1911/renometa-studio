@@ -33,10 +33,10 @@ export const Route = createFileRoute("/ai-center")({
         content:
           "AI agents built for contractor workflows: qualify leads, follow up, draft estimates, summarize conversations, request reviews.",
       },
-      { property: "og:title", content: "AI Center" },
+      { property: "og:title", content: "AI Center | RenoMeta" },
       { property: "og:description", content: "AI agents built for contractor workflows." },
       { property: "og:url", content: "/ai-center" },
-      { name: "twitter:title", content: "AI Center" },
+      { name: "twitter:title", content: "AI Center | RenoMeta" },
       { name: "twitter:description", content: "AI agents built for contractor workflows." },
     ],
     links: [{ rel: "canonical", href: "/ai-center" }],

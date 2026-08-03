@@ -32,14 +32,14 @@ export const Route = createFileRoute("/ai-website-systems")({
         content:
           "Conversion-focused contractor websites that capture leads and send them directly into RenoMeta Connect.",
       },
-      { property: "og:title", content: "AI Website Systems" },
+      { property: "og:title", content: "AI Website Systems | RenoMeta" },
       {
         property: "og:description",
         content:
           "Websites that feed your contractor growth system.",
       },
       { property: "og:url", content: "/ai-website-systems" },
-      { name: "twitter:title", content: "AI Website Systems" },
+      { name: "twitter:title", content: "AI Website Systems | RenoMeta" },
       { name: "twitter:description", content: "Websites that feed your contractor growth system." },
     ],
     links: [{ rel: "canonical", href: "/ai-website-systems" }],

@@ -30,10 +30,10 @@ export const Route = createFileRoute("/custom-ai-solutions")({
         content:
           "Advanced workflows, integrations, dashboards, and automations built around unique business needs.",
       },
-      { property: "og:title", content: "Custom AI Solutions" },
+      { property: "og:title", content: "Custom AI Solutions | RenoMeta" },
       { property: "og:description", content: "Custom AI systems built around your business." },
       { property: "og:url", content: "/custom-ai-solutions" },
-      { name: "twitter:title", content: "Custom AI Solutions" },
+      { name: "twitter:title", content: "Custom AI Solutions | RenoMeta" },
       { name: "twitter:description", content: "Custom AI systems built around your business." },
     ],
     links: [{ rel: "canonical", href: "/custom-ai-solutions" }],

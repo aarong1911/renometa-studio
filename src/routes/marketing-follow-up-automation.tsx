@@ -30,10 +30,10 @@ export const Route = createFileRoute("/marketing-follow-up-automation")({
         content:
           "Run campaigns, nurture opportunities, request reviews, and keep your pipeline moving - all connected to your CRM.",
       },
-      { property: "og:title", content: "Marketing & Follow-Up Automation" },
+      { property: "og:title", content: "Marketing & Follow-Up Automation | RenoMeta" },
       { property: "og:description", content: "Marketing and follow-up connected to your CRM." },
       { property: "og:url", content: "/marketing-follow-up-automation" },
-      { name: "twitter:title", content: "Marketing & Follow-Up Automation" },
+      { name: "twitter:title", content: "Marketing & Follow-Up Automation | RenoMeta" },
       { name: "twitter:description", content: "Marketing and follow-up connected to your CRM." },
     ],
     links: [{ rel: "canonical", href: "/marketing-follow-up-automation" }],
