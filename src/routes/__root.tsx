@@ -131,12 +131,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "RenoMeta",
-          url: "/",
-          description:
-            "Business command center for renovation contractors and home service businesses.",
-          sameAs: [],
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "/#organization",
+              name: "RenoMeta",
+              url: "/",
+              logo: logoAsset.url,
+              description:
+                "Business command center for renovation contractors and home service businesses.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer support",
+                email: "support@renometa.com",
+                availableLanguage: "English",
+              },
+              sameAs: [],
+            },
+            {
+              "@type": "WebSite",
+              "@id": "/#website",
+              name: "RenoMeta",
+              url: "/",
+              description:
+                "RenoMeta Connect brings leads, conversations, estimates, scheduling, marketing, and follow-up into one connected platform for renovation contractors.",
+              publisher: { "@id": "/#organization" },
+            },
+          ],
         }),
       },
       {
