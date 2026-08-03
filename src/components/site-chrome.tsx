@@ -416,7 +416,7 @@ export function PageShell({
   eyebrow?: string;
   headline: string;
   subheading: string;
-  primaryCta?: { label: string; to: string };
+  primaryCta?: { label: string; to: string } | null;
   secondaryCta?: { label: string; to: string } | null;
   heroVisual?: ReactNode;
   children?: ReactNode;
@@ -447,20 +447,24 @@ export function PageShell({
               >
                 {subheading}
               </p>
-              <div
-                className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
-                style={{ animationDelay: "280ms" }}
-              >
-                <Link to={primaryCta.to} className="btn-primary">
-                  {primaryCta.label}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                {secondaryCta && (
-                  <Link to={secondaryCta.to} className="btn-ghost">
-                    {secondaryCta.label}
-                  </Link>
-                )}
-              </div>
+              {(primaryCta || secondaryCta) && (
+                <div
+                  className="mt-9 flex flex-wrap items-center gap-3 animate-reveal"
+                  style={{ animationDelay: "280ms" }}
+                >
+                  {primaryCta && (
+                    <Link to={primaryCta.to} className="btn-primary">
+                      {primaryCta.label}
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  )}
+                  {secondaryCta && (
+                    <Link to={secondaryCta.to} className="btn-ghost">
+                      {secondaryCta.label}
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
             {heroVisual && (
               <div className="mt-14 animate-reveal" style={{ animationDelay: "360ms" }}>
