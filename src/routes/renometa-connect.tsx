@@ -10,6 +10,7 @@ import {
   MockupFrame,
   Reveal,
 } from "@/components/page-primitives";
+import { TryAgentSection } from "@/components/try-agent-section";
 import {
   ArrowRight,
   Bot,
@@ -140,6 +141,8 @@ function ConnectPage() {
           ]}
         />
       </Section>
+
+      <TryAgentSection tone="surface" />
 
       <CTASection
         title="See Connect in Action"

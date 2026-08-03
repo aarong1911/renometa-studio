@@ -3,6 +3,7 @@ import { type ReactNode, type HTMLAttributes } from "react";
 import { useReveal } from "@/hooks/use-reveal";
 import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { PillarVisual } from "@/components/visuals";
+import { TryAgentSection } from "@/components/try-agent-section";
 
 import {
   ArrowRight,
@@ -69,6 +70,7 @@ function HomePage() {
         <WebsiteLayer />
         <HowItWorks />
         <Outcomes />
+        <TryAgentSection />
         <FinalCTA />
       </main>
       <SiteFooter />
