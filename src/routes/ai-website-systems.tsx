@@ -166,7 +166,6 @@ function WebsiteMockup() {
               src={chatbotIcon.url}
               alt="AI chat"
               className="absolute bottom-0 right-0 h-11 w-11 object-contain"
-              style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(93%) saturate(373%) hue-rotate(8deg) brightness(0.98)" }}
             />
           </div>
         </div>
