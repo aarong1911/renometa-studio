@@ -157,10 +157,9 @@ function WebsiteMockup() {
             <span className="btn-primary text-[12.5px] px-4 py-2">Book a site visit</span>
             <span className="btn-ghost text-[12.5px] px-4 py-2">See past kitchens</span>
           </div>
-          <div className="mt-6 grid grid-cols-3 gap-2">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="aspect-[4/3] rounded-lg border border-border bg-gradient-to-br from-gold-soft/50 to-surface" />
-            ))}
+          <div className="mt-6 flex items-center justify-end gap-2 rounded-lg border border-border bg-surface px-3 py-2.5">
+            <span className="text-[12px] text-muted-foreground">Ask any question about our services</span>
+            <Bot className="h-4 w-4 text-gold" />
           </div>
         </div>
       </MockupFrame>
