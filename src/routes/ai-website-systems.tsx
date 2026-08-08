@@ -167,7 +167,7 @@ function WebsiteMockup() {
       <div className="rounded-2xl border border-border bg-surface-elevated p-5 shadow-elegant flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-1.5 text-[12px] font-medium">
-            <Zap className="h-3.5 w-3.5 text-gold" /> Connected to Connect
+            <Zap className="h-3.5 w-3.5 text-gold" /> Connected to RenoMeta Connect
           </div>
           <div className="mt-4 space-y-2.5">
             {[
