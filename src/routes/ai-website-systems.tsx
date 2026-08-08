@@ -10,7 +10,6 @@ import {
   SplitCallout,
 } from "@/components/page-primitives";
 import {
-  Bot,
   Calendar,
   FileText,
   Globe,
@@ -22,6 +21,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import chatbotIcon from "@/assets/chatbot-icon.png.asset.json";
 
 export const Route = createFileRoute("/ai-website-systems")({
   head: () => ({
