@@ -158,14 +158,14 @@ function WebsiteMockup() {
             <span className="btn-primary text-[12.5px] px-4 py-2">Book a site visit</span>
             <span className="btn-ghost text-[12.5px] px-4 py-2">See past kitchens</span>
           </div>
-          <div className="relative mt-6 h-12">
-            <span className="absolute bottom-1.5 right-[52px] text-[12px] text-muted-foreground whitespace-nowrap">
+          <div className="mt-6 flex h-12 items-center justify-end gap-3">
+            <span className="text-[12px] text-muted-foreground whitespace-nowrap">
               Ask any question about our services
             </span>
             <img
               src={chatbotIcon.url}
               alt="AI chat"
-              className="absolute bottom-0 right-0 h-11 w-11 object-contain"
+              className="h-11 w-11 object-contain"
             />
           </div>
         </div>
