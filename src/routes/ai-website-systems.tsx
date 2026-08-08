@@ -22,6 +22,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import chatbotIcon from "@/assets/chatbot-icon.png.asset.json";
 
 export const Route = createFileRoute("/ai-website-systems")({
   head: () => ({
@@ -157,9 +158,16 @@ function WebsiteMockup() {
             <span className="btn-primary text-[12.5px] px-4 py-2">Book a site visit</span>
             <span className="btn-ghost text-[12.5px] px-4 py-2">See past kitchens</span>
           </div>
-          <div className="mt-6 flex items-center justify-end gap-2 rounded-lg border border-border bg-surface px-3 py-2.5">
-            <span className="text-[12px] text-muted-foreground">Ask any question about our services</span>
-            <Bot className="h-4 w-4 text-gold" />
+          <div className="relative mt-6 h-12">
+            <span className="absolute bottom-1.5 right-[52px] text-[12px] text-muted-foreground whitespace-nowrap">
+              Ask any question about our services
+            </span>
+            <img
+              src={chatbotIcon.url}
+              alt="AI chat"
+              className="absolute bottom-0 right-0 h-11 w-11 object-contain"
+              style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(93%) saturate(373%) hue-rotate(8deg) brightness(0.98)" }}
+            />
           </div>
         </div>
       </MockupFrame>
