@@ -10,6 +10,7 @@ import {
   SplitCallout,
 } from "@/components/page-primitives";
 import {
+  Bot,
   Calendar,
   FileText,
   Globe,
