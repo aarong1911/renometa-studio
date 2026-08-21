@@ -9,64 +9,64 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TryAgentRouteImport } from './routes/try-agent'
-import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
-import { Route as SolutionsRouteImport } from './routes/solutions'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RenometaConnectRouteImport } from './routes/renometa-connect'
-import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as MultiChannelInboxRouteImport } from './routes/multi-channel-inbox'
-import { Route as MarketingFollowUpAutomationRouteImport } from './routes/marketing-follow-up-automation'
-import { Route as GrowthOperationsRouteImport } from './routes/growth-operations'
-import { Route as CustomAiSolutionsRouteImport } from './routes/custom-ai-solutions'
-import { Route as CrmSalesRouteImport } from './routes/crm-sales'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AiWebsiteSystemsRouteImport } from './routes/ai-website-systems'
-import { Route as AiCenterRouteImport } from './routes/ai-center'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AiCenterRouteImport } from './routes/ai-center'
+import { Route as AiWebsiteSystemsRouteImport } from './routes/ai-website-systems'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CrmSalesRouteImport } from './routes/crm-sales'
+import { Route as CustomAiSolutionsRouteImport } from './routes/custom-ai-solutions'
+import { Route as GrowthOperationsRouteImport } from './routes/growth-operations'
+import { Route as MarketingFollowUpAutomationRouteImport } from './routes/marketing-follow-up-automation'
+import { Route as MultiChannelInboxRouteImport } from './routes/multi-channel-inbox'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as RenometaConnectRouteImport } from './routes/renometa-connect'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as TryAgentRouteImport } from './routes/try-agent'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
-const TryAgentRoute = TryAgentRouteImport.update({
-  id: '/try-agent',
-  path: '/try-agent',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
-  id: '/terms-of-service',
-  path: '/terms-of-service',
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SolutionsRoute = SolutionsRouteImport.update({
-  id: '/solutions',
-  path: '/solutions',
+const AiCenterRoute = AiCenterRouteImport.update({
+  id: '/ai-center',
+  path: '/ai-center',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const AiWebsiteSystemsRoute = AiWebsiteSystemsRouteImport.update({
+  id: '/ai-website-systems',
+  path: '/ai-website-systems',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RenometaConnectRoute = RenometaConnectRouteImport.update({
-  id: '/renometa-connect',
-  path: '/renometa-connect',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
+const CrmSalesRoute = CrmSalesRouteImport.update({
+  id: '/crm-sales',
+  path: '/crm-sales',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
+const CustomAiSolutionsRoute = CustomAiSolutionsRouteImport.update({
+  id: '/custom-ai-solutions',
+  path: '/custom-ai-solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MultiChannelInboxRoute = MultiChannelInboxRouteImport.update({
-  id: '/multi-channel-inbox',
-  path: '/multi-channel-inbox',
+const GrowthOperationsRoute = GrowthOperationsRouteImport.update({
+  id: '/growth-operations',
+  path: '/growth-operations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingFollowUpAutomationRoute =
@@ -75,44 +75,44 @@ const MarketingFollowUpAutomationRoute =
     path: '/marketing-follow-up-automation',
     getParentRoute: () => rootRouteImport,
   } as any)
-const GrowthOperationsRoute = GrowthOperationsRouteImport.update({
-  id: '/growth-operations',
-  path: '/growth-operations',
+const MultiChannelInboxRoute = MultiChannelInboxRouteImport.update({
+  id: '/multi-channel-inbox',
+  path: '/multi-channel-inbox',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CustomAiSolutionsRoute = CustomAiSolutionsRouteImport.update({
-  id: '/custom-ai-solutions',
-  path: '/custom-ai-solutions',
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CrmSalesRoute = CrmSalesRouteImport.update({
-  id: '/crm-sales',
-  path: '/crm-sales',
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const RenometaConnectRoute = RenometaConnectRouteImport.update({
+  id: '/renometa-connect',
+  path: '/renometa-connect',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AiWebsiteSystemsRoute = AiWebsiteSystemsRouteImport.update({
-  id: '/ai-website-systems',
-  path: '/ai-website-systems',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AiCenterRoute = AiCenterRouteImport.update({
-  id: '/ai-center',
-  path: '/ai-center',
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const TryAgentRoute = TryAgentRouteImport.update({
+  id: '/try-agent',
+  path: '/try-agent',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -280,109 +280,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/try-agent': {
-      id: '/try-agent'
-      path: '/try-agent'
-      fullPath: '/try-agent'
-      preLoaderRoute: typeof TryAgentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms-of-service': {
-      id: '/terms-of-service'
-      path: '/terms-of-service'
-      fullPath: '/terms-of-service'
-      preLoaderRoute: typeof TermsOfServiceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/solutions': {
-      id: '/solutions'
-      path: '/solutions'
-      fullPath: '/solutions'
-      preLoaderRoute: typeof SolutionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/renometa-connect': {
-      id: '/renometa-connect'
-      path: '/renometa-connect'
-      fullPath: '/renometa-connect'
-      preLoaderRoute: typeof RenometaConnectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy-policy': {
-      id: '/privacy-policy'
-      path: '/privacy-policy'
-      fullPath: '/privacy-policy'
-      preLoaderRoute: typeof PrivacyPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/multi-channel-inbox': {
-      id: '/multi-channel-inbox'
-      path: '/multi-channel-inbox'
-      fullPath: '/multi-channel-inbox'
-      preLoaderRoute: typeof MultiChannelInboxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/marketing-follow-up-automation': {
-      id: '/marketing-follow-up-automation'
-      path: '/marketing-follow-up-automation'
-      fullPath: '/marketing-follow-up-automation'
-      preLoaderRoute: typeof MarketingFollowUpAutomationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/growth-operations': {
-      id: '/growth-operations'
-      path: '/growth-operations'
-      fullPath: '/growth-operations'
-      preLoaderRoute: typeof GrowthOperationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/custom-ai-solutions': {
-      id: '/custom-ai-solutions'
-      path: '/custom-ai-solutions'
-      fullPath: '/custom-ai-solutions'
-      preLoaderRoute: typeof CustomAiSolutionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/crm-sales': {
-      id: '/crm-sales'
-      path: '/crm-sales'
-      fullPath: '/crm-sales'
-      preLoaderRoute: typeof CrmSalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-website-systems': {
-      id: '/ai-website-systems'
-      path: '/ai-website-systems'
-      fullPath: '/ai-website-systems'
-      preLoaderRoute: typeof AiWebsiteSystemsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-center': {
-      id: '/ai-center'
-      path: '/ai-center'
-      fullPath: '/ai-center'
-      preLoaderRoute: typeof AiCenterRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -392,11 +294,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/ai-center': {
+      id: '/ai-center'
+      path: '/ai-center'
+      fullPath: '/ai-center'
+      preLoaderRoute: typeof AiCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-website-systems': {
+      id: '/ai-website-systems'
+      path: '/ai-website-systems'
+      fullPath: '/ai-website-systems'
+      preLoaderRoute: typeof AiWebsiteSystemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm-sales': {
+      id: '/crm-sales'
+      path: '/crm-sales'
+      fullPath: '/crm-sales'
+      preLoaderRoute: typeof CrmSalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-ai-solutions': {
+      id: '/custom-ai-solutions'
+      path: '/custom-ai-solutions'
+      fullPath: '/custom-ai-solutions'
+      preLoaderRoute: typeof CustomAiSolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/growth-operations': {
+      id: '/growth-operations'
+      path: '/growth-operations'
+      fullPath: '/growth-operations'
+      preLoaderRoute: typeof GrowthOperationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing-follow-up-automation': {
+      id: '/marketing-follow-up-automation'
+      path: '/marketing-follow-up-automation'
+      fullPath: '/marketing-follow-up-automation'
+      preLoaderRoute: typeof MarketingFollowUpAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/multi-channel-inbox': {
+      id: '/multi-channel-inbox'
+      path: '/multi-channel-inbox'
+      fullPath: '/multi-channel-inbox'
+      preLoaderRoute: typeof MultiChannelInboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/renometa-connect': {
+      id: '/renometa-connect'
+      path: '/renometa-connect'
+      fullPath: '/renometa-connect'
+      preLoaderRoute: typeof RenometaConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/try-agent': {
+      id: '/try-agent'
+      path: '/try-agent'
+      fullPath: '/try-agent'
+      preLoaderRoute: typeof TryAgentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
