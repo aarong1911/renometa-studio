@@ -121,7 +121,7 @@ function Hero() {
   Run and Grow Your Contracting Business
 </span>
 <span className="block sm:whitespace-nowrap">
-  From One Place
+  Business From One Place
 </span>
           </h1>
           <p
