@@ -11,8 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import logoAsset from "@/assets/renometa-logo.webp.asset.json";
 import { SiteChatbot } from "@/components/site-chatbot";
+
+const LOGO_URL = "/renometa-logo.png";
 
 function NotFoundComponent() {
   return (
@@ -118,8 +119,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "preload",
         as: "image",
-        href: logoAsset.url,
-        type: "image/webp",
+        href: LOGO_URL,
+        type: "image/png",
         fetchpriority: "high",
       },
       // Non-critical: load Google Fonts CSS without blocking first paint.
@@ -144,7 +145,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               "@id": "/#organization",
               name: "RenoMeta",
               url: "/",
-              logo: logoAsset.url,
+              logo: LOGO_URL,
               description:
                 "Business command center for renovation contractors and home service businesses.",
               contactPoint: {

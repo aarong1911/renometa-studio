@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
-import logoAsset from "@/assets/renometa-logo.webp.asset.json";
 
 export const SOLUTIONS: { to: string; label: string; desc: string }[] = [
   { to: "/renometa-connect", label: "RenoMeta Connect", desc: "The business command center for renovation contractors." },
@@ -22,12 +21,12 @@ export const TRY_AGENT_ITEM = {
 } as const;
 
 
-export const LOGO_URL = logoAsset.url;
+export const LOGO_URL = "/renometa-logo.png";
 
 export function Logo({ className = "h-8 w-auto" }: { className?: string }) {
   return (
     <img
-      src={logoAsset.url}
+      src={LOGO_URL}
       alt="RenoMeta"
       className={className}
       width={498}
