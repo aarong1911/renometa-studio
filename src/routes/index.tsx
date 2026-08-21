@@ -118,7 +118,7 @@ function Hero() {
             style={{ animationDelay: "60ms" }}
           >
             <span className="block sm:whitespace-nowrap">
-  Run and Grow Your Contracting Business
+  Run and Grow Your Contracting
 </span>
 <span className="block sm:whitespace-nowrap">
   Business From One Place
