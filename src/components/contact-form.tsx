@@ -13,14 +13,46 @@ const SERVICES = [
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [smsConsent, setSmsConsent] = useState(false);
   const serviceId = useId();
   const messageId = useId();
   const smsId = useId();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("/.netlify/functions/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          company: data.get("company"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          service: data.get("service"),
+          message: data.get("message"),
+          consent: data.get("smsConsent") === "on",
+          source: "contact-form",
+        }),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || "Unable to send your message.");
+      setSubmitted(true);
+      form.reset();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to send your message.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -98,9 +130,9 @@ export function ContactForm() {
           />
           <span className="text-[12.5px] leading-relaxed text-muted-foreground">
             (Optional) By checking this box, you agree to receive SMS messages from RenoMeta.
-            Message frequency varies (up to 5 messages per month). Message and data rates may
-            apply. Reply STOP to opt out or HELP for help. Consent is not a condition of
-            purchase, receiving services, or completing any transaction. View our{" "}
+            Message frequency varies (up to 5 messages per month). Message and data rates may apply.
+            Reply STOP to opt out or HELP for help. Consent is not a condition of purchase,
+            receiving services, or completing any transaction. View our{" "}
             <Link to="/privacy-policy" className="underline hover:text-foreground">
               Privacy Policy
             </Link>{" "}
@@ -114,9 +146,14 @@ export function ContactForm() {
       </div>
 
       <button type="submit" className="btn-primary w-full sm:w-auto">
-        Send Message
+        {submitting ? "Sending..." : "Send Message"}
         <ArrowRight className="h-4 w-4" />
       </button>
+      {error && (
+        <p role="alert" className="text-sm text-red-600">
+          {error}
+        </p>
+      )}
     </form>
   );
 }
@@ -135,10 +172,7 @@ function Field({
   const id = useId();
   return (
     <div>
-      <label
-        htmlFor={id}
-        className="block text-[12.5px] font-medium text-foreground/80 mb-1.5"
-      >
+      <label htmlFor={id} className="block text-[12.5px] font-medium text-foreground/80 mb-1.5">
         {label}
         {required && <span className="text-gold ml-0.5">*</span>}
       </label>

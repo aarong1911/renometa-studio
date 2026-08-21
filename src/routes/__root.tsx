@@ -11,7 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import logoAsset from "@/assets/renometa-logo.webp.asset.json";
+import { SiteChatbot } from "@/components/site-chatbot";
+
+const LOGO_URL = "/renometa-logo.png";
 
 function NotFoundComponent() {
   return (
@@ -89,14 +91,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "RenoMeta" },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:title", content: "Business Command Center for Renovation Contractors | RenoMeta Connect" },
+      {
+        property: "og:title",
+        content: "Business Command Center for Renovation Contractors | RenoMeta Connect",
+      },
       {
         property: "og:description",
         content:
           "Manage leads, conversations, estimates, scheduling, marketing, and follow-up in one connected platform built for renovation contractors.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Business Command Center for Renovation Contractors | RenoMeta Connect" },
+      {
+        name: "twitter:title",
+        content: "Business Command Center for Renovation Contractors | RenoMeta Connect",
+      },
       {
         name: "twitter:description",
         content:
@@ -111,8 +119,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "preload",
         as: "image",
-        href: logoAsset.url,
-        type: "image/webp",
+        href: LOGO_URL,
+        type: "image/png",
         fetchpriority: "high",
       },
       // Non-critical: load Google Fonts CSS without blocking first paint.
@@ -137,7 +145,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               "@id": "/#organization",
               name: "RenoMeta",
               url: "/",
-              logo: logoAsset.url,
+              logo: LOGO_URL,
               description:
                 "Business command center for renovation contractors and home service businesses.",
               contactPoint: {
@@ -193,6 +201,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <SiteChatbot />
     </QueryClientProvider>
   );
 }
