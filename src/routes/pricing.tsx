@@ -1,12 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
-import {
-  Section,
-  SectionHeader,
-  CTASection,
-  Reveal,
-} from "@/components/page-primitives";
+import { Section, SectionHeader, CTASection, Reveal } from "@/components/page-primitives";
 import { ArrowRight, Check } from "lucide-react";
+import { useState } from "react";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -39,8 +35,10 @@ export const Route = createFileRoute("/pricing")({
 const PLANS = [
   {
     name: "Starter",
-    tagline: "For small businesses ready to connect leads, conversations, and follow-up.",
-    price: "$79",
+    bestFor: "Owner-led businesses",
+    promise: "Capture leads and manage daily customer activity.",
+    monthlyPrice: 79,
+    annualPrice: 67,
     suffix: "/ month",
     scale: "starter",
     highlights: ["2 users", "1,000 contacts", "1,000 SMS / month", "500 AI actions / month"],
@@ -48,26 +46,43 @@ const PLANS = [
   },
   {
     name: "Growth",
-    tagline: "For growing teams handling more leads, conversations, and automation.",
-    price: "$199",
+    bestFor: "Growing sales teams",
+    promise: "Automate follow-up and convert more opportunities.",
+    monthlyPrice: 199,
+    annualPrice: 169,
     suffix: "/ month",
     scale: "most popular",
-    highlights: ["Up to 5 users", "10,000 contacts", "5,000 SMS / month", "5,000 AI actions / month"],
+    highlights: [
+      "Up to 5 users",
+      "10,000 contacts",
+      "5,000 SMS / month",
+      "5,000 AI actions / month",
+    ],
     cta: "Start Free",
     featured: true,
   },
   {
     name: "Scale",
-    tagline: "For established businesses running AI and automation across their operation.",
-    price: "$399",
+    bestFor: "Established contractors",
+    promise: "Coordinate teams, brands, reporting, and advanced workflows.",
+    monthlyPrice: 399,
+    annualPrice: 339,
     suffix: "/ month",
     scale: "scale",
-    highlights: ["Up to 15 users", "50,000 contacts", "20,000 SMS / month", "20,000 AI actions / month"],
+    highlights: [
+      "Up to 15 users",
+      "50,000 contacts",
+      "20,000 SMS / month",
+      "20,000 AI actions / month",
+    ],
     cta: "Talk to Sales",
   },
 ];
 
-const FEATURES: { group: string; rows: [string, boolean | string, boolean | string, boolean | string][] }[] = [
+const FEATURES: {
+  group: string;
+  rows: [string, boolean | string, boolean | string, boolean | string][];
+}[] = [
   {
     group: "Core platform",
     rows: [
@@ -101,7 +116,12 @@ const FEATURES: { group: string; rows: [string, boolean | string, boolean | stri
       ["Meta Lead Ads", true, true, true],
       ["Facebook Messenger", true, true, true],
       ["Instagram Messaging", true, true, true],
-      ["WhatsApp Business", "Included, usage-based messaging", "Included, usage-based messaging", "Included, custom usage plan"],
+      [
+        "WhatsApp Business",
+        "Integration included; Meta fees separate",
+        "Integration included; Meta fees separate",
+        "Integration included; custom usage plan",
+      ],
       ["Custom Integrations", "Not included", "Available as add-on", "Included/custom scope"],
     ],
   },
@@ -129,7 +149,12 @@ const FEATURES: { group: string; rows: [string, boolean | string, boolean | stri
   },
 ];
 
-const ADDONS: { title: string; desc: string; label: string; link?: { label: string; to: string } }[] = [
+const ADDONS: {
+  title: string;
+  desc: string;
+  label: string;
+  link?: { label: string; to: string };
+}[] = [
   {
     title: "AI Voice",
     desc: "AI-powered calling for lead response, qualification, follow-up, and appointment booking.",
@@ -148,7 +173,7 @@ const ADDONS: { title: string; desc: string; label: string; link?: { label: stri
   {
     title: "Additional Users",
     desc: "Add team members as your operation grows without immediately changing plans.",
-    label: "Available on demand",
+    label: "Priced per seat",
   },
   {
     title: "Additional Phone Numbers",
@@ -164,16 +189,49 @@ const ADDONS: { title: string; desc: string; label: string; link?: { label: stri
 ];
 
 function PricingPage() {
+  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+
   return (
     <PageShell
       eyebrow="Pricing"
-      headline="AI and Automation Included on Every Plan"
-      subheading="Start with the tools you need today. As your business grows, your plan scales with your team, contacts, messaging, and AI usage."
+      headline="Simple Pricing That Grows With Your Business"
+      subheading="Every plan includes the CRM, inbox, pipeline, AI tools, and automation. Choose the capacity that fits your team today and expand as you grow."
       primaryCta={{ label: "Find the Right Plan", to: "/contact" }}
       secondaryCta={{ label: "See the Platform", to: "/renometa-connect" }}
     >
       <Section>
         <h2 className="sr-only">Pricing Plans</h2>
+        <div className="mb-10 flex justify-center">
+          <div
+            className="inline-flex rounded-full border border-border bg-surface p-1"
+            aria-label="Billing period"
+          >
+            <button
+              type="button"
+              onClick={() => setBilling("monthly")}
+              className={`rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
+                billing === "monthly"
+                  ? "bg-surface-elevated text-foreground shadow-card"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              aria-pressed={billing === "monthly"}
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              onClick={() => setBilling("annual")}
+              className={`rounded-full px-4 py-2 text-[13px] font-medium transition-colors ${
+                billing === "annual"
+                  ? "bg-surface-elevated text-foreground shadow-card"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              aria-pressed={billing === "annual"}
+            >
+              Annual <span className="text-gold-strong">· Save 15%</span>
+            </button>
+          </div>
+        </div>
         <div className="grid gap-6 lg:grid-cols-3">
           {PLANS.map((p, i) => (
             <Reveal key={p.name} delay={i * 70}>
@@ -192,12 +250,27 @@ function PricingPage() {
                 <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
                   {p.scale}
                 </div>
-                <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight">{p.name}</h3>
-                <p className="mt-2 text-[14px] text-muted-foreground leading-relaxed">{p.tagline}</p>
+                <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight">
+                  {p.name}
+                </h3>
+                <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  Best for: {p.bestFor}
+                </p>
+                <p className="mt-3 text-[14px] text-muted-foreground leading-relaxed">
+                  {p.promise}
+                </p>
                 <div className="mt-6 flex items-baseline gap-2">
-                  <div className="font-display text-4xl font-semibold tracking-tight">{p.price}</div>
+                  <div className="font-display text-4xl font-semibold tracking-tight">
+                    {p.name === "Scale" && (
+                      <span className="mr-1 text-base text-muted-foreground">From</span>
+                    )}
+                    ${billing === "annual" ? p.annualPrice : p.monthlyPrice}
+                  </div>
                   <div className="text-[13px] text-muted-foreground">{p.suffix}</div>
                 </div>
+                {billing === "annual" && (
+                  <p className="mt-1.5 text-[12px] text-muted-foreground">Billed annually</p>
+                )}
                 <ul className="mt-6 space-y-2.5 flex-1">
                   {p.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2.5 text-[14px]">
@@ -206,35 +279,52 @@ function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  to="/contact"
-                  className={`mt-8 w-full text-center ${p.featured ? "btn-primary" : "btn-ghost"}`}
-                  aria-label={`${p.cta} for the ${p.name} plan - contact sales`}
-                >
-                  {p.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                {p.name === "Scale" ? (
+                  <Link
+                    to="/contact"
+                    className="mt-8 w-full text-center btn-ghost"
+                    aria-label="Talk to sales about the Scale plan"
+                  >
+                    Talk to Sales
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                ) : (
+                  <a
+                    href="https://connect.renometa.com/signup"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`mt-8 w-full text-center ${p.featured ? "btn-primary" : "btn-ghost"}`}
+                    aria-label={`Start a free trial of the ${p.name} plan`}
+                  >
+                    Start Free
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                )}
               </div>
             </Reveal>
           ))}
         </div>
         <Reveal delay={220}>
-          <p className="mt-10 text-center text-[13.5px] text-muted-foreground max-w-2xl mx-auto">
-            AI and automation are included on every plan. Plans scale with your business,
-            usage, and team - so you can start lean and add capacity as you grow.
+          <p className="mt-10 text-center text-[13.5px] text-muted-foreground max-w-3xl mx-auto">
+            14-day free trial · No credit card required · Guided onboarding included · Cancel
+            anytime
+          </p>
+          <p className="mt-3 text-center text-[12.5px] text-muted-foreground max-w-3xl mx-auto">
+            An AI action is one completed AI task, such as qualifying a lead, drafting a response,
+            summarizing a conversation, or generating follow-up. We notify you before you reach your
+            included capacity so you can add usage or upgrade without interrupting your workflows.
           </p>
         </Reveal>
       </Section>
 
       <Section tone="surface">
-        <SectionHeader
-          eyebrow="Comparison"
-          title="Compare RenoMeta Connect plans"
-        />
+        <SectionHeader eyebrow="Comparison" title="Compare RenoMeta Connect plans" />
         <Reveal>
           <ComparisonTable />
           <p className="mt-4 text-[13px] text-muted-foreground max-w-3xl">
-            <span className="font-medium text-foreground">Custom Integrations</span> means custom connections to third-party tools, internal systems, APIs, webhooks, or business-specific workflows beyond the standard built-in integrations.
+            <span className="font-medium text-foreground">Custom Integrations</span> means custom
+            connections to third-party tools, internal systems, APIs, webhooks, or business-specific
+            workflows beyond the standard built-in integrations.
           </p>
         </Reveal>
       </Section>
@@ -284,7 +374,11 @@ function PricingPage() {
             },
             {
               q: "What happens if I exceed my monthly usage?",
-              a: "We'll let you know as you approach your included capacity. You can add additional usage or move to a higher plan without interrupting your workflows or lead follow-up.",
+              a: "We'll let you know before you reach your included capacity. You can approve additional usage or move to a higher plan without interrupting your workflows or lead follow-up. Any additional rate is shown before you approve it.",
+            },
+            {
+              q: "What counts as an AI action?",
+              a: "An AI action is one completed AI task, such as qualifying a lead, drafting a response, summarizing a conversation, generating follow-up, or preparing an estimate draft.",
             },
             {
               q: "How does AI Voice usage-based pricing work?",
@@ -292,7 +386,7 @@ function PricingPage() {
             },
             {
               q: "How is WhatsApp usage billed?",
-              a: "WhatsApp Business is included on every plan, but messaging is usage-based. Starter and Growth include usage-based messaging rates, while Scale offers a custom usage plan for higher-volume messaging and teams with specific campaign needs.",
+              a: "The WhatsApp Business integration is included on every plan. Meta's messaging charges are billed separately based on usage. Scale customers can arrange a custom usage plan for higher-volume messaging.",
             },
             {
               q: "What's included in Custom Integrations?",
