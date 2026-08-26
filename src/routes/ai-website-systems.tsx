@@ -22,7 +22,6 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import chatbotIcon from "@/assets/chatbot-icon.png.asset.json";
 
 export const Route = createFileRoute("/ai-website-systems")({
   head: () => ({
@@ -144,29 +143,64 @@ function WebsiteMockup() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] items-stretch">
       <MockupFrame url="yourcontractorsite.com / kitchen-remodel">
-        <div className="p-6 sm:p-8">
-          <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            Kitchen renovation
+        <div className="relative overflow-hidden bg-background">
+          <div className="flex items-center justify-between border-b border-border px-5 py-3 sm:px-7">
+            <div className="font-display text-[13px] font-semibold tracking-tight">
+              NORTHLINE <span className="text-gold">BUILDERS</span>
+            </div>
+            <div className="hidden items-center gap-4 text-[10.5px] text-muted-foreground sm:flex">
+              <span>Services</span>
+              <span>Projects</span>
+              <span>Reviews</span>
+              <span className="font-medium text-foreground">(555) 014-2026</span>
+            </div>
           </div>
-          <h3 className="mt-3 font-display text-2xl sm:text-3xl font-semibold tracking-tight leading-tight">
-            Custom kitchen builds, delivered on time.
-          </h3>
-          <p className="mt-3 text-[13.5px] text-muted-foreground max-w-md leading-relaxed">
-            Design, permitting, and installation from a single team. Fixed timeline. Fixed price.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <span className="btn-primary text-[12.5px] px-4 py-2">Book a site visit</span>
-            <span className="btn-ghost text-[12.5px] px-4 py-2">See past kitchens</span>
+
+          <div className="grid min-h-[255px] sm:grid-cols-[1.08fr_.92fr]">
+            <div className="p-6 sm:p-7">
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-2.5 py-1 text-[9.5px] font-medium uppercase tracking-[0.13em] text-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+                Design-build remodeling
+              </div>
+              <h3 className="mt-4 font-display text-2xl font-semibold leading-[1.08] tracking-tight sm:text-[28px]">
+                A kitchen designed around the way you live.
+              </h3>
+              <p className="mt-3 max-w-sm text-[12.5px] leading-relaxed text-muted-foreground">
+                Thoughtful design, transparent planning, and expert construction—from the first sketch to the final detail.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <span className="btn-primary px-4 py-2 text-[11.5px]">Plan my remodel</span>
+                <span className="btn-ghost px-4 py-2 text-[11.5px]">View our work</span>
+              </div>
+              <div className="mt-5 flex items-center gap-3 text-[10.5px] text-muted-foreground">
+                <span className="font-semibold text-gold">★★★★★</span>
+                <span><strong className="text-foreground">4.9</strong> from 120+ homeowners</span>
+              </div>
+            </div>
+
+            <div className="relative m-4 min-h-[210px] overflow-hidden rounded-xl border border-border bg-[linear-gradient(145deg,#e8e0d3_0%,#c9b49b_48%,#75614e_100%)] sm:ml-0">
+              <div className="absolute inset-x-4 bottom-4 rounded-lg border border-white/30 bg-black/55 p-3 text-white backdrop-blur-sm">
+                <div className="text-[9px] uppercase tracking-[0.15em] text-white/65">Featured project</div>
+                <div className="mt-1 text-[12px] font-medium">Warm modern kitchen · Austin, TX</div>
+                <div className="mt-1 text-[9.5px] text-white/70">Custom millwork · Natural stone · 9 weeks</div>
+              </div>
+              <div className="absolute right-3 top-3 rounded-full border border-white/30 bg-black/35 px-2 py-1 text-[9px] text-white backdrop-blur-sm">
+                View project →
+              </div>
+            </div>
           </div>
-          <div className="mt-6 flex h-12 items-center justify-end gap-3">
-            <span className="text-[12px] text-muted-foreground whitespace-nowrap">
-              Ask any question about our services
+
+          <div className="absolute bottom-4 right-4 flex items-center gap-2">
+            <span className="rounded-full border border-border bg-background/95 px-3 py-2 text-[10.5px] text-muted-foreground shadow-elegant backdrop-blur">
+              Ask about your project
             </span>
-            <img
-              src={chatbotIcon.url}
-              alt="AI chat"
-              className="h-11 w-11 object-contain"
-            />
+            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-background shadow-elegant">
+              <img
+                src="/chatbot-icon-gold.png"
+                alt="Open AI project assistant"
+                className="h-9 w-9 object-contain"
+              />
+            </span>
           </div>
         </div>
       </MockupFrame>
