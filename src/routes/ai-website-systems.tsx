@@ -178,7 +178,13 @@ function WebsiteMockup() {
               </div>
             </div>
 
-            <div className="relative m-4 min-h-[210px] overflow-hidden rounded-xl border border-border bg-[linear-gradient(145deg,#e8e0d3_0%,#c9b49b_48%,#75614e_100%)] sm:ml-0">
+            <div className="relative m-4 min-h-[210px] overflow-hidden rounded-xl border border-border bg-surface sm:ml-0">
+              <img
+                src="/featured-kitchen-project.jpg"
+                alt="Completed warm modern kitchen remodeling project"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
               <div className="absolute inset-x-4 bottom-4 rounded-lg border border-white/30 bg-black/55 p-3 text-white backdrop-blur-sm">
                 <div className="text-[9px] uppercase tracking-[0.15em] text-white/65">Featured project</div>
                 <div className="mt-1 text-[12px] font-medium">Warm modern kitchen · Austin, TX</div>
@@ -190,15 +196,15 @@ function WebsiteMockup() {
             </div>
           </div>
 
-          <div className="absolute bottom-4 right-4 flex items-center gap-2">
-            <span className="rounded-full border border-border bg-background/95 px-3 py-2 text-[10.5px] text-muted-foreground shadow-elegant backdrop-blur">
-              Ask about your project
+          <div className="flex items-center justify-between border-t border-border bg-surface/60 px-5 py-2.5 sm:px-7">
+            <span className="text-[10.5px] text-muted-foreground">
+              Questions about your project? Our AI assistant is here to help.
             </span>
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-background shadow-elegant">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-background shadow-elegant">
               <img
                 src="/chatbot-icon-gold.png"
                 alt="Open AI project assistant"
-                className="h-9 w-9 object-contain"
+                className="h-8 w-8 object-contain"
               />
             </span>
           </div>
