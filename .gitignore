@@ -31,3 +31,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+
+# Local editor history
+.history/

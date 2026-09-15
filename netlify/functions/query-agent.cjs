@@ -2,18 +2,22 @@
 
 const { createClient } = require("@supabase/supabase-js");
 const OpenAI = require("openai");
+const { jsonResponse, preflightResponse } = require("./_shared/json.cjs");
+const { assertBodySize, validateQueryFields } = require("./_shared/validation.cjs");
+const { verifyCapabilityToken } = require("./_shared/capability.cjs");
+const { formatRateLimitResponse } = require("./_shared/rate-limit.cjs");
 
-const MAX_QUERIES_PER_WEBSITE = 10;
-const RESET_HOURS = 24;
+const QUERY_COOLDOWN_MS = 2000;
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
+const MAX_LIMIT_VALUE = 100000;
+
+function readIntEnv(name, fallback, max = MAX_LIMIT_VALUE) {
+  const n = Number.parseInt(process.env[name], 10);
+  if (!Number.isFinite(n) || n <= 0) return fallback;
+  return Math.min(n, max);
+}
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 function buildSystemPrompt(companyName) {
@@ -83,16 +87,12 @@ function formatResponseToHTML(rawAnswer) {
     .replace(/<book_appointment>[\s\S]*?<\/book_appointment>/g, "")
     .trim();
 
-  // Markdown links → clickable HTML
   answer = answer.replace(
     /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
     '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">$1</a>',
   );
-
-  // Markdown bold
   answer = answer.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-  // Numbered lists
   if (answer.match(/^\d+\.\s/m)) {
     answer = answer.replace(/\d+\.\s(.+)/g, "<li>$1</li>");
     answer = `<ol>${answer}</ol>`;
@@ -131,82 +131,114 @@ async function getEmbedding(text) {
   return response.data[0].embedding;
 }
 
-exports.handler = async (event) => {
-  console.log("--- query-agent function invoked ---");
-
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers: corsHeaders, body: "" };
+async function markConversationFailed(conversationId) {
+  if (!conversationId) return;
+  const { error } = await supabase
+    .from("agent_conversations")
+    .update({ status: "failed", answer: null })
+    .eq("id", conversationId);
+  if (error) {
+    console.error("query-agent: failed to mark conversation as failed", error.message);
   }
+}
+
+exports.handler = async (event) => {
+  if (event.httpMethod === "OPTIONS") return preflightResponse(event);
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, headers: corsHeaders, body: "Method Not Allowed" };
+    return jsonResponse(event, 405, { error: "Method Not Allowed" });
+  }
+
+  if (!assertBodySize(event.body)) {
+    return jsonResponse(event, 413, { error: "Request body too large." });
   }
 
   let parsedBody;
   try {
-    parsedBody = JSON.parse(event.body);
-  } catch (err) {
-    return { statusCode: 400, headers: corsHeaders, body: "Invalid JSON body provided" };
+    parsedBody = JSON.parse(event.body || "{}");
+  } catch {
+    return jsonResponse(event, 400, { error: "Invalid JSON body provided." });
   }
 
-  const { user_request_id, question, chat_history = [] } = parsedBody;
+  const {
+    user_request_id: userRequestId,
+    question,
+    chat_history: chatHistory = [],
+    token,
+  } = parsedBody;
 
-  if (!user_request_id || !question) {
-    return { statusCode: 400, headers: corsHeaders, body: "Missing user_request_id or question" };
+  if (!userRequestId || !question) {
+    return jsonResponse(event, 400, { error: "Missing user_request_id or question" });
   }
 
-  // Check query limit
-  const windowStart = new Date(Date.now() - RESET_HOURS * 60 * 60 * 1000).toISOString();
-  const { data: recentQueries, error: limitCheckError } = await supabase
+  const fieldErrors = validateQueryFields({ question, chat_history: chatHistory });
+  if (fieldErrors.length > 0) {
+    return jsonResponse(event, 400, { error: "invalid_fields", fields: fieldErrors });
+  }
+
+  const { data: requestRow, error: requestError } = await supabase
+    .from("agent_requests")
+    .select("company_name, status, access_token_hash, updated_at")
+    .eq("id", userRequestId)
+    .single();
+
+  // Same non-revealing response for "doesn't exist" and "bad token" so
+  // arbitrary/guessed request ids can't be used to probe or spend quota.
+  if (requestError || !requestRow) {
+    return jsonResponse(event, 404, { error: "Agent request not found." });
+  }
+  if (requestRow.access_token_hash && !verifyCapabilityToken(token, requestRow.access_token_hash)) {
+    return jsonResponse(event, 404, { error: "Agent request not found." });
+  }
+  if (requestRow.status !== "ready") {
+    return jsonResponse(event, 409, { error: "Agent is not ready to answer questions yet." });
+  }
+
+  // Lightweight per-request cooldown to slow down rapid repeated submissions;
+  // the real 10/24h quota is enforced atomically by the RPC below.
+  const { data: lastConversation } = await supabase
     .from("agent_conversations")
-    .select("id, created_at")
-    .eq("user_request_id", user_request_id)
-    .gte("created_at", windowStart);
-
-  if (limitCheckError) {
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: "Failed to verify usage limits" }),
-    };
+    .select("created_at")
+    .eq("user_request_id", userRequestId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (
+    lastConversation &&
+    Date.now() - new Date(lastConversation.created_at).getTime() < QUERY_COOLDOWN_MS
+  ) {
+    return jsonResponse(event, 429, formatRateLimitResponse("cooldown", null));
   }
 
-  if (recentQueries && recentQueries.length >= MAX_QUERIES_PER_WEBSITE) {
-    const oldest = recentQueries.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))[0];
-    const resetsAt = new Date(new Date(oldest.created_at).getTime() + RESET_HOURS * 60 * 60 * 1000);
-    const resetsAtStr = resetsAt.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
-    return {
-      statusCode: 429,
-      headers: corsHeaders,
-      body: JSON.stringify({
-        error: "limit_reached",
-        answer: `You've reached the limit of ${MAX_QUERIES_PER_WEBSITE} questions for this website in a 24-hour period. Your limit resets at ${resetsAtStr}.`,
-        resetsAt: resetsAt.toISOString(),
-      }),
-    };
+  const { data: reservation, error: reserveError } = await supabase.rpc(
+    "try_agent_reserve_question",
+    {
+      p_request_id: userRequestId,
+      p_question: question,
+      p_query_limit: readIntEnv("TRY_AGENT_QUERY_LIMIT", 10),
+      p_window_hours: readIntEnv("TRY_AGENT_WINDOW_HOURS", 24),
+    },
+  );
+
+  if (reserveError) {
+    console.error("query-agent: try_agent_reserve_question RPC failed", reserveError.message);
+    return jsonResponse(event, 500, { error: "Failed to verify usage limits" });
   }
 
-  // Fetch real company name from Supabase
-  let companyName = "our company";
-  try {
-    const { data: requestData } = await supabase
-      .from("agent_requests")
-      .select("company_name")
-      .eq("id", user_request_id)
-      .single();
-    if (requestData?.company_name) companyName = requestData.company_name;
-    console.log(`INFO: Using company name: ${companyName}`);
-  } catch (e) {
-    console.warn("Could not fetch company name:", e.message);
+  if (!reservation?.accepted) {
+    return jsonResponse(
+      event,
+      429,
+      formatRateLimitResponse(reservation?.limit_type, reservation?.retry_at),
+    );
   }
 
+  const conversationId = reservation.conversation_id;
+  const queryLimit = readIntEnv("TRY_AGENT_QUERY_LIMIT", 10);
+  const queriesRemaining = Math.max(0, queryLimit - (reservation.used_count ?? 0) - 1);
+  const companyName = requestRow.company_name || "our company";
   const systemPrompt = buildSystemPrompt(companyName);
 
   try {
-    // Query expansion for short inputs
     let searchQuestion = question;
     if (question.split(" ").length <= 3 && !question.includes("?")) {
       try {
@@ -230,39 +262,33 @@ Expanded:`,
         const expandedQuery = expansionResponse.choices[0]?.message?.content?.trim();
         if (expandedQuery && expandedQuery.length > question.length && expandedQuery.length < 200) {
           searchQuestion = expandedQuery;
-          console.log(`INFO: Query expanded to: "${searchQuestion}"`);
         }
       } catch (e) {
-        console.error("Query expansion failed:", e.message);
+        console.error("query-agent: query expansion failed", e.message);
       }
     }
 
-    // Vector search
     const queryEmbedding = await getEmbedding(searchQuestion);
     const { data: retrievedDocs, error: matchError } = await supabase.rpc("match_documents", {
       query_embedding: queryEmbedding,
       match_threshold: 0.01,
       match_count: 8,
-      filter_user_request_id: user_request_id,
+      filter_user_request_id: userRequestId,
     });
 
     if (matchError) {
-      return {
-        statusCode: 500,
-        headers: corsHeaders,
-        body: JSON.stringify({ error: `Vector search failed: ${matchError.message}` }),
-      };
+      await markConversationFailed(conversationId);
+      console.error("query-agent: vector search failed", matchError.message);
+      return jsonResponse(event, 500, { error: "The agent couldn't answer right now." });
     }
 
     const relevantDocs = (retrievedDocs || []).filter(
-      (doc) => doc.user_request_id === user_request_id,
+      (doc) => doc.user_request_id === userRequestId,
     );
-
-    // Even with no docs, give a helpful response using GPT
     const context =
       relevantDocs.length > 0 ? relevantDocs.map((doc) => doc.content).join("\n\n---\n\n") : null;
 
-    const historyMessages = (chat_history || []).slice(-6).map((msg) => ({
+    const historyMessages = (chatHistory || []).slice(-6).map((msg) => ({
       role: msg.role === "agent" ? "assistant" : "user",
       content: typeof msg.content === "string" ? msg.content.replace(/<[^>]*>/g, "") : msg.content,
     }));
@@ -285,32 +311,25 @@ Expanded:`,
       chatResponse.choices[0]?.message?.content || "I'm not sure how to respond to that.";
     const { html, quickReplies, bookAppointment } = formatResponseToHTML(rawAnswer);
 
-    // Store Q&A
-    const { error: insertError } = await supabase.from("agent_conversations").insert({
-      user_request_id,
-      question,
-      answer: rawAnswer,
-      created_at: new Date().toISOString(),
+    const { error: updateError } = await supabase
+      .from("agent_conversations")
+      .update({ answer: rawAnswer, status: "answered" })
+      .eq("id", conversationId);
+    if (updateError) {
+      console.error("query-agent: failed to store answer", updateError.message);
+    }
+
+    return jsonResponse(event, 200, {
+      answer: html,
+      quickReplies,
+      bookAppointment,
+      queriesRemaining,
     });
-    if (insertError) console.error("Failed to store Q&A:", insertError.message);
-
-    const queriesRemaining = MAX_QUERIES_PER_WEBSITE - (recentQueries?.length || 0) - 1;
-
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: JSON.stringify({ answer: html, quickReplies, bookAppointment, queriesRemaining }),
-    };
   } catch (error) {
-    console.error("FATAL ERROR in query-agent:", error.message);
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify({ error: error.message || "Internal server error" }),
-    };
+    await markConversationFailed(conversationId);
+    console.error("query-agent: unhandled error", error.message);
+    return jsonResponse(event, 500, { error: "The agent couldn't answer right now." });
   }
 };
 
-exports.config = {
-  timeout: 26,
-};
+exports.config = { timeout: 26 };

@@ -11,7 +11,7 @@ import {
   Send,
   User,
 } from "lucide-react";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import { PageShell } from "@/components/site-chrome";
 import { BenefitGrid, Section, SectionHeader } from "@/components/page-primitives";
 
@@ -51,92 +51,231 @@ type AgentForm = {
 
 type ChatMessage = { role: "user" | "agent"; content: string; quickReplies?: string[] };
 type Step = "form" | "training" | "chat";
+type BackendStatus = "pending" | "crawling" | "indexing" | "ready" | "failed";
 
 const EMPTY_FORM: AgentForm = { name: "", email: "", company: "", phone: "", website: "http://" };
+
+const TERMINAL_FAILURE_STATUSES = ["failed", "no_content", "crawling_initiation_failed"];
+
+const STAGE_LABELS: Record<BackendStatus, string> = {
+  pending: "Preparing your agent...",
+  crawling: "Reading your website...",
+  indexing: "Building your knowledge base...",
+  ready: "Agent training complete!",
+  failed: "Something went wrong.",
+};
+
+// The bar may creep forward within a stage while waiting for the next
+// confirmed backend value, but never past this stage's estimated ceiling.
+const STAGE_CEILING: Record<BackendStatus, number> = {
+  pending: 9,
+  crawling: 49,
+  indexing: 94,
+  ready: 100,
+  failed: 100,
+};
+
+function clampPercent(value: unknown): number {
+  const n = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(n)) return 0;
+  const pct = n <= 1 ? n * 100 : n;
+  return Math.min(100, Math.max(0, pct));
+}
+
+function statusToStage(status: string | undefined): BackendStatus {
+  if (status === "ready") return "ready";
+  if (status === "indexing") return "indexing";
+  if (status === "crawling") return "crawling";
+  if (TERMINAL_FAILURE_STATUSES.includes(status || "")) return "failed";
+  return "pending";
+}
 
 function TryAgentPage() {
   const [form, setForm] = useState<AgentForm>(EMPTY_FORM);
   const [step, setStep] = useState<Step>("form");
   const [requestId, setRequestId] = useState<string | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [status, setStatus] = useState("Initializing crawler...");
+  const [capabilityToken, setCapabilityToken] = useState<string | null>(null);
+  const [displayProgress, setDisplayProgress] = useState(0);
+  const [stage, setStage] = useState<BackendStatus>("pending");
+  const [estimated, setEstimated] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [queriesRemaining, setQueriesRemaining] = useState<number | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [turnstileReady, setTurnstileReady] = useState(false);
   const chatHistory = useRef<Array<{ role: string; content: string }>>([]);
+
+  const stageRef = useRef<BackendStatus>("pending");
+  const pollAbortRef = useRef<AbortController | null>(null);
+  const pollTimeoutRef = useRef<number | null>(null);
+  const creepIntervalRef = useRef<number | null>(null);
+  const pollingActiveRef = useRef(false);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
+  const turnstileTokenRef = useRef<string>("");
+  const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
 
   const update = (field: keyof AgentForm, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
+  const clearTimers = () => {
+    pollingActiveRef.current = false;
+    if (pollTimeoutRef.current) window.clearTimeout(pollTimeoutRef.current);
+    if (creepIntervalRef.current) window.clearInterval(creepIntervalRef.current);
+    pollAbortRef.current?.abort();
+    pollTimeoutRef.current = null;
+    creepIntervalRef.current = null;
+    pollAbortRef.current = null;
+  };
+
   const reset = () => {
+    clearTimers();
     setForm(EMPTY_FORM);
     setStep("form");
     setRequestId(null);
-    setProgress(0);
-    setStatus("Initializing crawler...");
+    setCapabilityToken(null);
+    setDisplayProgress(0);
+    setStage("pending");
+    setEstimated(false);
     setError(null);
     setInput("");
     setMessages([]);
     setQueriesRemaining(null);
     chatHistory.current = [];
+    turnstileTokenRef.current = "";
+    if (turnstileWidgetIdRef.current && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetIdRef.current);
+    }
   };
+
+  useEffect(() => clearTimers, []);
+
+  // Load the Cloudflare Turnstile script once and render a managed widget.
+  useEffect(() => {
+    if (step !== "form") return;
+    const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+    if (!siteKey) return;
+
+    function renderWidget() {
+      if (!turnstileContainerRef.current || !window.turnstile) return;
+      if (turnstileWidgetIdRef.current) return;
+      turnstileWidgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
+        sitekey: siteKey,
+        appearance: "interaction-only",
+        callback: (token: string) => {
+          turnstileTokenRef.current = token;
+        },
+        "expired-callback": () => {
+          turnstileTokenRef.current = "";
+        },
+        "error-callback": () => {
+          turnstileTokenRef.current = "";
+        },
+      });
+    }
+
+    if (window.turnstile) {
+      setTurnstileReady(true);
+      renderWidget();
+      return;
+    }
+
+    const existing = document.getElementById("cf-turnstile-script");
+    if (!existing) {
+      const script = document.createElement("script");
+      script.id = "cf-turnstile-script";
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        setTurnstileReady(true);
+        renderWidget();
+      };
+      document.head.appendChild(script);
+    } else {
+      existing.addEventListener("load", () => {
+        setTurnstileReady(true);
+        renderWidget();
+      });
+    }
+  }, [step]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError(null);
+
+    const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+    if (siteKey && !turnstileTokenRef.current) {
+      setError("Please complete the verification challenge and try again.");
+      return;
+    }
+
     setStep("training");
-    const id = crypto.randomUUID();
+    setStage("pending");
+    setDisplayProgress(5);
+    setEstimated(true);
 
     try {
       const response = await fetch("/.netlify/functions/setup-agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, userRequestId: id }),
+        body: JSON.stringify({ ...form, turnstileToken: turnstileTokenRef.current }),
+        credentials: "include",
       });
       const payload = await response
         .json()
         .catch(async () => ({ message: await response.text().catch(() => "") }));
-      if (!response.ok)
+      if (!response.ok) {
         throw new Error(payload.message || payload.error || "Unable to create the agent.");
-      setRequestId(payload.requestId || id);
+      }
+      setRequestId(payload.requestId);
+      setCapabilityToken(payload.capabilityToken || null);
     } catch (err) {
+      if (turnstileWidgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetIdRef.current);
+      }
+      turnstileTokenRef.current = "";
       setError(err instanceof Error ? err.message : "Unable to create the agent.");
       setStep("form");
+      setDisplayProgress(0);
     }
   };
 
+  // Poll agent-status: immediately, then every 2s, with an in-flight guard
+  // (AbortController) so overlapping requests can't race each other, plus a
+  // slow "creep" so the bar visibly moves between confirmed backend values.
   useEffect(() => {
     if (step !== "training" || !requestId) return;
-
-    const messagesByProgress = [
-      "Initializing crawler...",
-      "Analyzing website structure...",
-      "Extracting service information...",
-      "Building the knowledge base...",
-      "Finalizing agent capabilities...",
-    ];
+    pollingActiveRef.current = true;
+    stageRef.current = "pending";
 
     const poll = async () => {
+      if (!pollingActiveRef.current) return;
+      pollAbortRef.current?.abort();
+      const controller = new AbortController();
+      pollAbortRef.current = controller;
+
       try {
-        const response = await fetch(
-          `/.netlify/functions/agent-status?id=${encodeURIComponent(requestId)}`,
-        );
-        const payload = await response.json();
+        const url = `/.netlify/functions/agent-status?id=${encodeURIComponent(requestId)}&_=${Date.now()}`;
+        const response = await fetch(url, {
+          cache: "no-store",
+          signal: controller.signal,
+          headers: capabilityToken ? { "X-Agent-Token": capabilityToken } : {},
+        });
+        const payload = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(payload.error || "Unable to check training status.");
 
-        const nextProgress = Math.round((payload.progress || 0) * 100);
-        setProgress((current) => Math.max(current, nextProgress));
-        setStatus(
-          messagesByProgress[
-            Math.min(Math.floor(nextProgress / 20), messagesByProgress.length - 1)
-          ],
-        );
+        const nextStage = statusToStage(payload.status);
+        const nextPercent = clampPercent(payload.progress);
 
-        if (payload.status === "ready") {
-          setProgress(100);
-          setStatus("Agent training complete!");
+        stageRef.current = nextStage;
+        setStage(nextStage);
+        setEstimated(false);
+        setDisplayProgress((current) => Math.max(current, nextPercent));
+
+        if (nextStage === "ready") {
+          setDisplayProgress(100);
+          pollingActiveRef.current = false;
           setMessages([
             {
               role: "agent",
@@ -149,23 +288,49 @@ function TryAgentPage() {
             },
           ]);
           window.setTimeout(() => setStep("chat"), 500);
-        } else if (
-          ["failed", "no_content", "crawling_initiation_failed"].includes(payload.status)
-        ) {
+          return;
+        }
+
+        if (nextStage === "failed") {
+          pollingActiveRef.current = false;
           throw new Error(
             payload.error_message || "We couldn't train the agent from this website.",
           );
         }
       } catch (err) {
+        if (controller.signal.aborted) return;
+        pollingActiveRef.current = false;
         setError(err instanceof Error ? err.message : "Unable to finish training the agent.");
         setStep("form");
+        return;
+      }
+
+      if (pollingActiveRef.current) {
+        pollTimeoutRef.current = window.setTimeout(() => void poll(), 2000);
       }
     };
 
     void poll();
-    const interval = window.setInterval(() => void poll(), 4000);
-    return () => window.clearInterval(interval);
-  }, [step, requestId, form.company, form.name]);
+
+    // Slow estimated creep within the current stage's ceiling while waiting
+    // for the next confirmed value.
+    creepIntervalRef.current = window.setInterval(() => {
+      setDisplayProgress((current) => {
+        const ceiling = STAGE_CEILING[stageRef.current];
+        if (current >= ceiling) return current;
+        setEstimated(true);
+        return Math.min(ceiling, current + 1);
+      });
+    }, 900);
+
+    return () => {
+      pollingActiveRef.current = false;
+      if (pollTimeoutRef.current) window.clearTimeout(pollTimeoutRef.current);
+      if (creepIntervalRef.current) window.clearInterval(creepIntervalRef.current);
+      pollAbortRef.current?.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, requestId, capabilityToken]);
 
   const sendMessage = async (value = input) => {
     const question = value.trim();
@@ -182,13 +347,19 @@ function TryAgentPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user_request_id: requestId,
+          token: capabilityToken,
           question,
           chat_history: chatHistory.current,
         }),
       });
       const payload = await response.json();
       if (!response.ok)
-        throw new Error(payload.answer || payload.error || "The agent couldn't answer right now.");
+        throw new Error(
+          payload.message ||
+            payload.answer ||
+            payload.error ||
+            "The agent couldn't answer right now.",
+        );
 
       const answer = htmlToText(payload.answer || "");
       chatHistory.current = [...chatHistory.current, { role: "agent", content: answer }].slice(-10);
@@ -229,10 +400,18 @@ function TryAgentPage() {
               submit={handleSubmit}
               reset={reset}
               error={error}
+              turnstileContainerRef={turnstileContainerRef}
+              showTurnstile={Boolean(import.meta.env.VITE_TURNSTILE_SITE_KEY)}
+              turnstileReady={turnstileReady}
             />
           )}
           {step === "training" && (
-            <Training website={form.website} progress={progress} status={status} />
+            <Training
+              website={form.website}
+              progress={displayProgress}
+              status={STAGE_LABELS[stage]}
+              estimated={estimated}
+            />
           )}
           {step === "chat" && (
             <AgentChat
@@ -274,12 +453,18 @@ function AgentForm({
   submit,
   reset,
   error,
+  turnstileContainerRef,
+  showTurnstile,
+  turnstileReady,
 }: {
   form: AgentForm;
   update: (field: keyof AgentForm, value: string) => void;
   submit: (event: FormEvent) => void;
   reset: () => void;
   error: string | null;
+  turnstileContainerRef: RefObject<HTMLDivElement | null>;
+  showTurnstile: boolean;
+  turnstileReady: boolean;
 }) {
   const fields = [
     {
@@ -362,6 +547,9 @@ function AgentForm({
             className="w-full rounded-xl border border-border bg-background pl-10 pr-3 py-3 text-[14px] text-foreground placeholder:text-muted-foreground/80 focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/40"
           />
         </div>
+        {showTurnstile && (
+          <div ref={turnstileContainerRef} aria-hidden={!turnstileReady} className="min-h-0" />
+        )}
         {error && (
           <p role="alert" className="flex gap-2 text-sm text-red-600">
             <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
@@ -385,11 +573,14 @@ function Training({
   website,
   progress,
   status,
+  estimated,
 }: {
   website: string;
   progress: number;
   status: string;
+  estimated: boolean;
 }) {
+  const rounded = Math.round(progress);
   return (
     <div className="py-8 text-center">
       <Loader2 className="mx-auto h-9 w-9 animate-spin text-gold" />
@@ -402,12 +593,14 @@ function Training({
       <div className="mt-8 h-2 overflow-hidden rounded-full bg-surface">
         <div
           className="h-full rounded-full bg-gold transition-all duration-500"
-          style={{ width: `${progress}%` }}
+          style={{ width: `${rounded}%` }}
         />
       </div>
       <div className="mt-3 flex justify-between text-xs text-muted-foreground">
         <span>{status}</span>
-        <span>{progress}%</span>
+        <span>
+          {rounded}%{estimated && rounded < 100 ? " (estimated)" : ""}
+        </span>
       </div>
     </div>
   );
@@ -516,4 +709,22 @@ function htmlToText(html: string) {
   const container = document.createElement("div");
   container.innerHTML = html;
   return container.textContent?.replace(/\s+/g, " ").trim() || "";
+}
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: HTMLElement,
+        options: {
+          sitekey: string;
+          appearance?: string;
+          callback?: (token: string) => void;
+          "expired-callback"?: () => void;
+          "error-callback"?: () => void;
+        },
+      ) => string;
+      reset: (widgetId?: string) => void;
+    };
+  }
 }
