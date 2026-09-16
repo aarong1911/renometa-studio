@@ -118,7 +118,7 @@ function ConsentBanner({
     <div
       role="region"
       aria-label="Cookie consent"
-      className="fixed inset-x-0 bottom-0 z-[60] sm:inset-x-auto sm:bottom-6 sm:right-6 sm:max-w-sm animate-reveal"
+      className="fixed inset-x-0 bottom-0 z-[60] sm:inset-x-auto sm:bottom-6 sm:left-6 sm:max-w-sm animate-reveal"
     >
       <div className="rounded-t-2xl border border-border bg-surface-elevated p-5 shadow-elegant sm:rounded-2xl sm:p-6">
         <div className="flex items-start gap-3">
