@@ -701,13 +701,22 @@ function AgentChat({
 }
 
 function htmlToText(html: string) {
-  if (typeof document === "undefined")
-    return html
+  // Block-level boundaries and <br> carry no text of their own, so reading
+  // textContent (or stripping tags) directly runs adjacent paragraphs/list
+  // items/lines together with no space. Turn them into literal spaces
+  // before tags are removed or textContent is read.
+  const withBreaks = html
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/(p|div|li|ol|ul|h[1-6])>/gi, "</$1> ");
+
+  if (typeof document === "undefined") {
+    return withBreaks
       .replace(/<[^>]*>/g, " ")
       .replace(/\s+/g, " ")
       .trim();
+  }
   const container = document.createElement("div");
-  container.innerHTML = html;
+  container.innerHTML = withBreaks;
   return container.textContent?.replace(/\s+/g, " ").trim() || "";
 }
 
