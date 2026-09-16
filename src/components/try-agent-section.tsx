@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Bot, Check, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/page-primitives";
+import { trackEvent } from "@/lib/tracking";
 
 const POINTS = [
   "Trains from your website content",
@@ -34,13 +35,14 @@ export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surf
                   Try an AI Agent on Your Website
                 </h2>
                 <p className="mt-4 text-[15.5px] text-muted-foreground leading-relaxed max-w-xl">
-                  See how a RenoMeta customer service agent can answer questions,
-                  capture lead details, and help visitors move toward booking.
+                  See how a RenoMeta customer service agent can answer questions, capture lead
+                  details, and help visitors move toward booking.
                 </p>
 
                 <div className="mt-7">
                   <Link
                     to="/try-agent"
+                    onClick={() => trackEvent("try_agent", { source: "homepage_section" })}
                     className="btn-primary justify-center"
                     aria-label="Try the Agent Live - go to the AI agent demo"
                   >
@@ -49,10 +51,12 @@ export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surf
                   </Link>
                 </div>
 
-
                 <ul className="mt-8 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
                   {POINTS.map((p) => (
-                    <li key={p} className="flex items-start gap-2.5 text-[13.5px] text-muted-foreground">
+                    <li
+                      key={p}
+                      className="flex items-start gap-2.5 text-[13.5px] text-muted-foreground"
+                    >
                       <Check className="mt-0.5 h-3.5 w-3.5 text-gold shrink-0" strokeWidth={2} />
                       {p}
                     </li>
@@ -62,7 +66,10 @@ export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surf
 
               {/* Visual */}
               <div className="relative border-t lg:border-t-0 lg:border-l border-border bg-surface/60 p-6 sm:p-8">
-                <div className="absolute inset-0 bg-grid-fade opacity-40 pointer-events-none" aria-hidden />
+                <div
+                  className="absolute inset-0 bg-grid-fade opacity-40 pointer-events-none"
+                  aria-hidden
+                />
                 <div className="relative rounded-2xl border border-border bg-background shadow-elegant overflow-hidden">
                   <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surface">
                     <div className="h-7 w-7 rounded-lg border border-border bg-surface-elevated grid place-items-center">
@@ -77,13 +84,12 @@ export function TryAgentSection({ tone = "default" }: { tone?: "default" | "surf
                   <div className="p-4 space-y-3" aria-hidden>
                     <ChatBubble side="in">Do you handle full kitchen remodels?</ChatBubble>
                     <ChatBubble side="out">
-                      Yes - kitchens are one of our core projects. What is the approximate
-                      size of your space?
+                      Yes - kitchens are one of our core projects. What is the approximate size of
+                      your space?
                     </ChatBubble>
                     <ChatBubble side="in">About 200 sq ft, hoping to start in spring.</ChatBubble>
                     <ChatBubble side="out">
-                      Great. What is the best number to send a few available consultation
-                      times?
+                      Great. What is the best number to send a few available consultation times?
                     </ChatBubble>
                     <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2.5">
                       <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={1.6} />

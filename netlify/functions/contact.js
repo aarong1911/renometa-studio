@@ -22,6 +22,12 @@ exports.handler = async (event) => {
       consent: Boolean(body.consent),
       source: body.source || "contact-form",
       submittedAt: new Date().toISOString(),
+      // First-party UTM/referrer attribution captured client-side (see
+      // src/lib/attribution.ts). Purely additive field — absent/null for
+      // any caller that doesn't send it, so this doesn't change the
+      // existing contract for other callers of this function.
+      attribution:
+        body.attribution && typeof body.attribution === "object" ? body.attribution : null,
     };
 
     if (!payload.name || !payload.email || !payload.message) {

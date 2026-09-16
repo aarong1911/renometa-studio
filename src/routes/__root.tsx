@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,9 +13,10 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteChatbot } from "@/components/site-chatbot";
+import { CookieConsentManager } from "@/components/cookie-consent";
+import { captureAttributionOnce } from "@/lib/attribution";
 
 const LOGO_URL = "/renometa-logo.png";
-const GOOGLE_ADS_TAG_ID = "AW-18404601190";
 
 function NotFoundComponent() {
   return (
@@ -95,8 +97,7 @@ export const Route = createRootRouteWithContext<{
         content: "width=device-width, initial-scale=1",
       },
       {
-        title:
-          "Business Command Center for Renovation Contractors | RenoMeta Connect",
+        title: "Business Command Center for Renovation Contractors | RenoMeta Connect",
       },
       {
         name: "description",
@@ -125,8 +126,7 @@ export const Route = createRootRouteWithContext<{
       },
       {
         property: "og:title",
-        content:
-          "Business Command Center for Renovation Contractors | RenoMeta Connect",
+        content: "Business Command Center for Renovation Contractors | RenoMeta Connect",
       },
       {
         property: "og:description",
@@ -139,8 +139,7 @@ export const Route = createRootRouteWithContext<{
       },
       {
         name: "twitter:title",
-        content:
-          "Business Command Center for Renovation Contractors | RenoMeta Connect",
+        content: "Business Command Center for Renovation Contractors | RenoMeta Connect",
       },
       {
         name: "twitter:description",
@@ -195,30 +194,16 @@ export const Route = createRootRouteWithContext<{
     ],
 
     scripts: [
-      // Base Google Ads tag.
+      // Google Ads / GA4 / Meta Pixel are intentionally NOT loaded here.
       //
-      // This installs the Google tag globally across RenoMeta.com using the
-      // Google Ads destination ID assigned to the RenoMeta Ads account.
+      // They're initialized from src/lib/tracking.ts, and only after the
+      // visitor grants the relevant cookie-consent category (see
+      // CookieConsentManager below) — loading them unconditionally here, as
+      // this used to do, would send data before consent, which Google
+      // Consent Mode and Meta's advertising policies both require we not do.
       //
       // Do not add conversion-event snippets here. Qualified-lead conversions
       // are uploaded separately from RenoMeta Connect through the Google Ads API.
-      {
-        src: `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`,
-        async: true,
-      },
-      {
-        children: `
-          window.dataLayer = window.dataLayer || [];
-
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-
-          gtag("js", new Date());
-          gtag("config", "${GOOGLE_ADS_TAG_ID}");
-        `,
-      },
-
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -285,12 +270,18 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    captureAttributionOnce();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <SiteChatbot />
+      <CookieConsentManager pathname={pathname} />
     </QueryClientProvider>
   );
 }

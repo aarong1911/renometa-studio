@@ -1,6 +1,8 @@
 import { useId, useState, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
+import { trackEvent } from "@/lib/tracking";
+import { getAttribution } from "@/lib/attribution";
 
 const SERVICES = [
   "General Inquiry",
@@ -41,6 +43,7 @@ export function ContactForm() {
           message: data.get("message"),
           consent: data.get("smsConsent") === "on",
           source: "contact-form",
+          attribution: getAttribution(),
         }),
       });
 
@@ -48,6 +51,9 @@ export function ContactForm() {
       if (!response.ok) throw new Error(payload.error || "Unable to send your message.");
       setSubmitted(true);
       form.reset();
+      // Only fires after a confirmed successful submission — never on click,
+      // and never with any form field contents (name/email/message/etc).
+      trackEvent("contact_submit", { source: "contact-form" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to send your message.");
     } finally {

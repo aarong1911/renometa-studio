@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
 import { Section, SectionHeader, CTASection, Reveal } from "@/components/page-primitives";
 import { ArrowRight, Check } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { trackEvent } from "@/lib/tracking";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -191,6 +192,10 @@ const ADDONS: {
 function PricingPage() {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
 
+  useEffect(() => {
+    trackEvent("pricing_view", { page: "/pricing" });
+  }, []);
+
   return (
     <PageShell
       eyebrow="Pricing"
@@ -293,6 +298,9 @@ function PricingPage() {
                     href="https://connect.renometa.com/signup"
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() =>
+                      trackEvent("trial_start", { page: "/pricing", plan: p.name.toLowerCase() })
+                    }
                     className={`mt-8 w-full text-center ${p.featured ? "btn-primary" : "btn-ghost"}`}
                     aria-label={`Start a free trial of the ${p.name} plan`}
                   >

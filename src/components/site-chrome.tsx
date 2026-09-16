@@ -1,16 +1,46 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import { openCookiePreferences } from "@/lib/consent";
+import { trackEvent } from "@/lib/tracking";
 
 export const SOLUTIONS: { to: string; label: string; desc: string }[] = [
-  { to: "/renometa-connect", label: "RenoMeta Connect", desc: "The business command center for renovation contractors." },
-  { to: "/ai-website-systems", label: "AI Website Systems", desc: "Lead-focused websites connected to Connect." },
-  { to: "/ai-center", label: "AI Center", desc: "AI agents for lead response, follow-up, and estimates." },
-  { to: "/multi-channel-inbox", label: "Multi-Channel Inbox", desc: "Every customer conversation in one inbox." },
+  {
+    to: "/renometa-connect",
+    label: "RenoMeta Connect",
+    desc: "The business command center for renovation contractors.",
+  },
+  {
+    to: "/ai-website-systems",
+    label: "AI Website Systems",
+    desc: "Lead-focused websites connected to Connect.",
+  },
+  {
+    to: "/ai-center",
+    label: "AI Center",
+    desc: "AI agents for lead response, follow-up, and estimates.",
+  },
+  {
+    to: "/multi-channel-inbox",
+    label: "Multi-Channel Inbox",
+    desc: "Every customer conversation in one inbox.",
+  },
   { to: "/crm-sales", label: "CRM & Sales", desc: "Track leads from first inquiry to closed job." },
-  { to: "/marketing-follow-up-automation", label: "Marketing & Follow-Up Automation", desc: "Nurture, reviews, campaigns, reactivation." },
-  { to: "/growth-operations", label: "Growth Operations", desc: "Scheduling, workflows, reporting, insights." },
-  { to: "/custom-ai-solutions", label: "Custom AI Solutions", desc: "Advanced workflows built beyond the platform." },
+  {
+    to: "/marketing-follow-up-automation",
+    label: "Marketing & Follow-Up Automation",
+    desc: "Nurture, reviews, campaigns, reactivation.",
+  },
+  {
+    to: "/growth-operations",
+    label: "Growth Operations",
+    desc: "Scheduling, workflows, reporting, insights.",
+  },
+  {
+    to: "/custom-ai-solutions",
+    label: "Custom AI Solutions",
+    desc: "Advanced workflows built beyond the platform.",
+  },
 ];
 
 /** Featured entry point for the Try Agent Live feature (nav only, not a solution card). */
@@ -19,7 +49,6 @@ export const TRY_AGENT_ITEM = {
   label: "Try Agent Live",
   desc: "See an AI agent trained on your own website content.",
 } as const;
-
 
 export const LOGO_URL = "/renometa-logo.png";
 
@@ -138,33 +167,36 @@ export function SiteNav() {
                 onClick={() => setMobileSolutionsOpen((v) => !v)}
               >
                 Solutions
-                <ChevronDown className={`h-4 w-4 transition-transform ${mobileSolutionsOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${mobileSolutionsOpen ? "rotate-180" : ""}`}
+                />
               </button>
               <div
                 id="mobile-solutions-menu"
                 className={`grid transition-all duration-300 ease-out ${
-                  mobileSolutionsOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0 mt-0"
+                  mobileSolutionsOpen
+                    ? "grid-rows-[1fr] opacity-100 mt-3"
+                    : "grid-rows-[0fr] opacity-0 mt-0"
                 }`}
               >
                 <div className="min-h-0 overflow-hidden space-y-1">
-                {SOLUTIONS.map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    onClick={() => {
-                      setMobileOpen(false);
-                      setMobileSolutionsOpen(false);
-                    }}
-                    className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
-                  >
-                    <div className="text-[14px] font-medium text-foreground">{item.label}</div>
-                    <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
-                      {item.desc}
-                    </div>
-                  </Link>
-                ))}
+                  {SOLUTIONS.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setMobileSolutionsOpen(false);
+                      }}
+                      className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
+                    >
+                      <div className="text-[14px] font-medium text-foreground">{item.label}</div>
+                      <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
+                        {item.desc}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-
               </div>
             </div>
             <div className="pt-5 border-t border-border">
@@ -173,6 +205,7 @@ export function SiteNav() {
                 onClick={() => {
                   setMobileOpen(false);
                   setMobileSolutionsOpen(false);
+                  trackEvent("try_agent", { source: "mobile_nav" });
                 }}
                 className="block rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
               >
@@ -275,14 +308,21 @@ function SolutionsDropdown() {
         className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors"
       >
         Solutions
-        <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`h-3 w-3 opacity-60 transition-transform ${open ? "rotate-180" : ""}`}
+        />
       </button>
       <div
         className={`absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 transition-all duration-200 ${
-          open ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
+          open
+            ? "opacity-100 visible pointer-events-auto"
+            : "opacity-0 invisible pointer-events-none"
         }`}
       >
-        <div className="w-[380px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2" role="menu">
+        <div
+          className="w-[380px] rounded-2xl border border-border bg-surface-elevated shadow-elegant p-2"
+          role="menu"
+        >
           {SOLUTIONS.map((item) => (
             <Link
               key={item.to}
@@ -300,7 +340,10 @@ function SolutionsDropdown() {
           <div className="my-2 h-px bg-border" />
           <Link
             to={TRY_AGENT_ITEM.to}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              trackEvent("try_agent", { source: "nav_dropdown" });
+            }}
             role="menuitem"
             className="block rounded-xl px-4 py-3 hover:bg-surface transition-colors"
           >
@@ -312,13 +355,11 @@ function SolutionsDropdown() {
               {TRY_AGENT_ITEM.desc}
             </div>
           </Link>
-
         </div>
       </div>
     </div>
   );
 }
-
 
 export function SiteFooter() {
   return (
@@ -329,10 +370,9 @@ export function SiteFooter() {
             <Logo className="h-9 w-auto" />
           </Link>
           <p className="mt-4 text-[14px] text-muted-foreground max-w-sm leading-relaxed">
-            RenoMeta Connect is a business command center for renovation
-            contractors and home service businesses - bringing leads,
-            conversations, estimates, follow-up, scheduling, marketing,
-            automation, and insights into one connected platform.
+            RenoMeta Connect is a business command center for renovation contractors and home
+            service businesses - bringing leads, conversations, estimates, follow-up, scheduling,
+            marketing, automation, and insights into one connected platform.
           </p>
           <Link
             to="/contact"
@@ -342,10 +382,7 @@ export function SiteFooter() {
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
-        <FooterCol
-          title="Solutions"
-          links={SOLUTIONS.map((s) => ({ to: s.to, label: s.label }))}
-        />
+        <FooterCol title="Solutions" links={SOLUTIONS.map((s) => ({ to: s.to, label: s.label }))} />
         <FooterCol
           title="Company"
           links={[
@@ -368,6 +405,13 @@ export function SiteFooter() {
             <Link to="/terms-of-service" className="hover:text-foreground transition-colors">
               Terms of Service
             </Link>
+            <button
+              type="button"
+              onClick={() => openCookiePreferences()}
+              className="hover:text-foreground transition-colors cursor-pointer"
+            >
+              Cookie Preferences
+            </button>
           </div>
         </div>
       </div>
@@ -375,18 +419,10 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({
-  title,
-  links,
-}: {
-  title: string;
-  links: { to: string; label: string }[];
-}) {
+function FooterCol({ title, links }: { title: string; links: { to: string; label: string }[] }) {
   return (
     <div>
-      <div className="text-[12px] uppercase tracking-[0.16em] text-muted-foreground">
-        {title}
-      </div>
+      <div className="text-[12px] uppercase tracking-[0.16em] text-muted-foreground">{title}</div>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
           <li key={l.to}>
@@ -478,4 +514,3 @@ export function PageShell({
     </div>
   );
 }
-
