@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Cookie } from "lucide-react";
 import {
@@ -27,29 +27,39 @@ export function CookieConsentManager({ pathname }: { pathname: string }) {
   const state = useConsentState();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [draft, setDraft] = useState<Draft>(DEFAULT_DRAFT);
-  const pathnameRef = useRef(pathname);
-
-  useEffect(() => {
-    pathnameRef.current = pathname;
-  }, [pathname]);
 
   // Hydrate stored consent from localStorage once on the client.
   useEffect(() => {
     hydrateConsent();
   }, []);
 
-  // Apply consent (Google Consent Mode + conditional script loads) whenever
-  // the consent decision itself changes — deliberately NOT on every route
-  // change, so this never resets the page-view dedup used by trackPageView.
+  // Apply consent and track the page view in ONE effect, in that exact
+  // order, every time either the consent decision OR the route changes.
+  //
+  // These used to be two separate effects (one keyed on `state`, one keyed
+  // on `pathname`). That let them fire out of order across renders: on a
+  // returning visitor, consent hydrates synchronously on mount, so
+  // getConsentPreferences() already returned granted by the time the
+  // pathname-keyed effect ran in that SAME commit — but the state-keyed
+  // effect hadn't run yet (React only re-renders with the new `state` value
+  // on a later commit), so trackPageView() fired first, found `window.gtag`
+  // didn't exist yet (applyConsent/loadGoogleTagScript hadn't run), silently
+  // sent nothing, and still marked the pathname as "already tracked" —
+  // permanently swallowing the initial GA4 page_view. Combining them into
+  // one effect guarantees applyConsent() (which queues the `config` calls)
+  // always completes before trackPageView() (which queues the page_view
+  // event) runs, so the event is never queued ahead of the config it needs.
+  // applyConsent() re-runs on every navigation (pathname is a dependency),
+  // not just on real consent changes — that's intentional, for the ordering
+  // guarantee above. It's safe to call repeatedly with unchanged values:
+  // script/pixel loading is guarded idempotent, and applyGoogleConsentUpdate()
+  // (tracking.ts) skips re-issuing `consent update` when analytics/advertising
+  // haven't actually changed since the last call.
   useEffect(() => {
     if (state.status === "unknown") return;
-    applyConsent(state.status === "set" ? state.preferences : null, pathnameRef.current);
-  }, [state]);
-
-  // Route-change page views live in their own effect, keyed only on pathname.
-  useEffect(() => {
+    applyConsent(state.status === "set" ? state.preferences : null);
     trackPageView(pathname);
-  }, [pathname]);
+  }, [state, pathname]);
 
   const openPreferences = useCallback(() => {
     setDraft(
