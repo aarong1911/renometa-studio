@@ -115,7 +115,7 @@ function loadGoogleTagScript() {
   script.id = GOOGLE_TAG_SCRIPT_ID;
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
-    GOOGLE_ADS_ID || GA_MEASUREMENT_ID!,
+    GA_MEASUREMENT_ID || GOOGLE_ADS_ID!,
   )}`;
   document.head.appendChild(script);
   googleTagLoaded = true;
