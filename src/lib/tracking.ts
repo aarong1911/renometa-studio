@@ -50,8 +50,15 @@ function ensureDataLayerStub() {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
   if (!window.gtag) {
-    window.gtag = function gtag(...args: unknown[]) {
-      window.dataLayer!.push(args);
+    // Must match Google's documented snippet exactly: push the real
+    // `arguments` object, not a plain Array built from rest params.
+    // gtag.js's own bootstrap drains this queue expecting Arguments-shaped
+    // entries — a rest-param array (`(...args) => push(args)`) is a
+    // different structure, which is why commands were visible in
+    // dataLayer but never actually processed into a network request.
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params -- intentional: this is Google's canonical pattern and requires the real Arguments object.
+      window.dataLayer!.push(arguments);
     };
   }
 }
