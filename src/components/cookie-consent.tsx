@@ -222,7 +222,7 @@ function PreferencesDialog({
           />
           <PreferenceRow
             title="Advertising"
-            description="Powers retargeting with Meta (Facebook/Instagram) and Google Ads so we can show relevant ads after your visit. No personal details are shared."
+            description="Used for advertising, retargeting, and campaign measurement with Meta (Facebook/Instagram) and Google Ads. Partners may receive limited identifiers, which may be hashed, to match audiences and measure results."
             checked={draft.advertising}
             onCheckedChange={(checked) => onChangeDraft({ ...draft, advertising: checked })}
           />

@@ -1,9 +1,21 @@
 # Retargeting & Cookie Consent
 
 Consent-gated retargeting for Meta/Facebook/Instagram and Google Ads, plus
-optional GA4 and first-party UTM attribution. No visitor names, emails,
-phone numbers, or form contents are ever sent to any advertising provider —
-this is deliberately not an identity-matching system.
+optional GA4 and first-party UTM attribution.
+
+As of this writing, `trackEvent`/`trackPageView` in `src/lib/tracking.ts` do
+not pass any name/email/phone/address/message field to Meta or Google — see
+the `PII_KEY_PATTERN` safety net in §3 below — and Meta Advanced Matching
+parameters (hashed email/phone/name) are **not currently set** anywhere in
+this codebase's `fbq('init', ...)` call. The published Privacy Policy
+(`src/routes/privacy-policy.tsx`, §7b) discloses Advanced Matching as
+something RenoMeta **may** use once Advertising consent is granted — that
+disclosure is forward-covering (it's a Meta Pixel/Business Manager-level
+capability that can be turned on without necessarily changing this file) and
+is not a claim that it's active today. If Advanced Matching parameters are
+added to `loadMetaPixel()` in the future, no policy change should be needed,
+but confirm the disclosure below still matches whatever fields are actually
+sent.
 
 ## 1. Environment variables
 
@@ -182,8 +194,12 @@ link. The link is `https://connect.renometa.com/signup` in
 - Confirm the standard events used here (`ViewContent`, `Lead`,
   `CompleteRegistration`) and the custom `TrialStart` event show up under
   Test Events once traffic flows, and map them to Ads campaigns as needed.
-- No Advanced Matching (email/phone/name) is configured — if that's wanted
-  later it's a deliberate, separate decision (it sends hashed PII to Meta).
+- Advanced Matching (hashed email/phone/name passed to `fbq('init', ...)`)
+  is **not currently configured** in `loadMetaPixel()`. The Privacy Policy
+  (§7b) already discloses it as a capability RenoMeta may use once
+  Advertising consent is granted, so turning it on later is a Meta
+  Business Manager / code-level decision, not a policy-language decision —
+  just re-check §7b's wording still matches whatever fields end up sent.
 
 ### Google Ads / GA4
 - Confirm `VITE_GOOGLE_ADS_ID` matches the Google Ads account's tag.
@@ -215,5 +231,19 @@ options, roughly in order of reliability:
 Per the implementation brief: no Hotjar, Clarity, PostHog, Segment,
 Mixpanel, or other analytics products; no consent-management npm package
 (this is a native React implementation reusing the existing `Dialog`/
-`Switch` primitives); no browser fingerprinting or hidden identification;
-no advanced matching.
+`Switch` primitives); no browser fingerprinting or hidden identification.
+Meta Advanced Matching parameters are also not currently set in code (see
+the note at the top of this document and Privacy Policy §7b).
+
+## 10. Preferences dialog copy — reconciled with the Privacy Policy
+
+The Preferences dialog (`src/components/cookie-consent.tsx`, Advertising
+row) previously read *"...No personal details are shared,"* which
+conflicted with Privacy Policy §7b's disclosure that granting Advertising
+consent may cause hashed identifiers (email, phone, name) to be sent to
+Meta via Advanced Matching. That line has been replaced with: *"Used for
+advertising, retargeting, and campaign measurement with Meta
+(Facebook/Instagram) and Google Ads. Partners may receive limited
+identifiers, which may be hashed, to match audiences and measure
+results."* No absolute "not shared"/"anonymous" claims remain in the
+consent UI — re-check this section if that copy changes again.
