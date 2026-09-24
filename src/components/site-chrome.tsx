@@ -114,6 +114,14 @@ export function SiteNav() {
         </Link>
         <nav className="hidden md:flex items-center gap-7">
           <SolutionsDropdown />
+          <Link
+            to={TRY_AGENT_ITEM.to}
+            onClick={() => trackEvent("try_agent", { source: "top_nav" })}
+            className="inline-flex items-center gap-1 text-[13.5px] text-muted-foreground hover:text-foreground transition-colors"
+            activeProps={{ className: "text-[13.5px] text-foreground" }}
+          >
+            {TRY_AGENT_ITEM.label}
+          </Link>
           {links.map((l) => (
             <Link
               key={l.to}
