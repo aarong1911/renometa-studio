@@ -7,8 +7,10 @@ import { TryAgentSection } from "@/components/try-agent-section";
 
 import {
   ArrowRight,
+  ArrowUpRight,
   Bot,
   Calendar,
+  CalendarCheck,
   Check,
   Clock,
   FileText,
@@ -71,6 +73,7 @@ function HomePage() {
         <HowItWorks />
         <Outcomes />
         <TryAgentSection />
+        <FoundingProgram />
         <FinalCTA />
       </main>
       <SiteFooter />
@@ -113,6 +116,28 @@ function Hero() {
       <div className="absolute inset-0 bg-grid-fade opacity-70 pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-4xl text-left pt-8">
+          <a
+            href="https://gorenometa.com/?utm_source=renometa&utm_medium=website&utm_campaign=founding_contractors&utm_content=hero"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-gold-soft/40 px-3.5 py-1.5 text-[12px] sm:text-[13px] text-foreground/75 transition-colors duration-300 hover:border-gold/70 hover:bg-gold-soft/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background animate-reveal"
+          >
+            <span className="font-medium text-foreground whitespace-nowrap">
+              Founding Contractor Program
+            </span>
+            <span className="text-gold-strong" aria-hidden>
+              ·
+            </span>
+            <span className="whitespace-nowrap">
+              90 Days <span className="hidden sm:inline">Complimentary Access</span>
+              <span className="sm:hidden">Free</span>
+            </span>
+            <ArrowUpRight
+              className="h-3.5 w-3.5 shrink-0 text-gold-strong transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden
+            />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
           <h1
             className="font-display text-[32px] sm:text-5xl lg:text-[64px] leading-[1.08] sm:leading-[1.03] tracking-[-0.03em] font-semibold text-foreground animate-reveal"
             style={{ animationDelay: "60ms" }}
@@ -991,6 +1016,73 @@ function Outcomes() {
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------- FOUNDING CONTRACTOR PROGRAM -------------------- */
+function FoundingProgram() {
+  const benefits = [
+    {
+      icon: CalendarCheck,
+      title: "90 Days Complimentary Access",
+      desc: "Explore RenoMeta Connect without a subscription fee during the program.",
+    },
+    {
+      icon: MessageSquare,
+      title: "Help Shape the Platform",
+      desc: "Share feedback that helps guide features and workflows for real contractors.",
+    },
+    {
+      icon: Sparkles,
+      title: "Early Access to New Capabilities",
+      desc: "Get hands-on experience with the platform as it continues to evolve.",
+    },
+  ];
+  return (
+    <section id="founding-program" className="py-28 bg-surface/50 border-y border-border">
+      <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+        <div>
+          <SectionHeader
+            eyebrow="Founding Contractor Program"
+            title="Help Shape the Future of Contractor Software"
+            desc="We're inviting a select group of remodeling and construction companies to experience RenoMeta Connect for 90 days at no cost in exchange for product feedback."
+          />
+          <div className="mt-9">
+            <a
+              href="https://gorenometa.com/?utm_source=renometa&utm_medium=website&utm_campaign=founding_contractors&utm_content=homepage_section"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Apply for the Program
+              <ArrowRight className="h-4 w-4" aria-hidden />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+            <p className="mt-4 text-[13px] text-muted-foreground">
+              Limited spots available. Applications are reviewed before acceptance.
+            </p>
+          </div>
+        </div>
+
+        <Reveal className="card-elegant divide-y divide-border">
+          {benefits.map((b) => (
+            <div key={b.title} className="flex items-start gap-4 p-6 sm:p-7">
+              <div className="h-10 w-10 rounded-xl border border-border bg-surface grid place-items-center shrink-0">
+                <b.icon className="h-[18px] w-[18px] text-gold-strong" strokeWidth={1.5} />
+              </div>
+              <div>
+                <h3 className="font-display text-[17px] font-semibold tracking-tight">
+                  {b.title}
+                </h3>
+                <p className="mt-1.5 text-[14px] text-muted-foreground leading-relaxed">
+                  {b.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </Reveal>
       </div>
     </section>
   );
