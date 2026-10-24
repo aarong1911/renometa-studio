@@ -390,6 +390,10 @@ export function SiteFooter() {
             { to: "/about", label: "About" },
             { to: "/blog", label: "Blog" },
             { to: "/contact", label: "Contact" },
+            {
+              href: "https://gorenometa.com/?utm_source=renometa&utm_medium=website&utm_campaign=founding_contractors&utm_content=footer",
+              label: "Founding Contractor Program",
+            },
           ]}
         />
       </div>
@@ -419,19 +423,31 @@ export function SiteFooter() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { to: string; label: string }[] }) {
+type FooterLink = { to: string; label: string } | { href: string; label: string };
+
+function FooterCol({ title, links }: { title: string; links: FooterLink[] }) {
+  const linkClass = "text-[13.5px] text-foreground/80 hover:text-foreground transition-colors";
   return (
     <div>
       <div className="text-[12px] uppercase tracking-[0.16em] text-muted-foreground">{title}</div>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
-          <li key={l.to}>
-            <Link
-              to={l.to}
-              className="text-[13.5px] text-foreground/80 hover:text-foreground transition-colors"
-            >
-              {l.label}
-            </Link>
+          <li key={l.label}>
+            {"href" in l ? (
+              <a
+                href={l.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${linkClass} rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
+              >
+                {l.label}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ) : (
+              <Link to={l.to} className={linkClass}>
+                {l.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
