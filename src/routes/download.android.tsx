@@ -4,7 +4,7 @@ import { SiteNav, SiteFooter } from "@/components/site-chrome";
 import { Section } from "@/components/page-primitives";
 
 // Served as a static file from public/downloads (headers set in netlify.toml).
-const APK_URL = "/downloads/RenoMeta-Connect-Android-test.apk";
+const APK_URL = "/downloads/RenoMeta-Connect-Android.apk";
 
 // Beta distribution page: intentionally noindex, not in the sitemap, and not
 // linked from the main navigation.
@@ -30,7 +30,7 @@ const STEPS = [
   },
   {
     title: "Open the file",
-    desc: "When the download finishes, open RenoMeta-Connect-Android-test.apk from your notifications or Downloads folder.",
+    desc: "When the download finishes, open RenoMeta-Connect-Android.apk from your notifications or Downloads folder.",
   },
   {
     title: "Approve installation if prompted",
@@ -65,7 +65,7 @@ function AndroidDownloadPage() {
               <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-3">
                 <a
                   href={APK_URL}
-                  download="RenoMeta-Connect-Android-test.apk"
+                  download="RenoMeta-Connect-Android.apk"
                   type="application/vnd.android.package-archive"
                   className="btn-primary w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >

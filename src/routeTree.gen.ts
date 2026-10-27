@@ -29,6 +29,7 @@ import { Route as TryAgentRouteImport } from './routes/try-agent'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as DownloadAndroidRouteImport } from './routes/download.android'
+import { Route as DownloadsRenoMetaConnectAndroidTestDotapkRouteImport } from './routes/downloads.RenoMeta-Connect-Android-test[.]apk'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -131,6 +132,12 @@ const DownloadAndroidRoute = DownloadAndroidRouteImport.update({
   path: '/download/android',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DownloadsRenoMetaConnectAndroidTestDotapkRoute =
+  DownloadsRenoMetaConnectAndroidTestDotapkRouteImport.update({
+    id: '/downloads/RenoMeta-Connect-Android-test.apk',
+    path: '/downloads/RenoMeta-Connect-Android-test.apk',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/try-agent': typeof TryAgentRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/download/android': typeof DownloadAndroidRoute
+  '/downloads/RenoMeta-Connect-Android-test.apk': typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -174,6 +182,7 @@ export interface FileRoutesByTo {
   '/try-agent': typeof TryAgentRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/download/android': typeof DownloadAndroidRoute
+  '/downloads/RenoMeta-Connect-Android-test.apk': typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -197,6 +206,7 @@ export interface FileRoutesById {
   '/try-agent': typeof TryAgentRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/download/android': typeof DownloadAndroidRoute
+  '/downloads/RenoMeta-Connect-Android-test.apk': typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/try-agent'
     | '/blog/$slug'
     | '/download/android'
+    | '/downloads/RenoMeta-Connect-Android-test.apk'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -243,6 +254,7 @@ export interface FileRouteTypes {
     | '/try-agent'
     | '/blog/$slug'
     | '/download/android'
+    | '/downloads/RenoMeta-Connect-Android-test.apk'
     | '/blog'
   id:
     | '__root__'
@@ -265,6 +277,7 @@ export interface FileRouteTypes {
     | '/try-agent'
     | '/blog/$slug'
     | '/download/android'
+    | '/downloads/RenoMeta-Connect-Android-test.apk'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -288,6 +301,7 @@ export interface RootRouteChildren {
   TryAgentRoute: typeof TryAgentRoute
   BlogSlugRoute: typeof BlogSlugRoute
   DownloadAndroidRoute: typeof DownloadAndroidRoute
+  DownloadsRenoMetaConnectAndroidTestDotapkRoute: typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -433,6 +447,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DownloadAndroidRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/downloads/RenoMeta-Connect-Android-test.apk': {
+      id: '/downloads/RenoMeta-Connect-Android-test.apk'
+      path: '/downloads/RenoMeta-Connect-Android-test.apk'
+      fullPath: '/downloads/RenoMeta-Connect-Android-test.apk'
+      preLoaderRoute: typeof DownloadsRenoMetaConnectAndroidTestDotapkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -456,6 +477,8 @@ const rootRouteChildren: RootRouteChildren = {
   TryAgentRoute: TryAgentRoute,
   BlogSlugRoute: BlogSlugRoute,
   DownloadAndroidRoute: DownloadAndroidRoute,
+  DownloadsRenoMetaConnectAndroidTestDotapkRoute:
+    DownloadsRenoMetaConnectAndroidTestDotapkRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
