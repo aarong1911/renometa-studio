@@ -28,6 +28,7 @@ import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as TryAgentRouteImport } from './routes/try-agent'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as DownloadAndroidRouteImport } from './routes/download.android'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -125,6 +126,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DownloadAndroidRoute = DownloadAndroidRouteImport.update({
+  id: '/download/android',
+  path: '/download/android',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/terms-of-service': typeof TermsOfServiceRoute
   '/try-agent': typeof TryAgentRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/download/android': typeof DownloadAndroidRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/terms-of-service': typeof TermsOfServiceRoute
   '/try-agent': typeof TryAgentRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/download/android': typeof DownloadAndroidRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -188,6 +196,7 @@ export interface FileRoutesById {
   '/terms-of-service': typeof TermsOfServiceRoute
   '/try-agent': typeof TryAgentRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/download/android': typeof DownloadAndroidRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -211,6 +220,7 @@ export interface FileRouteTypes {
     | '/terms-of-service'
     | '/try-agent'
     | '/blog/$slug'
+    | '/download/android'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/terms-of-service'
     | '/try-agent'
     | '/blog/$slug'
+    | '/download/android'
     | '/blog'
   id:
     | '__root__'
@@ -253,6 +264,7 @@ export interface FileRouteTypes {
     | '/terms-of-service'
     | '/try-agent'
     | '/blog/$slug'
+    | '/download/android'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -275,6 +287,7 @@ export interface RootRouteChildren {
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   TryAgentRoute: typeof TryAgentRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  DownloadAndroidRoute: typeof DownloadAndroidRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -413,6 +426,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/download/android': {
+      id: '/download/android'
+      path: '/download/android'
+      fullPath: '/download/android'
+      preLoaderRoute: typeof DownloadAndroidRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -435,6 +455,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsOfServiceRoute: TermsOfServiceRoute,
   TryAgentRoute: TryAgentRoute,
   BlogSlugRoute: BlogSlugRoute,
+  DownloadAndroidRoute: DownloadAndroidRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
