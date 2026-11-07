@@ -48,7 +48,13 @@ function PrivacyPolicyPage() {
                 <p className="mt-3">
                   Welcome to RenoMeta Inc ("RenoMeta," "we," "us," or "our"). This Privacy Policy
                   explains how we collect, use, disclose, and safeguard information when you use our
-                  software, websites, and services (collectively, the "Services").
+                  software, websites, and services, including RenoMeta Connect (collectively, the
+                  "Services").
+                </p>
+                <p className="mt-3">
+                  Section 4A governs the use and sharing of data obtained through the Gmail API
+                  and information derived from it. Its restrictions apply throughout this Privacy
+                  Policy, including the general provisions on information use and sharing.
                 </p>
               </section>
 
@@ -102,6 +108,82 @@ function PrivacyPolicyPage() {
                 </p>
               </section>
 
+              <section id="google-user-data">
+                <h2 className="font-display text-xl font-semibold tracking-tight">
+                  4A. Google User Data and Gmail Integration
+                </h2>
+
+                <h3 className="mt-4 font-medium text-foreground">Data we access</h3>
+                <p className="mt-3">
+                  When you authorize RenoMeta Connect to connect to Gmail, we access the connected
+                  account's email address and the messages we sync. This includes sender and
+                  recipient addresses, subjects, timestamps, Gmail labels, message and thread
+                  identifiers, message snippets, and message text. We receive Google OAuth tokens
+                  to maintain the connection you authorize.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">How we use this data</h3>
+                <p className="mt-3">
+                  We use Gmail data and information derived from it only to provide or improve the
+                  user-facing features for which you granted access. RenoMeta Connect uses this
+                  data to connect your Gmail account and to sync, organize, and display email
+                  conversations in your workspace.
+                </p>
+                <p className="mt-3">
+                  We do not use or share Gmail data or information derived from it for advertising,
+                  retargeting, audience matching, unrelated analytics, credit decisions, or lending.
+                  We do not sell this data or provide it to advertising platforms, data brokers, or
+                  information resellers. We do not use Google Workspace APIs or data obtained through
+                  them to develop, improve, or train non-personalized AI or machine learning models.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Storage, safeguards, and sharing</h3>
+                <p className="mt-3">
+                  RenoMeta Connect stores synced message data in Supabase for the workspace
+                  that connected the account. We encrypt stored OAuth tokens and use encrypted
+                  connections when communicating with Google. Authorized workspace users can view
+                  synced messages through RenoMeta Connect.
+                </p>
+                <p className="mt-3">
+                  Our hosting and database providers process Gmail data to run the integration.
+                  We limit transfers to those permitted by Google's Limited Use requirements,
+                  including transfers needed to provide authorized features with your consent,
+                  protect security, or comply with applicable law. RenoMeta personnel may access
+                  specific messages only with your affirmative consent or when necessary for
+                  security or legal compliance.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Retention, disconnect, and deletion</h3>
+                <p className="mt-3">
+                  We retain synced copies so authorized users can view their email conversations in
+                  RenoMeta Connect. Disconnecting Gmail stops future sync and clears the OAuth
+                  tokens stored for the connection. Previously synced messages remain in the
+                  workspace after disconnection until removed.
+                </p>
+                <p className="mt-3">
+                  To request deletion of Gmail data stored by RenoMeta Connect, contact{" "}
+                  <a href="mailto:support@renometa.com" className="underline hover:text-foreground">
+                    support@renometa.com
+                  </a>
+                  {" "}and identify the connected account and workspace. The request covers copies
+                  held by RenoMeta Connect. Original messages in Gmail are managed in your Google
+                  account.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Google Limited Use</h3>
+                <p className="mt-3">
+                  RenoMeta Connect's use and transfer of information received from Google APIs
+                  adheres to the{" "}
+                  <a
+                    href="https://developers.google.com/terms/api-services-user-data-policy"
+                    className="underline hover:text-foreground"
+                  >
+                    Google API Services User Data Policy
+                  </a>
+                  , including its Limited Use requirements.
+                </p>
+              </section>
+
               <section>
                 <h2 className="font-display text-xl font-semibold tracking-tight">5. Security</h2>
                 <p className="mt-3">
@@ -130,6 +212,11 @@ function PrivacyPolicyPage() {
                 <h2 className="font-display text-xl font-semibold tracking-tight">
                   7. Cookies, Analytics, Advertising, and Audience Matching
                 </h2>
+                <p className="mt-3">
+                  The advertising, analytics, and audience matching practices in this section
+                  exclude data obtained through the Gmail API and information derived from that
+                  data.
+                </p>
                 <p className="mt-3">
                   When you visit our website, we and our advertising and analytics partners may use
                   cookies, pixels, and similar technologies. We group these technologies into the
@@ -292,6 +379,8 @@ function PrivacyPolicyPage() {
                 <p className="mt-3">
                   We may update this Privacy Policy from time to time. Changes are effective when
                   posted on our website. We encourage you to review this policy periodically.
+                  If we change how we use Google user data, we will notify affected users and ask
+                  them to consent before using that data for a new purpose.
                 </p>
               </section>
 
