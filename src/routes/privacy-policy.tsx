@@ -39,6 +39,7 @@ function PrivacyPolicyPage() {
         <Reveal>
           <div className="max-w-3xl mx-auto prose prose-neutral">
             <p className="text-[14px] text-muted-foreground">Effective Date: 08/01/2024</p>
+            <p className="text-[14px] text-muted-foreground">Last Updated: 11/08/2026</p>
 
             <div className="mt-10 space-y-10 text-[15px] leading-relaxed text-foreground/90">
               <section>
@@ -115,26 +116,59 @@ function PrivacyPolicyPage() {
 
                 <h3 className="mt-4 font-medium text-foreground">Data we access</h3>
                 <p className="mt-3">
-                  When you authorize RenoMeta Connect to connect to Gmail, we access the connected
-                  account's email address and the messages we sync. This includes sender and
-                  recipient addresses, subjects, timestamps, Gmail labels, message and thread
-                  identifiers, message snippets, and message text. We receive Google OAuth tokens
-                  to maintain the connection you authorize.
+                  When you connect Gmail, RenoMeta Connect asks Google for two permissions:
+                  read-only access to your Gmail messages (
+                  <code>https://www.googleapis.com/auth/gmail.readonly</code>), used to sync and
+                  display your email conversations, and permission to send email on your behalf (
+                  <code>https://www.googleapis.com/auth/gmail.send</code>), used only when you send
+                  an email from RenoMeta Connect.
+                </p>
+                <p className="mt-3">
+                  With these permissions, we access the connected account's email address and the
+                  messages we sync. This includes sender and recipient addresses (including CC and
+                  BCC), subjects, timestamps, Gmail labels, message and thread identifiers,
+                  message snippets, and message text. We receive Google OAuth tokens to maintain
+                  the connection you authorize.
                 </p>
 
                 <h3 className="mt-4 font-medium text-foreground">How we use this data</h3>
                 <p className="mt-3">
                   We use Gmail data and information derived from it only to provide or improve the
                   user-facing features for which you granted access. RenoMeta Connect uses this
-                  data to connect your Gmail account and to sync, organize, and display email
-                  conversations in your workspace.
+                  data to connect your Gmail account; to sync, organize, and display email
+                  conversations in your workspace; and to send the emails you write in RenoMeta
+                  Connect.
+                </p>
+                <p className="mt-3">
+                  Gmail information is added to your CRM records only when you choose to. If you
+                  create a contact or lead from a Gmail sender, the sender's email address and the
+                  name you enter are saved in that record, and the record is marked as derived from
+                  Google data. Synced emails may also be shown alongside an existing contact whose
+                  email address matches.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Artificial intelligence</h3>
+                <p className="mt-3">
+                  Some RenoMeta Connect features use third-party AI service providers, such as AI
+                  drafting for text and social messaging, AI agents, and AI voice agents. We do not
+                  send synced Gmail messages to third-party AI service providers. We apply
+                  server-side restrictions and provenance-based safeguards to prevent
+                  Google-derived information in CRM records from being included in AI requests.
+                </p>
+                <p className="mt-3">
+                  RenoMeta Connect applies provenance-based safeguards to prevent Google-derived CRM
+                  information from being included in requests to third-party AI services. These
+                  protections include restricting AI drafting for email conversations and redacting
+                  Google-derived information before AI processing.
                 </p>
                 <p className="mt-3">
                   We do not use or share Gmail data or information derived from it for advertising,
                   retargeting, audience matching, unrelated analytics, credit decisions, or lending.
                   We do not sell this data or provide it to advertising platforms, data brokers, or
                   information resellers. We do not use Google Workspace APIs or data obtained through
-                  them to develop, improve, or train non-personalized AI or machine learning models.
+                  them to develop, improve, or train generalized or non-personalized artificial
+                  intelligence or machine learning models, and we do not transfer this data to third
+                  parties for that purpose.
                 </p>
 
                 <h3 className="mt-4 font-medium text-foreground">Storage, safeguards, and sharing</h3>
@@ -145,7 +179,8 @@ function PrivacyPolicyPage() {
                   synced messages through RenoMeta Connect.
                 </p>
                 <p className="mt-3">
-                  Our hosting and database providers process Gmail data to run the integration.
+                  Our hosting provider (Netlify) and database provider (Supabase) process Gmail data
+                  to run the integration.
                   We limit transfers to those permitted by Google's Limited Use requirements,
                   including transfers needed to provide authorized features with your consent,
                   protect security, or comply with applicable law. RenoMeta personnel may access
@@ -156,8 +191,10 @@ function PrivacyPolicyPage() {
                 <h3 className="mt-4 font-medium text-foreground">Retention, disconnect, and deletion</h3>
                 <p className="mt-3">
                   We retain synced copies so authorized users can view their email conversations in
-                  RenoMeta Connect. Disconnecting Gmail stops future sync and clears the OAuth
-                  tokens stored for the connection. Previously synced messages remain in the
+                  RenoMeta Connect. Disconnecting Gmail stops future sync, asks Google to revoke
+                  RenoMeta Connect's access, and clears the OAuth tokens stored for the connection.
+                  You can also remove RenoMeta Connect's access at any time from your Google
+                  Account's third-party connections page. Previously synced messages remain in the
                   workspace after disconnection until removed.
                 </p>
                 <p className="mt-3">
@@ -172,15 +209,22 @@ function PrivacyPolicyPage() {
 
                 <h3 className="mt-4 font-medium text-foreground">Google Limited Use</h3>
                 <p className="mt-3">
-                  RenoMeta Connect's use and transfer of information received from Google APIs
+                  The use of information received from Google Workspace APIs by RenoMeta Connect
                   adheres to the{" "}
                   <a
                     href="https://developers.google.com/terms/api-services-user-data-policy"
                     className="underline hover:text-foreground"
                   >
                     Google API Services User Data Policy
+                  </a>{" "}
+                  and the{" "}
+                  <a
+                    href="https://developers.google.com/workspace/workspace-api-user-data-developer-policy"
+                    className="underline hover:text-foreground"
+                  >
+                    Google Workspace API User Data and Developer Policy
                   </a>
-                  , including its Limited Use requirements.
+                  , including the Limited Use requirements.
                 </p>
               </section>
 
