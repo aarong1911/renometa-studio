@@ -151,7 +151,9 @@ function PrivacyPolicyPage() {
                 <p className="mt-3">
                   Some RenoMeta Connect features use third-party AI service providers, such as AI
                   drafting for text and social messaging, AI agents, and AI voice agents. We do not
-                  send Gmail data or information derived from it to these providers.
+                  send synced Gmail messages to third-party AI service providers. We apply
+                  server-side restrictions and provenance-based safeguards to prevent
+                  Google-derived information in CRM records from being included in AI requests.
                 </p>
                 <p className="mt-3">
                   RenoMeta Connect applies provenance-based safeguards to prevent Google-derived CRM
