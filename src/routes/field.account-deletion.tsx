@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Info, Mail, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, Copy, Info, Mail, ShieldCheck } from "lucide-react";
 import { PageShell } from "@/components/site-chrome";
 import { Section } from "@/components/page-primitives";
 
@@ -75,6 +76,77 @@ const STEPS = [
   },
 ];
 
+/** Copies text with the Clipboard API, falling back to the older copy command. Resolves false when neither works. */
+async function copyText(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // Fall through to the older method (for example, when clipboard access is denied).
+  }
+  try {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    const copied = document.execCommand("copy");
+    document.body.removeChild(area);
+    return copied;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * A fallback for devices with no email app: copies the support address. It only copies; it never sends anything, so its
+ * confirmation never says a request was submitted.
+ */
+function CopyEmailButton() {
+  const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  const onCopy = async () => {
+    const copied = await copyText(SUPPORT_EMAIL);
+    setState(copied ? "copied" : "failed");
+    clearTimeout(timer.current);
+    if (copied) timer.current = setTimeout(() => setState("idle"), 5000);
+  };
+
+  return (
+    <div className="flex flex-col gap-1.5 sm:items-start">
+      <button
+        type="button"
+        onClick={() => void onCopy()}
+        className={`btn-ghost w-full sm:w-auto ${focusRing}`}
+      >
+        {state === "copied" ? (
+          <Check className="h-4 w-4" aria-hidden />
+        ) : (
+          <Copy className="h-4 w-4" aria-hidden />
+        )}
+        Copy email address
+      </button>
+      <p role="status" aria-live="polite" className="min-h-[1.25rem] text-[13px]">
+        {state === "copied" ? (
+          <span className="text-foreground">
+            Email address copied. Paste it into a new email to {SUPPORT_EMAIL}.
+          </span>
+        ) : state === "failed" ? (
+          <span className="text-destructive">
+            Couldn&apos;t copy automatically. Please copy {SUPPORT_EMAIL} by hand.
+          </span>
+        ) : null}
+      </p>
+    </div>
+  );
+}
+
 function FieldAccountDeletionPage() {
   return (
     <PageShell
@@ -119,10 +191,15 @@ function FieldAccountDeletionPage() {
                 <Mail className="h-4 w-4" aria-hidden />
                 Request account deletion
               </a>
-              <span className="text-[13px] text-muted-foreground">
-                Opens your email app with the request filled in.
-              </span>
+              <CopyEmailButton />
             </div>
+            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed">
+              The request button opens your email app with the request filled in, if this device has
+              one set up. If nothing opens, email{" "}
+              <span className="font-medium text-foreground break-words">{SUPPORT_EMAIL}</span> from
+              any email service, such as Gmail or Outlook on the web, with the subject{" "}
+              <span className="font-medium text-foreground">"{REQUEST_SUBJECT}"</span>.
+            </p>
             <p className="mt-5 flex items-start gap-2 text-[13.5px] text-muted-foreground">
               <Info className="h-4 w-4 mt-0.5 shrink-0 text-gold-strong" aria-hidden />
               <span>
