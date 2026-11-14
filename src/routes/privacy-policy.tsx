@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/site-chrome";
 import { Section, Reveal } from "@/components/page-primitives";
 
@@ -17,11 +17,11 @@ export const Route = createFileRoute("/privacy-policy")({
         content:
           "RenoMeta's Privacy Policy explains how we collect, use, disclose, and safeguard information when you use our services.",
       },
-      { property: "og:url", content: "/privacy-policy" },
+      { property: "og:url", content: "https://renometa.com/privacy-policy" },
       { name: "twitter:title", content: "Privacy Policy | RenoMeta" },
       { name: "twitter:description", content: "RenoMeta's Privacy Policy." },
     ],
-    links: [{ rel: "canonical", href: "/privacy-policy" }],
+    links: [{ rel: "canonical", href: "https://renometa.com/privacy-policy" }],
   }),
   component: PrivacyPolicyPage,
 });
@@ -37,9 +37,9 @@ function PrivacyPolicyPage() {
     >
       <Section>
         <Reveal>
-          <div className="max-w-3xl mx-auto prose prose-neutral">
+          <div className="max-w-3xl mx-auto prose prose-neutral [&_code]:[overflow-wrap:anywhere]">
             <p className="text-[14px] text-muted-foreground">Effective Date: 08/01/2024</p>
-            <p className="text-[14px] text-muted-foreground">Last Updated: 11/08/2026</p>
+            <p className="text-[14px] text-muted-foreground">Last Updated: 11/13/2026</p>
 
             <div className="mt-10 space-y-10 text-[15px] leading-relaxed text-foreground/90">
               <section>
@@ -49,8 +49,8 @@ function PrivacyPolicyPage() {
                 <p className="mt-3">
                   Welcome to RenoMeta Inc ("RenoMeta," "we," "us," or "our"). This Privacy Policy
                   explains how we collect, use, disclose, and safeguard information when you use our
-                  software, websites, and services, including RenoMeta Connect (collectively, the
-                  "Services").
+                  software, websites, and services, including RenoMeta Connect and the RenoMeta
+                  Field mobile application (collectively, the "Services").
                 </p>
                 <p className="mt-3">
                   Section 4A governs the use and sharing of data obtained through the Gmail API
@@ -228,6 +228,224 @@ function PrivacyPolicyPage() {
                 </p>
               </section>
 
+              <section id="renometa-field">
+                <h2 className="font-display text-xl font-semibold tracking-tight">
+                  4B. RenoMeta Field Mobile Application
+                </h2>
+
+                <h3 className="mt-4 font-medium text-foreground">Application purpose</h3>
+                <p className="mt-3">
+                  RenoMeta Field is a mobile workforce application connected to RenoMeta Connect. It
+                  is intended for technicians, employees, project managers, and other workers whom
+                  an organization using RenoMeta Connect has authorized. RenoMeta Field does not
+                  offer public sign-up: accounts are created when an organization invites a worker
+                  through RenoMeta Connect, and RenoMeta Field and RenoMeta Connect use the same
+                  account.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Information we process</h3>
+                <p className="mt-3">When you use RenoMeta Field, we process:</p>
+                <ul className="mt-3 list-disc pl-5 space-y-1.5">
+                  <li>
+                    Your name and work email address, and the invitation details your organization
+                    entered for you, such as your role and contact information.
+                  </li>
+                  <li>
+                    Account identifiers and authentication information, such as your user ID, the
+                    email address you sign in with, one-time sign-in codes, and session tokens.
+                  </li>
+                  <li>Your organization memberships, user roles, and account status.</li>
+                  <li>
+                    Tasks assigned to you, including their titles, statuses, due dates and times,
+                    and completion times.
+                  </li>
+                  <li>
+                    Project information your organization makes available to you, such as the name
+                    and address of the project linked to a task.
+                  </li>
+                  <li>
+                    Task completion and activity history. When you change a task's status, the
+                    change, its time, and your account identifier are recorded in your
+                    organization's workspace.
+                  </li>
+                  <li>
+                    Technical information needed to operate, secure, and troubleshoot the app, such
+                    as IP address, device and app information, and request timestamps received by
+                    our service providers when the app connects to our servers.
+                  </li>
+                </ul>
+                <p className="mt-3">
+                  The currently available version of RenoMeta Field does not request access to your
+                  device's location, camera, photos, contacts, microphone, or biometric sensors. It
+                  does not send push notifications, does not include advertising or analytics tools,
+                  and does not access Gmail or other Google user data.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">
+                  Features not currently available
+                </h3>
+                <p className="mt-3">
+                  We may add features such as photo capture for task documentation or push
+                  notifications. Neither is available today. Before we release either of them, we
+                  will update this section to describe the information involved and how it is used.
+                  Optional device unlock, which is being prepared for an upcoming release of the
+                  Android app, is described under &quot;Authentication and device security&quot;
+                  below.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">How we use this information</h3>
+                <ul className="mt-3 list-disc pl-5 space-y-1.5">
+                  <li>To sign you in and keep you signed in.</li>
+                  <li>
+                    To determine which organizations and roles you have access to, and to show the
+                    tasks assigned to you and related project information.
+                  </li>
+                  <li>
+                    To record the task updates you make and synchronize them with RenoMeta Connect
+                    so your organization can see them.
+                  </li>
+                  <li>
+                    To protect the security of the Services, prevent fraud and abuse, and diagnose
+                    technical issues.
+                  </li>
+                  <li>To provide support and respond to your requests.</li>
+                  <li>To comply with legal obligations.</li>
+                </ul>
+                <p className="mt-3">
+                  We do not sell information processed through RenoMeta Field or use it for
+                  advertising.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Shared organization data</h3>
+                <p className="mt-3">
+                  RenoMeta Field and RenoMeta Connect use a shared organizational workspace.
+                  Information you create or update in RenoMeta Field, such as a task status change,
+                  becomes part of your organization's business records. Authorized members of your
+                  organization can view and manage those records in RenoMeta Connect according to
+                  their permissions. Your organization controls your access, role, and task
+                  assignments, and decides which business information it stores about its projects
+                  and tasks. Questions about how your organization uses that information should be
+                  directed to your organization.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">
+                  Authentication and device security
+                </h3>
+                <p className="mt-3">
+                  RenoMeta Field does not use passwords. To sign in, you enter your email address
+                  and we email you a one-time code and sign-in link. Only email addresses that
+                  already have a RenoMeta account can sign in. After you sign in, a session token is
+                  stored on your device so you stay signed in until you sign out or the session
+                  ends. The app connects to our servers over encrypted (HTTPS) connections, and
+                  Android app backup and device-to-device transfer are disabled for the app's data.
+                </p>
+                <p className="mt-3">
+                  <span className="font-medium text-foreground">
+                    Upcoming: optional device unlock on Android.
+                  </span>{" "}
+                  This feature is not available in the current version of RenoMeta Field. An
+                  upcoming release of the Android app will let you choose to require your
+                  fingerprint, face, or your phone&apos;s screen lock (PIN, pattern, or password)
+                  before the app shows your information. When the feature is released:
+                </p>
+                <ul className="mt-3 list-disc pl-5 space-y-1.5">
+                  <li>
+                    It will be off unless you turn it on, and you can turn it off at any time.
+                  </li>
+                  <li>
+                    Verification will be performed by your device&apos;s operating system. The app
+                    will receive only the outcome of the check (such as whether it succeeded), never
+                    the biometric data itself. Fingerprints, face data, and other biometric
+                    information will not be sent to or stored by RenoMeta.
+                  </li>
+                  <li>
+                    Your unlock setting will be stored only on your device and removed when you sign
+                    out.
+                  </li>
+                  <li>
+                    Device unlock will not replace signing in. Your session will still be checked
+                    with our servers, and an ended or invalid session will still require a new email
+                    sign-in.
+                  </li>
+                </ul>
+
+                <h3 className="mt-4 font-medium text-foreground">Service providers</h3>
+                <p className="mt-3">
+                  Supabase provides the authentication and database services used by RenoMeta Field
+                  and RenoMeta Connect and processes the information described in this section on
+                  our behalf. RenoMeta Field is distributed through Google Play, and Google's
+                  handling of app downloads and Play services is governed by Google's own terms and
+                  privacy policy. If you choose to open a project address in a maps application, the
+                  address is passed to that application and handled under its provider's terms.
+                </p>
+
+                <h3 id="field-account-deletion" className="mt-4 font-medium text-foreground">
+                  Retention and deletion
+                </h3>
+                <p className="mt-3">
+                  We retain your account information while your account is active and as needed to
+                  provide the Services to the organizations you work with. You may request deletion
+                  of your account and associated personal information at any time, without signing
+                  in, by following the steps on our{" "}
+                  <Link to="/field/account-deletion" className="underline hover:text-foreground">
+                    RenoMeta Field Account &amp; Data Deletion
+                  </Link>{" "}
+                  page or by emailing{" "}
+                  <a href="mailto:support@renometa.com" className="underline hover:text-foreground">
+                    support@renometa.com
+                  </a>
+                  .
+                </p>
+                <p className="mt-3">
+                  <span className="font-medium text-foreground">
+                    Account deletion and workspace removal are different.
+                  </span>{" "}
+                  An organization can remove you from its workspace, which ends your access to that
+                  organization's records in both RenoMeta Field and RenoMeta Connect. Removal from
+                  one organization does not by itself delete your account if you belong to other
+                  organizations. When we delete your account, we delete your sign-in account, your
+                  profile information, and your organization memberships. Because RenoMeta Field and
+                  RenoMeta Connect use the same account, this ends your access to both apps and to
+                  every organization workspace connected to that account. Where information about
+                  you cannot be removed without affecting an organization's records, we de-identify
+                  it instead so that it is no longer associated with you, and we tell you when we do
+                  so.
+                </p>
+                <p className="mt-3">
+                  <span className="font-medium text-foreground">
+                    Organization-owned business records.
+                  </span>{" "}
+                  Tasks, projects, task activity history, and other records you created or updated
+                  for an organization are that organization's business records. After your account
+                  is deleted, these records may be retained by the organization for its legitimate
+                  operational, contractual, or legal needs. Retained records may continue to
+                  reference an internal identifier for the deleted account, or information your
+                  organization entered, but they will no longer be linked to an active account. We
+                  may also retain limited information where required by law or needed for security,
+                  fraud prevention, or the resolution of disputes. Deleted information may remain in
+                  backup copies until those backups expire or are deleted.
+                </p>
+                <p className="mt-3">
+                  <span className="font-medium text-foreground">Verification.</span> Before we
+                  delete an account, we verify that the request comes from the account holder, for
+                  example by confirming the request from the email address associated with the
+                  account. We do not delete an account solely because a request names an email
+                  address. Each verified request is reviewed and approved by authorized RenoMeta
+                  personnel before it is carried out. If you own an organization in RenoMeta
+                  Connect, we will contact you about the organization's workspace before deleting
+                  your account. We may decline a request we cannot verify.
+                </p>
+
+                <h3 className="mt-4 font-medium text-foreground">Contact</h3>
+                <p className="mt-3">
+                  For questions about RenoMeta Field or to request deletion, contact{" "}
+                  <a href="mailto:support@renometa.com" className="underline hover:text-foreground">
+                    support@renometa.com
+                  </a>
+                  .
+                </p>
+              </section>
+
               <section>
                 <h2 className="font-display text-xl font-semibold tracking-tight">5. Security</h2>
                 <p className="mt-3">
@@ -249,6 +467,14 @@ function PrivacyPolicyPage() {
                     Support@RenoMeta.com
                   </a>
                   . We will respond within a reasonable timeframe, subject to applicable law.
+                </p>
+                <p className="mt-3">
+                  RenoMeta Field users can find instructions for requesting deletion of their
+                  account and associated personal information on the{" "}
+                  <Link to="/field/account-deletion" className="underline hover:text-foreground">
+                    RenoMeta Field Account &amp; Data Deletion
+                  </Link>{" "}
+                  page and in Section 4B.
                 </p>
               </section>
 

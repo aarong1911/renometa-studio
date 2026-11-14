@@ -402,12 +402,15 @@ export function SiteFooter() {
           <div className="text-[12.5px] text-muted-foreground">
             © {new Date().getFullYear()} RenoMeta. All rights reserved.
           </div>
-          <div className="flex items-center gap-4 text-[12.5px] text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12.5px] text-muted-foreground">
             <Link to="/privacy-policy" className="hover:text-foreground transition-colors">
               Privacy Policy
             </Link>
             <Link to="/terms-of-service" className="hover:text-foreground transition-colors">
               Terms of Service
+            </Link>
+            <Link to="/field/account-deletion" className="hover:text-foreground transition-colors">
+              Field Account Deletion
             </Link>
             <button
               type="button"
