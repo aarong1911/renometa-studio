@@ -102,46 +102,65 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
+// One size for both request actions: same fixed height, padding, icon gap and text alignment, full width on phones.
+const ACTION_BUTTON = `h-12 px-6 py-0 w-full sm:w-auto whitespace-nowrap leading-none ${focusRing}`;
+
 /**
- * A fallback for devices with no email app: copies the support address. It only copies; it never sends anything, so its
- * confirmation never says a request was submitted.
+ * The two ways to make a request. "Compose deletion request" hands a pre-filled email to the device's email app (it needs
+ * one); "Copy email address" is the fallback that always works. Neither sends anything, so no message here says a request
+ * was submitted. The copy status sits below the buttons so it never shifts them.
  */
-function CopyEmailButton() {
-  const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
+function RequestActions() {
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
 
   const onCopy = async () => {
     const copied = await copyText(SUPPORT_EMAIL);
-    setState(copied ? "copied" : "failed");
+    setCopyState(copied ? "copied" : "failed");
     clearTimeout(timer.current);
-    if (copied) timer.current = setTimeout(() => setState("idle"), 5000);
+    if (copied) timer.current = setTimeout(() => setCopyState("idle"), 5000);
   };
 
   return (
-    <div className="flex flex-col gap-1.5 sm:items-start">
-      <button
-        type="button"
-        onClick={() => void onCopy()}
-        className={`btn-ghost w-full sm:w-auto ${focusRing}`}
-      >
-        {state === "copied" ? (
-          <Check className="h-4 w-4" aria-hidden />
-        ) : (
-          <Copy className="h-4 w-4" aria-hidden />
-        )}
-        Copy email address
-      </button>
-      <p role="status" aria-live="polite" className="min-h-[1.25rem] text-[13px]">
-        {state === "copied" ? (
+    <div className="mt-7">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+        <a href={MAILTO} className={`btn-primary ${ACTION_BUTTON}`}>
+          <Mail className="h-4 w-4 shrink-0" aria-hidden />
+          Compose deletion request
+        </a>
+        <button
+          type="button"
+          onClick={() => void onCopy()}
+          className={`btn-ghost ${ACTION_BUTTON}`}
+        >
+          {copyState === "copied" ? (
+            <Check className="h-4 w-4 shrink-0" aria-hidden />
+          ) : (
+            <Copy className="h-4 w-4 shrink-0" aria-hidden />
+          )}
+          Copy email address
+        </button>
+      </div>
+      <p role="status" aria-live="polite" className="mt-2 min-h-5 text-[13px]">
+        {copyState === "copied" ? (
           <span className="text-foreground">
             Email address copied. Paste it into a new email to {SUPPORT_EMAIL}.
           </span>
-        ) : state === "failed" ? (
+        ) : copyState === "failed" ? (
           <span className="text-destructive">
             Couldn&apos;t copy automatically. Please copy {SUPPORT_EMAIL} by hand.
           </span>
         ) : null}
+      </p>
+      <p className="mt-1 text-[13px] text-muted-foreground leading-relaxed">
+        <span className="font-medium text-foreground">Compose deletion request</span> opens a
+        pre-filled email in your email app. It only works if this device has an email app, or an
+        email website set up to handle email links in your browser. If nothing opens, use{" "}
+        <span className="font-medium text-foreground">Copy email address</span> and send an email to{" "}
+        <span className="font-medium text-foreground break-words">{SUPPORT_EMAIL}</span> from any
+        email service, such as Gmail or Outlook on the web, with the subject{" "}
+        <span className="font-medium text-foreground">"{REQUEST_SUBJECT}"</span>.
       </p>
     </div>
   );
@@ -186,20 +205,7 @@ function FieldAccountDeletionPage() {
                 <dd className="mt-1 font-medium text-foreground">{REQUEST_SUBJECT}</dd>
               </div>
             </dl>
-            <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-3">
-              <a href={MAILTO} className={`btn-primary w-full sm:w-auto ${focusRing}`}>
-                <Mail className="h-4 w-4" aria-hidden />
-                Request account deletion
-              </a>
-              <CopyEmailButton />
-            </div>
-            <p className="mt-3 text-[13px] text-muted-foreground leading-relaxed">
-              The request button opens your email app with the request filled in, if this device has
-              one set up. If nothing opens, email{" "}
-              <span className="font-medium text-foreground break-words">{SUPPORT_EMAIL}</span> from
-              any email service, such as Gmail or Outlook on the web, with the subject{" "}
-              <span className="font-medium text-foreground">"{REQUEST_SUBJECT}"</span>.
-            </p>
+            <RequestActions />
             <p className="mt-5 flex items-start gap-2 text-[13.5px] text-muted-foreground">
               <Info className="h-4 w-4 mt-0.5 shrink-0 text-gold-strong" aria-hidden />
               <span>
