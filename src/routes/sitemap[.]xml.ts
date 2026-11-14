@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { ARTICLES } from "@/lib/blog-articles";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+// Sitemap <loc> values must be absolute URLs (sitemaps.org protocol).
+const BASE_URL = "https://renometa.com";
 
 interface SitemapEntry {
   path: string;
@@ -34,6 +34,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/try-agent", changefreq: "monthly", priority: "0.6" },
           { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
           { path: "/terms-of-service", changefreq: "yearly", priority: "0.3" },
+          { path: "/field/account-deletion", changefreq: "yearly", priority: "0.3" },
         ];
 
         const articleEntries: SitemapEntry[] = ARTICLES.map((a) => ({

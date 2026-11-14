@@ -30,6 +30,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as DownloadAndroidRouteImport } from './routes/download.android'
 import { Route as DownloadsRenoMetaConnectAndroidTestDotapkRouteImport } from './routes/downloads.RenoMeta-Connect-Android-test[.]apk'
+import { Route as FieldAccountDeletionRouteImport } from './routes/field.account-deletion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -138,6 +139,11 @@ const DownloadsRenoMetaConnectAndroidTestDotapkRoute =
     path: '/downloads/RenoMeta-Connect-Android-test.apk',
     getParentRoute: () => rootRouteImport,
   } as any)
+const FieldAccountDeletionRoute = FieldAccountDeletionRouteImport.update({
+  id: '/field/account-deletion',
+  path: '/field/account-deletion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -160,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/download/android': typeof DownloadAndroidRoute
   '/downloads/RenoMeta-Connect-Android-test.apk': typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
+  '/field/account-deletion': typeof FieldAccountDeletionRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -183,6 +190,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/download/android': typeof DownloadAndroidRoute
   '/downloads/RenoMeta-Connect-Android-test.apk': typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
+  '/field/account-deletion': typeof FieldAccountDeletionRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -207,6 +215,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/download/android': typeof DownloadAndroidRoute
   '/downloads/RenoMeta-Connect-Android-test.apk': typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
+  '/field/account-deletion': typeof FieldAccountDeletionRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -232,6 +241,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/download/android'
     | '/downloads/RenoMeta-Connect-Android-test.apk'
+    | '/field/account-deletion'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/download/android'
     | '/downloads/RenoMeta-Connect-Android-test.apk'
+    | '/field/account-deletion'
     | '/blog'
   id:
     | '__root__'
@@ -278,6 +289,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/download/android'
     | '/downloads/RenoMeta-Connect-Android-test.apk'
+    | '/field/account-deletion'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -302,6 +314,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   DownloadAndroidRoute: typeof DownloadAndroidRoute
   DownloadsRenoMetaConnectAndroidTestDotapkRoute: typeof DownloadsRenoMetaConnectAndroidTestDotapkRoute
+  FieldAccountDeletionRoute: typeof FieldAccountDeletionRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -454,6 +467,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DownloadsRenoMetaConnectAndroidTestDotapkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/field/account-deletion': {
+      id: '/field/account-deletion'
+      path: '/field/account-deletion'
+      fullPath: '/field/account-deletion'
+      preLoaderRoute: typeof FieldAccountDeletionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -479,6 +499,7 @@ const rootRouteChildren: RootRouteChildren = {
   DownloadAndroidRoute: DownloadAndroidRoute,
   DownloadsRenoMetaConnectAndroidTestDotapkRoute:
     DownloadsRenoMetaConnectAndroidTestDotapkRoute,
+  FieldAccountDeletionRoute: FieldAccountDeletionRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
